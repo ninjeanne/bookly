@@ -1,4 +1,4 @@
-# BOOKlY - Software Requirements Specification
+# BOOKLY - Software Requirements Specification
 
 ## Table of Contents
 
