@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
--   [BOOKlY - Software Requirements Specification](#BOOKlY---software-requirements-specification)
+-   [BOOKLY - Software Requirements Specification](#BOOKlY---software-requirements-specification)
 
     -   [Table of Contents](#table-of-contents)
 
@@ -20,7 +20,7 @@
 		-   [2.2 Product functions](#22-product-functions)
         -   [2.3 User characteristics](#23-user-characteristics)
         -   [2.4 Dependencies](#24-dependencies)
-		-	[2.5 Constraints] (#25-constraints)
+		-	[2.5 Constraints](#25-constraints)
 
     -   [3. Specific Requirements](#3-specific-requirements)
 
@@ -87,23 +87,23 @@ The purpose of this document is a general description of the bookly project. It 
 This document is designed for internal use only and will outline the development process of the project.The idea shall be realized within a website. Depending on the progress, the same or reduced functions should also be implemented as an Android app.
 
 **Subcomponents**
--Account
-	-Registering, delete account, Login and Logout to our Application. Opportunity to decide whether the content is visible for everybody by sharing a link or only for the user
--Connecting People
-	-Opportunity to share the friendship book with friends by sending a link for editing a page.
--Overview
-	-View of the friendship book with all pages and entries.
-	-Edit friendship book
-	-Edit cover, delete friendship book pages, add page (data input only) 
--Static Pages
-	-FAQ
-	-Impressum
-	-DSGVO
-	-Kontakt
--Friend Entry
-	-Possibility to create new entries and to share them with friends
--Individual Themes
-	-Choose your own theme and design it by extending it with stickers, pictures and text.
+-	Account
+	-	Registering, delete account, Login and Logout to our Application. Opportunity to decide whether the content is visible for everybody by sharing a link or only for the user
+-	Connecting People
+	-	Opportunity to share the friendship book with friends by sending a link for editing a page.
+-	Overview
+	-	View of the friendship book with all pages and entries.
+	-	Edit friendship book
+	-	Edit cover, delete friendship book pages, add page (data input only) 
+-	Static Pages
+	-	FAQ
+	-	Impressum
+	-	DSGVO
+	-	Kontakt
+-	Friend Entry
+	-	Possibility to create new entries and to share them with friends
+-	Individual Themes
+	-	Choose your own theme and design it by extending it with stickers, pictures and text.
 
 
 
@@ -142,16 +142,17 @@ The product is supposed to be an open source. It is a web based system implement
 
 The following are the main features that are included in the bookly website.
 
--User account/interface: The system allows the user to create their accounts in the system and provide features of updating and viewing profiles. You can view your friendship and invite friends to design a page.
--Number of users being supported by the system: Though the number is precisely not mentioned but the system is able to support a large number of online users at a time.
--FAQs section: Frequently asked section contains answers to problems which bookly users frequently faced.
+-	User account/interface: The system allows the user to create their accounts in the system and provide features of updating and viewing profiles. You can view your friendship and invite friends to design a page.
+-	Number of users being supported by the system: Though the number is precisely not mentioned but the system is able to support a large number of online users at a time.
+-	FAQs section: Frequently asked section contains answers to problems which bookly users frequently faced.
 
-###2.2Product functions
+### 2.2 Product functions
+
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system. According use cases are:
--User System: login, register, invite friends, logout, edit, close account
+-	User System: login, register, invite friends, logout, edit, close account
 
 A user can give permissions to other users so they’re able to design a new page in the friendship book. Users are able to design their own friendship book covers. According use cases are:
--friendship book: design cover, design friendship book page, share friendship book
+-	friendship book: design cover, design friendship book page, share friendship book
 
 
 **Our Use-Case-Diagram**
@@ -169,12 +170,12 @@ It is basically for everyone who feels nostalgic and wants to dwell in the memor
 Whether the website will be mobile compatible depends on the Vue.js framework. We have to decide whether we will implement an individual design or use a predefined template. 
 The project has the dependencies that are due to our choice in technology. 
 Requirements subsets
--database
--VM
--domain
--gitLab
--IDE
--YouTrack
+-	database
+-	VM
+-	domain
+-	gitLab
+-	IDE
+-	YouTrack
 
 ### 2.5 Constraints
 Our database limit is under 70 GB.
@@ -244,7 +245,7 @@ one or two hours from the point on we noticed.
 
 #### 3.4.3 Accuracy
 
--N\\A
+-	N\\A
 
 
 ### 3.5 Performance
