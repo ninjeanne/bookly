@@ -126,7 +126,7 @@ This document is designed for internal use only and will outline the development
 | Title                                                                                                 | Date       |
 | ----------------------------------------------------------------------------------------------------- | ---------- |
 | [Blog](https://blog.bookly.online/)                                                                   | 17/10/2019 |
-| [GitHub](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
+| [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
 | [Use Case Diagram](ADD LINK)ADD LINK | 17/10/2019 |
 
 ### 1.5 Overview
