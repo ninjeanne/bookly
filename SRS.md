@@ -16,12 +16,11 @@
 
     -   [2. Overall Description](#2-overall-description)
 
-        -   [2.1 Vision](#21-vision)
-
-    -   [2.2 Product perspective](#22-product-perspective)
-
+		-   [2.1 Product perspective](#21-product-perspective)
+		-   [2.2 Product functions](#22-product-functions)
         -   [2.3 User characteristics](#23-user-characteristics)
         -   [2.4 Dependencies](#24-dependencies)
+		-	[2.5 Constraints] (#25-constraints)
 
     -   [3. Specific Requirements](#3-specific-requirements)
 
@@ -34,9 +33,7 @@
         -   [3.2 Functionality – User Interface](#32-functionality--user-interface)
 
             -   [3.2.1 User system](#321-user-system)
-            -   [3.2.3 Flashcard boxes](#323-flashcard-boxes)
-            -   [3.2.4 Flashcards](#324-flashcards)
-            -   [3.2.5 Statistics](#325-statistics)
+            -   [3.2.2 Friendship book](#322-friendship-book)
 
         -   [3.3 Usability](#33-usability)
 
@@ -45,23 +42,20 @@
             -   [3.4.1 Availability](#341-availability)
             -   [3.4.2 MTBF, MTTR](#342-mtbf-mttr)
             -   [3.4.3 Accuracy](#343-accuracy)
-            -   [3.4.4 Bug classes](#344-bug-classes)
-
+           
         -   [3.5 Performance](#35-performance)
 
             -   [3.5.1 Response time](#351-response-time)
             -   [3.5.2 Throughput](#352-throughput)
             -   [3.5.3 Capacity](#353-capacity)
-            -   [3.5.4 Resource utilization](#354-resource-utilization)
-
+           
         -   [3.6 Supportability](#36-supportability)
 
         -   [3.7 Design Constraints](#37-design-constraints)
 
             -   [3.7.1 Development tools](#371-development-tools)
             -   [3.7.2 Spring Boot](#372-spring-boot)
-            -   [3.7.3 ReactJS](#373-reactjs)
-            -   [3.7.4 Supported Platforms](#374-supported-platforms)
+            -   [3.7.3 Supported Platforms](#373-supported-platforms)
 
         -   [3.8 Online User Documentation and Help System Requirements](#38-online-user-documentation-and-help-system-requirements)
 
@@ -119,6 +113,8 @@ This document is designed for internal use only and will outline the development
 | -------- | ----------------------------------- |
 | **SRS**  | Software Requirements Specification |
 | **JSON** | JavaScript Object Notation          |
+| **MTBF** | Mean Time Between Failures          |
+| **MTTR** | Mean Time To Repair                 |
 | **API**  | Application Programming Interface   |
 | **FAQ**  | Frequently Asked Questions          |
 | **REST** | Representational State Transfer     |
@@ -130,8 +126,8 @@ This document is designed for internal use only and will outline the development
 | Title                                                                                                 | Date       |
 | ----------------------------------------------------------------------------------------------------- | ---------- |
 | [Blog](https://blog.bookly.online/)                                                                   | 17/10/2019 |
-| [GitHub](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
-| [Use Case Diagram](ADD LINK) | 17/10/2019 |
+| [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
+| [Use Case Diagram](ADD LINK)ADD LINK | 17/10/2019 |
 
 ### 1.5 Overview
 
@@ -140,7 +136,7 @@ The next chapters provide information about our vision based on the use case dia
 ## 2. Overall Description
 
 
-## 2.1 Product perspective
+### 2.1 Product perspective
 
 The product is supposed to be an open source. It is a web based system implementing client-server model. Bookly provides a friendship book from the old days.
 
@@ -150,7 +146,7 @@ The following are the main features that are included in the bookly website.
 -Number of users being supported by the system: Though the number is precisely not mentioned but the system is able to support a large number of online users at a time.
 -FAQs section: Frequently asked section contains answers to problems which bookly users frequently faced.
 
-2.2Product functions
+###2.2Product functions
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system. According use cases are:
 -User System: login, register, invite friends, logout, edit, close account
 
@@ -160,7 +156,7 @@ A user can give permissions to other users so they’re able to design a new pag
 
 **Our Use-Case-Diagram**
 
-![UseCaseDiagram](ADD LINK)
+![UseCaseDiagram](ADD LINK) ADD LINK
 
 
 
@@ -211,20 +207,20 @@ The frontend provides an user interface for the users to interact with and is ab
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
 According use cases are:
 
--   [Register Use Case](ADD LINK)
--   [Login Use Case](ADD LINK)
--   [Logout Use Case](ADD LINK)
--   [Edit Profile Use Case](ADD LINK)
--   [Close Account Use Case](ADD LINK)
+-   [Register Use Case](ADD LINK) ADD LINK
+-   [Login Use Case](ADD LINK) ADD LINK
+-   [Logout Use Case](ADD LINK) ADD LINK
+-   [Edit Profile Use Case](ADD LINK)ADD LINK
+-   [Close Account Use Case](ADD LINK)ADD LINK
 
 #### 3.2.2 Friendship book
 
 A friendship book consists of a cover and friendship book entries. These entries can be created by friend after inviting them to contribute to your friendship book.
 According use cases are:
 
--   [create book entry](ADD LINK)
--   [design cover](ADD LINK)
--   [design friendship book page](ADD LINK)
+-   [create book entry](ADD LINK) ADD LINK
+-   [design cover](ADD LINK)ADD LINK
+-   [design friendship book page](ADD LINK)ADD LINK
 
 
 ### 3.3 Usability
