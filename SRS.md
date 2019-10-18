@@ -127,7 +127,7 @@ This document is designed for internal use only and will outline the development
 | ----------------------------------------------------------------------------------------------------- | ---------- |
 | [Blog](https://blog.bookly.online/)                                                                   | 17/10/2019 |
 | [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
-| [Use Case Diagram](ADD LINK)ADD LINK | 17/10/2019 |
+| [Use Case Diagram](https://gitlab.com/project_bookly/bookly/commit/7d203c6be710b9960fa0f8d1a150729a75b005ef)| 17/10/2019 |
 
 ### 1.5 Overview
 
@@ -157,7 +157,7 @@ A user can give permissions to other users so they’re able to design a new pag
 
 **Our Use-Case-Diagram**
 
-![UseCaseDiagram](https://gitlab.com/project_bookly/bookly/commit/7d203c6be710b9960fa0f8d1a150729a75b005ef)
+[UseCaseDiagram](https://gitlab.com/project_bookly/bookly/commit/7d203c6be710b9960fa0f8d1a150729a75b005ef)
 
 
 
