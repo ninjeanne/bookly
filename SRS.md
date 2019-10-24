@@ -177,7 +177,7 @@ Requirements subsets
 -	YouTrack
 
 ### 2.5 Constraints
-Our database limit is under 70 GB.
+Our database limit is under 15 GB.
 (tbd)
 
 
