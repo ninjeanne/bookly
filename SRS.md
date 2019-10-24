@@ -127,7 +127,7 @@ This document is designed for internal use only and will outline the development
 | ----------------------------------------------------------------------------------------------------- | ---------- |
 | [Blog](https://blog.bookly.online/)                                                                   | 17/10/2019 |
 | [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
-| [Use Case Diagram](https://gitlab.com/project_bookly/bookly/commit/7d203c6be710b9960fa0f8d1a150729a75b005ef)| 17/10/2019 |
+| [Use Case Diagram](design/usecase.png)                                                                | 17/10/2019 |
 
 ### 1.5 Overview
 
@@ -157,7 +157,7 @@ A user can give permissions to other users so they’re able to design a new pag
 
 **Our Use-Case-Diagram**
 
-![UseCaseDiagram](https://gitlab.com/project_bookly/bookly/blob/master/design/usecaseV1.png)
+![UseCaseDiagram](design/usecase.png "Use Case Diagramm")
 
 
 ### 2.3 User characteristics
@@ -177,7 +177,7 @@ Requirements subsets
 -	YouTrack
 
 ### 2.5 Constraints
-Our database limit is under 70 GB.
+Our database limit is under 15 GB.
 (tbd)
 
 
@@ -192,18 +192,15 @@ The backend is needed to separate the user interface from the data storage. It v
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
 According use cases are:
 
--   [Register Use Case](ADD LINK) ADD LINK
--   [Login Use Case](ADD LINK) ADD LINK
--   [Logout Use Case](ADD LINK) ADD LINK
+-   [Account Operations](design/Account.md)
 -   [Edit Profile Use Case](ADD LINK)ADD LINK
--   [Close Account Use Case](ADD LINK)ADD LINK
 
 #### 3.1.2 Friendship book
 
 A friendship book consists of a cover and friendship book entries. These entries can be created by friend after inviting them to contribute to your friendship book.
 According use cases are:
 
--   [create book entry](ADD LINK) ADD LINK
+-   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
 
