@@ -50,7 +50,8 @@ There he can scroll trough all of his pages and manually delete a page if he wan
 
 ### 3.1 Owning An Account
         
-In order to create a new journal the user has to have an account. Only if he has one, the dialog of a creation of a journal will be visible.
+In order to create a friendship book the user has to have an account. For editing a page, the user has to create the page
+and share it with the friend.
 
 ## 4. Preconditions
 

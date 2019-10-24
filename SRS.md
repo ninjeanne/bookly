@@ -192,18 +192,15 @@ The backend is needed to separate the user interface from the data storage. It v
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
 According use cases are:
 
--   [Register Use Case](ADD LINK) ADD LINK
--   [Login Use Case](ADD LINK) ADD LINK
--   [Logout Use Case](ADD LINK) ADD LINK
+-   [Account Operations](design/Account.md)
 -   [Edit Profile Use Case](ADD LINK)ADD LINK
--   [Close Account Use Case](ADD LINK)ADD LINK
 
 #### 3.1.2 Friendship book
 
 A friendship book consists of a cover and friendship book entries. These entries can be created by friend after inviting them to contribute to your friendship book.
 According use cases are:
 
--   [create book entry](ADD LINK) ADD LINK
+-   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
 
