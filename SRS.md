@@ -187,22 +187,7 @@ This section contains all of the functional and quality requirements of the syst
 
 The backend is needed to separate the user interface from the data storage. It verifies if the correct permissions are present to request data or to ensure that incoming data is properly parsed and saved correctly. For security reasons data is filtered by the backend. It is then packed in the right format which the next chapter describes. The data is kept inside a database and maintained by the backend.
 
-#### 3.1.1 Read data given over API endpoints
-
-For the communication between both sides (frontend and backend) a universal data format is needed, therefore JSON is used. The frontend sends data in JSON to the backend in form of a request and waits for a response from the backend which also answers with JSON.
-
-#### 3.1.2 Parse data
-
-Incoming data needs to be checked if the sent values represent the correct data type and if the user that sends the request has the permissions to do so. 
-#### 3.1.3 Provide data
-
-After data is requested from the frontend and the user is allowed to do so, the backend sends data. In addition, the response contains a HTTP status code even if the request failed so that the frontend knows if it just received data or an error.
-
-### 3.2 Functionality – User Interface
-
-The frontend provides an user interface for the users to interact with and is able to request data from the data backend.
-
-#### 3.2.1 User system
+#### 3.1.1 User system
 
 At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
 According use cases are:
@@ -213,7 +198,7 @@ According use cases are:
 -   [Edit Profile Use Case](ADD LINK)ADD LINK
 -   [Close Account Use Case](ADD LINK)ADD LINK
 
-#### 3.2.2 Friendship book
+#### 3.1.2 Friendship book
 
 A friendship book consists of a cover and friendship book entries. These entries can be created by friend after inviting them to contribute to your friendship book.
 According use cases are:
@@ -221,6 +206,21 @@ According use cases are:
 -   [create book entry](ADD LINK) ADD LINK
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
+
+#### 3.1.3 Read data given over API endpoints
+
+For the communication between both sides (frontend and backend) a universal data format is needed, therefore JSON is used. The frontend sends data in JSON to the backend in form of a request and waits for a response from the backend which also answers with JSON.
+
+#### 3.1.4 Parse data
+
+Incoming data needs to be checked if the sent values represent the correct data type and if the user that sends the request has the permissions to do so. 
+#### 3.1.5 Provide data
+
+After data is requested from the frontend and the user is allowed to do so, the backend sends data. In addition, the response contains a HTTP status code even if the request failed so that the frontend knows if it just received data or an error.
+
+### 3.2 Functionality – User Interface
+
+The frontend provides an user interface for the users to interact with and is able to request data from the data backend.
 
 
 ### 3.3 Usability
