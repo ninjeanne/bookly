@@ -157,7 +157,7 @@ A user can give permissions to other users so they’re able to design a new pag
 
 **Our Use-Case-Diagram**
 
-![UseCaseDiagram](https://gitlab.com/project_bookly/bookly/blob/master/design/usecaseV1.png)
+![UseCaseDiagram](design/usecase.png "Use Case Diagramm")
 
 
 ### 2.3 User characteristics
