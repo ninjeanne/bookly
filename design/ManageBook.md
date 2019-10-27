@@ -12,7 +12,7 @@ in separate files. The activity diagram also does not show their functions in de
 ## 2. Flow of Events
 
 For further details for reading, creating and updating pages look into their linked use case specification.
-![ManageBookFlow](ManageBookFlow.png "Manage Book Flow")
+![ManageBookFlow](ManageBookFlow.jpg "Manage Book Flow")
 
 ### 2.1 Basic flow
 
@@ -26,7 +26,7 @@ a new book you can create a personalized book cover. Later the book cover can al
 designed with different themes. You can decide whether you friendship book will be 
 public or private.
 
-TBD Alex
+TBD A
 
 ### 2.3 Read
 
