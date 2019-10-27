@@ -75,7 +75,7 @@ friendship book or it will be public and guests will be able to view it.
 
 ### 5.3 Edit
 
-You can edit your book cover as often as you like. You only need to be logged in.
+You can edit your book cover as often as you like. You only need to be logged in. If you want to manage your friendship book entries, see the ManagePage UC.
 
 
 ### 5.4 Delete
