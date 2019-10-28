@@ -52,7 +52,7 @@ deploy:
     - chmod 0644 ~/.ssh/known_hosts
     ## login
     - scp build/libs/bookly*.jar bookly-ci@bookly.online:bookly.jar
-    - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly'
+    - ssh bookly-ci@bookly.online '/bin/systemctl restart bookly'
   only:
     - master
     - test-ci
