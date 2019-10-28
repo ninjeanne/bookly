@@ -1,4 +1,4 @@
-image: ubuntu
+image: maven:latest
 
 stages:
   - test
@@ -48,9 +48,6 @@ deploy:
     ## login
     - scp target/bookly*.jar bookly-ci@bookly.online:/root/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly'
-  tags:
-    - shared
-    - hogan
   only:
     - master
     - test-ci
