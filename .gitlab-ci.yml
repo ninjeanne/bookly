@@ -1,19 +1,24 @@
-image: maven:latest
+image: java:8-jdk
 
 stages:
   - test
   - build
   - deploy
 
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
 test:
   stage: test
   script:
-    - mvn test
+    - ./gradlew check
 
 build:
   stage: build
   script:
-    - mvn install -DskipTests=true
+    - ./gradlew build
   artifacts:
     expire_in: 2h
     paths:
