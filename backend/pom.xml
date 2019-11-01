@@ -7,9 +7,9 @@
 	<packaging>jar</packaging>
 
 	<parent>
-		<groupId>de.jonashackt</groupId>
-		<artifactId>spring-boot-vuejs</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>dhbw.online</groupId>
+		<artifactId>bookly</artifactId>
+		<version>0.0.1</version>
 	</parent>
 
 	<properties>
