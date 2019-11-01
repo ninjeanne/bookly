@@ -5,24 +5,19 @@ stages:
   - build
   - deploy
 
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
-
 test:
   stage: test
   script:
-    - ./gradlew check
+    - ./mvnw verify
 
 build:
   stage: build
   script:
-    - ./gradlew build
+    - ./mvnw clean install
   artifacts:
     expire_in: 2h
     paths:
-      - build/libs/*.jar
+      - backend/target/*.jar
   only:
     - master
     - test-ci
@@ -51,7 +46,7 @@ deploy:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp build/libs/bookly*.jar bookly-ci@bookly.online:bookly/bookly.jar
+    - scp backend/target/bookly*.jar bookly-ci@bookly.online:bookly/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly'
   only:
     - master
