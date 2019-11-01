@@ -46,7 +46,7 @@ deploy:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp backend/target/bookly*.jar bookly-ci@bookly.online:bookly/bookly.jar
+    - scp backend/target/backend*.jar bookly-ci@bookly.online:bookly/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly'
   only:
     - master
