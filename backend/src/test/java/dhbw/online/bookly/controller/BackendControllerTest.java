@@ -1,7 +1,8 @@
-package de.jonashackt.springbootvuejs.controller;
+package dhbw.online.bookly.controller;
 
-import de.jonashackt.springbootvuejs.SpringBootVuejsApplication;
-import de.jonashackt.springbootvuejs.domain.User;
+import dhbw.online.bookly.SpringBootVuejsApplication;
+import dhbw.online.bookly.controller.BackendController;
+import dhbw.online.bookly.domain.User;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.junit.Before;

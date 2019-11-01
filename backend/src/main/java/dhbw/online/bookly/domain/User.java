@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.domain;
+package dhbw.online.bookly.domain;
 
 import javax.persistence.*;
 

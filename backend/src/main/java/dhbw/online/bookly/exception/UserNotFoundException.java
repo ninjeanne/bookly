@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs.exception;
+package dhbw.online.bookly.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

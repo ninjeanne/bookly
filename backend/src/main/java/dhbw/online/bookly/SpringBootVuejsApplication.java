@@ -1,4 +1,4 @@
-package de.jonashackt.springbootvuejs;
+package dhbw.online.bookly;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

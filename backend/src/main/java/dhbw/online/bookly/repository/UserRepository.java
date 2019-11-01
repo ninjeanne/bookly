@@ -1,7 +1,7 @@
-package de.jonashackt.springbootvuejs.repository;
+package dhbw.online.bookly.repository;
 
 
-import de.jonashackt.springbootvuejs.domain.User;
+import dhbw.online.bookly.domain.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 

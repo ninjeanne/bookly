@@ -1,6 +1,7 @@
-package de.jonashackt.springbootvuejs.repository;
+package dhbw.online.bookly.repository;
 
-import de.jonashackt.springbootvuejs.domain.User;
+import dhbw.online.bookly.domain.User;
+import dhbw.online.bookly.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

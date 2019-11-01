@@ -1,8 +1,8 @@
-package de.jonashackt.springbootvuejs.controller;
+package dhbw.online.bookly.controller;
 
-import de.jonashackt.springbootvuejs.domain.User;
-import de.jonashackt.springbootvuejs.exception.UserNotFoundException;
-import de.jonashackt.springbootvuejs.repository.UserRepository;
+import dhbw.online.bookly.domain.User;
+import dhbw.online.bookly.exception.UserNotFoundException;
+import dhbw.online.bookly.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
