@@ -13,14 +13,11 @@ test:
 build:
   stage: build
   script:
-    - ./mvnw clean install
+    - ./mvnw install -DskipTests
   artifacts:
     expire_in: 2h
     paths:
       - backend/target/*.jar
-  only:
-    - master
-    - test-ci
 
 deploy:
   when: manual
