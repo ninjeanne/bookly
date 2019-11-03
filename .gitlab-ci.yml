@@ -5,6 +5,14 @@ stages:
   - build
   - deploy
 
+cache:
+  paths:
+    - frontend/node_modules/
+    - .m2/
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+
 test:
   stage: test
   script:
