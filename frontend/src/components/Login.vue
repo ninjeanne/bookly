@@ -29,7 +29,16 @@ export default {
   },
   methods: {
     callLogin() {
-      // TODO: implement login method
+      this.errors = [];
+      this.$store.dispatch("login", { user: this.user, password: this.password})
+              .then(() => {
+                this.$router.push('/Home')
+              })
+              .catch(error => {
+                this.loginError = true;
+                this.errors.push(error);
+                this.error = true
+              })
     }
   }
 }
