@@ -39,7 +39,7 @@ A user can browse through his book. Starting with the cover, he can reach all
 entries by clicking on arrows to the right or left on the bottom of the page.
 The view of the cover or a page includes a photo or picture, labels and text.
 
-TBD J
+[Read Book](ReadBook.md "Read Book Cover")
 
 ### 2.4 Edit
 
