@@ -65,15 +65,15 @@ not manage it. See the privacy settings in the profile.)
 
 ### 5.1 Create
 
-TBD Nico
+After a new page is created, it must be saved in the database and displayed in the list overview.
 
 ### 5.2 Read
 
-TBF Nico
+The user is able to read a page. No changes can be made.
 
 ### 5.3 Edit
 
-TBD Nico
+After a page has been edited, the data must have been changed in the database and thus when reloaded shown in the list overview.
 
 ### 5.4 Delete
 
