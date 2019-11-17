@@ -25,14 +25,31 @@ with **username:sa password:(empty)**
 ```
 curl localhost:8080/books -u user:password
 ```
+Returns 200 and data when successful and 401 when the visitor is not authorized
 
 ###GET with admin credentials
 ```
 curl localhost:8080/books/1 -u admin:password
 ```
+Returns 200 and data when successful and 401 when the visitor is not authorized
+
 
 ###POST with admin credentials
 ```
 curl -X POST localhost:8080/books -H "Content-type:application/json" 
 	-d {\"name\":\"ABC\",\"author\":\"mkyong\",\"price\":\"8.88\"} -u admin:password
 ```
+Returns 200 and data when successful and 401 when the visitor is not authorized
+
+
+###save credentials in a cookie
+```
+curl -i -X POST -d username=user -d password=password -c cookies.txt http://localhost:8080/login
+```
+Returns 200 and data when successful and 401 when the visitor is not authorized
+
+###use cookie for authentication
+```
+curl -i --header "Accept:application/json" -X GET -b cookies.txt http://localhost:8080/books
+```
+Returns 200 and data when successful and 401 when the visitor is not authorized
