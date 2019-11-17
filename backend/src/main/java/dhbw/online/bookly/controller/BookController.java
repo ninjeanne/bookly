@@ -1,5 +1,7 @@
-package dhbw.online.bookly;
+package dhbw.online.bookly.controller;
 
+import dhbw.online.bookly.repository.BookRepository;
+import dhbw.online.bookly.dto.Book;
 import dhbw.online.bookly.error.BookNotFoundException;
 import dhbw.online.bookly.error.BookUnSupportedFieldPatchException;
 import org.springframework.beans.factory.annotation.Autowired;

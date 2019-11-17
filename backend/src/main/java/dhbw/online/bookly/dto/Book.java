@@ -1,4 +1,4 @@
-package dhbw.online.bookly;
+package dhbw.online.bookly.dto;
 
 import dhbw.online.bookly.error.validator.Author;
 
