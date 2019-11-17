@@ -59,18 +59,24 @@ Returns 200 and data when successful and 401 when the visitor is not authorized
 ```
 curl -i -X POST -u user:password http://localhost:8080/friendshipbook
 ```
-Already created return code 400 otherwise code 200 (successful)
+Already created return code 400 otherwise code 200 (successful) or 401 (unauthorized)
 
 ###update title from book
 ```
 curl -i -X PUT -u user:password http://localhost:8080/friendshipbook\?title\=test
 ```
-Without title return code 400 otherwise successful and code 200 (succesful)
+Without title return code 400 otherwise successful with 200 (succesful) or unauthorized 401
 ###read book
 ```
 curl -i -X GET -u user:password http://localhost:8080/friendshipbook
 ```
-Response (successful with code 200)
+Response 200 if successful or 401 if unauthorized or otherwise 400
+
 ```
 {"uuid":"6e1e88a5-478e-4763-aaf8-ac4c27fba614","title":"test","user":{"username":"user","mail":null},"pages":[]}
 ```
+###delete book
+```
+curl -i -X DELETE -u user:password http://localhost:8080/friendshipbook
+```
+Response 200 if successful or 401 if unauthorized or otherwise 400
