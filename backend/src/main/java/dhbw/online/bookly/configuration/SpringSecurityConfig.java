@@ -26,7 +26,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 //HTTP Basic authentication
-                .httpBasic()
+                .httpBasic().and()
+                .headers().frameOptions().disable()//make h2 console visible again
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/books/**").hasRole("USER")
