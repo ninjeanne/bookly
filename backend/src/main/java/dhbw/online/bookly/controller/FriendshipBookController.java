@@ -20,17 +20,23 @@ public class FriendshipBookController {
     @GetMapping("/friendshipbook")
     ResponseEntity read() {
         User user = userService.getUser();
-        return ResponseEntity.ok(bookService.read(user));
+        if (user != null) {
+            return ResponseEntity.ok(bookService.read(user));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PostMapping("/friendshipbook")
     ResponseEntity create() {
         User user = userService.getUser();
-        boolean status = bookService.create(user);
-        if (status) {
-            return ResponseEntity.ok().build();
+        if (user != null) {
+            boolean status = bookService.create(user);
+            if (status) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PutMapping("/friendshipbook")
@@ -39,22 +45,27 @@ public class FriendshipBookController {
             return ResponseEntity.noContent().build();
         }
         User user = userService.getUser();
-        boolean status = bookService.updateTitle(user, title);
-        if (status) {
-            return ResponseEntity.ok().build();
+        if (user != null) {
+            boolean status = bookService.updateTitle(user, title);
+            if (status) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
-
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @DeleteMapping("/friendshipbook")
     ResponseEntity deleteBook() {
         User user = userService.getUser();
-        boolean status = bookService.delete(user);
-        if (status) {
-            return ResponseEntity.ok().build();
+        if (user != null) {
+            boolean status = bookService.delete(user);
+            if (status) {
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }

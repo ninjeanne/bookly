@@ -21,7 +21,7 @@ public class UserService {
     @Nullable
     public User getUser() {
         String username = authenticationService.getLoggedInUser();
-        if (!exists(username)) {
+        if (!exists(username) && !username.equals("anonymousUser")) {
             create(username);
         }
         return userRepository.findByUsername(username).orElse(null);
