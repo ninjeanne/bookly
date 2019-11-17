@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/user">User</router-link>
+    <div>
+      <b-card-header header-tag="nav">
+        <b-nav card-header tabs align="center">
+          <b-nav-item to="/" exact exact-active-class="active">Home</b-nav-item>
+          <b-nav-item to="/login" exact exact-active-class="active">Login</b-nav-item>
+          <b-nav-item to="user" exact exact-active-class="active">Profile</b-nav-item>
+        </b-nav>
+      </b-card-header>
     </div>
     <router-view :hellomsg="msg"></router-view>
   </div>
@@ -22,23 +26,12 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
-
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
     color: #2c3e50;
-    &.router-link-exact-active {
-     color: #42b983;
-    }
+    padding-bottom: 16px;
   }
-}
 </style>
