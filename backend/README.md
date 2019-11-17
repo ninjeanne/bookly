@@ -1,3 +1,18 @@
+##Run the backend
+####If you haven't installed maven you can use the included maven wrapper!
+
+Build the complete project including backend and frontend
+```
+mvn clean install -DskipTests
+java -jar backend/target/backend<version>.jar
+#OR: play button in StartBookApplication.java
+```
+
+Running tests
+```
+mvn test
+```
+
 ## general information about the backend
 
 local database h2 available at
@@ -21,4 +36,3 @@ curl localhost:8080/books/1 -u admin:password
 curl -X POST localhost:8080/books -H "Content-type:application/json" 
 	-d {\"name\":\"ABC\",\"author\":\"mkyong\",\"price\":\"8.88\"} -u admin:password
 ```
-
