@@ -60,6 +60,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/books/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/books/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
+                .antMatchers("/api/**").authenticated()
                 .and()
                 .formLogin()
                 .successHandler(mySuccessHandler)

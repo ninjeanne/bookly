@@ -57,18 +57,18 @@ Returns 200 and data when successful and 401 when the visitor is not authorized
 ##Manage Book
 ###create book
 ```
-curl -i -X POST -u user:password http://localhost:8080/friendshipbook
+curl -i -X POST -u user:password http://localhost:8080/api/friendshipbook
 ```
 Already created return code 400 otherwise code 200 (successful) or 401 (unauthorized)
 
 ###update title from book
 ```
-curl -i -X PUT -u user:password http://localhost:8080/friendshipbook\?title\=test
+curl -i -X PUT -u user:password http://localhost:8080/api/friendshipbook\?title\=test
 ```
 Without title return code 400 otherwise successful with 200 (succesful) or unauthorized 401
 ###read book
 ```
-curl -i -X GET -u user:password http://localhost:8080/friendshipbook
+curl -i -X GET -u user:password http://localhost:8080/api/friendshipbook
 ```
 Response 200 if successful or 401 if unauthorized or otherwise 400
 
@@ -77,6 +77,6 @@ Response 200 if successful or 401 if unauthorized or otherwise 400
 ```
 ###delete book
 ```
-curl -i -X DELETE -u user:password http://localhost:8080/friendshipbook
+curl -i -X DELETE -u user:password http://localhost:8080/api/friendshipbook
 ```
 Response 200 if successful or 401 if unauthorized or otherwise 400

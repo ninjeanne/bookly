@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/friendshipbook")
 public class FriendshipBookController {
 
     @Autowired
@@ -17,7 +18,7 @@ public class FriendshipBookController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/friendshipbook")
+    @GetMapping
     ResponseEntity read() {
         User user = userService.getUser();
         if (user != null) {
@@ -26,7 +27,7 @@ public class FriendshipBookController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @PostMapping("/friendshipbook")
+    @PostMapping
     ResponseEntity create() {
         User user = userService.getUser();
         if (user != null) {
@@ -39,7 +40,7 @@ public class FriendshipBookController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @PutMapping("/friendshipbook")
+    @PutMapping
     ResponseEntity update(@RequestParam String title) {
         if (title == null) {
             return ResponseEntity.noContent().build();
@@ -55,7 +56,7 @@ public class FriendshipBookController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @DeleteMapping("/friendshipbook")
+    @DeleteMapping
     ResponseEntity delete() {
         User user = userService.getUser();
         if (user != null) {
