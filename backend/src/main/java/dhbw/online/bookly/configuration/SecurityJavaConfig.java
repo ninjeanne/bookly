@@ -52,6 +52,8 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(accessDeniedHandler)
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
+                .headers().frameOptions().disable()//make h2 console visible again
+                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/books/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")

@@ -53,3 +53,24 @@ Returns 200 and data when successful and 401 when the visitor is not authorized
 curl -i --header "Accept:application/json" -X GET -b cookies.txt http://localhost:8080/books
 ```
 Returns 200 and data when successful and 401 when the visitor is not authorized
+
+##Manage Book
+###create book
+```
+curl -i -X POST -u user:password http://localhost:8080/friendshipbook
+```
+Already created return code 400 otherwise code 200 (successful)
+
+###update title from book
+```
+curl -i -X PUT -u user:password http://localhost:8080/friendshipbook\?title\=test
+```
+Without title return code 400 otherwise successful and code 200 (succesful)
+###read book
+```
+curl -i -X GET -u user:password http://localhost:8080/friendshipbook
+```
+Response (successful with code 200)
+```
+{"uuid":"6e1e88a5-478e-4763-aaf8-ac4c27fba614","title":"test","user":{"username":"user","mail":null},"pages":[]}
+```
