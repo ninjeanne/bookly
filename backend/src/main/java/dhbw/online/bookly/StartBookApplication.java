@@ -18,7 +18,6 @@ public class StartBookApplication {
         SpringApplication.run(StartBookApplication.class, args);
     }
 
-    @Profile("demo")
     @Bean
     CommandLineRunner initDatabase(BookRepository repository) {
         return args -> {
