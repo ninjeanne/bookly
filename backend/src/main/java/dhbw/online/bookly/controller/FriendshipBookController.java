@@ -56,7 +56,7 @@ public class FriendshipBookController {
     }
 
     @DeleteMapping("/friendshipbook")
-    ResponseEntity deleteBook() {
+    ResponseEntity delete() {
         User user = userService.getUser();
         if (user != null) {
             boolean status = bookService.delete(user);
