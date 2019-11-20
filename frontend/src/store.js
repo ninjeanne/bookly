@@ -48,6 +48,34 @@ export default new Vuex.Store({
                         reject("Invalid credentials!")
                     })
             })
+        },
+        register({commit}, {user, email, password1, password2}) {
+            // TODO: Check that it works after Backend implemented register functionality
+            return new Promise((resolve, reject) => {
+                console.log("Accessing backend with user: '" + user);
+                api.getSecured(user, email, password1, password2)
+                    .then(response => {
+                        console.log("Response: '" + response.data + "' with Statuscode " + response.status);
+                        if (response.status == 200) {
+                            console.log("Login successful");
+                            // place the loginSuccess state into our vuex store
+                            commit('login_success', {
+                                user: user,
+                                email: password,
+                                password1: password1,
+                                password2: password2
+                            });
+                        }
+                        resolve(response)
+                    })
+                    .catch(error => {
+                        console.log("Error: " + error);
+                        commit('register_error', {
+                            userName: user
+                        });
+                        reject("Invalid credentials!")
+                    })
+            })
         }
     },
     getters: {
