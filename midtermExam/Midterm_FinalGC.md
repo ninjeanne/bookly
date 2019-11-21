@@ -12,19 +12,19 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 ### 1. Understand business need 
 
-- Vision           done
-- Use case         done
-- Srs              done
-- non-functionals  tbd
-- scope			   done
+- Vision           done  📗
+- Use case         done  📗
+- Srs              done  📗
+- non-functionals  tbd  
+- scope			   done   📗
 
-- Project Methodology: SCRUM     done
+- Project Methodology: SCRUM     done   📗
 
-- Project Management: YouTrack   done
+- Project Management: YouTrack   done    📗
 
-- RUP and long-term planning: done
+- RUP and long-term planning: done    📗
 
-- Iterative Process, sprint every 2 week 
+- Iterative Process, sprint every 2 week     📗
 	One week is to short because of time spent at university
 	and personal appointments.
 
@@ -33,36 +33,36 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 ### 2. Technical ability 
 
-- Demo - PP Alex
+- Demo - PP Alex   📙
 
-- Extend of functionality – PP reasoning Alex
+- Extend of functionality – PP reasoning Alex  📙
   ( points off if you have too few or 
   trivial use cases that don’t count like 
   log-in, log-out, register )
 
-- Class diagram – Nico
+- Class diagram – Nico  📙
 
 ### 3. Quality
 
-- Architecture – 
+- Architecture –    📙
 
-- Configuration – 
+- Configuration –   📙
 
-- Automation –  will be completed next semester  Alex
+- Automation –  will be completed next semester  Alex   📗
 	for example, the last push of the day can
  trigger all kinds of things, metrics, tests,
  deployment (next semester we will do this) 
  currently IDE, git and PM should be integrated already.
 
 - Continuous Integration / -Life cycle management 
-(automatic deploy etc.)   Alex
+(automatic deploy etc.)   Alex                       📗
 
 - Risk Mgmt.- (excel sheet that shows that you have a list
  of risks that you kept up to date on a weekly basis,
  how you mitigated risks - dont show an xcel sheet 
  during a presentation!)   BLUE  📘
 
-- Testing CUCUMBER SS
+- Testing CUCUMBER SS   📙
 
 - Patterns   BLUE  📘
 
@@ -75,8 +75,6 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 - Test Plan includes 3 different tests  BLUE  📘
 + include lifecycle management tools and metrics + change BLUE  📘
 
-- Functional Test
- 
 + unit test    BLUE  📘
 + one other test (like installation, stress test, …) BLUE  📘
 
@@ -92,7 +90,7 @@ future long-term plan using FP estimation BLUE  📘
  
 Quality:
 
-- SAD document
+- SAD document 📙
 
 + includes pattern highlighted as part of architecture BLUE  📘
 
