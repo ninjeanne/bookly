@@ -1,4 +1,4 @@
-#Project: bookly
+##Project: bookly
 Names: Alexandra Stober, Jeanne Helm, Nico Schinacher         
 ## Table of Contents
 -	[Table of Contents](#table-of-contents)
