@@ -1,5 +1,6 @@
 package dhbw.online.bookly.controller;
 
+import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
@@ -22,7 +23,10 @@ public class FriendshipBookController {
     ResponseEntity read() {
         User user = userService.getUser();
         if (user != null) {
-            return ResponseEntity.ok(bookService.read(user));
+            FriendshipBook book = bookService.read(user);
+            if (book != null)
+                return ResponseEntity.ok(book);
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
