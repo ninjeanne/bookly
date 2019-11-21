@@ -5,7 +5,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 	-	[1. Understand business need](#1-Understand business need)
 	-   [2. Technical ability](#2-Technical ability)
 	-   [3. Quality](#3-Quality)
-	-	[4.	Additional Requirements] (#4-Additional Requirements)
+	-	[4.	Additional Requirements](#4-Additional Requirements)
 
 
 ###Understand business need 
@@ -66,7 +66,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 - Metrics    BLUE
 
-###Additional Requirements:
+###Additional Requirements
 
 - testcoverage BLUE
  
