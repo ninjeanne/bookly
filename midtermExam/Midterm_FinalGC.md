@@ -1,7 +1,5 @@
 ## Project bookly
 
-<mark style="background-color: lightblue">Marked text</mark>
-<mark>BLA</mark>
 Names: Alexandra Stober, Jeanne Helm, Nico Schinacher         
 
 ## Table of Contents
@@ -34,7 +32,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 <span style="background-color: #0000FF"> Marked text</span>
 '''
 - Cost Estimation (FP -> time (time is money)) 
-  / comparison of estimation vs. real time spent.  BLUE
+  / comparison of estimation vs. real time spent.  BLUE HEART (&#x1F499;): 💙
 
 ### 2. Technical ability 
 
