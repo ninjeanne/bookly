@@ -28,8 +28,9 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 	One week is to short because of time spent at university
 	and personal appointments.
 
+'''html
 <span style="background-color: #0000FF"> Marked text</span>
-
+'''
 - Cost Estimation (FP -> time (time is money)) 
   / comparison of estimation vs. real time spent.  BLUE
 
