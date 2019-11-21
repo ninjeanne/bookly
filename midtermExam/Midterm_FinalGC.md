@@ -32,7 +32,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 <span style="background-color: #0000FF"> Marked text</span>
 '''
 - Cost Estimation (FP -> time (time is money)) 
-  / comparison of estimation vs. real time spent.  BLUE HEART (&#x1F499;): 💙
+  / comparison of estimation vs. real time spent.  BLUE  📘
 
 ### 2. Technical ability 
 
@@ -63,45 +63,43 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 - Risk Mgmt.- (excel sheet that shows that you have a list
  of risks that you kept up to date on a weekly basis,
  how you mitigated risks - dont show an xcel sheet 
- during a presentation!)   BLUE
+ during a presentation!)   BLUE  📘
 
 - Testing CUCUMBER SS
 
-- Patterns   BLUE
+- Patterns   BLUE  📘
 
-- Metrics    BLUE
+- Metrics    BLUE  📘
 
 ### 4. Additional Requirements
 
-- testcoverage BLUE
+- testcoverage BLUE  📘
  
-- Test Plan includes 3 different tests  BLUE
-+ include lifecycle management tools and metrics + change BLUE
+- Test Plan includes 3 different tests  BLUE  📘
++ include lifecycle management tools and metrics + change BLUE  📘
 
 - Functional Test
  
-+ unit test    BLUE
-+ one other test (like installation, stress test, …) BLUE
++ unit test    BLUE  📘
++ one other test (like installation, stress test, …) BLUE  📘
 
 
 Project Management
 
--    RUP gantt chart (past) tbd  GENERATED not done by hand 
-
-future long-term plan using FP estimation BLUE
+future long-term plan using FP estimation BLUE  📘
 
 (including hours/team member breakdown)
  
-- FP calculation BLUE
+- FP calculation BLUE   📘
  (include esimtes and actual time spent comparison)
  
 Quality:
 
 - SAD document
 
-+ includes pattern highlighted as part of architecture BLUE
++ includes pattern highlighted as part of architecture BLUE  📘
 
 - Testing
-	- unit BLUE
-- Pattern          (place in SAD) explain pattern BLUE
+	- unit BLUE  📘
+- Pattern          (place in SAD) explain pattern BLUE   📘
  
