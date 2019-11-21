@@ -8,7 +8,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 	-	[4.	Additional Requirements](#4-Additional Requirements)
 
 
-###Understand business need 
+### 1. Understand business need 
 
 - Vision           done
 - Use case         done
@@ -29,7 +29,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 - Cost Estimation (FP -> time (time is money)) 
   / comparison of estimation vs. real time spent.  BLUE
 
-###Technical ability 
+### 2. Technical ability 
 
 - Demo - PP Alex
 
@@ -40,7 +40,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 - Class diagram – Nico
 
-###Quality
+### 3. Quality
 
 - Architecture – 
 
@@ -66,7 +66,7 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 - Metrics    BLUE
 
-###Additional Requirements
+### 4. Additional Requirements
 
 - testcoverage BLUE
  
@@ -77,8 +77,6 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
  
 + unit test    BLUE
 + one other test (like installation, stress test, …) BLUE
-
- 
 
 
 Project Management
