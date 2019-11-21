@@ -1,5 +1,7 @@
-##Project: bookly
+## Project bookly
+
 Names: Alexandra Stober, Jeanne Helm, Nico Schinacher         
+
 ## Table of Contents
 -	[Table of Contents](#table-of-contents)
 	-	[1. Understand business need](#1-Understand business need)
@@ -25,6 +27,8 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 - Iterative Process, sprint every 2 week 
 	One week is to short because of time spent at university
 	and personal appointments.
+
+<span style="background-color: #0000FF"> - Marked text</span>
 
 - Cost Estimation (FP -> time (time is money)) 
   / comparison of estimation vs. real time spent.  BLUE
