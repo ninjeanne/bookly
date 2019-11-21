@@ -1,5 +1,7 @@
 ## Project bookly
 
+<mark style="background-color: lightblue">Marked text</mark>
+
 Names: Alexandra Stober, Jeanne Helm, Nico Schinacher         
 
 ## Table of Contents
