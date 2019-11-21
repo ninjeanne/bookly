@@ -57,9 +57,8 @@ export default new Vuex.Store({
                     .then(response => {
                         console.log("Response: '" + response.data + "' with Statuscode " + response.status);
                         if (response.status == 200) {
-                            console.log("Login successful");
-                            // place the loginSuccess state into our vuex store
-                            commit('login_success', {
+                            console.log("Register successful");
+                            commit('register_success', {
                                 user: user,
                                 email: password,
                                 password1: password1,

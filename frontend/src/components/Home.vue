@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <b-img src="bookly.jpg"></b-img>
+    <img src="./../assets/bookly.jpg">
     <div class="separator" style="margin-bottom: 16px"></div>
     <h1>{{ hellomsg }}</h1>
     <h3>Do you still remember the friendship book from your childhood days?
