@@ -64,9 +64,19 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 - Testing CUCUMBER SS   📙
 
+- Testing
+	- unit BLUE  📘
+	- functional 📗
+
 - Patterns   BLUE  📘
 
 - Metrics    BLUE  📘
+
+- SAD document 📙
+
++ includes pattern highlighted as part of architecture BLUE  📘
+
+- Pattern          (place in SAD) explain pattern BLUE   📘
 
 ### 4. Additional Requirements
 
@@ -81,20 +91,11 @@ Names: Alexandra Stober, Jeanne Helm, Nico Schinacher
 
 Project Management
 
-future long-term plan using FP estimation BLUE  📘
-
-(including hours/team member breakdown)
+- future long-term plan using FP estimation BLUE  📘
+  (including hours/team member breakdown)
  
 - FP calculation BLUE   📘
  (include esimtes and actual time spent comparison)
  
-Quality:
 
-- SAD document 📙
-
-+ includes pattern highlighted as part of architecture BLUE  📘
-
-- Testing
-	- unit BLUE  📘
-- Pattern          (place in SAD) explain pattern BLUE   📘
  
