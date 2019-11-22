@@ -2,6 +2,7 @@ package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,13 @@ public class FriendshipBookController {
         }
         User user = userService.getUser();
         if (user != null) {
-            boolean status = bookService.updateTitle(user, title);
-            if (status) {
-                return ResponseEntity.ok().build();
+            try {
+                FriendshipBook book = bookService.updateTitle(user, title);
+                return ResponseEntity.ok(book);
+
+            } catch (FriendshipBookException fbe) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
