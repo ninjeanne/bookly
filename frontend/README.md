@@ -1,4 +1,9 @@
 # frontend
+- \#A64AC9 Kinda Purple
+- \#FCCD04 Mellow
+- \#FFB48F Pinky
+- \#F5E6CC Whitish
+- \#17E9E0 Bluey
 
 ## Project setup
 ```
