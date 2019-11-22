@@ -34,12 +34,6 @@ curl -i --header "Accept:application/json" -X GET -b cookies.txt http://localhos
 Returns 200 and data when successful and 401 when the visitor is not authorized
 
 ##Manage Book
-###create book
-```
-curl -i -X POST -u user:password http://localhost:8080/api/friendshipbook
-```
-Already created return code 400 otherwise code 200 (successful) or 401 (unauthorized)
-
 ###update title from book
 ```
 curl -i -X PUT -u user:password http://localhost:8080/api/friendshipbook\?title\=test
@@ -54,8 +48,3 @@ Response 200 if successful or 401 if unauthorized or otherwise 400
 ```
 {"uuid":"6e1e88a5-478e-4763-aaf8-ac4c27fba614","title":"test","user":{"username":"user","mail":null},"pages":[]}
 ```
-###delete book
-```
-curl -i -X DELETE -u user:password http://localhost:8080/api/friendshipbook
-```
-Response 200 if successful or 401 if unauthorized or otherwise 400
