@@ -70,7 +70,7 @@ export default {
 
 <style lang="scss">
   #main {
-    height: 100vh;
+    min-height: 100vh;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
