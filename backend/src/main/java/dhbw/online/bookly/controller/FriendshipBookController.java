@@ -31,19 +31,6 @@ public class FriendshipBookController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    @PostMapping
-    ResponseEntity create() {
-        User user = userService.getUser();
-        if (user != null) {
-            boolean status = bookService.create(user);
-            if (status) {
-                return ResponseEntity.ok().build();
-            }
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
     @PutMapping
     ResponseEntity update(@RequestParam String title) {
         if (title == null) {
@@ -52,19 +39,6 @@ public class FriendshipBookController {
         User user = userService.getUser();
         if (user != null) {
             boolean status = bookService.updateTitle(user, title);
-            if (status) {
-                return ResponseEntity.ok().build();
-            }
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
-    @DeleteMapping
-    ResponseEntity delete() {
-        User user = userService.getUser();
-        if (user != null) {
-            boolean status = bookService.delete(user);
             if (status) {
                 return ResponseEntity.ok().build();
             }

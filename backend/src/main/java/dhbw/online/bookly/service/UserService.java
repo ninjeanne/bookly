@@ -13,6 +13,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private AuthenticationService authenticationService;
+    @Autowired
+    private FriendshipBookService friendshipBookService;
 
     public boolean exists(String username) {
         return userRepository.existsByUsername(username);
@@ -22,17 +24,16 @@ public class UserService {
     public User getUser() {
         String username = authenticationService.getLoggedInUser();
         if (!exists(username) && !username.equals("anonymousUser")) {
-            create(username);
+            User user = create(username);
+            friendshipBookService.create(user);
         }
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    public void create(String username) {
-        if (!exists(username)) {
-            userRepository.save(
-                    User.builder()
-                            .username(username)
-                            .build());
-        }
+    public User create(String username) {
+        return userRepository.save(
+                User.builder()
+                        .username(username)
+                        .build());
     }
 }
