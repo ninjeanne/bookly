@@ -6,7 +6,7 @@
       </div>
       <div class="right">
         <h3 class="suggestion">Take a look at your Friends Entries</h3>
-        <b-btn class="suggestion-button float-right">View Entries (!)</b-btn>
+        <b-btn class="float-right">View Entries (!)</b-btn>
         <br>
         <h3 class="suggestion">Design your own Book</h3>
         <b-btn class="float-right">View my Book (!)</b-btn>
@@ -45,7 +45,7 @@ export default {
     width: 100%;
   }
   button {
-    width: 60%;
+    width: 80%;
   }
   .separator {
     width: 100%;

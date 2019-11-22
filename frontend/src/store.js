@@ -60,7 +60,7 @@ export default new Vuex.Store({
                             console.log("Register successful");
                             commit('register_success', {
                                 user: user,
-                                email: password,
+                                email: email,
                                 password1: password1,
                                 password2: password2
                             });
@@ -75,7 +75,7 @@ export default new Vuex.Store({
                         reject("Invalid credentials!")
                     })
             })
-        }
+        },
     },
     getters: {
         isLoggedIn: state => state.loginSuccess,
