@@ -55,11 +55,6 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()//make h2 console visible again
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/books/**").hasRole("USER")
-                .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/books/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/books/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/books/**").hasRole("ADMIN")
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .formLogin()
