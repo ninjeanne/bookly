@@ -14,7 +14,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -69,18 +68,26 @@ public class FriendshipBookService {
         if (book != null) {
             val pages = book.getPages();
             page.setUuid(UUID.randomUUID().toString());
+            setMissingUuidsToPageEntries(page);
             pages.add(page);
             return repository.save(book);
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }
 
+    private Page getPage(String uuid) {
+        return pageRepository.findByUuid(uuid).orElse(null);
+    }
+
     public FriendshipBook deletePage(User user, Page page) {
         FriendshipBook book = read(user);
         if (book != null) {
-            val pages = book.getPages();
-            pages.remove(page);
-            return repository.save(book);
+            val pagesFromDb = book.getPages();
+            if (pageRepository.existsByUuid(page.getUuid())) {
+                val pageFromDb = getPage(page.getUuid());
+                pagesFromDb.remove(pageFromDb);
+                return repository.save(book);
+            }
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }
@@ -89,16 +96,26 @@ public class FriendshipBookService {
         FriendshipBook book = read(user);
         if (book != null) {
             val pages = book.getPages();
-            Page resultpage = pages.stream()
+            val resultpages = pages.stream()
                     .filter(pageFromDb -> pageFromDb.getUuid().equals(page.getUuid()))
-                    .collect(Collectors.toList()).get(0);
-            if (resultpage == null) {
+                    .collect(Collectors.toList());
+            if (resultpages.isEmpty()) {
                 throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");
             }
-            pages.remove(resultpage);
+            setMissingUuidsToPageEntries(page);
+            pages.remove(resultpages.get(0));
             pages.add(page);
             return repository.save(book);
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
+    }
+
+    private void setMissingUuidsToPageEntries(Page page) {
+        if (page.getEntries().isEmpty()) {
+            page.setEntries(new ArrayList<>());
+        }
+        page.getEntries().stream()
+                .filter(pageEntry -> pageEntry.getUuid() == null)
+                .forEach(pageEntry -> pageEntry.setUuid(UUID.randomUUID().toString()));
     }
 }

@@ -23,12 +23,12 @@ public class PageController {
     private UserService userService;
 
     @PostMapping
-    ResponseEntity create(Page page) {
+    ResponseEntity create(@RequestBody Page page) {
         User user = userService.getUser();
         if (user != null && page != null) {
             try {
                 FriendshipBook book = bookService.addPage(user, page);
-                return ResponseEntity.ok(book);
+                return ResponseEntity.ok(book.getPages());
             } catch (FriendshipBookException | PageException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
@@ -49,12 +49,12 @@ public class PageController {
     }
 
     @PutMapping
-    ResponseEntity update(Page page) {
+    ResponseEntity update(@RequestBody Page page) {
         User user = userService.getUser();
         if (user != null) {
             try {
                 FriendshipBook book = bookService.updatePage(user, page);
-                return ResponseEntity.ok(book);
+                return ResponseEntity.ok(book.getPages());
             } catch (FriendshipBookException | PageException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
@@ -63,12 +63,12 @@ public class PageController {
     }
 
     @DeleteMapping
-    ResponseEntity delete(Page page) {
+    ResponseEntity delete(@RequestBody Page page) {
         User user = userService.getUser();
         if (user != null && page != null) {
             try {
                 FriendshipBook book = bookService.deletePage(user, page);
-                return ResponseEntity.ok(book);
+                return ResponseEntity.ok(book.getPages());
             } catch (FriendshipBookException | PageException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
