@@ -19,7 +19,41 @@ local database h2 available at
 http://localhost:8080/h2-console with the database **jdbc:h2:mem:testdb**
 with **username:sa password:(empty)**
 ####For changing the access of different roles, please look into the spring security configuration
-
+##Manage Profile/User
+###get user
+```
+curl --request GET \
+  --url http://localhost:8080/api/user \
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0
+```
+return code CONFLICT, OK or UNAUTHORIZED
+Response (Code OK example)
+```
+{
+  "username": "admin",
+  "mail": null
+}
+```
+###put user
+```
+curl --request PUT \
+  --url http://localhost:8080/api/user \
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+  --header 'content-type: application/json' \
+  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0 \
+  --data '{
+	"mail": "bookly@cool.de"
+}'
+```
+return code CONFLICT, OK or UNAUTHORIZED
+Response (Code OK example)
+```
+{
+  "username": "admin",
+  "mail": "bookly@cool.de"
+}
+```
 ##Manage Book
 ###update title from book
 ```

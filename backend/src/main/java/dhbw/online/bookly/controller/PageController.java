@@ -2,8 +2,10 @@ package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
+import dhbw.online.bookly.exception.UserException;
 import dhbw.online.bookly.service.PageService;
 import dhbw.online.bookly.service.UserService;
 import lombok.val;
@@ -29,7 +31,7 @@ public class PageController {
             try {
                 val pages = pageService.add(user, page);
                 return ResponseEntity.ok(pages);
-            } catch (FriendshipBookException | PageException fbe) {
+            } catch (BooklyException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
@@ -52,7 +54,7 @@ public class PageController {
             try {
                 val pages = pageService.update(user, page);
                 return ResponseEntity.ok(pages);
-            } catch (FriendshipBookException | PageException fbe) {
+            } catch (BooklyException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
@@ -66,7 +68,7 @@ public class PageController {
             try {
                 val pages = pageService.delete(user, page);
                 return ResponseEntity.ok(pages);
-            } catch (FriendshipBookException | PageException fbe) {
+            } catch (BooklyException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }

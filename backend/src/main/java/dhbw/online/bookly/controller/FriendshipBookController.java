@@ -2,7 +2,7 @@ package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.User;
-import dhbw.online.bookly.exception.FriendshipBookException;
+import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,7 @@ public class FriendshipBookController {
         try {
             FriendshipBook book = bookService.updateTitle(user, title);
             return ResponseEntity.ok(book);
-
-        } catch (FriendshipBookException fbe) {
+        } catch (BooklyException fbe) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
         }
     }
