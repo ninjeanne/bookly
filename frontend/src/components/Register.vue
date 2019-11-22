@@ -31,7 +31,7 @@
         },
         methods: {
             callRegister() {
-                this.errors = [];
+                /*this.errors = [];
                 this.$store.dispatch("register", { user: this.user, email: this.email, password1: this.password1, password2: this.password2 })
                     .then(() => {
                         this.$router.push('/login')
@@ -40,7 +40,7 @@
                         this.loginError = true;
                         this.errors.push(error);
                         this.error = true
-                    })
+                    })*/
             }
         }
     }
