@@ -1,6 +1,21 @@
 <template>
   <div class="hello">
-    <img src="./../assets/bookly.jpg">
+    <div class="wrapper">
+      <div class="left">
+        <img src="./../assets/bookly.jpg">
+      </div>
+      <div class="right">
+        <h3 class="suggestion">Take a look at your Friends Entries</h3>
+        <b-btn class="suggestion-button float-right">View Entries (!)</b-btn>
+        <br>
+        <h3 class="suggestion">Design your own Book</h3>
+        <b-btn class="float-right">View my Book (!)</b-btn>
+        <br>
+        <h3 class="suggestion">Ask your friend to add a new Entry</h3>
+        <b-btn class="float-right">Send Invite (!)</b-btn>
+      </div>
+    </div>
+    <div style="clear: both"></div>
     <div class="separator" style="margin-bottom: 16px"></div>
     <h1>{{ hellomsg }}</h1>
     <h3>Do you still remember the friendship book from your childhood days?
@@ -11,12 +26,8 @@
     <br>
     <h4>As books become less important with digitalization,
       <br>
-      we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.</h4>
-    <br>
-    <h5 style="margin-top: 64px">This website was developed by three students for a college project.
-      <br>You can find out more about it here:<br>
-      <a href="https://blog.bookly.online">Blog</a> <a href="https://gitlab.com/project_bookly/bookly">GitLab</a>
-    </h5>
+      we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
+    </h4>
   </div>
 </template>
 
@@ -33,9 +44,25 @@ export default {
   img {
     width: 100%;
   }
+  button {
+    width: 60%;
+  }
   .separator {
     width: 100%;
     height: 2px;
     background: black;
+  }
+  .left {
+    width: 50%;
+    float: left;
+  }
+  .right {
+    width: 50%;
+    float: right;
+    padding: 64px;
+  }
+  .suggestion {
+    margin-top: 16px;
+    text-align: right;
   }
 </style>

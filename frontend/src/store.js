@@ -53,7 +53,7 @@ export default new Vuex.Store({
             // TODO: Check that it works after Backend implemented register functionality
             return new Promise((resolve, reject) => {
                 console.log("Accessing backend with user: '" + user);
-                api.getSecured(user, email, password1, password2)
+                api.createUser(user, email, password1, password2)
                     .then(response => {
                         console.log("Response: '" + response.data + "' with Statuscode " + response.status);
                         if (response.status == 200) {
