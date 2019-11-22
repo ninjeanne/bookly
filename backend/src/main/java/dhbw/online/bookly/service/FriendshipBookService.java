@@ -24,6 +24,7 @@ public class FriendshipBookService {
         if (!repository.existsByUser(user)) {
             repository.save(FriendshipBook.builder()
                     .user(user)
+                    .title("My Friendship Book")
                     .pages(Collections.emptyList())
                     .uuid(UUID.randomUUID().toString())
                     .build());
