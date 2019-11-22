@@ -25,7 +25,7 @@ public class PageController {
     @PostMapping
     ResponseEntity create(@RequestBody Page page) {
         User user = userService.getUser();
-        if (user != null && page != null) {
+        if (page != null) {
             try {
                 val pages = pageService.add(user, page);
                 return ResponseEntity.ok(pages);
@@ -33,25 +33,22 @@ public class PageController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @GetMapping
     ResponseEntity read() {
         User user = userService.getUser();
-        if (user != null) {
-            val pages = pageService.read(user);
-            if (pages != null)
-                return ResponseEntity.ok(pages);
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        val pages = pageService.read(user);
+        if (pages != null)
+            return ResponseEntity.ok(pages);
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @PutMapping
     ResponseEntity update(@RequestBody Page page) {
         User user = userService.getUser();
-        if (user != null) {
+        if (page != null) {
             try {
                 val pages = pageService.update(user, page);
                 return ResponseEntity.ok(pages);
@@ -59,13 +56,13 @@ public class PageController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @DeleteMapping
     ResponseEntity delete(@RequestBody Page page) {
         User user = userService.getUser();
-        if (user != null && page != null) {
+        if (page != null) {
             try {
                 val pages = pageService.delete(user, page);
                 return ResponseEntity.ok(pages);
@@ -73,7 +70,7 @@ public class PageController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
 }

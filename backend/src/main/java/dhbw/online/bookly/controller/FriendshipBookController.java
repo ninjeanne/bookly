@@ -23,13 +23,10 @@ public class FriendshipBookController {
     @GetMapping
     ResponseEntity read() {
         User user = userService.getUser();
-        if (user != null) {
-            FriendshipBook book = bookService.read(user);
-            if (book != null)
-                return ResponseEntity.ok(book);
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        FriendshipBook book = bookService.read(user);
+        if (book != null)
+            return ResponseEntity.ok(book);
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @PutMapping
@@ -38,16 +35,13 @@ public class FriendshipBookController {
             return ResponseEntity.noContent().build();
         }
         User user = userService.getUser();
-        if (user != null) {
-            try {
-                FriendshipBook book = bookService.updateTitle(user, title);
-                return ResponseEntity.ok(book);
+        try {
+            FriendshipBook book = bookService.updateTitle(user, title);
+            return ResponseEntity.ok(book);
 
-            } catch (FriendshipBookException fbe) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
-            }
+        } catch (FriendshipBookException fbe) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }
