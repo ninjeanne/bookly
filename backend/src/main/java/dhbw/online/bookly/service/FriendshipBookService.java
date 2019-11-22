@@ -1,16 +1,15 @@
 package dhbw.online.bookly.service;
 
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class FriendshipBookService {
             repository.save(FriendshipBook.builder()
                     .user(user)
                     .title("My Friendship Book")
-                    .pages(Collections.emptyList())
+                    .pages(new ArrayList<>())
                     .uuid(UUID.randomUUID().toString())
                     .build());
             return true;
@@ -48,24 +47,12 @@ public class FriendshipBookService {
         return false;
     }
 
-    public boolean updateTitle(User user, String title) {
+    public FriendshipBook updateTitle(User user, String title) {
         FriendshipBook book = read(user);
         if (book != null) {
             book.setTitle(title);
-            repository.save(book);
-            return true;
+            return repository.save(book);
         }
-        return false;
-    }
-
-    public boolean addPage(User user, Page page) {
-        FriendshipBook book = read(user);
-        if (book != null) {
-            val pages = book.getPages();
-            pages.add(page);
-            repository.save(book);
-            return true;
-        }
-        return false;
+        throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }
 }
