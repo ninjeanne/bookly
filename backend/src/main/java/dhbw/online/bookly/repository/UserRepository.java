@@ -1,16 +1,15 @@
 package dhbw.online.bookly.repository;
 
-
-import dhbw.online.bookly.domain.User;
+import dhbw.online.bookly.dto.User;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+@Repository
+public interface UserRepository extends CrudRepository<User, String> {
 
-    List<User> findByLastName(@Param("lastname") String lastname);
+    Optional<User> findByUsername(String username);
 
-    List<User> findByFirstName(@Param("firstname") String firstname);
-
+    boolean existsByUsername(String username);
 }
