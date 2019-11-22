@@ -1,8 +1,10 @@
 <template>
     <div class="unprotected" v-if="loginError">
-        <h5><b-badge variant="danger">Login failed</b-badge></h5>
+        <h5>
+            <b-badge variant="danger">Login failed</b-badge>
+        </h5>
     </div>
-    <div class="unprotected" v-else>
+    <div class="unprotected" v-else-if="isNotLoggedIn">
         <form @submit.prevent="callLogin()">
             <input type="text" placeholder="username" v-model="user">
             <br>
@@ -12,45 +14,59 @@
         </form>
         <a href="/register">Not registered yet?</a>
     </div>
+    <div v-else>
+        <h2>Looks like you're already logged in!</h2>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'login',
+    import store from './../store';
 
-  data () {
-    return {
-      loginError: false,
-      user: '',
-      password: '',
-      error: false,
-      errors: []
+    export default {
+
+        name: 'login',
+
+        beforeMount() {
+            this.isNotLoggedIn = !store.getters.isLoggedIn;
+        },
+
+        data() {
+            return {
+                isNotLoggedIn: false,
+                loginError: false,
+                user: '',
+                password: '',
+                error: false,
+                errors: []
+            }
+        },
+        methods: {
+            callLogin() {
+                this.errors = [];
+                this.$store.dispatch("login", {user: this.user, password: this.password})
+                    .then(() => {
+                        this.$router.push('/Home')
+                    })
+                    .catch(error => {
+                        this.loginError = true;
+                        this.errors.push(error);
+                        this.error = true
+                    })
+            }
+        }
     }
-  },
-  methods: {
-    callLogin() {
-      this.errors = [];
-      this.$store.dispatch("login", { user: this.user, password: this.password})
-              .then(() => {
-                this.$router.push('/Home')
-              })
-              .catch(error => {
-                this.loginError = true;
-                this.errors.push(error);
-                this.error = true
-              })
-    }
-  }
-}
 </script>
 <style scoped>
-    .unprotected {
-        margin-top: 20px;
+
+    div {
+        margin-top: 32px;
     }
+
     input {
         padding: 16px;
         min-width: 300px;
     }
+
     button {
         margin-top: 16px;
         min-width: 300px;
