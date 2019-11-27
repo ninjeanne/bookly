@@ -3,6 +3,7 @@ package dhbw.online.bookly.controller;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
+import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class FriendshipBookController {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
-    @RequestMapping(value = "/image", method = RequestMethod.GET,
+    @GetMapping(value = "/image",
             produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImage() throws IOException {
         User user = userService.getUser();
@@ -53,12 +54,15 @@ public class FriendshipBookController {
         }
     }
 
-    @RequestMapping(value = "/image", method = RequestMethod.POST)
+    @PostMapping(value = "/image")
     @ResponseBody
     public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile file) {
 
         try {
+            if(file==null){
+                throw new FriendshipBookException("There was no picture in the request for saving.");
+            }
             User user = userService.getUser();
             FriendshipBook book = bookService.read(user);
             bookService.saveImageForBook(book, file);
