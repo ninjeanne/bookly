@@ -7,22 +7,23 @@ const AXIOS = axios.create({
 
 
 export default {
-    hello() {
-        return AXIOS.get(`/hello`);
-    },
-    getUser(userId) {
-        return AXIOS.get(`/user/` + userId);
+    getUser(auth) {
+        return AXIOS.get("/user/", {
+            headers: {
+                "authorization": "Basic " + auth
+            }
+        })
     },
     createUser(firstName, lastName) {
         return AXIOS.post(`/user/` + firstName + '/' + lastName);
     },
     getSecured(user, password) {
-        return AXIOS.get(`/secured/`,{
+        return AXIOS.get(`/user/`,{
             auth: {
                 username: user,
                 password: password
             }});
-    }
+    },
 }
 
 

@@ -5,7 +5,6 @@
         <b-nav card-header tabs align="center">
           <b-nav-item to="/" exact exact-active-class="active">Home</b-nav-item>
           <b-nav-item to="/book" exact exact-active-class="active">Book</b-nav-item>
-          <b-nav-item to="/login" exact exact-active-class="active">Login</b-nav-item>
           <b-nav-item to="/user" exact exact-active-class="active">Profile</b-nav-item>
         </b-nav>
       </b-card-header>

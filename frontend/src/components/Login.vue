@@ -36,8 +36,6 @@
                 loginError: false,
                 user: '',
                 password: '',
-                error: false,
-                errors: []
             }
         },
         methods: {
@@ -45,12 +43,10 @@
                 this.errors = [];
                 this.$store.dispatch("login", {user: this.user, password: this.password})
                     .then(() => {
-                        this.$router.push('/Home')
+                        this.$router.push('/home')
                     })
-                    .catch(error => {
+                    .catch(() => {
                         this.loginError = true;
-                        this.errors.push(error);
-                        this.error = true
                     })
             }
         }
