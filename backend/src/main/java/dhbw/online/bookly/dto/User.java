@@ -17,4 +17,6 @@ public class User {
     @Id
     private String username;
     private String mail;
+    private String first_name;
+    private String last_name;
 }

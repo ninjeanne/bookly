@@ -24,8 +24,7 @@ with **username:sa password:(empty)**
 ```
 curl --request GET \
   --url http://localhost:8080/api/user \
-  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ='
 ```
 return code CONFLICT, OK or UNAUTHORIZED
 Response (Code OK example)
@@ -41,7 +40,6 @@ curl --request PUT \
   --url http://localhost:8080/api/user \
   --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
   --header 'content-type: application/json' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0 \
   --data '{
 	"mail": "bookly@cool.de"
 }'
@@ -70,6 +68,26 @@ Response (Code OK example)
 {"uuid":"6e1e88a5-478e-4763-aaf8-ac4c27fba614","title":"test","user":{"username":"user","mail":null},"pages":[]}
 ```
 
+###post cover image
+```
+curl --request POST \
+  --url http://localhost:8080/api/friendshipbook/image \
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+  --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' \
+  --form file=
+```
+Attention: uses multipart/form-data as content-type
+return code CONFLICT, OK or UNAUTHORIZED
+
+###read cover image
+```
+curl --request GET \
+  --url http://localhost:8080/api/friendshipbook/image \
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+  --header 'content-type: multipart/form-data; boundary=---011000010111000001101001'
+```
+return code NOT_FOUND, OK or UNAUTHORIZED
+
 ##Manage Page
 ###create page
 ```
@@ -77,7 +95,6 @@ curl --request POST \
   --url http://localhost:8080/api/page \
   --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
   --header 'content-type: application/json' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0 \
   --data '{
 	"entries": [
 		{
@@ -125,8 +142,7 @@ Response (Code OK example)
 ```
 curl --request GET \
   --url http://localhost:8080/api/page \
-  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0
+  --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ='
 ```
 return code CONFLICT, OK or UNAUTHORIZED
 Response (Code OK example)
@@ -161,7 +177,6 @@ curl --request PUT \
   --url http://localhost:8080/api/page \
   --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
   --header 'content-type: application/json' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0 \
   --data '{
 	"uuid": "ef28be80-58ed-41ba-b5f7-5b335335277e",
 	"entries": [
@@ -195,7 +210,6 @@ curl --request DELETE \
   --url http://localhost:8080/api/page \
   --header 'authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
   --header 'content-type: application/json' \
-  --cookie JSESSIONID=DA854AEC7E6F1434F8C2D3F7E7F260A0 \
   --data '{
 	"uuid": "ef28be80-58ed-41ba-b5f7-5b335335277e"
 }'
