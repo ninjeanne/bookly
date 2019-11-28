@@ -16,7 +16,7 @@
         <div class="row text-center d-flex justify-content-center pt-5 mb-3">
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="/about">About us</a>
+              <router-link to="/about">About us</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
@@ -26,7 +26,7 @@
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="/termsofservice">Terms of Service</a>
+              <router-link to="/termsofservice">Terms of Service</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
@@ -36,7 +36,7 @@
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="/help">Help</a>
+              <router-link to="/help">Help</router-link>
             </h6>
           </div>
         </div>
