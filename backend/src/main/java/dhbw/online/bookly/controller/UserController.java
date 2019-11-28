@@ -3,6 +3,8 @@ package dhbw.online.bookly.controller;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
+    @ApiOperation(value= "Returns the user data of the currently logged in user.", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity read() {
         try {
             return ResponseEntity.ok(userService.getUser());
@@ -26,6 +29,7 @@ public class UserController {
     }
 
     @PutMapping
+    @ApiOperation(value= "Update the user data of the currently logged in user. The username can't be be changed.", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity update(@RequestBody User user) {
         if (user != null) {
             try {

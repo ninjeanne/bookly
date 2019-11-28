@@ -8,6 +8,8 @@ import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.exception.UserException;
 import dhbw.online.bookly.service.PageService;
 import dhbw.online.bookly.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ public class PageController {
     private UserService userService;
 
     @PostMapping
+    @ApiOperation(value= "Add a new page with data into the users friendship book", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity create(@RequestBody Page page) {
         User user = userService.getUser();
         if (page != null) {
@@ -39,6 +42,7 @@ public class PageController {
     }
 
     @GetMapping
+    @ApiOperation(value= "Returns explicit all pages of a book", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity read() {
         User user = userService.getUser();
         val pages = pageService.read(user);
@@ -48,6 +52,7 @@ public class PageController {
     }
 
     @PutMapping
+    @ApiOperation(value= "Update a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity update(@RequestBody Page page) {
         User user = userService.getUser();
         if (page != null) {
@@ -62,6 +67,7 @@ public class PageController {
     }
 
     @DeleteMapping
+    @ApiOperation(value= "Delete a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity delete(@RequestBody Page page) {
         User user = userService.getUser();
         if (page != null) {

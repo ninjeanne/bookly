@@ -21,6 +21,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic().and()
                 .headers().frameOptions().disable()//make h2 console visible again
                 .and().authorizeRequests()
+                .antMatchers("/v2/api-docs", "/swagger-ui.html").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and().csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL PUT, POST, DELETE will get HTTP 403!
     }

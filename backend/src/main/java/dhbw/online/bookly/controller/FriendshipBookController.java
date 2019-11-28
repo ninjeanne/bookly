@@ -6,6 +6,8 @@ import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,7 +31,8 @@ public class FriendshipBookController {
     @Autowired
     private ServletContext servletContext;
 
-    @GetMapping
+    @GetMapping()
+    @ApiOperation(value= "Returns the data of the book of a user including all of his pages", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity read() {
         User user = userService.getUser();
         FriendshipBook book = bookService.read(user);
@@ -40,6 +43,7 @@ public class FriendshipBookController {
 
     @GetMapping(value = "/image",
             produces = MediaType.IMAGE_JPEG_VALUE)
+    @ApiOperation(value= "Returns cover image of a book", authorizations = {@Authorization(value="basicAuth")})
     public ResponseEntity<byte[]> getImage() throws IOException {
         User user = userService.getUser();
         FriendshipBook book = bookService.read(user);
@@ -56,6 +60,7 @@ public class FriendshipBookController {
 
     @PostMapping(value = "/image")
     @ResponseBody
+    @ApiOperation(value= "Send a new image as cover for the book of the logged in user", authorizations = {@Authorization(value="basicAuth")})
     public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile file) {
 
@@ -74,6 +79,7 @@ public class FriendshipBookController {
     }
 
     @PutMapping
+    @ApiOperation(value= "Update the cover title of the friendship book", authorizations = {@Authorization(value="basicAuth")})
     ResponseEntity update(@RequestParam String title) {
         if (title == null) {
             return ResponseEntity.noContent().build();
