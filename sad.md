@@ -74,6 +74,8 @@ implementation and data views.
 
 Our project bookly uses the classic MVC structure as follows:
 
+<img src="./booklyMVC.png" alt="MVC diagram "/>
+
 ## 3. Architectural Goals And Constraints
 
 As our main technology we decided to use Spring MVC, which is a framework that takes not only care of the backend but 
