@@ -12,7 +12,7 @@
             <br>
             <b-btn variant="success" type="submit">Login</b-btn>
         </form>
-        <a href="/register">Not registered yet?</a>
+        <router-link to="/register">Not registered yet?</router-link>
     </div>
     <div v-else>
         <h2>Looks like you're already logged in!</h2>

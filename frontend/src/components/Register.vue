@@ -11,7 +11,7 @@
             <br>
             <b-btn variant="success" type="submit">Register</b-btn>
         </form>
-        <a href="/login">Already registered?</a>
+        <router-link to="/login">Already registered?</router-link>
     </div>
 </template>
 
