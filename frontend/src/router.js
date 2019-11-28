@@ -12,7 +12,6 @@ import TermsOfService from '@/components/TermsOfService';
 Vue.use(Router);
 
 const router = new Router({
-    mode: 'history',
     routes: [
         { path: '/', component: Home},
         { path: '/user', component: User},
