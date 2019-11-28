@@ -9,47 +9,31 @@
 </template>
 
 <script>
-  import api from "./backend-api";
-  import store from './../store';
-
   export default {
     name: 'user',
 
     beforeMount() {
-      this.username = store.getters.getUserName;
-      this.password = store.getters.getUserPass;
-      this.isLoggedIn = store.getters.isLoggedIn;
+      this.isLoggedIn = this.$store.getters.isLoggedIn;
     },
-
+    created() {
+      if(!this.isLoggedIn) {
+        this.getUser();
+      }
+    },
     data () {
       return {
-        response: [],
-        errors: [],
-        user: {
-          lastName: '',
-          firstName: '',
-          id: 0
-        },
         username: '',
-        password: '',
-        showResponse: false,
-        retrievedUser: {},
-        showRetrievedUser: false,
         isLoggedIn: false
       }
     },
     methods: {
-      // Fetches posts when the component is created.
-      retrieveUser () {
-        api.getUser(this.user.id).then(response => {
-            // JSON responses are automatically parsed.
-            this.retrievedUser = response.data;
-            this.showRetrievedUser = true
-          })
-          .catch(e => {
-            this.errors.push(e)
-          })
-      },
+      getUser() {
+        this.$store.dispatch("user")
+                .then(() => {
+                  this.isLoggedIn = this.$store.getters.isLoggedIn;
+                  this.username = this.$store.getters.getUserName;
+                })
+      }
     }
   }
 

@@ -29,14 +29,26 @@
         name: "Book",
         beforeMount() {
             this.username = store.getters.getUserName;
-            this.password = store.getters.getUserPass;
             this.isLoggedIn = store.getters.isLoggedIn;
+        },
+        created() {
+            if(!this.isLoggedIn) {
+                this.getUser();
+            }
         },
         data() {
             return {
                 username: '',
-                password: '',
                 isLoggedIn: false
+            }
+        },
+        methods: {
+            getUser() {
+                this.$store.dispatch("user")
+                    .then(() => {
+                        this.isLoggedIn = this.$store.getters.isLoggedIn;
+                        this.username = this.$store.getters.getUserName;
+                    })
             }
         }
     }
