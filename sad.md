@@ -6,7 +6,7 @@
 
 | Date       | Version | Description                                          | Author           |
 |------------|---------|------------------------------------------------------|------------------|
-| 28/11/2018 | 1.0     | Initial Documentation                                | Alexandra Stober |
+| 28/11/2019 | 1.0     | Initial Documentation                                | Alexandra Stober |
 | 			 |  	   |                                                      |                  |
 
 # Table of Contents
@@ -153,6 +153,9 @@ To ensure a high quality we are using continuous integration. It automatically b
 measures and deploys the application, if the respective previous step has not failed. This happens periodically and when 
 changes are pushed to a branch. When merging the master branch into the deployment branch, the application will 
 automatically be deployed as well after pushing the button.
+
+
+ADD SWAGGER
 
 
 ## 12. Patterns
