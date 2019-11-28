@@ -18,7 +18,8 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No session will be created or used by spring security
-                .and().httpBasic()
+                .and().httpBasic().and()
+                .headers().frameOptions().disable()//make h2 console visible again
                 .and().authorizeRequests()
                 .antMatchers("/api/**").authenticated()
                 .and().csrf().disable(); // disable cross site request forgery, as we don't use cookies - otherwise ALL PUT, POST, DELETE will get HTTP 403!
