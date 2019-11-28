@@ -1,6 +1,6 @@
 # Bookly - Software Architecture Document
 
-### Version 2.1
+### Version 1.0
 
 # Revision history
 
