@@ -9,12 +9,10 @@ import Help from '@/components/Help'
 import About from '@/components/About'
 import TermsOfService from "@/components/TermsOfService";
 
-import store from './store'
-
 Vue.use(Router);
 
 const router = new Router({
-    mode: 'history', // uris without hashes #, see https://router.vuejs.org/guide/essentials/history-mode.html#html5-history-mode
+    mode: 'history',
     routes: [
         { path: '/', component: Home },
         { path: '/user', component: User },
@@ -40,17 +38,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-    /*if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!store.getters.isLoggedIn) {
-            next({
-                path: '/login'
-            })
-        } else {
-            next();
-        }
-    } else {
-        next();
-    }*/
 });
 
 export default router;
