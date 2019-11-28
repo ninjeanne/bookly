@@ -61,10 +61,9 @@ well as the structure of classes.
 
 | Reference                                                                        						    | Date       |
 |-----------------------------------------------------------------------------------------------------------|------------|
-| <a href="https://blog.bookly.online/">Bookly Blog</a>                         						    | 21/10/2018 |
-| <a href="https://gitlab.com/project_bookly/bookly">GitLab Repository</a>         				            | 21/10/2018 |
-| <a href="https://nicoschinacher.myjetbrains.com/youtrack/issues?q=project:%20bookly">YouTrack</a>			| 21/10/2018 |
-| <a href="https://www.youtube.com/channel/UCkzyPZ1hoasZHXEwxLfDu2w">YouTube</a>       						| 21/10/2018 |
+| <a href="https://blog.bookly.online/">Bookly Blog</a>                         						    | 28/10/2019 |
+| <a href="https://gitlab.com/project_bookly/bookly">GitLab Repository</a>         				            | 28/10/2019 |
+| <a href="https://nicoschinacher.myjetbrains.com/youtrack/issues?q=project:%20bookly">YouTrack</a>			| 28/10/2019 |
 
 ### 1.5 Overview
 
