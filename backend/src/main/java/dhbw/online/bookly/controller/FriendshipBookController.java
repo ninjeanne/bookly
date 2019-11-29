@@ -1,7 +1,6 @@
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.FriendshipBookCover;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/friendshipbook")
@@ -54,7 +52,7 @@ public class FriendshipBookController {
             @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
     })
-    public ResponseEntity<byte[]> getImage() throws IOException {
+    public ResponseEntity<byte[]> getImage() {
         User user = userService.getUser();
         FriendshipBook book = bookService.read(user);
         if (book != null && book.getCover() != null) {

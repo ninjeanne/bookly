@@ -1,8 +1,6 @@
 package dhbw.online.bookly.service;
 
-import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.Page;
-import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.dto.*;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -11,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +27,30 @@ public class PageService {
 
     public List<Page> read(User user) {
         return friendshipBookService.read(user).getPages();
+    }
+
+    public void saveImageForPage(Page page, MultipartFile file) {
+        try {
+            page.setPageImage(PageImage.builder()
+                    .data(file.getBytes())
+                    .size(file.getSize())
+                    .mediaType(file.getContentType())
+                    .build());
+            pageRepository.save(page);
+        } catch (NullPointerException | IOException e) {
+            throw new FriendshipBookException("Image couldn't be saved.");
+        }
+    }
+
+    public Page findPageByUserAndId(User user, int uuid) {
+        List<Page> pagesByUser = read(user);
+
+        for (Page page : pagesByUser) {
+            if (page.getUuid() == uuid) {
+                return page;
+            }
+        }
+        throw new PageException("Page couldn't be found");
     }
 
     public List<Page> add(User user) {
@@ -65,7 +89,7 @@ public class PageService {
         if (book != null) {
             val pages = book.getPages();
             val resultpages = pages.stream()
-                    .filter(pageFromDb -> pageFromDb.getUuid()==page.getUuid())
+                    .filter(pageFromDb -> pageFromDb.getUuid() == page.getUuid())
                     .collect(Collectors.toList());
             if (resultpages.isEmpty()) {
                 throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");
