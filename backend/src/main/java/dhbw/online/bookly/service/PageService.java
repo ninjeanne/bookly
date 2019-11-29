@@ -31,13 +31,12 @@ public class PageService {
         return friendshipBookService.read(user).getPages();
     }
 
-    public List<Page> add(User user, Page page) {
+    public List<Page> add(User user) {
         FriendshipBook book = friendshipBookService.read(user);
         if (book != null) {
             val pages = book.getPages();
-            page.setUuid(UUID.randomUUID().toString());
-            setMissingUuidsToPageEntries(page);
-            pages.add(page);
+            val newPage = new Page();
+            pages.add(newPage);
             friendshipBookRepository.save(book);
             return pages;
         }
@@ -48,12 +47,12 @@ public class PageService {
         return pageRepository.findByUuid(uuid).orElse(null);
     }
 
-    public List<Page> delete(User user, Page page) {
+    public List<Page> delete(User user, String uuid) {
         FriendshipBook book = friendshipBookService.read(user);
         if (book != null) {
             val pagesFromDb = book.getPages();
-            if (pageRepository.existsByUuid(page.getUuid())) {
-                val pageFromDb = getPage(page.getUuid());
+            if (pageRepository.existsByUuid(uuid)) {
+                val pageFromDb = getPage(uuid);
                 pagesFromDb.remove(pageFromDb);
                 friendshipBookRepository.save(book);
                 return pagesFromDb;
@@ -72,7 +71,6 @@ public class PageService {
             if (resultpages.isEmpty()) {
                 throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");
             }
-            setMissingUuidsToPageEntries(page);
             pages.remove(resultpages.get(0));
             pages.add(page);
             friendshipBookRepository.save(book);
@@ -81,12 +79,4 @@ public class PageService {
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }
 
-    private void setMissingUuidsToPageEntries(Page page) {
-        if (page.getEntries().isEmpty()) {
-            page.setEntries(new ArrayList<>());
-        }
-        page.getEntries().stream()
-                .filter(pageEntry -> pageEntry.getUuid() == null)
-                .forEach(pageEntry -> pageEntry.setUuid(UUID.randomUUID().toString()));
-    }
 }

@@ -3,13 +3,9 @@ package dhbw.online.bookly.controller;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
-import dhbw.online.bookly.exception.FriendshipBookException;
-import dhbw.online.bookly.exception.PageException;
-import dhbw.online.bookly.exception.UserException;
 import dhbw.online.bookly.service.PageService;
 import dhbw.online.bookly.service.UserService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
+import io.swagger.annotations.*;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,22 +23,29 @@ public class PageController {
     private UserService userService;
 
     @PostMapping
-    @ApiOperation(value= "Add a new page with data into the users friendship book", authorizations = {@Authorization(value="basicAuth")})
-    ResponseEntity create(@RequestBody Page page) {
+    @ApiOperation(value = "Add a new page with data into the users friendship book", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
+            @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
+    })
+    ResponseEntity create() {
         User user = userService.getUser();
-        if (page != null) {
-            try {
-                val pages = pageService.add(user, page);
-                return ResponseEntity.ok(pages);
-            } catch (BooklyException fbe) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
-            }
+        try {
+            val pages = pageService.add(user);
+            return ResponseEntity.ok(pages);
+        } catch (BooklyException fbe) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @GetMapping
-    @ApiOperation(value= "Returns explicit all pages of a book", authorizations = {@Authorization(value="basicAuth")})
+    @ApiOperation(value = "Returns explicit all pages of a book", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
+            @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
+    })
     ResponseEntity read() {
         User user = userService.getUser();
         val pages = pageService.read(user);
@@ -52,7 +55,12 @@ public class PageController {
     }
 
     @PutMapping
-    @ApiOperation(value= "Update a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value="basicAuth")})
+    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
+            @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
+    })
     ResponseEntity update(@RequestBody Page page) {
         User user = userService.getUser();
         if (page != null) {
@@ -67,12 +75,17 @@ public class PageController {
     }
 
     @DeleteMapping
-    @ApiOperation(value= "Delete a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value="basicAuth")})
-    ResponseEntity delete(@RequestBody Page page) {
+    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
+            @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
+    })
+    ResponseEntity delete(@RequestBody @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "9ed23f00-543f-44a8-a6f6-39894a4129dd") String uuid) {
         User user = userService.getUser();
-        if (page != null) {
+        if (uuid != null) {
             try {
-                val pages = pageService.delete(user, page);
+                val pages = pageService.delete(user, uuid);
                 return ResponseEntity.ok(pages);
             } catch (BooklyException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
