@@ -129,10 +129,8 @@ N/A
 
 This is our deployment view:
 
-ADD IMAGE Deployment
+<img src="./design/deployment_view.png" alt="Deployment View"/>
 
-We only have one instance of an application server due to lack of capacity. The database is running on the 
-server  as well due to the same reason.
 
 ## 8. Implementation View
 
