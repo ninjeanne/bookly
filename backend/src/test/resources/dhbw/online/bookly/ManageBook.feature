@@ -1,8 +1,12 @@
 Feature: As a registered User
   I want to manage my friendship book
 
+  Scenario: successfully logged in and getting user data
+    When I login with "user""password"
+    Then  The response is the test user
+
   Scenario: Delete friendship book cover
-    Given I am logged in
+    When I login with "user""password"
     And I navigate to friendship book cover
     When User friendship book cover is loaded
     And User friendship book cover is shown
@@ -11,7 +15,7 @@ Feature: As a registered User
     And I am able to create a new cover
 
   Scenario: Browse through friendship book
-    Given I am logged in
+    When I login with "user""password"
     And I navigate to friendship book
     When User friendship book cover is loaded
     And User friendship book cover is shown
@@ -21,7 +25,7 @@ Feature: As a registered User
     And I can see next page
 
   Scenario: Create new friendship book cover
-    Given I am logged in
+    When I login with "user""password"
     And I navigate to profile
     When I select create friendship book cover
     Then The friendship book cover form should be loaded
@@ -29,7 +33,7 @@ Feature: As a registered User
 
 
   Scenario: Edit friendship book cover
-    Given I am logged in
+    When I login with "user""password"
     Given I created a friendship book cover
     And I navigate to profile
     When I select edit friendship book cover
