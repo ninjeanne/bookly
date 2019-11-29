@@ -12,9 +12,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,17 +35,18 @@ public class PageService {
             val pages = book.getPages();
             val newPage = new Page();
             pages.add(newPage);
+            pageRepository.save(newPage);
             friendshipBookRepository.save(book);
             return pages;
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }
 
-    private Page getPage(String uuid) {
+    private Page getPage(int uuid) {
         return pageRepository.findByUuid(uuid).orElse(null);
     }
 
-    public List<Page> delete(User user, String uuid) {
+    public List<Page> delete(User user, int uuid) {
         FriendshipBook book = friendshipBookService.read(user);
         if (book != null) {
             val pagesFromDb = book.getPages();
@@ -66,7 +65,7 @@ public class PageService {
         if (book != null) {
             val pages = book.getPages();
             val resultpages = pages.stream()
-                    .filter(pageFromDb -> pageFromDb.getUuid().equals(page.getUuid()))
+                    .filter(pageFromDb -> pageFromDb.getUuid()==page.getUuid())
                     .collect(Collectors.toList());
             if (resultpages.isEmpty()) {
                 throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");

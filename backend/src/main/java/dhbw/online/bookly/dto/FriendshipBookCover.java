@@ -8,10 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.MediaType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -21,10 +18,11 @@ import javax.persistence.Lob;
 @ApiModel(description = "Class representing the book cover of a friendship book")
 public class FriendshipBookCover {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "the unique identifier of the cover image",
-            example = "c96b83f8-e840-4500-9537-f671661b472c",
+            example = "3",
             position = 0)
-    private String uuid;
+    private int uuid;
 
     @Lob
     @Column(length=100000)

@@ -20,12 +20,13 @@ import java.util.UUID;
 @ApiModel(description = "Class representing the friendship book of a user.")
 public class FriendshipBook {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "Is extracted from the authentication and the user where it belongs to" +
             "the unique identifier of the book.",
-            example = "e38334ef-852a-4b96-9a51-286282189ad5",
+            example = "3",
             required = true,
             position = 0)
-    private String uuid;
+    private int uuid;
 
     @ApiModelProperty(notes = "the cover title of the book",
             example = "My super fancy friendship book",

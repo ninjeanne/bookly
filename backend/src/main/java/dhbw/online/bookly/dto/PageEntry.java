@@ -1,5 +1,6 @@
 package dhbw.online.bookly.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,8 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -24,10 +26,12 @@ public class PageEntry {
     }
 
     @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "the unique identifier of a page entry of a book.",
-            example = "27df8c72-83e8-4ef1-8f3b-b99a24d7f5d2",
+            example = "3",
             position = 0)
-    private String uuid = UUID.randomUUID().toString();
+    private int uuid;
 
     @ApiModelProperty(notes = "title of a page entry",
             example = "Titel",

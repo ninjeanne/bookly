@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -20,10 +17,11 @@ import javax.persistence.Lob;
 @ApiModel(description = "Class representing the image of a page entry.")
 public class PageImage {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "the unique identifier of the page image",
             example = "c96b83f8-e840-4500-9537-f671661b472c",
             position = 0)
-    private String uuid;
+    private int uuid;
 
     @Lob
     @Column(length=100000)

@@ -81,13 +81,14 @@ public class PageController {
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
     })
-    ResponseEntity delete(@RequestBody @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "9ed23f00-543f-44a8-a6f6-39894a4129dd") String uuid) {
+    ResponseEntity delete(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
         User user = userService.getUser();
         if (uuid != null) {
             try {
-                val pages = pageService.delete(user, uuid);
+                int uuidNumb = Integer.parseInt(uuid);
+                val pages = pageService.delete(user, uuidNumb);
                 return ResponseEntity.ok(pages);
-            } catch (BooklyException fbe) {
+            } catch (NumberFormatException | BooklyException fbe) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }

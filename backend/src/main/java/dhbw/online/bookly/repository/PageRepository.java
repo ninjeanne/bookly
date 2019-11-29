@@ -9,8 +9,8 @@ import java.util.Optional;
 @Repository
 public interface PageRepository extends CrudRepository<Page, String> {
 
-    Optional<Page> findByUuid(String uuid);
+    Optional<Page> findByUuid(int uuid);
 
-    boolean existsByUuid(String uuid);
+    boolean existsByUuid(int uuid);
 
 }
