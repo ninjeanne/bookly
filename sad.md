@@ -95,7 +95,16 @@ This is our overall use-case diagram:
 
 We split our architecture according to the MVC architecture as follows:
 
-ADD IMAGE
+Backend Controller
+<img src="./design/controller.png" alt="Backend Controller"/>
+
+Model
+
+ADD IMAGE MODEL
+
+View 
+
+ADD IMAGE VIEW
 
 We are working with maven modules, because it allows us to modularize the project better. We defined our module 
 structure as follows:
