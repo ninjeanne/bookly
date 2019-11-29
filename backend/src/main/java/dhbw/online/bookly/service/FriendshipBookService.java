@@ -29,7 +29,6 @@ public class FriendshipBookService {
                     .user(user)
                     .title("My Friendship Book")
                     .pages(new ArrayList<>())
-                    .uuid(UUID.randomUUID().toString())
                     .build());
             return true;
         }
@@ -39,7 +38,6 @@ public class FriendshipBookService {
     public void saveImageForBook(FriendshipBook friendshipBook, MultipartFile file) {
         try {
             friendshipBook.setCover(FriendshipBookCover.builder()
-                    .uuid(UUID.randomUUID().toString())
                     .data(file.getBytes())
                     .size(file.getSize())
                     .mediaType(file.getContentType())
