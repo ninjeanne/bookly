@@ -100,34 +100,16 @@ Backend Controller
 
 Model
 
-ADD IMAGE MODEL
+<img src="./design/class_diagram.png" alt="Model"/>
 
 View 
-
-ADD IMAGE VIEW
-
-We are working with maven modules, because it allows us to modularize the project better. We defined our module 
-structure as follows:
-
-```
-|--???????
-|   |-- application
-|   |-- model
-|   |-- shared
-|   |-- util
-``` 
-
-For this maven module structure has the following dependency graph:
-
-ADD PICTURE MAVEN STRUCTURE
+<img src="./design/VIEW.png" alt="Backend Controller"/>
 
 
 ### 5.2 Architecturally Significant Design Packages
 
-The module `???????` contains all controllers, the main application as well as all views. In this module, 
-the Spring MVC framework is realized. However, the module `??????` is outsources, so that the controllers 
-cannot directly access the database. This is all handled by the class `???????` which represents the interface 
-between Controllers and Models. 
+We have a backend and a frontend module. The backend module contains our model. The frontend module contains our view. 
+The Spring MVC framework is realized. The controllers cannot directly access the database. 
 
 
 ## 6. Process View
