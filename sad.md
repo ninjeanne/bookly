@@ -74,7 +74,7 @@ implementation and data views.
 
 Our project bookly uses the classic MVC structure as follows:
 
-<img src="./booklyMVC.png" alt="MVC diagram "/>
+![booklyMVC](booklyMVC.png "MVC diagram")
 
 ## 3. Architectural Goals And Constraints
 
@@ -87,7 +87,7 @@ serialization.
 
 This is our overall use-case diagram:
 
-<img src="./design/usecase.png" alt="Overall use-case diagram" />
+![Overall use-case diagram](design/usecase.png "Overall use-case diagram")
 
 ## 5. Logical View
 
@@ -97,15 +97,13 @@ We split our architecture according to the MVC architecture as follows:
 
 Spring uses a Dispatcher Servlet that accepts requests and forwards to the view resolver. 
 This resolver serves our view files. See steps 1, 6, 7 and 8. This is our controller according to the MVC model.
-
-<img src="./design/maven_mvc.png" alt="controller"/>
+![Controller](design/maven_mvc.png "controller")
 
 The backend serves as the model according to the MVC model.
-
-<img src="./design/class_diagram.png" alt="Model"/>
+![Model](design/class_diagram.png "Model")
 
 The frontend serves as the model according to the MVC model.
-<img src="./design/VIEW.png" alt="view"/>
+![View](design/VIEW.png "View")
 
 ### 5.2 Architecturally Significant Design Packages
 
@@ -121,7 +119,7 @@ N/A
 
 This is our deployment view:
 
-<img src="./design/deployment_view.png" alt="Deployment View"/>
+![DeploymentView](design/deployment_view.png "Deployment View")
 
 
 ## 8. Implementation View
@@ -132,8 +130,7 @@ N/A
 
 Our data view is modelled as followed:
 
-<img src="./design/DatabaseERM.png" alt="Data View" />
-
+![DataView](design/DatabaseERM.png "Data View")
 
 ## 10. Size and Performance
 
