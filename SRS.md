@@ -128,22 +128,27 @@ This document is designed for internal use only and will outline the development
 | [Blog](https://blog.bookly.online/)                                                                   | 17/10/2019 |
 | [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
 | [Use Case Diagram](design/usecase.png)                                                                | 17/10/2019 |
+| [Youtrack](https://nicoschinacher.myjetbrains.com/youtrack/agiles)                                    | 02/12/2019 |
 
 ### 1.5 Overview
 
-The next chapters provide information about our vision based on the use case diagram as well as more detailed software requirements.
+The next chapters provide information about our vision based on the use case diagram as well as more detailed 
+software requirements.
 
 ## 2. Overall Description
 
 
 ### 2.1 Product perspective
 
-The product is supposed to be an open source. It is a web based system implementing client-server model. Bookly provides a friendship book from the old days.
+The product is supposed to be an open source. It is a web based system implementing client-server model. Bookly 
+provides a friendship book from the old days.
 
 The following are the main features that are included in the bookly website.
 
--	User account/interface: The system allows the user to create their accounts in the system and provide features of updating and viewing profiles. You can view your friendship and invite friends to design a page.
--	Number of users being supported by the system: Though the number is precisely not mentioned but the system is able to support a large number of online users at a time.
+-	User account/interface: The system allows the user to create their accounts in the system and provide features 
+of updating and viewing profiles. You can view your friendship and invite friends to design a page.
+-	Number of users being supported by the system: Though the number is precisely not mentioned but the system is 
+able to support a large number of online users at a time.
 -	FAQs section: Frequently asked section contains answers to problems which bookly users frequently faced.
 
 ### 2.2 Product functions
@@ -162,11 +167,13 @@ A user can give permissions to other users so they’re able to design a new pag
 
 ### 2.3 User characteristics
 
-It is basically for everyone who feels nostalgic and wants to dwell in the memories of their childhood. Nevertheless, our main target group consists of children. 
+It is basically for everyone who feels nostalgic and wants to dwell in the memories of their childhood. 
+Nevertheless, our main target group consists of children. 
 
 ### 2.4 Dependencies
 
-Whether the website will be mobile compatible depends on the Vue.js framework. We have to decide whether we will implement an individual design or use a predefined template. 
+Whether the website will be mobile compatible depends on the Vue.js framework. We have to decide whether we will 
+implement an individual design or use a predefined template. 
 The project has the dependencies that are due to our choice in technology. 
 Requirements subsets
 -	database
@@ -182,14 +189,20 @@ Our database limit is under 15 GB.
 
 
 ## 3. Specific Requirements
-This section contains all of the functional and quality requirements of the system. It gives a detailed description of the system and all its features. In the following sections our standard requirements for our functions are described. If they vary, these functions will be explained explicitly. 
+This section contains all of the functional and quality requirements of the system. It gives a detailed description 
+of the system and all its features. In the following sections our standard requirements for our functions are described. 
+If they vary, these functions will be explained explicitly. 
 ### 3.1 Functionality – Data Backend
 
-The backend is needed to separate the user interface from the data storage. It verifies if the correct permissions are present to request data or to ensure that incoming data is properly parsed and saved correctly. For security reasons data is filtered by the backend. It is then packed in the right format which the next chapter describes. The data is kept inside a database and maintained by the backend.
+The backend is needed to separate the user interface from the data storage. It verifies if the correct permissions 
+are present to request data or to ensure that incoming data is properly parsed and saved correctly. For security 
+reasons data is filtered by the backend. It is then packed in the right format which the next chapter describes. The 
+data is kept inside a database and maintained by the backend.
 
 #### 3.1.1 User system
 
-At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile and also provides the basis for a permission-system.
+At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile 
+and also provides the basis for a permission-system.
 According use cases are:
 
 -   [Account Operations](design/Account.md)
@@ -197,7 +210,8 @@ According use cases are:
 
 #### 3.1.2 Friendship book
 
-A friendship book consists of a cover and friendship book entries. These entries can be created by friend after inviting them to contribute to your friendship book.
+A friendship book consists of a cover and friendship book entries. These entries can be created by friend after 
+inviting them to contribute to your friendship book.
 According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
@@ -206,14 +220,19 @@ According use cases are:
 
 #### 3.1.3 Read data given over API endpoints
 
-For the communication between both sides (frontend and backend) a universal data format is needed, therefore JSON is used. The frontend sends data in JSON to the backend in form of a request and waits for a response from the backend which also answers with JSON.
+For the communication between both sides (frontend and backend) a universal data format is needed, therefore JSON is 
+used. The frontend sends data in JSON to the backend in form of a request and waits for a response from the backend 
+which also answers with JSON.
 
 #### 3.1.4 Parse data
 
-Incoming data needs to be checked if the sent values represent the correct data type and if the user that sends the request has the permissions to do so. 
+Incoming data needs to be checked if the sent values represent the correct data type and if the user that sends the 
+request has the permissions to do so. 
 #### 3.1.5 Provide data
 
-After data is requested from the frontend and the user is allowed to do so, the backend sends data. In addition, the response contains a HTTP status code even if the request failed so that the frontend knows if it just received data or an error.
+After data is requested from the frontend and the user is allowed to do so, the backend sends data. In addition, 
+the response contains a HTTP status code even if the request failed so that the frontend knows if it just received 
+data or an error.
 
 ### 3.2 Functionality – User Interface
 
@@ -222,21 +241,26 @@ The frontend provides an user interface for the users to interact with and is ab
 
 ### 3.3 Usability
 
-We will build the user interface intuitive, so that a new user does not necessarily need an explanation. If questions arise our interface provides a comprehensive FAQ. 
+We will build the user interface intuitive, so that a new user does not necessarily need an explanation. If questions 
+arise our interface provides a comprehensive FAQ. 
 ### 3.4 Reliability
 
 In the following we describe the availability, MTBF and MTTR, accuracy and bug classes we strive for.
 
 #### 3.4.1 Availability
 
-Since we are trying to focus on a bug free application rather than caring about hosting it on our own, the availability depends on the hosting
-provider we choose. Due redundancy and other security arrangements, most providers can ensure an uptime over 99.9% of the time its hosted at their datacenter.
+Since we are trying to focus on a bug free application rather than caring about hosting it on our own, the availability 
+depends on the hosting
+provider we choose. Due redundancy and other security arrangements, most providers can ensure an uptime over 99.9% of 
+the time its hosted at their datacenter.
 
 #### 3.4.2 MTBF, MTTR
 
-If the application fails due an hardware issue, then the mean times are up to our hosting provider. Since the ensured uptime of most hosting providers
+If the application fails due an hardware issue, then the mean times are up to our hosting provider. Since the ensured 
+uptime of most hosting providers
 is 99.9%, they try to fix the issue within a few minutes.
-However, if the application fails due a bug in our code, we can revert the code to a previous version that worked fine. This shouldn't take more than
+However, if the application fails due a bug in our code, we can revert the code to a previous version that worked fine. 
+This shouldn't take more than
 one or two hours from the point on we noticed.
 
 #### 3.4.3 Accuracy
@@ -246,7 +270,8 @@ one or two hours from the point on we noticed.
 
 ### 3.5 Performance
 
-In general, we try to keep to user experience fluent and response times low. High peaks can still appear when the hosting provider is currently having issues.
+In general, we try to keep to user experience fluent and response times low. High peaks can still appear when the 
+hosting provider is currently having issues.
 
 #### 3.5.1 Response time
 
@@ -261,36 +286,43 @@ tbd
 
 ### 3.6 Supportability
 
-Our frontend, backend and each functionality will be clearly separated and we try to stick to naming conventions which are common in the used technologies.
-Furthermore we aim to keep our code clean which we can't guarantee though. Thereby we make it easy to understand our infrastructure and avoid possible confusion
+Our frontend, backend and each functionality will be clearly separated and we try to stick to naming conventions 
+which are common in the used technologies.
+Furthermore we aim to keep our code clean which we can't guarantee though. Thereby we make it easy to understand 
+our infrastructure and avoid possible confusion
 when one needs to edit older parts of the application.
 
 ### 3.7 Design Constraints
 
-We are focused on building a modern-looking application using modern technologies. Of course there are other smaller libraries and frameworks used than the ones that
+We are focused on building a modern-looking application using modern technologies. Of course there are other 
+smaller libraries and frameworks used than the ones that
 are listed, but they represent just a small fraction of the whole project and aren't worth mentioning.
 
 #### 3.7.1 Development tools
 
 -   Git: version control system
--   JetBrains IntelliJ: Spring MVC backend development
+-   JetBrains IntelliJ: Spring MVC backend development and Vue.js frontend development
 -   YouTrack: Project planning tool
 -	Database: H2
 
 #### 3.7.2 Spring Boot
 
-Spring Boot is built on top of the Spring framework and provides the developer with helpful features to create and run web applications. In our case, a REST Web Service
-which represents the interface between our front- and backend. As we want to benefit from the newest features of Java 10, the platform this service will be hosted on needs to support Java 10 or higher.
+Spring Boot is built on top of the Spring framework and provides the developer with helpful features to create and 
+run web applications. In our case, a REST Web Service
+which represents the interface between our front- and backend. As we want to benefit from the newest features of Java 8, 
+the platform this service will be hosted on needs to support Java 8 or higher.
 
 
 #### 3.7.3 Supported Platforms
 
-Since bookly will be a web application the user only needs a modern web browser and a stable internet connection. With modern web browser we mean the
+Since bookly will be a web application the user only needs a modern web browser and a stable internet connection. With 
+modern web browser we mean the
 current versions of Mozilla Firefox or Google Chrome.
 
 ### 3.8 Online User Documentation and Help System Requirements
 
-We want to provide a F.A.Q. for possible questions that can come up when using our application. Since it can be frustrating for children if they don't know what to do we will include step-by-step
+We want to provide a F.A.Q. for possible questions that can come up when using our application. Since it can be 
+frustrating for children if they don't know what to do we will include step-by-step
 instructions and enough pictures to show the user exactly what to click at.
 
 ### 3.9 Purchased Components
@@ -324,17 +356,15 @@ By  interpreting its content our system will be able to transfer all needed data
 
 ### 3.11 Licensing Requirements
 
-tbd  (Nico)
+Our project runs under the MIT License. This way everyone is allowed to create his own version.
 
 ### 3.12 Legal, Copyright and other Notices
 
 -   N\\A
-tbd  (Jeanne)
 
 ### 3.13 Applicable Standards
 
 -   N\\A
-tbd  (Alex)
 
 ## 4. Supporting Information
 
