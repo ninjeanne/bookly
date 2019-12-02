@@ -95,21 +95,22 @@ This is our overall use-case diagram:
 
 We split our architecture according to the MVC architecture as follows:
 
-Backend Controller
-<img src="./design/controller.png" alt="Backend Controller"/>
+Spring uses a Dispatcher Servlet that accepts requests and forwards to the view resolver. 
+This resolver serves our view files. See steps 1, 6, 7 and 8. This is our controller according to the MVC model.
 
-Model
+<img src="./design/maven_mvc.png" alt="controller"/>
+
+The backend serves as the model according to the MVC model.
 
 <img src="./design/class_diagram.png" alt="Model"/>
 
-View 
-<img src="./design/VIEW.png" alt="Backend Controller"/>
-
+The frontend serves as the model according to the MVC model.
+<img src="./design/VIEW.png" alt="view"/>
 
 ### 5.2 Architecturally Significant Design Packages
 
 We have a backend and a frontend module. The backend module contains our model. The frontend module contains our view. 
-The Spring MVC framework is realized. The controllers cannot directly access the database. 
+The Spring MVC framework is realized. The controller cannot directly access the database. 
 
 
 ## 6. Process View
@@ -145,9 +146,9 @@ measures and deploys the application, if the respective previous step has not fa
 changes are pushed to a branch. When merging the master branch into the deployment branch, the application will 
 automatically be deployed as well after pushing the button.
 
-
-ADD SWAGGER
-
+For serving a most current documentation of our API, we are using Swagger. It is an open-source software framework backed by a large ecosystem of tools that helps developers 
+design, build, document, and consume RESTful web services. It is accessible at PATH/swagger-ui.html.
+It's also possible to test an API and see all possible responses.
 
 ## 12. Patterns
 
