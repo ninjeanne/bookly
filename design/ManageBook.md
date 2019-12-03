@@ -26,7 +26,7 @@ a new book you can create a personalized book cover. Later the book cover can al
 designed with different themes. You can decide whether you friendship book will be 
 public or private.
 
-[Create Book] (design_CreateBook.md "Create Book")
+[Create Book](design_CreateBook.md "Create Book")
 
 
 ### 2.3 Read
