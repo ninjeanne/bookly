@@ -102,7 +102,7 @@ This resolver serves our view files. See steps 1, 6, 7 and 8. This is our contro
 The backend serves as the model according to the MVC model.
 ![Model](design/class_diagram.png "Model")
 
-The frontend serves as the model according to the MVC model.
+The frontend serves as the view according to the MVC model.
 ![View](design/VIEW.png "View")
 
 ### 5.2 Architecturally Significant Design Packages
