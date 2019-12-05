@@ -1,6 +1,6 @@
 ## Project bookly
 
-###Team
+### Team
 - Alexandra Stober - stober.alexandra@student.dhbw-karlsruhe.de
 - Jeanne Helm - helm.jeanne@student.dhbw-karlsruhe.de
 - Nico Schinacher - schinacher.nico@student.dhbw-karlsruhe.de
