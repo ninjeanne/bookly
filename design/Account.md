@@ -20,7 +20,7 @@ When entering our website, the first page that is shown is the login mask. A use
 successful, one will be redirected to his profile page. Otherwise a error message will show up and he can repeat his login
 or register.
 
-![Login](Login.png "Login")
+![Login](login.png "Login")
 
 ### 2.3 Logout
 
@@ -35,7 +35,7 @@ For registering a username and a mail is needed. If the username is already take
 To protect against bots, a captcha query is built in. In addition, the general data protection guidelines must be accepted.
 After confirmation, an e-mail is generated and sent in which the user activates his account by clicking on the link. 
 He will be redirected to the login page and can now log in there.
-![Registration](Registration.png "Registration")
+![Registration](registration.png "Registration")
 
 ### 2.5 Delete/Unregister
 
