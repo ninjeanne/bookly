@@ -7,7 +7,6 @@ import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Slf4j
@@ -37,13 +35,22 @@ public class FriendshipBookService {
 
     public void saveImageForBook(FriendshipBook friendshipBook, MultipartFile file) {
         try {
-            friendshipBook.setCover(FriendshipBookCover.builder()
-                    .data(file.getBytes())
-                    .size(file.getSize())
-                    .mediaType(file.getContentType())
-                    .build());
+           saveImageForBook(friendshipBook, file.getBytes(), file.getSize(), file.getContentType());
             repository.save(friendshipBook);
         } catch (NullPointerException | IOException e) {
+            throw new FriendshipBookException("Image couldn't be saved.");
+        }
+    }
+
+    public void saveImageForBook(FriendshipBook friendshipBook, byte[] data, long size, String contentType) {
+        try {
+            friendshipBook.setCover(FriendshipBookCover.builder()
+                    .data(data)
+                    .size(size)
+                    .mediaType(contentType)
+                    .build());
+            repository.save(friendshipBook);
+        } catch (NullPointerException e) {
             throw new FriendshipBookException("Image couldn't be saved.");
         }
     }
