@@ -16,6 +16,6 @@ lead to the new page (a link with the userid and a uuid for this page).
 ![Create Book Entry](Create_Book_Entry.png "Create Book Entry")
 
 
-## 4. Preconditions
+## 3. Preconditions
 
 The User either received a link to create a page for a friend, or is logged in to create a page to share with a friend.
