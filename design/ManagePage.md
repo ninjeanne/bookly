@@ -25,7 +25,7 @@ The creation of a new page. The owner of the book has the opportunity to add new
 book. Later this option will lead to a link sharing. For now the adding option will automatically
 lead to the new page (a link with the userid and a uuid for this page).
 
-[Create Book Entry](design_CreatePage.md "Create Book Entry")
+[Create Book Entry](CreatePage.md "Create Book Entry")
 
 ### 2.3 Read
 
