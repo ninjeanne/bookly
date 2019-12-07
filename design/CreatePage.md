@@ -9,8 +9,6 @@ The creation of a new page. The owner of the book has the opportunity to add new
 book. Later this option will lead to a link sharing. For now the adding option will automatically
 lead to the new page (a link with the userid and a uuid for this page).
 
-![Friendship Book Cover](cover.png "Friendship Book Cover")
-
 ## 2. Flow of Events
 
 ![Create Book Entry](Create_Book_Entry.png "Create Book Entry")
