@@ -32,13 +32,13 @@ lead to the new page (a link with the userid and a uuid for this page).
 A user can view an entry by browsing through his book. (Starting with the cover, he can reach all entries by arrows.)
 The functionality to the view of only one page includes a photo, labels and text.
 
-[Read Book Entry](design_ReadPage.md "Read Book Entry")
+[Read Book Entry](ReadPage.md "Read Book Entry")
 
 ### 2.4 Edit
 
 During editing the user can modify his labels and text but also change the picture.
 
-[Edit Book Entry](design_EditPage.md "Edit Book Entry")
+[Edit Book Entry](EditPage.md "Edit Book Entry")
 
 ### 2.5 Delete
 
