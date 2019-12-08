@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/api/friendshipbook")
@@ -51,20 +52,20 @@ public class FriendshipBookController {
             @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
     })
-    public ResponseEntity<byte[]> getImage() {
+    public ResponseEntity<String> getImage() {
         User user = userService.getUser();
         FriendshipBook book = bookService.read(user);
         if (book != null && book.getCover() != null) {
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.valueOf(book.getCover().getMediaType()))
-                    .body(book.getCover().getData());
+                    .body(encodeBase64(book.getCover().getData()));
         } else {
             return ResponseEntity
                     .notFound().build();
         }
     }
-
+    @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
     @ApiOperation(value = "Send a new image as cover for the book of the logged in user", authorizations = {@Authorization(value = "basicAuth")})
@@ -89,7 +90,7 @@ public class FriendshipBookController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @CrossOrigin
     @PutMapping
     @ApiOperation(value = "Update the cover title of the friendship book", authorizations = {@Authorization(value = "basicAuth")})
     @ApiResponses(value = {
@@ -109,5 +110,9 @@ public class FriendshipBookController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
         }
     }
-
+    public String encodeBase64(byte[] data)
+    {
+        byte[] encoded = Base64.getEncoder().encode(data);
+        return new String(encoded);
+    }
 }

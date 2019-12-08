@@ -7,15 +7,15 @@ const AXIOS = axios.create({
 
 
 export default {
+    register(firstName, lastName) {
+        return AXIOS.post(`/user/` + firstName + '/' + lastName);
+    },
     getUser(auth) {
         return AXIOS.get("/user/", {
             headers: {
                 "authorization": "Basic " + auth
             }
         })
-    },
-    createUser(firstName, lastName) {
-        return AXIOS.post(`/user/` + firstName + '/' + lastName);
     },
     getSecured(user, password) {
         return AXIOS.get(`/user/`,{
@@ -24,6 +24,39 @@ export default {
                 password: password
             }});
     },
+    getBook(auth) {
+        return AXIOS.get("/friendshipbook",{
+            headers: {
+                "authorization": "Basic " + auth
+            }
+        });
+    },
+    editBook(auth, title) {
+        return AXIOS.put("/friendshipbook" +
+            "?title=" + title,
+            {},
+            { headers: {
+                "authorization": "Basic " + auth
+            }
+        });
+    },
+    getBookCover(auth) {
+        return AXIOS.get("/friendshipbook/image",{
+            headers: {
+                "authorization": "Basic " + auth
+            }
+        })
+    },
+    editBookCover(auth, image) {
+        var formData = new FormData();
+        formData.append("file", image);
+        return AXIOS.post("/friendshipbook/image", formData,{
+            headers: {
+                'content-type': 'multipart/form-data',
+                "authorization": "Basic " + auth
+            }
+        });
+    }
 }
 
 

@@ -5,9 +5,11 @@ import User from '@/components/User'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Book from '@/components/Book'
+import BookEditor from '@/components/BookEditor'
 import Help from '@/components/Help'
 import About from '@/components/About'
-import TermsOfService from '@/components/TermsOfService';
+import TermsOfService from '@/components/TermsOfService'
+import Page from '@/components/Page';
 
 Vue.use(Router);
 
@@ -19,9 +21,11 @@ const router = new Router({
         { path: '/login', component: Login},
         { path: '/register', component: Register},
         { path: '/book', component: Book},
+        { path: '/bookeditor', component: BookEditor},
         { path: '/help', component: Help},
         { path: '/about', component: About},
         { path: '/termsofservice', component: TermsOfService},
+        { path: '/page', component: Page},
         // otherwise redirect to home
         { path: '*', redirect: '/' }
     ]
