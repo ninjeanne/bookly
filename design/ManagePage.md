@@ -25,20 +25,20 @@ The creation of a new page. The owner of the book has the opportunity to add new
 book. Later this option will lead to a link sharing. For now the adding option will automatically
 lead to the new page (a link with the userid and a uuid for this page).
 
-![Create Book Entry](Create_Book_Entry.png "Create Book Entry")
+[Create Book Entry](CreatePage.md "Create Book Entry")
 
 ### 2.3 Read
 
 A user can view an entry by browsing through his book. (Starting with the cover, he can reach all entries by arrows.)
 The functionality to the view of only one page includes a photo, labels and text.
 
-TBD photo Nico
+[Read Book Entry](ReadPage.md "Read Book Entry")
 
 ### 2.4 Edit
 
 During editing the user can modify his labels and text but also change the picture.
 
-TBD photo Nico
+[Edit Book Entry](EditPage.md "Edit Book Entry")
 
 ### 2.5 Delete
 

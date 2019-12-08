@@ -44,9 +44,8 @@ public class FriendshipBookController {
             return ResponseEntity.ok(book);
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
-    @CrossOrigin
-    @GetMapping(value = "/image",
-            produces = MediaType.IMAGE_JPEG_VALUE)
+
+    @GetMapping(value = "/image")
     @ApiOperation(value = "Returns cover image of a book", authorizations = {@Authorization(value = "basicAuth")})
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array", response = byte[].class),

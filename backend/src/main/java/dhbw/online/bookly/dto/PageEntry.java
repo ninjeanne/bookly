@@ -25,6 +25,11 @@ public class PageEntry {
         setTitle(title);
     }
 
+    public PageEntry(String title, String description) {
+        this(title);
+        setDescription(description);
+    }
+
     @Id
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)

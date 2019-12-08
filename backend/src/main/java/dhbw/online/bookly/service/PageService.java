@@ -1,6 +1,9 @@
 package dhbw.online.bookly.service;
 
-import dhbw.online.bookly.dto.*;
+import dhbw.online.bookly.dto.FriendshipBook;
+import dhbw.online.bookly.dto.Page;
+import dhbw.online.bookly.dto.PageImage;
+import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -31,13 +34,21 @@ public class PageService {
 
     public void saveImageForPage(Page page, MultipartFile file) {
         try {
+            saveImageForPage(page, file.getBytes(), file.getSize(), file.getContentType());
+        } catch (NullPointerException | IOException e) {
+            throw new FriendshipBookException("Image couldn't be saved.");
+        }
+    }
+
+    public void saveImageForPage(Page page, byte[] data, long size, String contentType) {
+        try {
             page.setPageImage(PageImage.builder()
-                    .data(file.getBytes())
-                    .size(file.getSize())
-                    .mediaType(file.getContentType())
+                    .data(data)
+                    .size(size)
+                    .mediaType(contentType)
                     .build());
             pageRepository.save(page);
-        } catch (NullPointerException | IOException e) {
+        } catch (NullPointerException e) {
             throw new FriendshipBookException("Image couldn't be saved.");
         }
     }
