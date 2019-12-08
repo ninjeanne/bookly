@@ -6,21 +6,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        loginSuccess: false,
-        loginError: false,
         userName: null,
-        userPass: null
+        userPass: null,
+        userBook: null,
     },
     mutations: {
-        login_success(state, payload){
-            state.loginSuccess = true;
-            state.loginError = false;
+        login_success(state, payload) {
             state.userName = payload.userName;
             state.userPass = payload.userPass;
         },
-        login_error(state){
-            state.loginSuccess = false;
-            state.loginError = true;
+        book_retrieved(state, payload) {
+            state.userBook = payload;
         }
     },
     actions: {
@@ -37,26 +33,21 @@ export default new Vuex.Store({
                         }
                         resolve(response)
                     })
-                    .catch(() => {
-                        commit('login_error');
-                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
             })
         },
         register({commit}, {user, email, password1, password2}) {
             return new Promise((resolve, reject) => {
-                api.createUser(user, email, password1, password2)
+                api.register(user, email, password1, password2)
                     .then(response => {
-                        if (response.status === 200) {
-
-                        }
+                        if (response.status === 200) { }
                         resolve(response)
                     })
-                    .catch(error => {
-                        commit('register_error', {
-                            userName: user
-                        });
-                        reject("Invalid credentials!")
-                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
             })
         },
         user({commit}) {
@@ -68,20 +59,68 @@ export default new Vuex.Store({
                                 commit('login_success', {
                                     userName: response.data.username
                                 });
-                                console.log(response.data.username);
                             }
                             resolve(response)
                         })
-                } else {
-                    commit('login_error', {});
+                        .catch(err => {
+                            console.error(err);
+                        });
                 }
             })
         },
+        getBook({commit}) {
+            return new Promise((resolve) => {
+                api.getBook(localStorage.getItem("auth"))
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        editBook({commit}, {title}) {
+            return new Promise((resolve) => {
+                api.editBook(localStorage.getItem("auth"), title)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        getBookCover() {
+            return new Promise((resolve) => {
+                api.getBookCover(localStorage.getItem("auth"))
+                        .then((response) => {
+                            if(response.status === 200) {
+                                resolve(response)
+                            }
+                        })
+                        .catch(err=>{
+                            console.error(err);
+                        });
+            })
+        },
+        editBookCover({commit}, {image}) {
+            return new Promise((resolve) => {
+                api.editBookCover(localStorage.getItem("auth"), image)
+                    .then(response => {
+                        if(response.status === 200) {
+                            console.log("success");
+                        }
+                        resolve(response)
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    });
+            })
+        }
     },
     getters: {
-        isLoggedIn: state => state.loginSuccess,
-        hasLoginErrored: state => state.loginError,
         getUserName: state => state.userName,
-        getUserPass: state => state.userPass
+        getUserPass: state => state.userPass,
+        getBook: state => state.userBook
     }
 })

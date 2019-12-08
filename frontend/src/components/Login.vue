@@ -1,10 +1,5 @@
 <template>
-    <div class="unprotected" v-if="loginError">
-        <h5>
-            <b-badge variant="danger">Login failed</b-badge>
-        </h5>
-    </div>
-    <div class="unprotected" v-else-if="isNotLoggedIn">
+    <div class="unprotected" v-if="!isLoggedIn">
         <form @submit.prevent="callLogin()">
             <input type="text" placeholder="username" v-model="user">
             <br>
@@ -25,28 +20,33 @@
     export default {
 
         name: 'login',
-
         beforeMount() {
-            this.isNotLoggedIn = !store.getters.isLoggedIn;
+            this.username = store.getters.getUserName;
+            if(this.username == null) {
+                this.getUser();
+            } else {
+                this.isLoggedIn = true;
+            }
         },
-
         data() {
             return {
-                isNotLoggedIn: false,
-                loginError: false,
-                user: '',
-                password: '',
+                user: "",
+                isLoggedIn: false,
+                password: "",
             }
         },
         methods: {
             callLogin() {
-                this.errors = [];
                 this.$store.dispatch("login", {user: this.user, password: this.password})
                     .then(() => {
                         this.$router.push('/home')
                     })
-                    .catch(() => {
-                        this.loginError = true;
+            },
+            getUser() {
+                this.$store.dispatch("user")
+                    .then(() => {
+                        this.username = this.$store.getters.getUserName;
+                        this.isLoggedIn = true;
                     })
             }
         }

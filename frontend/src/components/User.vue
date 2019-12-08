@@ -9,29 +9,31 @@
 </template>
 
 <script>
+  import store from './../store';
+
   export default {
     name: 'user',
 
     beforeMount() {
-      this.isLoggedIn = this.$store.getters.isLoggedIn;
-    },
-    created() {
-      if(!this.isLoggedIn) {
+      this.username = store.getters.getUserName;
+      if(this.username == null) {
         this.getUser();
+      } else {
+        this.isLoggedIn = true;
       }
     },
     data () {
       return {
-        username: '',
-        isLoggedIn: false
+        isLoggedIn: true,
+        username: ""
       }
     },
     methods: {
       getUser() {
         this.$store.dispatch("user")
                 .then(() => {
-                  this.isLoggedIn = this.$store.getters.isLoggedIn;
                   this.username = this.$store.getters.getUserName;
+                  this.isLoggedIn = true;
                 })
       }
     }
