@@ -28,15 +28,16 @@ public class FriendshipBookService {
                     .title("My Friendship Book")
                     .pages(new ArrayList<>())
                     .build());
+            log.debug("Book created for user {}", user.getUsername());
             return true;
         }
+        log.debug("Book for user {} does already exist.", user.getUsername());
         return false;
     }
 
     public void saveImageForBook(FriendshipBook friendshipBook, MultipartFile file) {
         try {
-           saveImageForBook(friendshipBook, file.getBytes(), file.getSize(), file.getContentType());
-            repository.save(friendshipBook);
+            saveImageForBook(friendshipBook, file.getBytes(), file.getSize(), file.getContentType());
         } catch (NullPointerException | IOException e) {
             throw new FriendshipBookException("Image couldn't be saved.");
         }
@@ -50,6 +51,7 @@ public class FriendshipBookService {
                     .mediaType(contentType)
                     .build());
             repository.save(friendshipBook);
+            log.debug("Book cover updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
         } catch (NullPointerException e) {
             throw new FriendshipBookException("Image couldn't be saved.");
         }
@@ -58,6 +60,9 @@ public class FriendshipBookService {
     @Nullable
     public FriendshipBook read(User user) {
         Optional<FriendshipBook> book = repository.findByUser(user);
+        if (!book.isPresent()) {
+            log.warn("Requested user {} couldn't be found in database", user.getUsername());
+        }
         return book.orElse(null);
     }
 
@@ -65,8 +70,10 @@ public class FriendshipBookService {
         FriendshipBook book = read(user);
         if (book != null) {
             repository.delete(book);
+            log.debug("Book of user {} with book id {} has been deleted", user.getUsername(), book.getUuid());
             return true;
         }
+        log.warn("Book for user {} doesn't exist. Has it already been deleted?", user.getUsername());
         return false;
     }
 
@@ -74,7 +81,9 @@ public class FriendshipBookService {
         FriendshipBook book = read(user);
         if (book != null) {
             book.setTitle(title);
-            return repository.save(book);
+            repository.save(book);
+            log.debug("Book title of book from user {} and with book id {} and title {} has been updated", user.getUsername(), book.getUuid(), title);
+            return book;
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());
     }

@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.util.Base64;
 
 @RestController
@@ -46,7 +45,6 @@ public class FriendshipBookController extends Controller {
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
-
 
 
     @GetMapping(value = "/image")
@@ -88,7 +86,9 @@ public class FriendshipBookController extends Controller {
             }
             User user = userService.getUser();
             FriendshipBook book = bookService.read(user);
-            bookService.saveImageForBook(book, file);
+            if (existsUser(user) && existsBook(book)) {
+                bookService.saveImageForBook(book, file);
+            }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -111,13 +111,15 @@ public class FriendshipBookController extends Controller {
             return ResponseEntity.noContent().build();
         }
         User user = userService.getUser();
-        try {
-            FriendshipBook book = bookService.updateTitle(user, title);
-            return ResponseEntity.ok(book);
-        } catch (BooklyException fbe) {
-            log.warn(fbe.getMessage());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+        if (existsUser(user)) {
+            try {
+                FriendshipBook book = bookService.updateTitle(user, title);
+                return ResponseEntity.ok(book);
+            } catch (BooklyException fbe) {
+                log.warn(fbe.getMessage());
+            }
         }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     private String encodeBase64(byte[] data) {
