@@ -7,6 +7,7 @@ import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.UserService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,21 +15,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.util.Base64;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/friendshipbook")
-public class FriendshipBookController {
+public class FriendshipBookController extends Controller {
 
     @Autowired
     private FriendshipBookService bookService;
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ServletContext servletContext;
 
     @GetMapping()
     @ApiOperation(value = "Returns the data of the book of a user including all of his pages", authorizations = {@Authorization(value = "basicAuth")})
@@ -39,11 +37,15 @@ public class FriendshipBookController {
     })
     ResponseEntity read() {
         User user = userService.getUser();
-        FriendshipBook book = bookService.read(user);
-        if (book != null)
-            return ResponseEntity.ok(book);
+        if (existsUser(user)) {
+            FriendshipBook book = bookService.read(user);
+            if (existsBook(book)) {
+                return ResponseEntity.ok(book);
+            }
+        }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
+
 
     @GetMapping(value = "/image")
     @ApiOperation(value = "Returns cover image of a book", authorizations = {@Authorization(value = "basicAuth")})
@@ -55,7 +57,7 @@ public class FriendshipBookController {
     public ResponseEntity<String> getImage() {
         User user = userService.getUser();
         FriendshipBook book = bookService.read(user);
-        if (book != null && book.getCover() != null) {
+        if (existsCover(book)) {
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.valueOf(book.getCover().getMediaType()))
@@ -65,6 +67,7 @@ public class FriendshipBookController {
                     .notFound().build();
         }
     }
+
     @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
@@ -83,13 +86,17 @@ public class FriendshipBookController {
             }
             User user = userService.getUser();
             FriendshipBook book = bookService.read(user);
-            bookService.saveImageForBook(book, file);
+            if (existsUser(user) && existsBook(book)) {
+                bookService.saveImageForBook(book, file);
+            }
         } catch (BooklyException e) {
+            log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @CrossOrigin
     @PutMapping
     @ApiOperation(value = "Update the cover title of the friendship book", authorizations = {@Authorization(value = "basicAuth")})
@@ -100,18 +107,22 @@ public class FriendshipBookController {
     })
     ResponseEntity update(@RequestParam @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book") String title) {
         if (title == null) {
+            log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
         }
         User user = userService.getUser();
-        try {
-            FriendshipBook book = bookService.updateTitle(user, title);
-            return ResponseEntity.ok(book);
-        } catch (BooklyException fbe) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+        if (existsUser(user)) {
+            try {
+                FriendshipBook book = bookService.updateTitle(user, title);
+                return ResponseEntity.ok(book);
+            } catch (BooklyException fbe) {
+                log.warn(fbe.getMessage());
+            }
         }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
-    public String encodeBase64(byte[] data)
-    {
+
+    private String encodeBase64(byte[] data) {
         byte[] encoded = Base64.getEncoder().encode(data);
         return new String(encoded);
     }

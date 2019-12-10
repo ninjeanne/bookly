@@ -47,6 +47,7 @@ public class PageService {
                     .size(size)
                     .mediaType(contentType)
                     .build());
+            log.debug("Page image has been set for page with uuid {}", page.getUuid());
             pageRepository.save(page);
         } catch (NullPointerException e) {
             throw new FriendshipBookException("Image couldn't be saved.");
@@ -72,6 +73,7 @@ public class PageService {
             pages.add(newPage);
             pageRepository.save(newPage);
             friendshipBookRepository.save(book);
+            log.debug("New page has been created for user {} ", user.getUsername());
             return pages;
         }
         throw new FriendshipBookException("There is no book for user " + user.getUsername());

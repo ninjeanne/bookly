@@ -3,11 +3,13 @@ package dhbw.online.bookly.service;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.UserException;
 import dhbw.online.bookly.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -28,7 +30,7 @@ public class UserService {
             User user = create(username);
             friendshipBookService.create(user);
         }
-        if(username.equals("anonymousUser")){
+        if (username.equals("anonymousUser")) {
             throw new UserException("Critical error! User is not logged in valid");
         }
         return userRepository.findByUsername(username).orElse(null);
@@ -36,17 +38,21 @@ public class UserService {
 
     public User update(User user) {
         String username = authenticationService.getLoggedInUser();
-        if(username.equals("anonymousUser")){
+        if (username.equals("anonymousUser")) {
             throw new UserException("Critical error! User is not logged in valid");
         }
         user.setUsername(username);
-        return userRepository.save(user);
+        userRepository.save(user);
+        log.debug("User {} has been updated", user.getUsername());
+        return user;
     }
 
     public User create(String username) {
-        return userRepository.save(
-                User.builder()
-                        .username(username)
-                        .build());
+        User user = User.builder()
+                .username(username)
+                .build();
+        userRepository.save(user);
+        log.debug("User {} has been created.", user.getUsername());
+        return user;
     }
 }

@@ -4,6 +4,7 @@ import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.service.UserService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends Controller {
 
     @Autowired
     private UserService userService;
@@ -25,11 +27,15 @@ public class UserController {
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
     })
     ResponseEntity read() {
+        User user = userService.getUser();
         try {
-            return ResponseEntity.ok(userService.getUser());
+            if (existsUser(user)) {
+                return ResponseEntity.ok(user);
+            }
         } catch (BooklyException ue) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(ue.getMessage());
+            log.warn(ue.getMessage());
         }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @PutMapping
@@ -40,12 +46,13 @@ public class UserController {
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
     })
     ResponseEntity update(@RequestBody @ApiParam(value = "Updatable user as JSON", required = true) User user) {
-        if (user != null) {
+        if (existsUser(user)) {
             try {
                 val updatedUser = userService.update(user);
                 return ResponseEntity.ok(updatedUser);
             } catch (BooklyException ue) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(ue.getMessage());
+                log.warn(ue.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
