@@ -7,6 +7,7 @@ import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.service.PageService;
 import dhbw.online.bookly.service.UserService;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/page")
-public class PageController {
+public class PageController extends Controller {
 
     @Autowired
     private PageService pageService;
@@ -36,12 +38,15 @@ public class PageController {
     })
     ResponseEntity create() {
         User user = userService.getUser();
-        try {
-            val pages = pageService.add(user);
-            return ResponseEntity.ok(pages);
-        } catch (BooklyException fbe) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+        if (existsUser(user)) {
+            try {
+                val pages = pageService.add(user);
+                return ResponseEntity.ok(pages);
+            } catch (BooklyException fbe) {
+                log.warn(fbe.getMessage());
+            }
         }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @GetMapping
@@ -53,9 +58,10 @@ public class PageController {
     })
     ResponseEntity read() {
         User user = userService.getUser();
-        val pages = pageService.read(user);
-        if (pages != null)
+        if (existsUser(user)) {
+            val pages = pageService.read(user);
             return ResponseEntity.ok(pages);
+        }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
@@ -72,7 +78,7 @@ public class PageController {
         User user = userService.getUser();
         try {
             Page page = pageService.findPageByUserAndId(user, Integer.parseInt(uuid));
-            if (page != null && page.getPageImage() != null) {
+            if (existsPageImage(page)) {
                 return ResponseEntity
                         .ok()
                         .contentType(MediaType.valueOf(page.getPageImage().getMediaType()))
@@ -82,6 +88,7 @@ public class PageController {
                         .notFound().build();
             }
         } catch (NumberFormatException | BooklyException nfe) {
+            log.warn(nfe.getMessage());
             return ResponseEntity
                     .status(HttpStatus.CONFLICT).build();
         }
@@ -103,9 +110,13 @@ public class PageController {
                 throw new PageException("There was no picture in the request for saving.");
             }
             User user = userService.getUser();
-            Page page = pageService.findPageByUserAndId(user, Integer.parseInt(uuid));
-            pageService.saveImageForPage(page, file);
+            if (existsUser(user)) {
+                Page page = pageService.findPageByUserAndId(user, Integer.parseInt(uuid));
+                if (existsPage(page))
+                    pageService.saveImageForPage(page, file);
+            }
         } catch (BooklyException | NumberFormatException e) {
+            log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
@@ -121,14 +132,16 @@ public class PageController {
     })
     ResponseEntity update(@RequestBody Page page) {
         User user = userService.getUser();
-        if (page != null) {
+        if (existsUser(user) && existsPage(page)) {
             try {
                 val pages = pageService.update(user, page);
                 return ResponseEntity.ok(pages);
             } catch (BooklyException fbe) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+                log.warn(fbe.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
         }
+        log.warn("Couldn't update page for user");
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
@@ -141,14 +154,18 @@ public class PageController {
     })
     ResponseEntity delete(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
         User user = userService.getUser();
-        if (uuid != null) {
-            try {
-                int uuidNumb = Integer.parseInt(uuid);
-                val pages = pageService.delete(user, uuidNumb);
-                return ResponseEntity.ok(pages);
-            } catch (NumberFormatException | BooklyException fbe) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+        if (existsUser(user)) {
+            if (uuid != null) {
+                try {
+                    int uuidNumb = Integer.parseInt(uuid);
+                    val pages = pageService.delete(user, uuidNumb);
+                    return ResponseEntity.ok(pages);
+                } catch (NumberFormatException | BooklyException fbe) {
+                    log.warn(fbe.getMessage());
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+                }
             }
+            log.warn("Couldn't delete page as the uuid is missing");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
