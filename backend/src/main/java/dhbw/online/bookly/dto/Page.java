@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -18,31 +17,31 @@ import java.util.UUID;
 public class Page {
 
     public Page() {
-        setAddress(new PageEntry("Adresse"));
+        setAddress(new PageEntry("Address"));
         setName(new PageEntry("Name"));
-        setTelephone(new PageEntry("Telefon"));
-        setMobile(new PageEntry("Handy"));
-        setSchool(new PageEntry("Schule"));
-        setSchool_class(new PageEntry("Klasse"));
-        setSize(new PageEntry("Größe"));
-        setHair_color(new PageEntry("Haarfarbe"));
-        setMy_hobbies(new PageEntry("Meine Hobbies"));
-        setEye_color(new PageEntry("Augenfarbe"));
-        setFavorite_book(new PageEntry("Das tollste Buch"));
-        setFavorite_movie(new PageEntry("Bester Film/Serie"));
-        setFavorite_sport(new PageEntry("Lieblingssport"));
-        setFavorite_subject(new PageEntry("Liebstes Schulfach"));
-        setFavorite_job(new PageEntry("Traumberuf"));
-        setFavorite_pet(new PageEntry("Mein Haustier"));
-        setFavorite_food(new PageEntry("Mein Lieblingsessen"));
-        setNice_comment(new PageEntry("Hier noch etwas schönes für dich"));
-        setDate(new PageEntry("Datum"));
-        setSign(new PageEntry("Mein Autogramm für dich"));
-        setHow_to_please_me(new PageEntry("So kann man mir eine Freude machen"));
-        setStar_sign(new PageEntry("Sternzeichen"));
-        setBirthday(new PageEntry("Geburtstag"));
-        setFan_of(new PageEntry("Ich bin Fan von"));
-        setWhat_i_dont_like(new PageEntry("Das mag ich gar nicht"));
+        setTelephone(new PageEntry("Telephone"));
+        setMobile(new PageEntry("Mobile"));
+        setSchool(new PageEntry("School"));
+        setSchool_class(new PageEntry("School class"));
+        setSize(new PageEntry("Size"));
+        setHair_color(new PageEntry("Hair color"));
+        setMy_hobbies(new PageEntry("My hobbies"));
+        setEye_color(new PageEntry("Eye color"));
+        setFavorite_book(new PageEntry("My favorite book"));
+        setFavorite_movie(new PageEntry("Best Movie or TV show"));
+        setFavorite_sport(new PageEntry("Favorite sport"));
+        setFavorite_subject(new PageEntry("Favorite school subject"));
+        setFavorite_job(new PageEntry("Dream profession"));
+        setFavorite_pet(new PageEntry("My pet"));
+        setFavorite_food(new PageEntry("Favorite food"));
+        setNice_comment(new PageEntry("Here's something nice for you"));
+        setDate(new PageEntry("Date"));
+        setSign(new PageEntry("My autograph for you"));
+        setHow_to_please_me(new PageEntry("So one can make me a joy"));
+        setStar_sign(new PageEntry("sign of the zodiac"));
+        setBirthday(new PageEntry("birthday"));
+        setFan_of(new PageEntry("I am a fan of"));
+        setWhat_i_dont_like(new PageEntry("What i don't like"));
     }
 
     @Id
