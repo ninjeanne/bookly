@@ -1,4 +1,6 @@
 *.class
+~*.ppt*
+~*.doc*
 
 # Package Files #
 *.jar
