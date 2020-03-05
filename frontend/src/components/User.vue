@@ -30,11 +30,9 @@
     },
     methods: {
       getUser() {
-        this.$store.dispatch("user")
-                .then(() => {
-                  this.username = this.$store.getters.getUserName;
-                  this.isLoggedIn = true;
-                })
+        let user = JSON.parse(localStorage.getItem("userInfo"));
+        console.log(user);
+        this.username = user.preferred_username;//TODO weitere UserDetails herausholen
       }
     }
   }

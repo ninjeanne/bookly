@@ -4,7 +4,6 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueKeyCloak from '@dsb-norge/vue-keycloak-js'
 import Keycloak from 'keycloak-js';
 import store from './store'
 
@@ -13,21 +12,6 @@ Vue.config.productionTip = false;
 
 // Bootstrap
 Vue.use(BootstrapVue);
-
-//Keycloak
-/*Vue.use(VueKeyCloak, {
-    config: {
-        realm: 'bookly',
-        url: 'http://localhost:8080/auth',
-        clientId: 'bookly-app'
-    },
-    onReady: kc => {
-        new Vue({
-            render: h => h(App)
-        }).$mount('#app')
-    }
-})*/
-
 
 const keycloakConfig = {
     realm: 'bookly',
