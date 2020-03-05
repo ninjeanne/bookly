@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.Base64;
 
 @RestController
@@ -29,13 +30,12 @@ public class FriendshipBookController extends Controller {
     private UserService userService;
 
     @GetMapping()
-    @ApiOperation(value = "Returns the data of the book of a user including all of his pages", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
+    @ApiOperation(value = "Returns the data of the book of a user including all of his pages", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
-    ResponseEntity read() {
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    ResponseEntity read(Principal principal) {
+        System.err.println(principal.getName());
         User user = userService.getUser();
         if (existsUser(user)) {
             FriendshipBook book = bookService.read(user);
@@ -45,7 +45,6 @@ public class FriendshipBookController extends Controller {
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
-
 
     @GetMapping(value = "/image")
     @ApiOperation(value = "Returns cover image of a book", authorizations = {@Authorization(value = "basicAuth")})
