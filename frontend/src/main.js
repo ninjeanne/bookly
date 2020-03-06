@@ -22,7 +22,7 @@ const keycloakConfig = {
 };
 const keycloak = Keycloak(keycloakConfig);
 keycloak.init({ onLoad: keycloakConfig.onLoad }).success((auth) =>{
-
+    console.log(auth)
     if(!auth) {
         window.location.reload();
     } else {

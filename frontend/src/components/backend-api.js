@@ -4,7 +4,6 @@ const AXIOS = axios.create({
   timeout: 1000,
     baseURL: 'http://localhost:8080',
     headers: {
-      'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
         'Access-Control-Allow-Origin' : '*',
         'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
     }
@@ -17,7 +16,11 @@ export default {
     },
     getUser() {
         console.log(localStorage.getItem('vue-token'));
-        return AXIOS.get("/customers", {})
+        return AXIOS.get("/customers", {
+            headers: {
+                'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+            }
+        })
     },
     getSecured(user, password) {
         return AXIOS.get(`/user/`,{
