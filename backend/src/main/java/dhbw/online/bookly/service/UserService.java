@@ -38,6 +38,16 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null); //TODO Infos aus Keycloak holen und syncen ggf.
     }
 
+    /*
+    * TODO Logout implementieren und Token löschen im FE und Session invalidieren im BE, Schnittstellen neu implementieren, Nutzer komplett in KC auslagern
+    * TODO Keycloak weitere Nutzerattribute erstellen und Registrierung erweitern
+    * TODO Keycloak Mailvalidierung erstellen -> SMTP Server notwendig
+    * TODO Keycloak auf dem Devsystem erstellen und auch von außen verfügbar machen
+    * TODO Startseite freigeben, restliche Seiten verbieten
+    * TODO Eigenes Login Theme in Keycloak hinzufügen (zumindest das Hintergrundbild ändern)
+    * TODO Accountverwaltung über Keycloak einbinden
+    * */
+
     public User update(User user) {
         String username = authenticationService.getLoggedInUser();
         if (username.equals("anonymousUser")) {
