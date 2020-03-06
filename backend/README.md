@@ -227,6 +227,8 @@ Response (Code OK example)
     2. Alternative: ```docker run --name keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=nimdanimda -p 8180:8180 jboss/keycloak -Djboss.socket.binding.port-offset=100```
 5. Access the Server under http://localhost:8180/auth/admin
 6. Import JSON ````realm-export.json````
+
+## Create a user in Keycloak
 7. Go to Roles > Realm Roles > Add Role > Role Name: user
 8. Go to Roles > Default Roles > Realm Roles: select user and click on Add selected
 9. Go to Users > Add user > username: user > Save
