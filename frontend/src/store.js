@@ -52,9 +52,9 @@ export default new Vuex.Store({
         },
         user({commit}) {
             return new Promise((resolve) => {
-                if(localStorage.getItem("auth")) {
-                    api.getUser(localStorage.getItem("auth"))
+                    api.getUser()
                         .then(response => {
+                            console.log(response)
                             if (response.status === 200) {
                                 commit('login_success', {
                                     userName: response.data.username
@@ -65,7 +65,6 @@ export default new Vuex.Store({
                         .catch(err => {
                             console.error(err);
                         });
-                }
             })
         },
         getBook({commit}) {

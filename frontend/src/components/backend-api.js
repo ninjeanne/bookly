@@ -1,21 +1,23 @@
 import axios from 'axios'
 
 const AXIOS = axios.create({
-  baseURL: `/api`,
-  timeout: 1000
-});
+  timeout: 1000,
+    baseURL: 'http://localhost:8080',
+    headers: {
+      'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
 
+});
 
 export default {
     register(firstName, lastName) {
         return AXIOS.post(`/user/` + firstName + '/' + lastName);
     },
-    getUser(auth) {
-        return AXIOS.get("/user/", {
-            headers: {
-                "authorization": "Basic " + auth
-            }
-        })
+    getUser() {
+        console.log(localStorage.getItem('vue-token'));
+        return AXIOS.get("/customers", {})
     },
     getSecured(user, password) {
         return AXIOS.get(`/user/`,{
