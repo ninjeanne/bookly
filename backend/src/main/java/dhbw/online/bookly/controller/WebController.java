@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WebController {
 
-    @GetMapping(path = "/")
-    public String index() {
-        return "external";
-    }
-
     @GetMapping(path = "/customers")
     public String customers() {
 
