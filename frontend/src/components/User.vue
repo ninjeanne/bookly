@@ -30,9 +30,8 @@
     },
     methods: {
       getUser() {
-        console.log(process.env.BACKEND);
+        console.log(process.env.VUE_APP_BACKEND);
         let user = JSON.parse(localStorage.getItem('userInfo'));
-        console.log(user)
         this.username = user.preferred_username;
       }
     }

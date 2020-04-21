@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const AXIOS = axios.create({
   timeout: 1000,
-    baseURL: process.env.BACKEND || "http://localhost:8080/api",
+    baseURL: process.env.VUE_APP_BACKEND + "/api" || "http://localhost:8080/api",
     headers: {
         'Access-Control-Allow-Origin' : '*',
         'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
@@ -20,6 +20,7 @@ export default {
         });
     },
     getUser() {
+        console.log(process.env.HOST);
         return AXIOS.get("/customers", {
             headers: {
                 'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
