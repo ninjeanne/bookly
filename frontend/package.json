@@ -9,9 +9,9 @@
     "test:unit": "vue-cli-service test:unit --coverage",
     "test:e2e": "vue-cli-service test:e2e",
     "test": "vue-cli-service test:unit && vue-cli-service test:e2e",
-    "build-dev": "vue-cli-service build",
+    "build-dev": "vue-cli-service build --mode dev",
     "build": "vue-cli-service build",
-    "build-prod": "vue-cli-service build --mode staging"
+    "build-prod": "vue-cli-service build --mode production"
   },
   "dependencies": {
     "@vue/cli": "4.3.1",
