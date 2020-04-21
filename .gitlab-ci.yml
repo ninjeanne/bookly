@@ -18,16 +18,26 @@ test:
   script:
     - ./mvnw verify
 
-build:
+build-prod:
+  when: manual
   stage: build
   script:
-    - ./mvnw install -DskipTests
+    - ./mvnw install -DskipTests -P prod
   artifacts:
     expire_in: 2h
     paths:
-      - backend/target/*.jar
+      - backend/prod/target/*.jar
 
-deploy-stage:
+build-dev:
+  stage: build
+  script:
+    - ./mvnw install -DskipTests -P dev
+  artifacts:
+    expire_in: 2h
+    paths:
+      - backend/dev/target/*.jar
+
+deploy-prod:
   when: manual
   stage: deploy
   script:
@@ -51,7 +61,7 @@ deploy-stage:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp backend/target/backend*.jar bookly-ci@bookly.online:stage/bookly.jar
+    - scp backend/prod/target/backend*.jar bookly-ci@bookly.online:stage/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly-stage'
   only:
     - master
@@ -81,5 +91,5 @@ deploy-dev:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp backend/target/backend*.jar bookly-ci@bookly.online:dev/bookly.jar
+    - scp backend/dev/target/backend*.jar bookly-ci@bookly.online:dev/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly-dev'
