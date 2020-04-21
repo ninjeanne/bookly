@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const AXIOS = axios.create({
   timeout: 1000,
-    baseURL: 'http://localhost:8080',
+    baseURL: process.env.BACKEND || "http://localhost:8080/api",
     headers: {
         'Access-Control-Allow-Origin' : '*',
         'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
@@ -12,13 +12,18 @@ const AXIOS = axios.create({
 
 export default {
     register(firstName, lastName) {
-        return AXIOS.post(`/user/` + firstName + '/' + lastName);
+        return AXIOS.post(`/user/` + firstName + '/' + lastName, {
+            headers: {
+                'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                'Access-Control-Allow-Origin' : '*'
+            }
+        });
     },
     getUser() {
-        console.log(localStorage.getItem('vue-token'));
         return AXIOS.get("/customers", {
             headers: {
                 'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                'Access-Control-Allow-Origin' : '*'
             }
         })
     },
@@ -27,12 +32,17 @@ export default {
             auth: {
                 username: user,
                 password: password
-            }});
+            },
+        headers: {
+            'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+            'Access-Control-Allow-Origin' : '*'
+        }});
     },
     getBook(auth) {
         return AXIOS.get("/friendshipbook",{
             headers: {
-                "authorization": "Basic " + auth
+                'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                'Access-Control-Allow-Origin' : '*'
             }
         });
     },
@@ -41,14 +51,16 @@ export default {
             "?title=" + title,
             {},
             { headers: {
-                "authorization": "Basic " + auth
+                    'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                    'Access-Control-Allow-Origin' : '*'
             }
         });
     },
     getBookCover(auth) {
         return AXIOS.get("/friendshipbook/image",{
             headers: {
-                "authorization": "Basic " + auth
+                'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                'Access-Control-Allow-Origin' : '*'
             }
         })
     },
@@ -58,7 +70,8 @@ export default {
         return AXIOS.post("/friendshipbook/image", formData,{
             headers: {
                 'content-type': 'multipart/form-data',
-                "authorization": "Basic " + auth
+                'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
+                'Access-Control-Allow-Origin' : '*'
             }
         });
     }

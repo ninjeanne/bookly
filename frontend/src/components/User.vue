@@ -30,12 +30,10 @@
     },
     methods: {
       getUser() {
-        this.$store.dispatch("user")
-            .then((response) => {
-              console.log(response);
-              this.username = response.data.username;
-            })
-        console.log("called")
+        console.log(process.env.BACKEND);
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        console.log(user)
+        this.username = user.preferred_username;
       }
     }
   }
