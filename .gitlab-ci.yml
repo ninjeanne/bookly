@@ -26,7 +26,7 @@ build-prod:
   artifacts:
     expire_in: 2h
     paths:
-      - backend/prod/target/*.jar
+      - backend/target/*.jar
   only:
     - master
     - test-ci
@@ -38,7 +38,7 @@ build-dev:
   artifacts:
     expire_in: 2h
     paths:
-      - backend/dev/target/*.jar
+      - backend/target/*.jar
 
 deploy-prod:
   when: manual
@@ -64,7 +64,7 @@ deploy-prod:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp backend/prod/target/backend*.jar bookly-ci@bookly.online:stage/bookly.jar
+    - scp backend/target/backend*.jar bookly-ci@bookly.online:stage/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly-stage'
   only:
     - master
@@ -94,5 +94,5 @@ deploy-dev:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 0644 ~/.ssh/known_hosts
     ## login
-    - scp backend/dev/target/backend*.jar bookly-ci@bookly.online:dev/bookly.jar
+    - scp backend/target/backend*.jar bookly-ci@bookly.online:dev/bookly.jar
     - ssh bookly-ci@bookly.online '/usr/bin/sudo /bin/systemctl restart bookly-dev'
