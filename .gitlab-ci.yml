@@ -27,6 +27,9 @@ build-prod:
     expire_in: 2h
     paths:
       - backend/prod/target/*.jar
+  only:
+    - master
+    - test-ci
 
 build-dev:
   stage: build
