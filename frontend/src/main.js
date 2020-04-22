@@ -17,23 +17,20 @@ const keycloakConfig = {
     realm: 'bookly',
     url: 'https://keycloak.bookly.online/auth',
     clientId: 'bookly-app',
-    onLoad: "login-required",
+    onLoad: "check-sso",
     "enable-cors": true
 };
 const keycloak = Keycloak(keycloakConfig);
-keycloak.init({ onLoad: keycloakConfig.onLoad }).success((auth) =>{
+keycloak.init({onLoad: keycloakConfig.onLoad}
+).success((auth) =>{
     console.log(auth)
-    if(!auth) {
-        window.location.reload();
-    } else {
-        console.log("Authenticated");
-    }
 
     new Vue({
         router,
         store,
         render: h => h(App),
     }).$mount('#app');
+
 
     localStorage.setItem("vue-token", keycloak.token);
     localStorage.setItem("vue-refresh-token", keycloak.refreshToken);
