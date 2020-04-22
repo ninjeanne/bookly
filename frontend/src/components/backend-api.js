@@ -20,7 +20,6 @@ export default {
         });
     },
     getUser() {
-        console.log(process.env.HOST);
         return AXIOS.get("/customers", {
             headers: {
                 'Authorization' : 'Bearer ' + localStorage.getItem('vue-token'),
