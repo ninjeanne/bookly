@@ -23,15 +23,13 @@ const keycloakConfig = {
 const keycloak = Keycloak(keycloakConfig);
 keycloak.init({onLoad: keycloakConfig.onLoad}
 ).success((auth) =>{
-    console.log(auth)
-
     new Vue({
         router,
         store,
         render: h => h(App),
     }).$mount('#app');
 
-
+    localStorage.setItem("auth", auth.toString());
     localStorage.setItem("vue-token", keycloak.token);
     localStorage.setItem("vue-refresh-token", keycloak.refreshToken);
 
@@ -60,3 +58,20 @@ keycloak.init({onLoad: keycloakConfig.onLoad}
     console.log("Authenticated Failed");
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth && localStorage.getItem("auth") === 'false') {
+        alert(localStorage.getItem("auth"))
+        let host = location.host;
+        if(host.includes('localhost')){
+            host = 'http://' + host;
+        } else {
+            host = 'https://' + host;
+        }
+        keycloak.login({
+            prompt: "login",
+            redirectUri: host
+        })
+    } else {
+        next()
+    }
+});
