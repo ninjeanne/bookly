@@ -27,9 +27,11 @@ public class PageService {
     private FriendshipBookRepository friendshipBookRepository;
     @Autowired
     private PageRepository pageRepository;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    public List<Page> read(User user) {
-        return friendshipBookService.read(user).getPages();
+    public List<Page> read() {
+        return friendshipBookService.read().getPages();
     }
 
     public void saveImageForPage(Page page, MultipartFile file) {
@@ -54,8 +56,8 @@ public class PageService {
         }
     }
 
-    public Page findPageByUserAndId(User user, int uuid) {
-        List<Page> pagesByUser = read(user);
+    public Page findPageByUserAndId(int uuid) {
+        List<Page> pagesByUser = read();
 
         for (Page page : pagesByUser) {
             if (page.getUuid() == uuid) {
@@ -65,26 +67,26 @@ public class PageService {
         throw new PageException("Page couldn't be found");
     }
 
-    public List<Page> add(User user) {
-        FriendshipBook book = friendshipBookService.read(user);
+    public List<Page> add() {
+        FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
             val newPage = new Page();
             pages.add(newPage);
             pageRepository.save(newPage);
             friendshipBookRepository.save(book);
-            log.debug("New page has been created for user {} ", user.getUsername());
+            log.debug("New page has been created for user {} ", authenticationService.getUsername());
             return pages;
         }
-        throw new FriendshipBookException("There is no book for user " + user.getUsername());
+        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
     private Page getPage(int uuid) {
         return pageRepository.findByUuid(uuid).orElse(null);
     }
 
-    public List<Page> delete(User user, int uuid) {
-        FriendshipBook book = friendshipBookService.read(user);
+    public List<Page> delete(int uuid) {
+        FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pagesFromDb = book.getPages();
             if (pageRepository.existsByUuid(uuid)) {
@@ -94,11 +96,11 @@ public class PageService {
                 return pagesFromDb;
             }
         }
-        throw new FriendshipBookException("There is no book for user " + user.getUsername());
+        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
-    public List<Page> update(User user, Page page) {
-        FriendshipBook book = friendshipBookService.read(user);
+    public List<Page> update(Page page) {
+        FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
             val resultpages = pages.stream()
@@ -112,7 +114,7 @@ public class PageService {
             friendshipBookRepository.save(book);
             return pages;
         }
-        throw new FriendshipBookException("There is no book for user " + user.getUsername());
+        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
 }

@@ -20,7 +20,7 @@ public class UserController extends Controller {
     private UserService userService;
 
     @GetMapping
-    @ApiOperation(value = "Returns the user data of the currently logged in user.", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "Returns the user data of the currently logged in user.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success - reads user data from db", response = User.class),
             @ApiResponse(code = 409, message = "Conflict - the user couldn't be found or something critical happened"),
@@ -29,31 +29,11 @@ public class UserController extends Controller {
     ResponseEntity read() {
         User user = userService.getUser();
         try {
-            if (existsUser(user)) {
+            if (existsUser()) {
                 return ResponseEntity.ok(user);
             }
         } catch (BooklyException ue) {
             log.warn(ue.getMessage());
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
-    }
-
-    @PutMapping
-    @ApiOperation(value = "Update the user data of the currently logged in user. The username can't be be changed.", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns updated user", response = User.class),
-            @ApiResponse(code = 409, message = "Conflict - the user couldn't be found or something critical happened"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
-    ResponseEntity update(@RequestBody @ApiParam(value = "Updatable user as JSON", required = true) User user) {
-        if (existsUser(user)) {
-            try {
-                val updatedUser = userService.update(user);
-                return ResponseEntity.ok(updatedUser);
-            } catch (BooklyException ue) {
-                log.warn(ue.getMessage());
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
-            }
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }

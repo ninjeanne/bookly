@@ -3,10 +3,15 @@ package dhbw.online.bookly.controller;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public abstract class Controller {
+
+    @Autowired
+    private UserService userService;
 
     protected boolean existsBook(FriendshipBook book) {
         if (book != null) {
@@ -46,7 +51,8 @@ public abstract class Controller {
         return false;
     }
 
-    protected boolean existsUser(User user) {
+    protected boolean existsUser() {
+        User user = userService.getUser();
         if (user != null) {
             return true;
         } else {

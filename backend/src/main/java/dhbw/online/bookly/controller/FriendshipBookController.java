@@ -17,28 +17,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 
+
 @RestController
 @Slf4j
 @RequestMapping("/api/friendshipbook")
 public class FriendshipBookController extends Controller {
-
     @Autowired
     private FriendshipBookService bookService;
 
-    @Autowired
-    private UserService userService;
-
-    @GetMapping()
-    @ApiOperation(value = "Returns the data of the book of a user including all of his pages", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
+    @GetMapping
+    @ApiOperation(value = "Returns the data of the book of a user including all of his pages")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity read() {
-        User user = userService.getUser();
-        if (existsUser(user)) {
-            FriendshipBook book = bookService.read(user);
+        if (existsUser()) {
+            FriendshipBook book = bookService.read();
             if (existsBook(book)) {
                 return ResponseEntity.ok(book);
             }
@@ -46,74 +40,57 @@ public class FriendshipBookController extends Controller {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
-
     @GetMapping(value = "/image")
-    @ApiOperation(value = "Returns cover image of a book", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array", response = byte[].class),
-            @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+    @ApiOperation(value = "Returns cover image of a book")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
+            response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<String> getImage() {
-        User user = userService.getUser();
-        FriendshipBook book = bookService.read(user);
+        FriendshipBook book = bookService.read();
         if (existsCover(book)) {
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.valueOf(book.getCover().getMediaType()))
-                    .body(encodeBase64(book.getCover().getData()));
+            return ResponseEntity.ok().contentType(MediaType.valueOf(book.getCover().getMediaType())).body(encodeBase64(book.getCover().getData()));
         } else {
-            return ResponseEntity
-                    .notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
     @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
-    @ApiOperation(value = "Send a new image as cover for the book of the logged in user", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
+    @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
-    public ResponseEntity<?> uploadFile(
-            @RequestParam("file") MultipartFile file) {
-
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             if (file == null) {
                 throw new FriendshipBookException("There was no picture in the request for saving.");
             }
-            User user = userService.getUser();
-            FriendshipBook book = bookService.read(user);
-            if (existsUser(user) && existsBook(book)) {
+            FriendshipBook book = bookService.read();
+            if (existsUser() && existsBook(book)) {
                 bookService.saveImageForBook(book, file);
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @CrossOrigin
     @PutMapping
-    @ApiOperation(value = "Update the cover title of the friendship book", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
+    @ApiOperation(value = "Update the cover title of the friendship book")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity update(@RequestParam @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book") String title) {
         if (title == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
         }
-        User user = userService.getUser();
-        if (existsUser(user)) {
+        if (existsUser()) {
             try {
-                FriendshipBook book = bookService.updateTitle(user, title);
+                FriendshipBook book = bookService.updateTitle(title);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
@@ -127,3 +104,4 @@ public class FriendshipBookController extends Controller {
         return new String(encoded);
     }
 }
+

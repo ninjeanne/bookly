@@ -30,11 +30,9 @@
     },
     methods: {
       getUser() {
-        this.$store.dispatch("user")
-                .then(() => {
-                  this.username = this.$store.getters.getUserName;
-                  this.isLoggedIn = true;
-                })
+        console.log(process.env.VUE_APP_BACKEND);
+        let user = JSON.parse(localStorage.getItem('userInfo'));
+        this.username = user.preferred_username;
       }
     }
   }

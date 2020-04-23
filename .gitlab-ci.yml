@@ -18,16 +18,29 @@ test:
   script:
     - ./mvnw verify
 
-build:
+build-prod:
+  when: manual
   stage: build
   script:
-    - ./mvnw install -DskipTests
+    - ./mvnw install -DskipTests -P prod
+  artifacts:
+    expire_in: 2h
+    paths:
+      - backend/target/*.jar
+  only:
+    - master
+    - test-ci
+
+build-dev:
+  stage: build
+  script:
+    - ./mvnw install -DskipTests -P dev
   artifacts:
     expire_in: 2h
     paths:
       - backend/target/*.jar
 
-deploy-stage:
+deploy-prod:
   when: manual
   stage: deploy
   script:

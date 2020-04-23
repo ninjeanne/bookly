@@ -2,7 +2,7 @@ Feature: As a registered User
   I want to manage my own Page
 
   Scenario: Delete Page
-    Given I login with "user""password"
+    Given I login with "test-user""resu"
     And I navigate to profile
     When User pages are loaded
     And User pages are shown
@@ -11,7 +11,7 @@ Feature: As a registered User
     And I am not able to see the deleted page
 
   Scenario: Browse through Pages
-    Given I login with "user""password"
+    Given I login with "test-user""resu"
     And I navigate to profile
     When User pages are loaded
     And User pages are shown
@@ -19,7 +19,7 @@ Feature: As a registered User
     Then I can browse through the pages
 
   Scenario: Share link to create new Page
-    Given I login with "user""password"
+    Given I login with "test-user""resu"
     And I navigate to profile
     When User pages are loaded
     And User pages are shown
@@ -27,7 +27,7 @@ Feature: As a registered User
     Then I can copy the generated link and share it with someone
 
   Scenario: Edit Page
-    Given I login with "user""password"
+    Given I login with "test-user""resu"
     And I navigate to profile
     When User pages are loaded
     And User pages are shown

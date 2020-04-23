@@ -1,3 +1,5 @@
+
+
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.Page;
@@ -22,25 +24,18 @@ import java.io.IOException;
 @Slf4j
 @RequestMapping("/api/page")
 public class PageController extends Controller {
-
     @Autowired
     private PageService pageService;
 
-    @Autowired
-    private UserService userService;
-
     @PostMapping
-    @ApiOperation(value = "Add a new page with data into the users friendship book", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
+    @ApiOperation(value = "Add a new page with data into the users friendship book")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity create() {
-        User user = userService.getUser();
-        if (existsUser(user)) {
+        if (existsUser()) {
             try {
-                val pages = pageService.add(user);
+                val pages = pageService.add();
                 return ResponseEntity.ok(pages);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
@@ -50,91 +45,70 @@ public class PageController extends Controller {
     }
 
     @GetMapping
-    @ApiOperation(value = "Returns explicit all pages of a book", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
+    @ApiOperation(value = "Returns explicit all pages of a book")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity read() {
-        User user = userService.getUser();
-        if (existsUser(user)) {
-            val pages = pageService.read(user);
+        if (existsUser()) {
+            val pages = pageService.read();
             return ResponseEntity.ok(pages);
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
-    @GetMapping(value = "/image",
-            produces = MediaType.IMAGE_JPEG_VALUE)
-    @ApiOperation(value = "Returns image of a page", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns the image of the page, returns byte array", response = byte[].class),
-            @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
-            @ApiResponse(code = 409, message = "conflict - missing or wrong uuid"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+    @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ApiOperation(value = "Returns image of a page")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the image of the page, returns byte array", response = byte[].class),
+            @ApiResponse(code = 404, message = "Not found - the image doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<byte[]> getImage(@RequestParam String uuid) throws IOException {
-        User user = userService.getUser();
         try {
-            Page page = pageService.findPageByUserAndId(user, Integer.parseInt(uuid));
+            Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
             if (existsPageImage(page)) {
-                return ResponseEntity
-                        .ok()
-                        .contentType(MediaType.valueOf(page.getPageImage().getMediaType()))
-                        .body(page.getPageImage().getData());
+                return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageImage().getMediaType())).body(page.getPageImage().getData());
             } else {
-                return ResponseEntity
-                        .notFound().build();
+                return ResponseEntity.notFound().build();
             }
         } catch (NumberFormatException | BooklyException nfe) {
             log.warn(nfe.getMessage());
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 
     @PostMapping(value = "/image")
     @ResponseBody
-    @ApiOperation(value = "Send a new image for a page", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
+    @ApiOperation(value = "Send a new image for a page")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
-    public ResponseEntity<?> uploadFile(
-            @RequestParam("file") MultipartFile file, @RequestParam String uuid) {
-
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam String uuid) {
         try {
             if (file == null) {
                 throw new PageException("There was no picture in the request for saving.");
             }
-            User user = userService.getUser();
-            if (existsUser(user)) {
-                Page page = pageService.findPageByUserAndId(user, Integer.parseInt(uuid));
-                if (existsPage(page))
+            if (existsUser()) {
+                Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
+                if (existsPage(page)) {
                     pageService.saveImageForPage(page, file);
+                }
             }
         } catch (BooklyException | NumberFormatException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping
-    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
+    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity update(@RequestBody Page page) {
-        User user = userService.getUser();
-        if (existsUser(user) && existsPage(page)) {
+        if (existsUser() && existsPage(page)) {
             try {
-                val pages = pageService.update(user, page);
+                val pages = pageService.update(page);
                 return ResponseEntity.ok(pages);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
@@ -146,19 +120,16 @@ public class PageController extends Controller {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.", authorizations = {@Authorization(value = "basicAuth")})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
+    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"),
-    })
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity delete(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
-        User user = userService.getUser();
-        if (existsUser(user)) {
+        if (existsUser()) {
             if (uuid != null) {
                 try {
                     int uuidNumb = Integer.parseInt(uuid);
-                    val pages = pageService.delete(user, uuidNumb);
+                    val pages = pageService.delete(uuidNumb);
                     return ResponseEntity.ok(pages);
                 } catch (NumberFormatException | BooklyException fbe) {
                     log.warn(fbe.getMessage());
@@ -169,5 +140,5 @@ public class PageController extends Controller {
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
-
 }
+
