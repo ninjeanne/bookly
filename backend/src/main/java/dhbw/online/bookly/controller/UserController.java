@@ -20,7 +20,7 @@ public class UserController extends Controller {
     private UserService userService;
 
     @GetMapping
-    @ApiOperation(value = "Returns the user data of the currently logged in user.", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "Returns the user data of the currently logged in user.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success - reads user data from db", response = User.class),
             @ApiResponse(code = 409, message = "Conflict - the user couldn't be found or something critical happened"),
@@ -29,7 +29,7 @@ public class UserController extends Controller {
     ResponseEntity read() {
         User user = userService.getUser();
         try {
-            if (existsUser(user)) {
+            if (existsUser()) {
                 return ResponseEntity.ok(user);
             }
         } catch (BooklyException ue) {

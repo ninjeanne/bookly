@@ -28,7 +28,7 @@ public class PageController extends Controller {
     private PageService pageService;
 
     @PostMapping
-    @ApiOperation(value = "Add a new page with data into the users friendship book", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Add a new page with data into the users friendship book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -45,7 +45,7 @@ public class PageController extends Controller {
     }
 
     @GetMapping
-    @ApiOperation(value = "Returns explicit all pages of a book", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Returns explicit all pages of a book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -58,7 +58,7 @@ public class PageController extends Controller {
     }
 
     @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ApiOperation(value = "Returns image of a page", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Returns image of a page")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the image of the page, returns byte array", response = byte[].class),
             @ApiResponse(code = 404, message = "Not found - the image doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -78,7 +78,7 @@ public class PageController extends Controller {
 
     @PostMapping(value = "/image")
     @ResponseBody
-    @ApiOperation(value = "Send a new image for a page", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Send a new image for a page")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -101,8 +101,7 @@ public class PageController extends Controller {
     }
 
     @PutMapping
-    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.",
-            authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -121,8 +120,7 @@ public class PageController extends Controller {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.",
-            authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })

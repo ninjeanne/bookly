@@ -25,8 +25,8 @@ public class FriendshipBookController extends Controller {
     @Autowired
     private FriendshipBookService bookService;
 
-    @GetMapping()
-    @ApiOperation(value = "Returns the data of the book of a user including all of his pages", authorizations = { @Authorization(value = "basicAuth") })
+    @GetMapping
+    @ApiOperation(value = "Returns the data of the book of a user including all of his pages")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -41,7 +41,7 @@ public class FriendshipBookController extends Controller {
     }
 
     @GetMapping(value = "/image")
-    @ApiOperation(value = "Returns cover image of a book", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Returns cover image of a book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -57,7 +57,7 @@ public class FriendshipBookController extends Controller {
     @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
-    @ApiOperation(value = "Send a new image as cover for the book of the logged in user", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -79,7 +79,7 @@ public class FriendshipBookController extends Controller {
 
     @CrossOrigin
     @PutMapping
-    @ApiOperation(value = "Update the cover title of the friendship book", authorizations = { @Authorization(value = "basicAuth") })
+    @ApiOperation(value = "Update the cover title of the friendship book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })

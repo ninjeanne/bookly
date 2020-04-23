@@ -42,7 +42,6 @@ public class TestData {
                 .first_name("Max")
                 .last_name("Mustermann")
                 .username("user")
-                .password("password")
                 .build();
 
         Page page = initPage();
