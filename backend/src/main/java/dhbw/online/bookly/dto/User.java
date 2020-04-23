@@ -44,7 +44,4 @@ public class User {
             position = 3)
     private String last_name;
 
-    @JsonIgnore
-    private String password;
-
 }

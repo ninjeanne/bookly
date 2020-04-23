@@ -48,8 +48,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http.cors().and()
                 .authorizeRequests()
-            .antMatchers("/customers*")
-            .hasRole("user")
+            .antMatchers("/api*")
+            .authenticated()
             .anyRequest()
             .permitAll();
     }
