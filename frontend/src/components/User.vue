@@ -1,15 +1,13 @@
 <template>
-  <div v-if="isLoggedIn" class="user">
+  <div>
     <h2>Hey {{ username }}!!</h2>
-  </div>
-  <div v-else>
-    <h2>You must be logged in to view your profile</h2>
-    <a href="/login">Click here to login!</a>
+    <button v-on:click="logout">Logout</button>
   </div>
 </template>
 
 <script>
   import store from './../store';
+  import keycloak from './../main';
 
   export default {
     name: 'user',
@@ -18,13 +16,10 @@
       this.username = store.getters.getUserName;
       if(this.username == null) {
         this.getUser();
-      } else {
-        this.isLoggedIn = true;
       }
     },
     data () {
       return {
-        isLoggedIn: true,
         username: ""
       }
     },
@@ -33,6 +28,10 @@
         console.log(process.env.VUE_APP_BACKEND);
         let user = JSON.parse(localStorage.getItem('userInfo'));
         this.username = user.preferred_username;
+      },
+      logout: function () {
+        this.$router.push("/");
+        keycloak.logout();
       }
     }
   }

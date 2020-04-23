@@ -1,19 +1,13 @@
 <template>
-    <div v-if="isLoggedIn" class="main">
-        <div class="card">
-            <div class="content">
-                <img :src="image">
-                <h4 class="card-title"><strong>{{ title }}</strong></h4>
-            </div>
-            <div style="padding: 64px 64px 32px 64px">
-                <router-link style="float: left" to="/bookeditor" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Edit</router-link>
-                <router-link style="float: right" to="/page?0" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading</router-link>
-            </div>
+    <div class="card">
+        <div class="content">
+            <img :src="image">
+            <h4 class="card-title"><strong>{{ title }}</strong></h4>
         </div>
-    </div>
-    <div class="main" v-else>
-        <h2>You must be logged in</h2>
-        <a href="/login">Click here to login!</a>
+        <div style="padding: 64px 64px 32px 64px">
+            <router-link style="float: left" to="/bookeditor" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Edit</router-link>
+            <router-link style="float: right" to="/page?0" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading</router-link>
+        </div>
     </div>
 </template>
 
@@ -27,17 +21,12 @@
             this.username = store.getters.getUserName;
             if(this.username == null) {
                 this.getUser();
-            } else {
-                this.isLoggedIn = true;
             }
-            if(this.isLoggedIn) {
-                this.getBook();
-                this.getCover();
-            }
+            this.getBook();
+            this.getCover();
         },
         data() {
             return {
-                isLoggedIn: false,
                 username: "",
                 book: null,
                 title: "",
@@ -49,7 +38,6 @@
                 this.$store.dispatch("user")
                     .then(() => {
                         this.username = this.$store.getters.getUserName;
-                        this.isLoggedIn = true;
                     })
             },
             getCover() {
@@ -69,9 +57,6 @@
 </script>
 
 <style scoped>
-    .main {
-        margin: 32px 128px 256px 128px;
-    }
     .card {
         max-width: 100%;
         min-width: 60%;
