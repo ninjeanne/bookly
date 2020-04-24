@@ -3,6 +3,8 @@
 
 ## 1. Use-Case: Navigate Footer
 
+![navigationFooter_mockup](navigationFooter_mockup.png "Navigation Footer")
+
 ### 1.1 Brief Description
 
 There shall always be a footer presented when scrolling to the bottom of a site. With this footer the user shall easily navigate to the following locations:
