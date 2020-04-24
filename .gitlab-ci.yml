@@ -22,7 +22,7 @@ build-prod:
   when: manual
   stage: build
   script:
-    - ./mvnw install -DskipTests -P prod
+    - ./mvnw install -DskipTests -P prod -Dspring.datasource.password=$DATABASE_PASSWORD
   artifacts:
     expire_in: 2h
     paths:
@@ -34,7 +34,7 @@ build-prod:
 build-dev:
   stage: build
   script:
-    - ./mvnw install -DskipTests -P dev
+    - ./mvnw install -DskipTests -P dev -Dspring.datasource.password=$DATABASE_PASSWORD
   artifacts:
     expire_in: 2h
     paths:
