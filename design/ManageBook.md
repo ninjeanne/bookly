@@ -3,7 +3,7 @@
 
 ## 1. Use-Case: Manage Book
 
-![ManageBook](manageBock_mockup.png "Manage Book")
+![ManageBook](manageBook_mockup.png "Manage Book")
 
 ### 1.1 Brief Description
 
