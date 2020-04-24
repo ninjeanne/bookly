@@ -3,6 +3,8 @@
 
 ## 1. Use-Case: Share link, change visibility (private/public) and invite friends
 
+![sharelink_visibility_invite_mockup](sharelink_visibility_invite_mockup.png "Share link, change visibility (private/public) and invite friends")
+
 ### 1.1 Brief Description
 
 The main focus on this use case is to connect your book with your friends. This is achieved by three main methods:
