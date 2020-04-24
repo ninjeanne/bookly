@@ -3,6 +3,8 @@
 
 ## 1. Use-Case: Manage Book
 
+![ManageBook](manageBock_mockup.png "Manage Book")
+
 ### 1.1 Brief Description
 
 This use case describes the creation, reading, updating and deleting of a book(CRUD).
