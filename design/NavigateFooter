@@ -14,7 +14,7 @@ There shall always be a footer presented when scrolling to the bottom of a site.
 
 ## 2. Flow of Events
 
-![Create Book Entry](design_navigate_footer.png "Navigate Footer")
+![Navigate Footer](design_navigate_footer.png "Navigate Footer")
 
 
 ## 3. Preconditions
