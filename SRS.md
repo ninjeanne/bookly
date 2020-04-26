@@ -180,8 +180,10 @@ Requirements subsets
 -	VM
 -	domain
 -	gitLab
--	IDE
+-	IntelliJ IDE
 -	YouTrack
+-   Keycloak
+-   Postgres
 
 ### 2.5 Constraints
 Our database limit is under 15 GB.
@@ -201,12 +203,12 @@ data is kept inside a database and maintained by the backend.
 
 #### 3.1.1 User system
 
-At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile 
+At registration, the data provided by the user is stored in the backend. It is needed to log in/logout, unregister, edit the profile 
 and also provides the basis for a permission-system.
-According use cases are:
+The According use cases:
 
 -   [Account Operations](design/Account.md)
--   [Edit Profile Use Case](ADD LINK)ADD LINK
+-   [Header](design/Header.md)
 
 #### 3.1.2 Friendship book
 
@@ -215,6 +217,7 @@ inviting them to contribute to your friendship book.
 According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
+-   [Manage book](design/ManageBook.md "Manage book")
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
 
