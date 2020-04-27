@@ -98,6 +98,7 @@ public class TestData {
         page.getFavorite_book().setDescription("1984");
         page.getFavorite_food().setDescription("Spaghetti");
         page.getWhat_i_dont_like().setDescription("learning");
+        page.getLeftOver().setDescription("My last words are CHOCOLATE");
         return page;
     }
 
