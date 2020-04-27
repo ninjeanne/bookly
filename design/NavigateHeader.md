@@ -15,7 +15,11 @@ The user can access its profile settings or logout, go to his own friendship boo
 some friends to look into his book.
 ![Header](header.png "Header")
 
-See [Account Operations](Account.md), [Read Book](ReadBook.md) and TBD Invite
+See [Account Operations](OperateAccount.md), [Read Book](ReadBook.md) and [sharelink_visibility_invite](sharelink_visibility_invite.md)
+
+## 3. Preconditions
+
+The visitor has to be logged in to see the header.
 
 
 
