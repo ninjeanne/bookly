@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @ApiModel(description = "Class representing a user tracked by the application.")
-@Table(name = "RegisteredBooklyUser")
+@Table(name = "Account")
 public class User {
     @Id
     @ApiModelProperty(
