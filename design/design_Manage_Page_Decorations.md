@@ -3,6 +3,10 @@
 
 ## 1. Use-Case: Manage Page Decoration
 
+MockUpManaePageDecorationsTheme
+![ManagePageDecorations1]( MockUpManaePageDecorationsTheme.jpg "Manage Page Decoration 1")
+![ManagePageDecorations2]( MockUpManagePageDecorationsTheme.jpg "Manage Page Decoration 2")
+
 ### 1.1 Brief Description
 
 This use case describes the creation, reading, updating and deleting of decorations on a book page (CRUD).
