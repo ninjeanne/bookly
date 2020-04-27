@@ -222,6 +222,8 @@ According use cases are:
 -   [Share link, Visibility & Invite](design/sharelink_visibility_invite.md)
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
+-   [Manage page decorations](design/design_Manage_Page_Decorations.md)
+-   [Manage cover decorations](design/design_Manage_Cover_Decorations.md)
 
 #### 3.1.3 Read data given over API endpoints
 
