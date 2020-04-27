@@ -3,7 +3,6 @@
 
 ## 1. Use-Case: Manage Page Decoration
 
-MockUpManaePageDecorationsTheme
 ![ManagePageDecorations1]( MockUpManaePageDecorationsTheme.jpg "Manage Page Decoration 1")
 ![ManagePageDecorations2]( MockUpManagePageDecorationsTheme.jpg "Manage Page Decoration 2")
 
