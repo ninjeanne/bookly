@@ -209,6 +209,7 @@ The According use cases:
 
 -   [Operate Account](design/OperateAccount.md)
 -   [Navigate Header](design/NavigateHeader.md)
+-   [Navigate Footer](design/NavigateFooter.md)
 
 #### 3.1.2 Friendship book
 
@@ -218,6 +219,7 @@ According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
 -   [Manage book](design/ManageBook.md "Manage book")
+-   [Share link, Visibility & Invite](design/sharelink_visibility_invite.md)
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
 
