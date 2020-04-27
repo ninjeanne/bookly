@@ -1,12 +1,13 @@
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
-import dhbw.online.bookly.service.UserService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 
-
+@CrossOrigin
 @RestController
 @Slf4j
 @RequestMapping("/api/friendshipbook")
@@ -54,7 +55,6 @@ public class FriendshipBookController extends Controller {
         }
     }
 
-    @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
     @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
@@ -77,7 +77,6 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin
     @PutMapping
     @ApiOperation(value = "Update the cover title of the friendship book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
