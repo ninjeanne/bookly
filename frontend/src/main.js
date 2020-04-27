@@ -21,8 +21,9 @@ const keycloakConfig = {
     "enable-cors": true
 };
 const keycloak = Keycloak(keycloakConfig);
-keycloak.init({onLoad: keycloakConfig.onLoad}
-).success((auth) =>{
+keycloak.init({
+    onLoad: keycloakConfig.onLoad
+}).success((auth) => {
     new Vue({
         router,
         store,
@@ -60,7 +61,6 @@ keycloak.init({onLoad: keycloakConfig.onLoad}
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && localStorage.getItem("auth") === 'false') {
-        alert(localStorage.getItem("auth"))
         let host = location.host;
         if(host.includes('localhost')){
             host = 'http://' + host;
@@ -75,3 +75,5 @@ router.beforeEach((to, from, next) => {
         next()
     }
 });
+
+export default keycloak

@@ -19,6 +19,7 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 
 @Component
@@ -45,10 +46,11 @@ public class TestData {
                 .build();
 
         Page page = initPage();
+        Page secondPage = initSecondPage();
         FriendshipBook friendshipBook = FriendshipBook.builder()
                 .title("Unser super tolles Buch")
                 .user(user)
-                .pages(Collections.singletonList(page))
+                .pages(Arrays.asList(page, secondPage))
                 .build();
 
         userRepository.save(user);
@@ -95,6 +97,26 @@ public class TestData {
         page.getFavorite_movie().setDescription("Star Trek, Lilo and Stitch");
         page.getFavorite_book().setDescription("1984");
         page.getFavorite_food().setDescription("Spaghetti");
+        page.getWhat_i_dont_like().setDescription("learning");
+        page.getLeftOver().setDescription("My last words are CHOCOLATE");
+        return page;
+    }
+
+    private Page initSecondPage() {
+        Page page = new Page();
+        page.getAddress().setDescription("Karlsruher Straße 12");
+        page.getName().setDescription("Maximilia Musterfrau");
+        page.getTelephone().setDescription("87687");
+        page.getMobile().setDescription("123456");
+        page.getSchool().setDescription("KIT");
+        page.getSchool_class().setDescription("1A");
+        page.getSize().setDescription("50m");
+        page.getHair_color().setDescription("blond");
+        page.getMy_hobbies().setDescription("Chillen");
+        page.getEye_color().setDescription("green");
+        page.getFavorite_movie().setDescription("Star Trek, Lilo and Stitch");
+        page.getFavorite_book().setDescription("1984");
+        page.getFavorite_food().setDescription("Spaghetti Bologonese");
         page.getWhat_i_dont_like().setDescription("learning");
         return page;
     }

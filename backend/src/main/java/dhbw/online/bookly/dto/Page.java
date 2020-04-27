@@ -36,7 +36,7 @@ public class Page {
         setFavorite_food(new PageEntry("Favorite food"));
         setNice_comment(new PageEntry("Here's something nice for you"));
         setDate(new PageEntry("Date"));
-        setSign(new PageEntry("My autograph for you"));
+        setLeftOver(new PageEntry("My autograph for you"));
         setHow_to_please_me(new PageEntry("So one can make me a joy"));
         setStar_sign(new PageEntry("sign of the zodiac"));
         setBirthday(new PageEntry("birthday"));
@@ -179,8 +179,8 @@ public class Page {
     private PageEntry date;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @ApiModelProperty(notes = "signing of the friend",
+    @ApiModelProperty(notes = "last words of the friend",
             position = 26)
-    private PageEntry sign;
+    private PageEntry leftOver;
 
 }
