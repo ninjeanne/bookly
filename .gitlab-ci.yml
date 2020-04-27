@@ -22,7 +22,7 @@ build-prod:
   when: manual
   stage: build
   script:
-    - ./mvnw install -DskipTests -P prod
+    - ./mvnw install -DskipTests -P production
   artifacts:
     expire_in: 2h
     paths:
