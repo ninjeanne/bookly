@@ -79,3 +79,6 @@ After a page has been edited, the data must have been changed in the database an
 
 After confirming the deletion modal of a page, the page will be permanently removed and no longer displayed in the list 
 overview and in the database too.
+
+## 6. Feature Files
+[Feature Manage Page](../backend/src/test/resources/dhbw/online/bookly/manage_page.feature)

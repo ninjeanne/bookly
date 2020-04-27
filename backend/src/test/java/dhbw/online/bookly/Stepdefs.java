@@ -3,33 +3,44 @@ package dhbw.online.bookly;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.junit.Assert;
+import org.keycloak.OAuth2Constants;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import java.util.Base64;
+import org.springframework.web.client.RestTemplate;
 
 public class Stepdefs {
 
-    private String answer;
+    private String getUser = "{\"username\":\"test-user\",\"mail\":\"max.mustermann@test.bookly.online\",\"first_name\":\"Max\",\"last_name\":\"Mustermann\"}";
+
+    private RestTemplate login(String username, String password){
+        String url = "https://keycloak.bookly.online/auth/realms/bookly/protocol/openid-connect/token";
+
+        ResourceOwnerPasswordResourceDetails resourceDetails = new ResourceOwnerPasswordResourceDetails();
+        resourceDetails.setGrantType(OAuth2Constants.PASSWORD);
+        resourceDetails.setAccessTokenUri(url);
+        resourceDetails.setClientId("bookly-app");
+        resourceDetails.setUsername(username);
+        resourceDetails.setPassword(password);
+
+        return new OAuth2RestTemplate(resourceDetails);
+    }
 
     @Given("I login with {string}{string}")
     public void i_am_logged_in(String username, String password) throws Exception {
-        TestRestTemplate testRestTemplate = new TestRestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        String encodeBytes = Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
-        headers.add(HttpHeaders.AUTHORIZATION, "Basic " + encodeBytes);
-
+        RestTemplate restTemplate = login(username, password);
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
 
-        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
-        ResponseEntity<String> response = testRestTemplate.exchange(
-                "http://localhost:8080/api/user", HttpMethod.GET, request, String.class, new LinkedMultiValueMap<>());
-        answer = response.getBody();
-        System.out.println(answer);
+        ResponseEntity<String> response = restTemplate
+                .exchange("http://localhost:8080/api/user", HttpMethod.GET, request, String.class, new LinkedMultiValueMap<>());
+        Assert.assertEquals(getUser, response.getBody());
     }
 
     @Given("^I navigate to friendship book cover$")

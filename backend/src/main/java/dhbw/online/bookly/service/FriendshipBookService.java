@@ -21,8 +21,19 @@ public class FriendshipBookService {
     @Autowired
     private FriendshipBookRepository repository;
 
-    public boolean create(User user) {
-        if (!repository.existsByUser(user)) {
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private UserService userService;
+
+    public boolean exists(){
+        return repository.existsByUser(authenticationService.getUser());
+    }
+
+    public boolean create() {
+        User user = authenticationService.getUser();
+        if (!exists()) {
             repository.save(FriendshipBook.builder()
                     .user(user)
                     .title("My Friendship Book")
@@ -58,7 +69,8 @@ public class FriendshipBookService {
     }
 
     @Nullable
-    public FriendshipBook read(User user) {
+    public FriendshipBook read() {
+        User user = userService.getUser();
         Optional<FriendshipBook> book = repository.findByUser(user);
         if (!book.isPresent()) {
             log.warn("Requested user {} couldn't be found in database", user.getUsername());
@@ -66,8 +78,9 @@ public class FriendshipBookService {
         return book.orElse(null);
     }
 
-    public boolean delete(User user) {
-        FriendshipBook book = read(user);
+    public boolean delete() {
+        User user = userService.getUser();
+        FriendshipBook book = read();
         if (book != null) {
             repository.delete(book);
             log.debug("Book of user {} with book id {} has been deleted", user.getUsername(), book.getUuid());
@@ -77,8 +90,9 @@ public class FriendshipBookService {
         return false;
     }
 
-    public FriendshipBook updateTitle(User user, String title) {
-        FriendshipBook book = read(user);
+    public FriendshipBook updateTitle(String title) {
+        User user = userService.getUser();
+        FriendshipBook book = read();
         if (book != null) {
             book.setTitle(title);
             repository.save(book);

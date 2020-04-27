@@ -88,7 +88,7 @@ This document is designed for internal use only and will outline the development
 
 **Subcomponents**
 -	Account
-	-	Registering, delete account, Login and Logout to our Application. Opportunity to decide whether the content is visible for everybody by sharing a link or only for the user
+	-	Registering, managing, deleting account, Login and Logout to our Application.
 -	Connecting People
 	-	Opportunity to share the friendship book with friends by sending a link for editing a page.
 -	Overview
@@ -180,8 +180,10 @@ Requirements subsets
 -	VM
 -	domain
 -	gitLab
--	IDE
+-	IntelliJ IDE
 -	YouTrack
+-   Keycloak
+-   Postgres
 
 ### 2.5 Constraints
 Our database limit is under 15 GB.
@@ -201,12 +203,13 @@ data is kept inside a database and maintained by the backend.
 
 #### 3.1.1 User system
 
-At registration, the data provided by the user is stored in the backend. It is needed to log in, edit the profile 
+At registration, the data provided by the user is stored in the backend. It is needed to log in/logout, unregister, edit the profile 
 and also provides the basis for a permission-system.
-According use cases are:
+The According use cases:
 
--   [Account Operations](design/Account.md)
--   [Edit Profile Use Case](ADD LINK)ADD LINK
+-   [Operate Account](design/OperateAccount.md)
+-   [Navigate Header](design/NavigateHeader.md)
+-   [Navigate Footer](design/NavigateFooter.md)
 
 #### 3.1.2 Friendship book
 
@@ -215,8 +218,12 @@ inviting them to contribute to your friendship book.
 According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
+-   [Manage book](design/ManageBook.md "Manage book")
+-   [Share link, Visibility & Invite](design/sharelink_visibility_invite.md)
 -   [design cover](ADD LINK)ADD LINK
 -   [design friendship book page](ADD LINK)ADD LINK
+-   [Manage page decorations](design/design_Manage_Page_Decorations.md)
+-   [Manage cover decorations](design/design_Manage_Cover_Decorations.md)
 
 #### 3.1.3 Read data given over API endpoints
 
