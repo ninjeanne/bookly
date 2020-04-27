@@ -88,7 +88,7 @@ This document is designed for internal use only and will outline the development
 
 **Subcomponents**
 -	Account
-	-	Registering, delete account, Login and Logout to our Application. Opportunity to decide whether the content is visible for everybody by sharing a link or only for the user
+	-	Registering, managing, deleting account, Login and Logout to our Application.
 -	Connecting People
 	-	Opportunity to share the friendship book with friends by sending a link for editing a page.
 -	Overview
@@ -207,8 +207,8 @@ At registration, the data provided by the user is stored in the backend. It is n
 and also provides the basis for a permission-system.
 The According use cases:
 
--   [Account Operations](design/Account.md)
--   [Header](design/Header.md)
+-   [Operate Account](design/OperateAccount.md)
+-   [Navigate Header](design/NavigateHeader.md)
 
 #### 3.1.2 Friendship book
 

@@ -1,5 +1,5 @@
 # BOOKLY - Software Requirements Specification
-## Use-Case Specification: Header
+## Use-Case Specification: Navigate Header
 
 ### 1 Brief Description
 
