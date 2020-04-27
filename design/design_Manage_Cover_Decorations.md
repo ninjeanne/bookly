@@ -3,7 +3,9 @@
 
 ## 1. Use-Case: Manage Cover Decoration
 
-![ManageCoverDecorations](manageCoverDecorations.png "Manage Cover Decoration")
+![ManageCoverDecorations]( MockUpManageCoverDecorationsTheme.jpg "Manage Cover Decoration")
+![ManageCoverDecorationsTheme1]( Theme1.jpg "Manage Cover Decoration - Theme 1")
+![ManageCoverDecorationsTheme2]( Theme2.jpg "Manage Cover Decoration - Theme 2")
 
 ### 1.1 Brief Description
 
