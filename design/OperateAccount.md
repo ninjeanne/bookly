@@ -1,5 +1,5 @@
 # BOOKLY - Software Requirements Specification
-## Use-Case Specification: Account Operations
+## Use-Case Specification: Operate Account
 
 ### 1 Brief Description
 
