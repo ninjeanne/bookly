@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const AXIOS = axios.create({
   timeout: 2000,
-    baseURL: process.env.VUE_APP_BACKEND + "/api" || "http://localhost:8080/api",
+    baseURL: process.env.VUE_APP_BACKEND || "http://localhost:8080/api",
     headers: { }
 });
 
