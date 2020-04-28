@@ -29,15 +29,15 @@ public class PageController extends Controller {
     private PageService pageService;
 
     @PostMapping
-    @ApiOperation(value = "Add a new page with data into the users friendship book")
+    @ApiOperation(value = "Add a new page with data into the users friendship book and returns it")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity create() {
         if (existsUser()) {
             try {
-                val pages = pageService.add();
-                return ResponseEntity.ok(pages);
+                val newpage = pageService.add();
+                return ResponseEntity.ok(newpage);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
             }
