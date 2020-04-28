@@ -3,7 +3,6 @@ package dhbw.online.bookly.service;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.PageImage;
-import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -16,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -44,11 +43,7 @@ public class PageService {
 
     public void saveImageForPage(Page page, byte[] data, long size, String contentType) {
         try {
-            page.setPageImage(PageImage.builder()
-                    .data(data)
-                    .size(size)
-                    .mediaType(contentType)
-                    .build());
+            page.setPageImage(PageImage.builder().data(data).size(size).mediaType(contentType).build());
             log.debug("Page image has been set for page with uuid {}", page.getUuid());
             pageRepository.save(page);
         } catch (NullPointerException e) {
@@ -63,6 +58,14 @@ public class PageService {
             if (page.getUuid() == uuid) {
                 return page;
             }
+        }
+        throw new PageException("Page couldn't be found");
+    }
+
+    public Page findPageById(int uuid) {
+        Optional<Page> page = pageRepository.findByUuid(uuid);
+        if (page.isPresent()) {
+            return page.get();
         }
         throw new PageException("Page couldn't be found");
     }
@@ -99,22 +102,12 @@ public class PageService {
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
-    public List<Page> update(Page page) {
-        FriendshipBook book = friendshipBookService.read();
-        if (book != null) {
-            val pages = book.getPages();
-            val resultpages = pages.stream()
-                    .filter(pageFromDb -> pageFromDb.getUuid() == page.getUuid())
-                    .collect(Collectors.toList());
-            if (resultpages.isEmpty()) {
-                throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");
-            }
-            pages.remove(resultpages.get(0));
-            pages.add(page);
-            friendshipBookRepository.save(book);
-            return pages;
+    public boolean update(Page apiPage) {
+        if(pageRepository.existsByUuid(apiPage.getUuid())){
+            pageRepository.save(apiPage);
+            return true;
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        return false;
     }
 
 }
