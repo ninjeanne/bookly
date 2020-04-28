@@ -20,6 +20,7 @@ public class UserService {
     public User getUser() {
         sync();
         if (!friendshipBookService.exists()) {
+            log.debug("Friendship book for user does not exist!");
             friendshipBookService.create();
         }
         return authenticationService.getUser();

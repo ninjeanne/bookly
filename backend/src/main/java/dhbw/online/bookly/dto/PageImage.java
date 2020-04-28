@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -24,7 +25,8 @@ public class PageImage {
     private int uuid;
 
     @Lob
-    @Column(length=100000)
+    @Column(length=100000)   
+    @Type(type = "org.hibernate.type.ImageType")
     @ApiModelProperty(notes = "the binary data of the page image",
             position = 1)
     private byte[] data;
