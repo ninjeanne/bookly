@@ -52,7 +52,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                     .authorizeRequests()
                         .antMatchers("/api/public**")
                             .permitAll()
-                        .antMatchers("/api**")
+                        .antMatchers("/api/friendshipbook/image**", "/api/user**", "/api/friendshipbook**", "/api/page**", "/api**")
                             .hasRole("user")
                         .anyRequest()
                             .permitAll()
