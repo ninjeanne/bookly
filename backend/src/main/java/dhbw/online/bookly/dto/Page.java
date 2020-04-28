@@ -1,13 +1,21 @@
 package dhbw.online.bookly.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
+import dhbw.online.bookly.exception.PageException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+
 import javax.persistence.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Data
 @Entity
@@ -17,6 +25,7 @@ import javax.persistence.*;
 public class Page {
 
     public Page() {
+        setUuid(generateRandomUUID());
         setAddress(new PageEntry("Address"));
         setName(new PageEntry("Name"));
         setTelephone(new PageEntry("Telephone"));
@@ -44,13 +53,43 @@ public class Page {
         setWhat_i_dont_like(new PageEntry("What i don't like"));
     }
 
+    private String generateRandomUUID() {
+        String UUID = "no:UUID:Set";
+        try {
+            URL url = new URL("https://random-word-api.herokuapp.com/word?number=3");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder content = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                inputLine = inputLine.replaceAll("\\[\"", "");
+                inputLine = inputLine.replaceAll("\",\"", ":");
+                inputLine = inputLine.replaceAll("\"]", "");
+                content.append(inputLine);
+            }
+            UUID = content.toString();
+            in.close();
+            con.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(UUID.equals("no:UUID:Set")){
+            throw new PageException("No UUID Set");
+        }
+        return UUID;
+    }
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "the unique identifier of a page of a book.",
-            example = "3",
+            example = "peachy:Peach:priest",
             required = true,
             position = 0)
-    private int uuid;
+    private String uuid;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
