@@ -13,11 +13,6 @@ cache:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2"
 
-test:
-  stage: test
-  script:
-    - ./mvnw verify
-
 build-prod:
   when: manual
   stage: build

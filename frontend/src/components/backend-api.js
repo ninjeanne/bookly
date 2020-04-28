@@ -1,8 +1,17 @@
 import axios from 'axios'
 
+let baseURL;
+if(location.hostname === "localhost"){
+    baseURL = "http://localhost:8080/api"
+}
+else {
+    baseURL = "https://" + location.hostname + "/api"
+}
+
+
 const AXIOS = axios.create({
   timeout: 2000,
-    baseURL: process.env.VUE_APP_BACKEND || "http://localhost:8080/api",
+    baseURL: baseURL,
     headers: { }
 });
 
