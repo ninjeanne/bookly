@@ -19,8 +19,8 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Collections;
 
 @Component
 @Slf4j
@@ -35,31 +35,21 @@ public class TestData {
     @Autowired
     private PageService pageService;
 
-
     @PostConstruct
     private void initialize() {
-        User user = User.builder()
-                .mail("user@bookly.online")
-                .first_name("Max")
-                .last_name("Mustermann")
-                .username("user")
-                .build();
+        User user = User.builder().mail("user@bookly.online").first_name("Max").last_name("Mustermann").username("user").build();
 
         Page page = initPage();
         Page secondPage = initSecondPage();
-        FriendshipBook friendshipBook = FriendshipBook.builder()
-                .title("Unser super tolles Buch")
-                .user(user)
-                .pages(Arrays.asList(page, secondPage))
-                .build();
+        FriendshipBook friendshipBook = FriendshipBook.builder().title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
 
         userRepository.save(user);
         friendshipBookRepository.save(friendshipBook);
 
         //read image
         try {
-            friendshipBookService.saveImageForBook(friendshipBook, extractBytes("test_image.jpg"), 0, "image/jpeg");
-            pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 0, "image/jpeg");
+            friendshipBookService.saveImageForBook(friendshipBook, extractBytes("test_image.jpg"), 423867, "image/jpeg");
+            pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
         } catch (IOException e) {
             log.debug("Could not read test image in resources folder");
         }
@@ -73,13 +63,7 @@ public class TestData {
         // open image
         assert resource != null;
         File imgPath = new File(resource.getFile());
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        // get DataBufferBytes from Raster
-        WritableRaster raster = bufferedImage.getRaster();
-        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-
-        return (data.getData());
+        return Files.readAllBytes(imgPath.toPath());
     }
 
     private Page initPage() {
