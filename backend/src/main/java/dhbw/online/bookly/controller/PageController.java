@@ -3,12 +3,14 @@
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.Page;
-import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.AuthenticationException;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.service.PageService;
-import dhbw.online.bookly.service.UserService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,10 @@ public class PageController extends Controller {
                 return ResponseEntity.ok(newpage);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
+            } catch (AuthenticationException ae) {
+                log.warn("Authentication error for user {}", ae.getPrincipal());
+                log.warn(ae.getMessage());
+                ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();

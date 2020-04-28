@@ -1,10 +1,10 @@
 package dhbw.online.bookly.service;
 
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.AuthenticationException;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.representations.AccessToken;
-import org.keycloak.representations.IDToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,12 @@ public class AuthenticationService {
         return getPrincipal().getName();
     }
 
-    private KeycloakPrincipal getPrincipal(){
-        return (KeycloakPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    private KeycloakPrincipal getPrincipal() throws AuthenticationException {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal instanceof String){
+            throw new AuthenticationException(principal.toString(), "Somehow the visitor was not logged in properly.");
+        }
+        return (KeycloakPrincipal) principal;
     }
 
     public User getUser(){
