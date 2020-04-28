@@ -67,40 +67,41 @@ public class TestData {
 
     private Page initPage() {
         Page page = new Page();
-        page.getAddress().setDescription("Teststraße 12");
-        page.getName().setDescription("Max Mustermann");
-        page.getTelephone().setDescription("012345");
-        page.getMobile().setDescription("23412313");
-        page.getSchool().setDescription("MIT");
-        page.getSchool_class().setDescription("1A");
-        page.getSize().setDescription("1.8m");
-        page.getHair_color().setDescription("blond");
-        page.getMy_hobbies().setDescription("Jogging, Dancing, Programming");
-        page.getEye_color().setDescription("green");
-        page.getFavorite_movie().setDescription("Star Trek, Lilo and Stitch");
-        page.getFavorite_book().setDescription("1984");
-        page.getFavorite_food().setDescription("Spaghetti");
-        page.getWhat_i_dont_like().setDescription("learning");
-        page.getLeftOver().setDescription("My last words are CHOCOLATE");
+        page.setAddress("Teststraße 12");
+        page.setName("Max Mustermann");
+        page.setTelephone("555555");
+        page.setMobile("123456");
+        page.setSchool("Driving School");
+        page.setSchool_class("1A");
+        page.setSize("1.8m");
+        page.setHair_color("blond");
+        page.setMy_hobbies("Jogging, Dancing, Programming");
+        page.setEye_color("green");
+        page.setFavorite_movie("Star Trek, Lilo and Stitch");
+        page.setFavorite_food("Spaghetti");
+        page.setWhat_i_dont_like("learning");
+        page.setLeftOver("My last words are CHOCOLATE");
         return page;
     }
 
     private Page initSecondPage() {
         Page page = new Page();
-        page.getAddress().setDescription("Karlsruher Straße 12");
-        page.getName().setDescription("Maximilia Musterfrau");
-        page.getTelephone().setDescription("87687");
-        page.getMobile().setDescription("123456");
-        page.getSchool().setDescription("KIT");
-        page.getSchool_class().setDescription("1A");
-        page.getSize().setDescription("50m");
-        page.getHair_color().setDescription("blond");
-        page.getMy_hobbies().setDescription("Chillen");
-        page.getEye_color().setDescription("green");
-        page.getFavorite_movie().setDescription("Star Trek, Lilo and Stitch");
-        page.getFavorite_book().setDescription("1984");
-        page.getFavorite_food().setDescription("Spaghetti Bologonese");
-        page.getWhat_i_dont_like().setDescription("learning");
+        page.setAddress("Teststraße 12");
+        page.setName("Maximila Musterfrau");
+        page.setTelephone("012345");
+        page.setMobile("23412313");
+        page.setSchool("MIT");
+        page.setSchool_class("1A");
+        page.setSize("1.8m");
+        page.setHair_color("blond");
+        page.setMy_hobbies("Jogging, Dancing, Programming");
+        page.setEye_color("green");
+        page.setFavorite_job("Chillen");
+        page.setFavorite_book("1984");
+        page.setWhat_i_dont_like("learning");
+        page.setLeftOver("My last words are CHOCOLATE");
+        page.setFan_of("Doing nothing");
+        page.setNice_comment("Hi Neeeko :) Du kannst mich lesen");
         return page;
     }
 
