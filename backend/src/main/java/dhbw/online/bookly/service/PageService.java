@@ -67,7 +67,7 @@ public class PageService {
         throw new PageException("Page couldn't be found");
     }
 
-    public List<Page> add() {
+    public Page add() {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
@@ -76,7 +76,7 @@ public class PageService {
             pageRepository.save(newPage);
             friendshipBookRepository.save(book);
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
-            return pages;
+            return newPage;
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
