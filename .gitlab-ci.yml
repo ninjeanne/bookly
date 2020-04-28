@@ -21,7 +21,7 @@ test:
 build:
   stage: build
   script:
-    - ./mvnw install -DskipTests -P production
+    - ./mvnw install -DskipTests
   artifacts:
     expire_in: 2h
     paths:
