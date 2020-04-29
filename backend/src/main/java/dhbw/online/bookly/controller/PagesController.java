@@ -62,7 +62,7 @@ public class PagesController extends Controller {
     @DeleteMapping
     @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
-            @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
+            @ApiResponse(code = 409, message = "Conflict - the page couldn't be found and deleted"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity delete(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
         if (existsUser()) {
@@ -79,6 +79,16 @@ public class PagesController extends Controller {
             log.warn("Couldn't delete page as the uuid is missing");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+
+    @DeleteMapping
+    @ApiOperation(value = "Deletes all pages of a book")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the deleting failed"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    ResponseEntity delete() {
+        pageService.deleteAllPages();
+        return ResponseEntity.ok().build();
     }
 }
 

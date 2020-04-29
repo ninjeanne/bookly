@@ -45,7 +45,7 @@ public class EditPageController extends Controller {
 
     @PostMapping
     @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages"),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity update(@RequestBody Page page) {
