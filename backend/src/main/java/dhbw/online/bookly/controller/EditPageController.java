@@ -27,7 +27,7 @@ public class EditPageController extends Controller {
     private PageService pageService;
 
     @GetMapping
-    @ApiOperation(value = "Returns a single page")
+    @ApiOperation(value = "Returns a single page, accessible for everyone.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the public page", response = byte[].class),
             @ApiResponse(code = 404, message = "Not found - the page doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid") })
     public ResponseEntity<Page> getPublicPage(@RequestParam String uuid) {
@@ -44,7 +44,7 @@ public class EditPageController extends Controller {
     }
 
     @PostMapping
-    @ApiOperation(value = "Update a page. It's important to send the uuid of the page for this request.")
+    @ApiOperation(value = "Update a page with its uuid, accessible for everyone")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages"),
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -60,7 +60,7 @@ public class EditPageController extends Controller {
     }
 
     @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ApiOperation(value = "Returns image of a page")
+    @ApiOperation(value = "Returns the image of a specific page by its uuid.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the image of the page, returns byte array", response = byte[].class),
             @ApiResponse(code = 404, message = "Not found - the image doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -80,7 +80,7 @@ public class EditPageController extends Controller {
 
     @PostMapping(value = "/image")
     @ResponseBody
-    @ApiOperation(value = "Send a new image for a page")
+    @ApiOperation(value = "Send a new image for the page by sending a file and sending the specific uuid.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })

@@ -45,7 +45,7 @@ public class UserController extends Controller {
     }
 
     @PostMapping
-    @ApiOperation(value = "Update user profile (not the password or username)")
+    @ApiOperation(value = "Update the logged in user profile (not the password or username)")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity updateProfile(@RequestBody User user) {
@@ -54,8 +54,8 @@ public class UserController extends Controller {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "Delete the user profile including the friendship book, images and pages")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be updated"),
+    @ApiOperation(value = "Delete the logged in user profile including the friendship book, images and pages")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be deleted and logged out."),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity deleteProfile(HttpServletRequest request) {
         User user = userService.getUser();
