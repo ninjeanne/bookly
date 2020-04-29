@@ -5,83 +5,80 @@ import api from './components/backend-api'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        loginSuccess: false,
-        loginError: false,
-        userName: null,
-        userPass: null
-    },
-    mutations: {
-        login_success(state, payload){
-            state.loginSuccess = true;
-            state.loginError = false;
-            state.userName = payload.userName;
-            state.userPass = payload.userPass;
-        },
-        login_error(state){
-            state.loginSuccess = false;
-            state.loginError = true;
-        }
-    },
+    state: { },
+    mutations: { },
     actions: {
-        login({commit}, {user, password}) {
+        user() {
             return new Promise((resolve) => {
-                api.getSecured(user, password)
-                    .then(response => {
-                        if(response.status === 200) {
-                            commit('login_success', {
-                                userName: user,
-                                userPass: password
-                            });
-                            localStorage.setItem("auth", btoa(`${user}:${password}`));
-                        }
-                        resolve(response)
-                    })
-                    .catch(() => {
-                        commit('login_error');
-                    })
-            })
-        },
-        register({commit}, {user, email, password1, password2}) {
-            return new Promise((resolve, reject) => {
-                api.createUser(user, email, password1, password2)
-                    .then(response => {
-                        if (response.status === 200) {
-
-                        }
-                        resolve(response)
-                    })
-                    .catch(error => {
-                        commit('register_error', {
-                            userName: user
-                        });
-                        reject("Invalid credentials!")
-                    })
-            })
-        },
-        user({commit}) {
-            return new Promise((resolve) => {
-                if(localStorage.getItem("auth")) {
-                    api.getUser(localStorage.getItem("auth"))
+                    api.getUser()
                         .then(response => {
-                            if (response.status === 200) {
-                                commit('login_success', {
-                                    userName: response.data.username
-                                });
-                                console.log(response.data.username);
-                            }
                             resolve(response)
                         })
-                } else {
-                    commit('login_error', {});
-                }
+                        .catch(err => {
+                            console.error(err);
+                        });
             })
         },
+        getBook() {
+            return new Promise((resolve) => {
+                api.getBook()
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        editBook({commit}, {title}) {
+            return new Promise((resolve) => {
+                api.editBook(title)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        getBookCover() {
+            return new Promise((resolve) => {
+                api.getBookCover()
+                        .then((response) => {
+                            if(response.status === 200) {
+                                resolve(response)
+                            }
+                        })
+                        .catch(err=>{
+                            console.error(err);
+                        });
+            })
+        },
+        editBookCover({commit}, {image}) {
+            return new Promise((resolve) => {
+                api.editBookCover(image)
+                    .then(response => {
+                        if(response.status === 200) {
+                            console.log("success");
+                        }
+                        resolve(response)
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    });
+            })
+        },
+        getPage() {
+            return new Promise((resolve) => {
+                api.getPage()
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        }
     },
-    getters: {
-        isLoggedIn: state => state.loginSuccess,
-        hasLoginErrored: state => state.loginError,
-        getUserName: state => state.userName,
-        getUserPass: state => state.userPass
-    }
+    getters: { }
 })

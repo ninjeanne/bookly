@@ -219,3 +219,18 @@ Response (Code OK example)
 ```
 []
 ```
+# Install Keycloak
+1. Download Standalone Server Distribution https://www.keycloak.org/downloads.html
+2. Unpack ZIP
+3. 1. Start Server with ```bin/standalone.sh -Djboss.socket.binding.port-offset=100``` -> The Server should be available under http://localhost:8180/auth2. Then
+        add a user ```bin/add-user-keycloak.sh -r master -u admin -p nimdanimda``` and restart the server
+    2. Alternative: ```docker run --name keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=nimdanimda -p 8180:8180 jboss/keycloak -Djboss.socket.binding.port-offset=100```
+5. Access the Server under http://localhost:8180/auth/admin
+6. Import JSON ````realm-export.json````
+
+## Create a user in Keycloak
+7. Go to Roles > Realm Roles > Add Role > Role Name: user
+8. Go to Roles > Default Roles > Realm Roles: select user and click on Add selected
+9. Go to Users > Add user > username: user > Save
+10. Go to Users > View all users > currently created user: Actions Edit > Credentials > Set Password > password: user > disable temporary > Set Password
+11. Role Mappings > Realm Roles > Available Roles > select user and add (if not already assigned)

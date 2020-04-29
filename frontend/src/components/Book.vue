@@ -1,53 +1,44 @@
 <template>
-    <div v-if="isLoggedIn" id="main">
-        <div class="card card-cascade wider">
-            <div class="view view-cascade overlay">
-                <img class="card-img-top" src="./../assets/einstein.jpg" alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center">
-                <h4 class="card-title"><strong>{{username}}'s Friendship Book</strong></h4>
-                <h5 class="blue-text pb-2"><strong>I like pizza, but sometimes I go outside too</strong></h5>
-                <p class="card-text">If you think you have the best Friendship Book, you haven't seen mine</p>
+    <div id="main">
+        <div class="card">
+            <div class="content">
+                <img :src="image">
+                <h4 class="card-title"><strong>{{ title }}</strong></h4>
             </div>
             <div style="padding: 64px 64px 32px 64px">
-                <b-btn style="float: left" type="button" class="btn btn-unique">Edit (!)</b-btn>
-                <a style="float: right" href="#" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading
-                    (!)</a>
+                <router-link style="float: left" to="/bookeditor" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Edit</router-link>
+                <router-link style="float: right" to="/page?num=0" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading</router-link>
             </div>
         </div>
-    </div>
-    <div v-else>
-        <h2>You must be logged in to view your book</h2>
-        <a href="/login">Click here to login!</a>
     </div>
 </template>
 
 <script>
-    import store from './../store';
 
     export default {
         name: "Book",
+
         beforeMount() {
-            this.username = store.getters.getUserName;
-            this.isLoggedIn = store.getters.isLoggedIn;
-        },
-        created() {
-            if(!this.isLoggedIn) {
-                this.getUser();
-            }
+            this.getBook();
+            this.getCover();
         },
         data() {
             return {
-                username: '',
-                isLoggedIn: false
+                title: "",
+                image: ""
             }
         },
         methods: {
-            getUser() {
-                this.$store.dispatch("user")
-                    .then(() => {
-                        this.isLoggedIn = this.$store.getters.isLoggedIn;
-                        this.username = this.$store.getters.getUserName;
+            getCover() {
+                this.$store.dispatch("getBookCover")
+                    .then((response) => {
+                        this.image = 'data:image/jpeg;base64,'.concat(this.image.concat(response.data));
+                    })
+            },
+            getBook() {
+                this.$store.dispatch("getBook")
+                    .then((response) => {
+                        this.title = response.data.title;
                     })
             }
         }
@@ -56,6 +47,17 @@
 
 <style scoped>
     #main {
-        margin: 32px 128px 256px 128px;
+        margin: 64px;
+    }
+    .card {
+        max-width: 100%;
+        min-width: 60%;
+        max-height: 80%;
+    }
+    h4 {
+        padding-top: 32px;
+    }
+    img {
+        max-width: 100%;
     }
 </style>

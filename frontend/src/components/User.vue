@@ -1,38 +1,29 @@
 <template>
-  <div v-if="isLoggedIn" class="user">
+  <div>
     <h2>Hey {{ username }}!!</h2>
-  </div>
-  <div v-else>
-    <h2>You must be logged in to view your profile</h2>
-    <a href="/login">Click here to login!</a>
+    <button v-on:click="logout">Logout</button>
   </div>
 </template>
 
 <script>
+  import keycloak from './../main';
+
   export default {
     name: 'user',
 
     beforeMount() {
-      this.isLoggedIn = this.$store.getters.isLoggedIn;
+      console.log(localStorage.getItem("userInfo"));
+      this.username = JSON.parse(localStorage.getItem('userInfo')).preferred_username;
     },
-    created() {
-      if(!this.isLoggedIn) {
-        this.getUser();
-      }
-    },
-    data () {
+    data() {
       return {
-        username: '',
-        isLoggedIn: false
+        username: ""
       }
     },
     methods: {
-      getUser() {
-        this.$store.dispatch("user")
-                .then(() => {
-                  this.isLoggedIn = this.$store.getters.isLoggedIn;
-                  this.username = this.$store.getters.getUserName;
-                })
+      logout: function () {
+        this.$router.push("/");
+        keycloak.logout();
       }
     }
   }

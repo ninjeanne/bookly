@@ -5,14 +5,6 @@
         <img src="./../assets/bookly.jpg">
       </div>
       <div class="right">
-        <h3 class="suggestion">Take a look at your Friends Entries</h3>
-        <b-btn class="float-right">View Entries (!)</b-btn>
-        <br>
-        <h3 class="suggestion">Design your own Book</h3>
-        <b-btn class="float-right">View my Book (!)</b-btn>
-        <br>
-        <h3 class="suggestion">Ask your friend to add a new Entry</h3>
-        <b-btn class="float-right">Send Invite (!)</b-btn>
       </div>
     </div>
     <div style="clear: both"></div>
@@ -60,9 +52,5 @@ export default {
     width: 50%;
     float: right;
     padding: 64px;
-  }
-  .suggestion {
-    margin-top: 16px;
-    text-align: right;
   }
 </style>

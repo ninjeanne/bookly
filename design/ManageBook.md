@@ -3,6 +3,8 @@
 
 ## 1. Use-Case: Manage Book
 
+![ManageBook](manageBook_mockup.png "Manage Book")
+
 ### 1.1 Brief Description
 
 This use case describes the creation, reading, updating and deleting of a book(CRUD).
@@ -83,3 +85,6 @@ You can edit your book cover as often as you like. You only need to be logged in
 
 After confirming the deletion dialog of a book, the book pages will be no longer displayed in the list 
 overview and all the book data will be permanently removed from the database.
+
+## 6. Feature Files
+[Feature Manage Book](../backend/src/test/resources/dhbw/online/bookly/ManageBook.feature)
