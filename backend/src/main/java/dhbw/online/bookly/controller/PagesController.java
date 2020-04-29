@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
+
 @RestController
 @CrossOrigin
 @Slf4j
@@ -81,7 +83,7 @@ public class PagesController extends Controller {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/all")
     @ApiOperation(value = "Deletes all pages of a book")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the deleting failed"),

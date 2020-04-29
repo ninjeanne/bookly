@@ -32,6 +32,8 @@ public class UserService {
     private AuthenticationService authenticationService;
     @Autowired
     private FriendshipBookService friendshipBookService;
+    @Autowired
+    private KeycloakConfiguration keycloakConfiguration;
 
     public User getUser() {
         sync();
@@ -43,25 +45,16 @@ public class UserService {
     }
 
     public void update(User user){
-        Keycloak keycloak = authenticationService.getAdminKeycloakInstance();
-
-        RealmResource realmResource = keycloak.realm(KeycloakConfiguration.KEYCLOAK_REALM);
-        UsersResource usersRessource = realmResource.users();
-
-        UserResource userResource = usersRessource.get(user.getUsername());
+        UserResource userResource = authenticationService.getUserResource();
         userResource.update(convertUser(user));
     }
 
     public void delete(){
-        Keycloak keycloak = authenticationService.getAdminKeycloakInstance();
         User user = authenticationService.getUser();
-
-        RealmResource realmResource = keycloak.realm(KeycloakConfiguration.KEYCLOAK_REALM);
-        UsersResource usersRessource = realmResource.users();
-
-        UserResource userResource = usersRessource.get(user.getUsername());
         userRepository.delete(user);
         log.debug("Deleted user {} on database", user.getUsername());
+
+        UserResource userResource = authenticationService.getUserResource();
         userResource.remove();
         log.debug("Deleted user {} on Keycloak", user.getUsername());
     }

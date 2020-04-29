@@ -9,6 +9,9 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +26,9 @@ public class AuthenticationService {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private KeycloakConfiguration keycloakConfiguration;
 
     public String getUsername() {
         return getPrincipal().getName();
@@ -46,14 +52,23 @@ public class AuthenticationService {
 
     public Keycloak getAdminKeycloakInstance() {
         return KeycloakBuilder.builder()
-                .serverUrl(KeycloakConfiguration.KEYCLOAK_URL)
-                .realm(KeycloakConfiguration.KEYCLOAK_REALM)
+                .serverUrl(keycloakConfiguration.getKEYCLOAK_URL())
+                .realm(keycloakConfiguration.getKEYCLOAK_REALM())
                 .grantType(OAuth2Constants.PASSWORD)
-                .clientId(KeycloakConfiguration.KEYCLOAK_RESOURCE)
-                .clientSecret(KeycloakConfiguration.KEYCLOAK_CREDENTIALS)
-                .username(KeycloakConfiguration.KEYCLOAK_USER)
-                .password(KeycloakConfiguration.KEYCLOAK_USER_PASSWORD)
+                .clientId(keycloakConfiguration.getKEYCLOAK_RESOURCE())
+                .clientSecret(keycloakConfiguration.getKEYCLOAK_CREDENTIALS())
+                .username(keycloakConfiguration.getKEYCLOAK_USER())
+                .password(keycloakConfiguration.getKEYCLOAK_USER_PASSWORD())
                 .build();
+    }
+
+    public UserResource getUserResource(){
+        Keycloak keycloak = getAdminKeycloakInstance();
+
+        RealmResource realmResource = keycloak.realm(keycloakConfiguration.getKEYCLOAK_REALM());
+        UsersResource usersRessource = realmResource.users();
+
+       return usersRessource.get(getUsername());
     }
 
     public User getUser() {
