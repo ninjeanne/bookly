@@ -4,7 +4,6 @@ import dhbw.online.bookly.configuration.KeycloakConfiguration;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.AuthenticationException;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.asm.Advice;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
@@ -42,11 +41,13 @@ public class AuthenticationService {
         return (KeycloakPrincipal) principal;
     }
 
-    public void logout(){
+    public void logout() {
         try {
+            String username = getUsername();
             request.logout();
+            log.debug("Logged out the user {}", username);
         } catch (ServletException e) {
-           throw new AuthenticationException("Couldn't log out the current user" + getUsername());
+            throw new AuthenticationException("Couldn't log out the current user" + getUsername());
         }
     }
 
@@ -62,13 +63,14 @@ public class AuthenticationService {
                 .build();
     }
 
-    public UserResource getUserResource(){
+    public UserResource getUserResource() {
         Keycloak keycloak = getAdminKeycloakInstance();
 
         RealmResource realmResource = keycloak.realm(keycloakConfiguration.getKEYCLOAK_REALM());
         UsersResource usersRessource = realmResource.users();
 
-       return usersRessource.get(getUsername());
+        String subjectId = getAccessToken().getSubject();
+        return usersRessource.get(subjectId);
     }
 
     public User getUser() {

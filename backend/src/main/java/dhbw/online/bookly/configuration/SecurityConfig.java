@@ -56,7 +56,6 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                                 "/api/public**")
                             .permitAll()
                         .antMatchers(
-                                "/api/profile**",
                                 "/api/friendshipbook/image**",
                                 "/api/user**",
                                 "/api/friendshipbook**",

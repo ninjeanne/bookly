@@ -103,7 +103,7 @@ public class PageService {
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
-    public List<Page> deleteAllPages() {
+    public void deleteAllPages() {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             pageRepository.deleteAll(book.getPages());
@@ -112,6 +112,7 @@ public class PageService {
             book.setPages(new ArrayList<>());
             friendshipBookRepository.save(book);
             log.debug("Book for user {} has been updated", book.getUser().getUsername());
+            return;
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
@@ -119,6 +120,7 @@ public class PageService {
     public boolean update(Page apiPage) {
         if (pageRepository.existsByUuid(apiPage.getUuid())) {
             pageRepository.save(apiPage);
+            log.debug("updated page with uuid {}", apiPage.getUuid());
             return true;
         }
         return false;
