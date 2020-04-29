@@ -32,8 +32,6 @@ public class UserService {
     private AuthenticationService authenticationService;
     @Autowired
     private FriendshipBookService friendshipBookService;
-    @Autowired
-    private KeycloakConfiguration keycloakConfiguration;
 
     public User getUser() {
         sync();

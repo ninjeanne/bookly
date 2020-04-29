@@ -10,7 +10,7 @@ public class KeycloakConfiguration {
     @Value("${keycloak.auth-server-url}")
     public String KEYCLOAK_URL;
 
-    @Value("${keycloak.realml}")
+    @Value("${keycloak.realm}")
     public String KEYCLOAK_REALM;
 
     @Value("${admin.keycloak.resource}")
