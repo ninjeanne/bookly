@@ -58,7 +58,6 @@ public class UserService {
     }
 
     private UserRepresentation convertUser(User user){
-        // Define user
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(user.getFirst_name());
         userRepresentation.setLastName(user.getLast_name());

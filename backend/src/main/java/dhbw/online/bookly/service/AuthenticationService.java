@@ -41,16 +41,6 @@ public class AuthenticationService {
         return (KeycloakPrincipal) principal;
     }
 
-    public void logout() {
-        try {
-            String username = getUsername();
-            request.logout();
-            log.debug("Logged out the user {}", username);
-        } catch (ServletException e) {
-            throw new AuthenticationException("Couldn't log out the current user" + getUsername());
-        }
-    }
-
     public Keycloak getAdminKeycloakInstance() {
         return KeycloakBuilder.builder()
                 .serverUrl(keycloakConfiguration.getKEYCLOAK_URL())

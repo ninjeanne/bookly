@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @Slf4j
 @CrossOrigin
@@ -54,8 +57,15 @@ public class UserController extends Controller {
     @ApiOperation(value = "Delete the user profile including the friendship book, images and pages")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity deleteProfile() {
-        deleteAccountService.deleteAndLogout();
+    ResponseEntity deleteProfile(HttpServletRequest request) {
+        User user = userService.getUser();
+        deleteAccountService.deleteAll();
+        try {
+            request.logout();
+            log.debug("Logged out the user {}", user.getUsername());
+        } catch (ServletException e) {
+            ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
         return ResponseEntity.ok().build();
     }
 

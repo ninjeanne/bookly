@@ -16,10 +16,9 @@ public class DeleteAccountService {
     @Autowired
     private AuthenticationService authenticationService;
 
-    public void deleteAndLogout() {
+    public void deleteAll() {
         pageService.deleteAllPages();
         friendshipBookService.delete();
         userService.delete();
-        authenticationService.logout();
     }
 }
