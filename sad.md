@@ -121,6 +121,13 @@ This is our deployment view:
 
 ![DeploymentView](design/deployment_view.png "Deployment View")
 
+This is our deployment process. Our code is hosted on GitLab. To be deployed,
+it is build as JAR (or as Dockerimage). The Files will be copyed on our server
+and for stage run exposed on port 8080 or on dev on port 7070.
+We are using the Apache2 webserver as reverse proxy and link the ports on the intended domain.
+If a visitor wants to log in, every authentication request is redirected to the running Keycloakinstance.
+![DeploymentProcess](design/set_up.png "Deployment Process")
+
 
 ## 8. Implementation View
 
