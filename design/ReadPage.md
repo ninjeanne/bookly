@@ -23,3 +23,7 @@ In order to browse through the pages (his friendship book) the user has to have 
 
 The user is logged in and has received at least one page entry
 
+## 5. Function Points
+
+![Read Page FPs](UC5_Read_Page.JPG "Read Page FPs")
+
