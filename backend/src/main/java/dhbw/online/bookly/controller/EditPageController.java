@@ -89,11 +89,9 @@ public class EditPageController extends Controller {
             if (file == null) {
                 throw new PageException("There was no picture in the request for saving.");
             }
-            if (existsUser()) {
-                Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
-                if (existsPage(page)) {
-                    pageService.saveImageForPage(page, file);
-                }
+            Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
+            if (existsPage(page)) {
+                pageService.saveImageForPage(page, file);
             }
         } catch (BooklyException | NumberFormatException e) {
             log.warn(e.getMessage());
