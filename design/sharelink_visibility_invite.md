@@ -20,3 +20,7 @@ The main focus on this use case is to connect your book with your friends. This 
 ## 3. Preconditions
 
 The user must be logged in
+
+## 4. Function Points
+
+![Share Link](UC7_Share_Link.JPG "Share Link")
