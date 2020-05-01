@@ -22,3 +22,7 @@ There shall always be a footer presented when scrolling to the bottom of a site.
 ## 3. Preconditions
 
 There are no preconditions, the footer shall be displayed to every visitor of the website
+
+## 4. Function Points
+
+![Navigate Footer](UC11_Navigate_Footer.JPG "Navigate Footer")
