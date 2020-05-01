@@ -28,5 +28,5 @@ To ensure proper privacy of a friendship book the user has to be logged in when 
 
 ## 5. Function Points
 
-![Create Book FPs](UC1_Create_Book.jpg "Create Book FPs")
+![Create Book FPs](UC1_Create_Book.JPG.jpg "Create Book FPs")
 
