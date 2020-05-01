@@ -27,5 +27,6 @@ See [Design Manage Cover](design_Manage_Cover_Decorations.md "Design Manage Cove
 To ensure proper privacy of a friendship book the user has to be logged in when working with his book.
 
 ## 5. Function Points
+
 ![Create Book FPs](UC1_Create_Book.jpg "Create Book FPs")
 
