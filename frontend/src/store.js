@@ -9,7 +9,7 @@ export default new Vuex.Store({
     state: { },
     mutations: { },
     actions: {
-        user() {
+        getUser() {
             return new Promise((resolve) => {
                     api.getUser()
                         .then(response => {

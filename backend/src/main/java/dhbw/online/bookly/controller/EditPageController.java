@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @RestController
 @CrossOrigin
@@ -64,11 +65,11 @@ public class EditPageController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the image of the page, returns byte array", response = byte[].class),
             @ApiResponse(code = 404, message = "Not found - the image doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<byte[]> getImage(@RequestParam String uuid) throws IOException {
+    public ResponseEntity<String> getImage(@RequestParam String uuid) throws IOException {
         try {
             Page page = pageService.findPageById(Integer.parseInt(uuid));
             if (existsPageImage(page)) {
-                return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageImage().getMediaType())).body(page.getPageImage().getData());
+                return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageImage().getMediaType())).body(encodeBase64(page.getPageImage().getData()));
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -99,5 +100,8 @@ public class EditPageController extends Controller {
         }
         return ResponseEntity.ok().build();
     }
-
+    private String encodeBase64(byte[] data) {
+        byte[] encoded = Base64.getEncoder().encode(data);
+        return new String(encoded);
+    }
 }

@@ -103,10 +103,14 @@
                         </div>
                     </div>
                     <div class="far-far-right-top">
-                        <img :src="image">
+                        <div class="far-left-top">
+                            <img :src="image">
+                        </div>
                     </div>
                     <div class="left-mid">
-                        <img :src="image">
+                        <div class="far-left-top">
+                            <img id="img-large" :src="image">
+                        </div>
                     </div>
                     <div class="right-mid">
                         <div style="padding: 16px; text-align: left">
@@ -148,7 +152,9 @@
                         </div>
                     </div>
                     <div class="left-bot">
-                        <img :src="image">
+                        <div class="far-left-top">
+                            <img :src="image">
+                        </div>
                     </div>
                     <div class="mid-bot">
                         <div style="padding: 16px; text-align: left">
@@ -197,7 +203,9 @@
                         </div>
                     </div>
                     <div class="right-bot">
-                        <img :src="image">
+                        <div class="far-left-top">
+                            <img :src="image">
+                        </div>
                     </div>
                 </div>
                 <div class="separator"></div>
@@ -293,7 +301,7 @@
             getImage() {
                 this.$store.dispatch("getPageImage", {uuid: this.uuid})
                     .then((response) => {
-                        this.image = 'data:image/jpeg;base64,'.concat(this.image.concat(response.data));
+                        this.image = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             back : function () {
@@ -321,5 +329,57 @@
         width: 100%;
         height: 1px;
         background: black;
+    }
+    img {
+        width: 20vh;
+    }
+    #img-large {
+        width: 50vh;
+    }
+    .container {
+        align-self: center;
+        display: grid;
+        min-width: 100%;
+        min-height: 100%;
+        margin: 0;
+        grid-template-areas: "far-left-top left-top right-top far-right-top far-far-right-top"
+        "left-mid left-mid right-mid right-mid right-mid"
+        "left-bot mid-bot mid-bot mid-bot right-bot";
+        grid-template-columns: 1fr 4fr 4fr 4fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .container > div {
+        align-self: center;
+        padding: 16px;
+    }
+    .far-left-top {
+        grid-area: far-left-top;
+    }
+    .left-top {
+        grid-area: left-top;
+    }
+    .right-top {
+        grid-area: right-top;
+    }
+    .far-right-top {
+        grid-area: far-right-top;
+    }
+    .far-far-right-top {
+        grid-area: far-far-right-top;
+    }
+    .left-mid {
+        grid-area: left-mid;
+    }
+    .right-mid {
+        grid-area: right-mid;
+    }
+    .left-bot {
+        grid-area: left-bot;
+    }
+    .mid-bot {
+        grid-area: mid-bot;
+    }
+    .right-bot {
+        grid-area: right-bot;
     }
 </style>
