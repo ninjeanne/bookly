@@ -21,5 +21,9 @@ See [Account Operations](OperateAccount.md), [Read Book](ReadBook.md) and [share
 
 The visitor has to be logged in to see the header.
 
+## 4. Function Points
+
+![Navigate Header](UC10_Navigate_Header.JPG "Navigate Header")
+
 
 

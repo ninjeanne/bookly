@@ -34,4 +34,4 @@ not manage it. See the privacy settings in the profile.)
 
 ## 5. Function Points
 
-![Read Book FPs](UC2_Read_Book.JPG.jpg "Create Book FPs")
+![Read Book FPs](UC2_Read_Book.JPG "Create Book FPs")

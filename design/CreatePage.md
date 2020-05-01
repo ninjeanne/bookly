@@ -16,3 +16,7 @@ book. Later this option will lead to a link sharing.
 ## 3. Preconditions
 
 The User either received a link or uuid to create a page for a friend.
+
+## 4. Function Points
+
+![Create Page FPs](UC4_Create_Page.JPG "Create Page FPs")
