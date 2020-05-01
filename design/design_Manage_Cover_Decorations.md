@@ -81,3 +81,7 @@ You can edit your book cover as often as you like. You only need to be logged in
 After confirming the deletion of a decoration, the decoration will be permanently removed 
 in the database too.
 
+
+## 6. Function Points
+
+![Update Book FPs](UC3_Update_Book_FP.JPG "Create Book FPs")
