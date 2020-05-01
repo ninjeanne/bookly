@@ -66,7 +66,7 @@ public class EditPageController extends Controller {
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<byte[]> getImage(@RequestParam String uuid) throws IOException {
         try {
-            Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
+            Page page = pageService.findPageById(Integer.parseInt(uuid));
             if (existsPageImage(page)) {
                 return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageImage().getMediaType())).body(page.getPageImage().getData());
             } else {
@@ -89,7 +89,7 @@ public class EditPageController extends Controller {
             if (file == null) {
                 throw new PageException("There was no picture in the request for saving.");
             }
-            Page page = pageService.findPageByUserAndId(Integer.parseInt(uuid));
+            Page page = pageService.findPageById(Integer.parseInt(uuid));
             if (existsPage(page)) {
                 pageService.saveImageForPage(page, file);
             }
