@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,9 +103,24 @@ public class PageService {
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
+    public void deleteAllPages() {
+        FriendshipBook book = friendshipBookService.read();
+        if (book != null) {
+            pageRepository.deleteAll(book.getPages());
+            log.debug("all pages for user {} have been deleted", book.getUser().getUsername());
+
+            book.setPages(new ArrayList<>());
+            friendshipBookRepository.save(book);
+            log.debug("Book for user {} has been updated", book.getUser().getUsername());
+            return;
+        }
+        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+    }
+
     public boolean update(Page apiPage) {
-        if(pageRepository.existsByUuid(apiPage.getUuid())){
+        if (pageRepository.existsByUuid(apiPage.getUuid())) {
             pageRepository.save(apiPage);
+            log.debug("updated page with uuid {}", apiPage.getUuid());
             return true;
         }
         return false;

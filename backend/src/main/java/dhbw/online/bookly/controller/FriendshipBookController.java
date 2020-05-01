@@ -27,7 +27,7 @@ public class FriendshipBookController extends Controller {
     private FriendshipBookService bookService;
 
     @GetMapping
-    @ApiOperation(value = "Returns the data of the book of a user including all of his pages")
+    @ApiOperation(value = "Return the whole book (including all pages) of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -42,7 +42,7 @@ public class FriendshipBookController extends Controller {
     }
 
     @GetMapping(value = "/image")
-    @ApiOperation(value = "Returns cover image of a book")
+    @ApiOperation(value = "Returns cover image of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -78,7 +78,7 @@ public class FriendshipBookController extends Controller {
     }
 
     @PutMapping
-    @ApiOperation(value = "Update the cover title of the friendship book")
+    @ApiOperation(value = "Update the cover title of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })

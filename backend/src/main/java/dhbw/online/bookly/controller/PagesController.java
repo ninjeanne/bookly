@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
+
 @RestController
 @CrossOrigin
 @Slf4j
@@ -26,7 +28,7 @@ public class PagesController extends Controller {
     private PageService pageService;
 
     @PostMapping
-    @ApiOperation(value = "Add a new page with data into the users friendship book and returns it")
+    @ApiOperation(value = "Add a new page for the logged in user and return it with its uuid.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -47,7 +49,7 @@ public class PagesController extends Controller {
     }
 
     @GetMapping
-    @ApiOperation(value = "Returns explicit all pages of a book")
+    @ApiOperation(value = "Returns explicit all pages of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -60,9 +62,9 @@ public class PagesController extends Controller {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "Delete a page. It's important to send the uuid of the page for this request.")
+    @ApiOperation(value = "Delete one page by its uuid. This action can only be done by the logged in user/owner.")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
-            @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found and deleted"),
+            @ApiResponse(code = 409, message = "Conflict - the page couldn't be found and deleted"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity delete(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
         if (existsUser()) {
@@ -79,6 +81,16 @@ public class PagesController extends Controller {
             log.warn("Couldn't delete page as the uuid is missing");
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+
+    @DeleteMapping("/all")
+    @ApiOperation(value = "Deletes all pages of the book of the currently logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the deleting failed"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    ResponseEntity delete() {
+        pageService.deleteAllPages();
+        return ResponseEntity.ok().build();
     }
 }
 
