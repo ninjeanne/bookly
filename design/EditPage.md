@@ -26,3 +26,6 @@ In order to edit a page entry you either have a direct link or uuid.
 
 The page entry to be edited has to be created before in order to edit it.
 
+## 5. Function Points
+
+![Update Page FPs](UC6_Update_Page_FP.JPG "Update Page FPs")
