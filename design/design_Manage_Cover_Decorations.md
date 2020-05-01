@@ -84,4 +84,4 @@ in the database too.
 
 ## 6. Function Points
 
-![Update Book FPs](UC3_Update_Book_FP.JPG "Create Book FPs")
+![Manage Cover Decorations](UC9_Manage_Cover_Decorations.JPG "Manage Cover Decorations")
