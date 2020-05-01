@@ -11,6 +11,9 @@ For updating decorations see [ManagePageDecorations](design_Manage_Page_Decorati
 ## 2. Flow of Events
 ![Edit Book Entry](Edit_Book_Entry.png "Edit Book Entry")
 
+![Manage Page Decorations](MockUpManagePageDecorationsTheme.jpg "ManagePageDecorations")
+
+
 ## 3. Special Requirements
 
 ### 3.1 Link or Account
