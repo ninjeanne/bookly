@@ -99,6 +99,7 @@ public class PageService {
                 friendshipBookRepository.save(book);
                 return pagesFromDb;
             }
+            throw new FriendshipBookException("There is no page with uuid "+uuid+" for user " + authenticationService.getUsername());
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }

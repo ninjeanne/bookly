@@ -1,4 +1,4 @@
-package dhbw.online.bookly.configuration;
+package dhbw.online.bookly;
 
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Page;
@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 @Component
 @Slf4j
-@Profile("local")
 public class TestData {
 
     @Autowired
