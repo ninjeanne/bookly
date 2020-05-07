@@ -1,12 +1,13 @@
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
-import dhbw.online.bookly.service.UserService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;
 
-
+@CrossOrigin
 @RestController
 @Slf4j
 @RequestMapping("/api/friendshipbook")
@@ -26,7 +27,7 @@ public class FriendshipBookController extends Controller {
     private FriendshipBookService bookService;
 
     @GetMapping
-    @ApiOperation(value = "Returns the data of the book of a user including all of his pages")
+    @ApiOperation(value = "Return the whole book (including all pages) of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -41,7 +42,7 @@ public class FriendshipBookController extends Controller {
     }
 
     @GetMapping(value = "/image")
-    @ApiOperation(value = "Returns cover image of a book")
+    @ApiOperation(value = "Returns cover image of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -54,7 +55,6 @@ public class FriendshipBookController extends Controller {
         }
     }
 
-    @CrossOrigin
     @PostMapping(value = "/image")
     @ResponseBody
     @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
@@ -77,9 +77,26 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @CrossOrigin
+    @DeleteMapping(value = "/image")
+    @ResponseBody
+    @ApiOperation(value = "Deletes the cover for the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> deleteFile() {
+        try {
+            if (existsUser()) {
+                bookService.deleteCover();
+            }
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping
-    @ApiOperation(value = "Update the cover title of the friendship book")
+    @ApiOperation(value = "Update the cover title of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })

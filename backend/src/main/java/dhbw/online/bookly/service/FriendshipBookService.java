@@ -27,18 +27,19 @@ public class FriendshipBookService {
     @Autowired
     private UserService userService;
 
-    public boolean exists(){
-        return repository.existsByUser(authenticationService.getUser());
+    public boolean exists() {
+        User user = authenticationService.getUser();
+        boolean exists = repository.existsByUser(user);
+        if (!exists) {
+            log.warn("Friendship book for user {} does not exist!", user.getUsername());
+        }
+        return exists;
     }
 
     public boolean create() {
         User user = authenticationService.getUser();
         if (!exists()) {
-            repository.save(FriendshipBook.builder()
-                    .user(user)
-                    .title("My Friendship Book")
-                    .pages(new ArrayList<>())
-                    .build());
+            repository.save(FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build());
             log.debug("Book created for user {}", user.getUsername());
             return true;
         }
@@ -56,11 +57,7 @@ public class FriendshipBookService {
 
     public void saveImageForBook(FriendshipBook friendshipBook, byte[] data, long size, String contentType) {
         try {
-            friendshipBook.setCover(FriendshipBookCover.builder()
-                    .data(data)
-                    .size(size)
-                    .mediaType(contentType)
-                    .build());
+            friendshipBook.setCover(FriendshipBookCover.builder().data(data).size(size).mediaType(contentType).build());
             repository.save(friendshipBook);
             log.debug("Book cover updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
         } catch (NullPointerException e) {
@@ -87,6 +84,19 @@ public class FriendshipBookService {
             return true;
         }
         log.warn("Book for user {} doesn't exist. Has it already been deleted?", user.getUsername());
+        return false;
+    }
+
+    public boolean deleteCover() {
+        User user = userService.getUser();
+        FriendshipBook book = read();
+        if (book != null) {
+            book.setCover(null);
+            repository.save(book);
+            log.debug("Book cover of user {} with book id {} has been deleted", user.getUsername(), book.getUuid());
+            return true;
+        }
+        log.error("Book for user {} doesn't exist. ", user.getUsername());
         return false;
     }
 

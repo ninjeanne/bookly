@@ -46,21 +46,26 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.cors().and()
-                .authorizeRequests()
-            .antMatchers("/api*")
-            .authenticated()
-            .anyRequest()
-            .permitAll();
+        http
+                    .cors()
+                .and()
+                    .authorizeRequests()
+                        .antMatchers(
+                                "/api/public/page/image**",
+                                "/api/public/page**",
+                                "/api/public**")
+                            .permitAll()
+                        .antMatchers(
+                                "/api/friendshipbook/image**",
+                                "/api/user**",
+                                "/api/friendshipbook**",
+                                "/api/page**",
+                                "/api**")
+                            .hasRole("user")
+                        .anyRequest()
+                            .permitAll()
+                .and()
+                    .csrf().disable();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*").allowedOrigins("http://localhost:8081");
-            }
-        };
-    }
 }

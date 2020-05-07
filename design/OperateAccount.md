@@ -51,4 +51,8 @@ Every personal data is allowed to be changed and updated (but not the username a
 A user can also delete his account including every data of his friendship book by going to his profile and selecting delete. 
 ![Account Management](profile.png "Account Management")
 
+## 3. Preconditions
+
+The visitor has to be logged in to manage its user data. If not he has to register.
+
 

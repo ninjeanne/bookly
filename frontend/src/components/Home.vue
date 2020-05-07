@@ -5,6 +5,8 @@
         <img src="./../assets/bookly.jpg">
       </div>
       <div class="right">
+        <input v-model="invite_code" placeholder="Code">
+        <a v-on:click="editPage" class="btn btn-primary">Go!</a>
       </div>
     </div>
     <div style="clear: both"></div>
@@ -26,7 +28,18 @@
 <script>
 export default {
   name: 'hello',
-  props: { hellomsg: { type: String, required: true } }
+  props: { hellomsg: { type: String, required: true } },
+
+  data() {
+    return {
+      invite_code: ""
+    }
+  },
+  methods: {
+    editPage() {
+      this.$router.push('/pageeditor?id=' + this.invite_code);
+    }
+  }
 }
 
 </script>

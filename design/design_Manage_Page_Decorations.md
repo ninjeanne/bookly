@@ -73,4 +73,8 @@ After a page decoration has been edited, the data must have been changed in the 
 After confirming the deletion of a decoration, the decoration will be permanently removed 
 in the database too.
 
+## 6. Function Points
+
+![Manage Page Decorations](UC8_Manage_Page_Decorations.JPG "Manage Page Decorations")
+
 

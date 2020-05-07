@@ -3,7 +3,6 @@ package dhbw.online.bookly.service;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.PageImage;
-import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -15,8 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -44,11 +44,7 @@ public class PageService {
 
     public void saveImageForPage(Page page, byte[] data, long size, String contentType) {
         try {
-            page.setPageImage(PageImage.builder()
-                    .data(data)
-                    .size(size)
-                    .mediaType(contentType)
-                    .build());
+            page.setPageImage(PageImage.builder().data(data).size(size).mediaType(contentType).build());
             log.debug("Page image has been set for page with uuid {}", page.getUuid());
             pageRepository.save(page);
         } catch (NullPointerException e) {
@@ -67,7 +63,15 @@ public class PageService {
         throw new PageException("Page couldn't be found");
     }
 
-    public List<Page> add() {
+    public Page findPageById(int uuid) {
+        Optional<Page> page = pageRepository.findByUuid(uuid);
+        if (page.isPresent()) {
+            return page.get();
+        }
+        throw new PageException("Page couldn't be found");
+    }
+
+    public Page add() {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
@@ -76,7 +80,7 @@ public class PageService {
             pageRepository.save(newPage);
             friendshipBookRepository.save(book);
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
-            return pages;
+            return newPage;
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
@@ -95,26 +99,32 @@ public class PageService {
                 friendshipBookRepository.save(book);
                 return pagesFromDb;
             }
+            throw new FriendshipBookException("There is no page with uuid "+uuid+" for user " + authenticationService.getUsername());
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
-    public List<Page> update(Page page) {
+    public void deleteAllPages() {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
-            val pages = book.getPages();
-            val resultpages = pages.stream()
-                    .filter(pageFromDb -> pageFromDb.getUuid() == page.getUuid())
-                    .collect(Collectors.toList());
-            if (resultpages.isEmpty()) {
-                throw new PageException("Requested page with the id " + page.getUuid() + " does not exist! ");
-            }
-            pages.remove(resultpages.get(0));
-            pages.add(page);
+            pageRepository.deleteAll(book.getPages());
+            log.debug("all pages for user {} have been deleted", book.getUser().getUsername());
+
+            book.setPages(new ArrayList<>());
             friendshipBookRepository.save(book);
-            return pages;
+            log.debug("Book for user {} has been updated", book.getUser().getUsername());
+            return;
         }
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+    }
+
+    public boolean update(Page apiPage) {
+        if (pageRepository.existsByUuid(apiPage.getUuid())) {
+            pageRepository.save(apiPage);
+            log.debug("updated page with uuid {}", apiPage.getUuid());
+            return true;
+        }
+        return false;
     }
 
 }

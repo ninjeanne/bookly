@@ -9,20 +9,19 @@ import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
+import java.nio.file.Files;
+import java.util.Arrays;
 
 @Component
 @Slf4j
+@Profile("local")
 public class TestData {
 
     @Autowired
@@ -34,34 +33,26 @@ public class TestData {
     @Autowired
     private PageService pageService;
 
-
     @PostConstruct
     private void initialize() {
-        User user = User.builder()
-                .mail("user@bookly.online")
-                .first_name("Max")
-                .last_name("Mustermann")
-                .username("user")
-                .build();
+        User user = User.builder().mail("user@bookly.online").first_name("Max").last_name("Mustermann").username("test-user").build();
 
         Page page = initPage();
-        FriendshipBook friendshipBook = FriendshipBook.builder()
-                .title("Unser super tolles Buch")
-                .user(user)
-                .pages(Collections.singletonList(page))
-                .build();
+        Page secondPage = initSecondPage();
+        FriendshipBook friendshipBook = FriendshipBook.builder().title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
 
-        userRepository.save(user);
-        friendshipBookRepository.save(friendshipBook);
-
-        //read image
-        try {
-            friendshipBookService.saveImageForBook(friendshipBook, extractBytes("test_image.jpg"), 0, "image/jpeg");
-            pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 0, "image/jpeg");
-        } catch (IOException e) {
-            log.debug("Could not read test image in resources folder");
+        if (!userRepository.existsByUsername(user.getUsername())) {
+            userRepository.save(user);
+            if (!friendshipBookRepository.existsByUser(user)) {
+                friendshipBookRepository.save(friendshipBook);
+                try {
+                    friendshipBookService.saveImageForBook(friendshipBook, extractBytes("test_image.jpg"), 423867, "image/jpeg");
+                    pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
+                } catch (IOException e) {
+                    log.debug("Could not read test image in resources folder");
+                }
+            }
         }
-
     }
 
     public byte[] extractBytes(String imageName) throws IOException {
@@ -71,31 +62,46 @@ public class TestData {
         // open image
         assert resource != null;
         File imgPath = new File(resource.getFile());
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        // get DataBufferBytes from Raster
-        WritableRaster raster = bufferedImage.getRaster();
-        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-
-        return (data.getData());
+        return Files.readAllBytes(imgPath.toPath());
     }
 
     private Page initPage() {
         Page page = new Page();
-        page.getAddress().setDescription("Teststraße 12");
-        page.getName().setDescription("Max Mustermann");
-        page.getTelephone().setDescription("012345");
-        page.getMobile().setDescription("23412313");
-        page.getSchool().setDescription("MIT");
-        page.getSchool_class().setDescription("1A");
-        page.getSize().setDescription("1.8m");
-        page.getHair_color().setDescription("blond");
-        page.getMy_hobbies().setDescription("Jogging, Dancing, Programming");
-        page.getEye_color().setDescription("green");
-        page.getFavorite_movie().setDescription("Star Trek, Lilo and Stitch");
-        page.getFavorite_book().setDescription("1984");
-        page.getFavorite_food().setDescription("Spaghetti");
-        page.getWhat_i_dont_like().setDescription("learning");
+        page.setAddress("Teststraße 12");
+        page.setName("Max Mustermann");
+        page.setTelephone("555555");
+        page.setMobile("123456");
+        page.setSchool("Driving School");
+        page.setSchool_class("1A");
+        page.setSize("1.8m");
+        page.setHair_color("blond");
+        page.setMy_hobbies("Jogging, Dancing, Programming");
+        page.setEye_color("green");
+        page.setFavorite_movie("Star Trek, Lilo and Stitch");
+        page.setFavorite_food("Spaghetti");
+        page.setWhat_i_dont_like("learning");
+        page.setLeftOver("My last words are CHOCOLATE");
+        return page;
+    }
+
+    private Page initSecondPage() {
+        Page page = new Page();
+        page.setAddress("Teststraße 12");
+        page.setName("Maximila Musterfrau");
+        page.setTelephone("012345");
+        page.setMobile("23412313");
+        page.setSchool("MIT");
+        page.setSchool_class("1A");
+        page.setSize("1.8m");
+        page.setHair_color("blond");
+        page.setMy_hobbies("Jogging, Dancing, Programming");
+        page.setEye_color("green");
+        page.setFavorite_job("Chillen");
+        page.setFavorite_book("1984");
+        page.setWhat_i_dont_like("learning");
+        page.setLeftOver("My last words are CHOCOLATE");
+        page.setFan_of("Doing nothing");
+        page.setNice_comment("Hi Neeeko :) Du kannst mich lesen");
         return page;
     }
 

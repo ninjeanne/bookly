@@ -5,12 +5,7 @@
 
 ### 1.1 Brief Description
 
-After registering you have the opportunity to create a friendship book. Once you have created
-a new book you can create a personalized book cover. Later the book cover can also be
-designed with different themes. You can decide whether you friendship book will be
-public or private.
-
-The friendship book cover after it was created.
+After registering a user will have his own friendship book. It's correlated with his account.
 
 ![Friendship Book Cover](cover.png "Friendship Book Cover")
 
@@ -18,20 +13,20 @@ The friendship book cover after it was created.
 
 ![create friendship book cover](create_friendship_book_cover.jpg "Create Friendship Book Cover")
 
-
 ## 3. Special Requirements
 
 ### 3.1 Owning An Account
         
-In order to browse through a friendship book the user has to have an account. After the registration one can create his
-book including an own cover and start browsing through his book there.
-
+In order to browse through a friendship book the user has to have an account. After the registration one can add further styles.
+See [Design Manage Cover](design_Manage_Cover_Decorations.md "Design Manage Cover").
 
 ## 4. Preconditions
 
 ### 4.1 The user has to be logged in
 
 To ensure proper privacy of a friendship book the user has to be logged in when working with his book.
-(BUT: he can make his friendship book visible to others if he wants to. But there one can only look inside the book,
-not manage it. See the privacy settings in the profile.)
+
+## 5. Function Points
+
+![Create Book FPs](UC1_Create_Book.JPG "Create Book FPs")
 

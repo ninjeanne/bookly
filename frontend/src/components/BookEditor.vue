@@ -1,5 +1,5 @@
 <template>
-    <div id="main" v-if="isLoggedIn">
+    <div id="main">
         <div class="wrapper">
             <div class="left">
                 <form id="app" @submit.prevent="editBook">
@@ -26,14 +26,9 @@
         </div>
         <div style="clear: both"></div>
     </div>
-    <div v-else>
-        <h2>You must be logged in</h2>
-        <a href="/login">Click here to login!</a>
-    </div>
 </template>
 
 <script>
-    import store from './../store';
     import PictureInput from 'vue-picture-input'
 
     export default {
@@ -41,32 +36,15 @@
         components: {
             PictureInput
         },
-        beforeMount() {
-            this.username = store.getters.getUserName;
-            if(this.username == null) {
-                this.getUser();
-            } else {
-                this.isLoggedIn = true;
-            }
-        },
         data() {
             return {
                 username: '',
-                isLoggedIn: false,
                 title: "",
                 subtitle: "",
                 image: ""
             }
         },
         methods: {
-            getUser() {
-                this.$store.dispatch("user")
-                    .then(() => {
-                        this.username = this.$store.getters.getUserName;
-                        this.isLoggedIn = true;
-                    })
-
-            },
             editBook() {
                 this.$store.dispatch("editBook", {title: this.title})
                     .then((response) => {
