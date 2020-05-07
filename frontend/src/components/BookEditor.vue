@@ -29,19 +29,12 @@
 </template>
 
 <script>
-    import store from './../store';
     import PictureInput from 'vue-picture-input'
 
     export default {
         name: "BookEditor",
         components: {
             PictureInput
-        },
-        beforeMount() {
-            this.username = store.getters.getUserName;
-            if(this.username == null) {
-                this.getUser();
-            }
         },
         data() {
             return {
@@ -52,12 +45,6 @@
             }
         },
         methods: {
-            getUser() {
-                this.$store.dispatch("user")
-                    .then(() => {
-                        this.username = this.$store.getters.getUserName;
-                    })
-            },
             editBook() {
                 this.$store.dispatch("editBook", {title: this.title})
                     .then((response) => {

@@ -1,13 +1,406 @@
 <template>
-    
+    <div v-if="uuid_exists" class="main">
+        <div class="container">
+            <div class="far-left-top">
+                <picture-input
+                        ref="pictureInput"
+                        @change="onChanged"
+                        @remove="onRemoved"
+                        :width="500"
+                        :removable="true"
+                        :height="500"
+                        accept="image/jpeg, image/png"
+                        :customStrings="{drag: 'Drag and drop your image here'}">
+                </picture-input>
+                <button class="btn btn-primary" @click="attemptUpload" v-bind:class="{ disabled: !image }">Upload</button>
+            </div>
+            <div class="left-top">
+                <div style="padding: 16px; text-align: left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Name</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Phone</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="phone">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Mobile</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="mobile">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Height</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="height">
+                    </div>
+                </div>
+            </div>
+            <div class="right-top">
+                <div style="padding: 16px; text-align: left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Haircolor</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="haircolor">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Eyecolor</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="eyecolor">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Birthday</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="birthday">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Star Sign</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="star_sign">
+                    </div>
+                </div>
+            </div>
+            <div class="far-right-top">
+                <div style="padding: 16px; text-align: left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Address</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="address">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Class</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="my_class">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">School</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="school">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Favorite Subject</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="subject">
+                    </div>
+                </div>
+            </div>
+            <div class="far-far-right-top">
+
+            </div>
+            <div class="left-mid">
+
+            </div>
+            <div class="right-mid">
+                <div style="padding: 16px; text-align: left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Pet</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="pet">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">I love ...</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="love">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">I hate ...</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="hate">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Dreamjob</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="job">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Hobbies</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="hobbies">
+                    </div>
+                </div>
+            </div>
+            <div class="left-bot">
+
+            </div>
+            <div class="mid-bot">
+                <div style="padding: 16px; text-align: left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Idol</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="idol">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Movie</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="movie">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Sport</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="sport">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Book</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="book">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Food</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="food">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">What I wanted to say</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                               aria-describedby="inputGroup-sizing-default" v-model="leftover">
+                    </div>
+                </div>
+            </div>
+            <div class="right-bot">
+
+            </div>
+        </div>
+        <a v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</a>
+    </div>
+    <div v-else class="main">
+        <h2>Whoops, something went wrong :/</h2>
+        <h3>Please check your code</h3>
+    </div>
 </template>
 
 <script>
+    import PictureInput from 'vue-picture-input'
+
     export default {
-        name: "PageEditor"
+        name: "PageEditor",
+
+        components: {
+            PictureInput
+        },
+        beforeMount() {
+            this.getPage();
+        },
+        data() {
+            return {
+                uuid: "",
+                uuid_exists: false,
+                image: "",
+                name: "",
+                phone: "",
+                mobile: "",
+                height: "",
+                haircolor: "",
+                eyecolor: "",
+                birthday: "",
+                star_sign: "",
+                address: "",
+                my_class: "",
+                school: "",
+                subject: "",
+                pet: "",
+                love: "",
+                hate: "",
+                job: "",
+                hobbies: "",
+                idol: "",
+                movie: "",
+                sport: "",
+                book: "",
+                food: "",
+                leftover: ""
+            }
+        },
+        methods: {
+            getPage() {
+                this.uuid = this.$route.query.id;
+                this.$store.dispatch("getPage", {uuid: this.uuid})
+                    .then((response) => {
+                        this.uuid_exists = true;
+                        this.parsePage(response);
+                    })
+                this.$store.dispatch("getPageImage", {uuid: this.uuid})
+                    .then((response) => { })
+            },
+            save() {
+                var text = '{ "uuid":"' + this.uuid + '",' +
+                    ' "address":"' + this.address + '",' +
+                    ' "birthday":"' + this.birthday + '",' +
+                    ' "eye_color":"' + this.eyecolor + '",' +
+                    ' "fan_of":"' + this.idol + '",' +
+                    ' "favorite_book":"' + this.book + '",' +
+                    ' "favorite_food":"' + this.food + '",' +
+                    ' "favorite_job":"' + this.job + '",' +
+                    ' "favorite_movie":"' + this.movie + '",' +
+                    ' "favorite_pet":"' + this.pet + '",' +
+                    ' "favorite_sport":"' + this.sport + '",' +
+                    ' "favorite_subject":"' + this.subject + '",' +
+                    ' "hair_color":"' + this.haircolor + '",' +
+                    ' "how_to_please_me":"' + this.love + '",' +
+                    ' "leftOver":"' + this.leftover + '",' +
+                    ' "mobile":"' + this.mobile + '",' +
+                    ' "my_hobbies":"' + this.hobbies + '",' +
+                    ' "name":"' + this.name + '",' +
+                    ' "nice_comment":"' + this.leftover + '",' +
+                    ' "school":"' + this.school + '",' +
+                    ' "school_class":"' + this.my_class + '",' +
+                    ' "size":"' + this.height + '",' +
+                    ' "telephone":"' + this.phone + '",' +
+                    ' "star_sign":"' + this.star_sign + '"' +
+                    ' }';
+                this.$store.dispatch("updatePage", {json: text})
+                    .then((response) => {
+                        alert("saved");
+                    })
+            },
+            parsePage(response) {
+                this.name = response.data.name;
+                this.address = response.data.address;
+                this.phone = response.data.telephone;
+                this.height = response.data.size;
+                this.haircolor = response.data.haircolor;
+                this.eyecolor = response.data.eyecolor;
+                this.birthday = response.data.birthday;
+                this.pet = response.data.favorite_pet;
+                this.my_class = response.data.school_class;
+                this.school = response.data.school;
+                this.subject = response.data.favorite_subject;
+                this.love = response.data.how_to_please_me;
+                this.hate = response.data.what_i_dont_like;
+                this.job = response.data.favorite_job;
+                this.hobbies = response.data.my_hobbies;
+                this.idol = response.data.fan_of;
+                this.movie = response.data.favorite_movie;
+                this.sport = response.data.favorite_sport;
+                this.book = response.data.favorite_book;
+                this.food = response.data.favorite_food;
+                this.leftover = response.data.nice_comment;
+                this.star_sign = response.data.star_sign;
+            },
+            onChanged() {
+                if (this.$refs.pictureInput.file) {
+                    this.image = this.$refs.pictureInput.file;
+                } else {
+                    console.log("Old browser. No support for Filereader API");
+                }
+            },
+            onRemoved() {
+                this.image = '';
+            },
+            attemptUpload() {
+                if (this.image) {
+                    this.$store.dispatch("updatePageImage", {uuid: this.uuid, image: this.image})
+                        .then((response) => {
+                            if(response.status === 200) {
+                                alert("successful");
+                            }
+                        })
+                }
+            }
+        }
     }
 </script>
 
 <style scoped>
-
+    .main {
+        padding: 16px;
+    }
+    img {
+        max-width: 25vh;
+        max-height: 25vh;
+    }
+    button {
+        margin-top: 16px;
+    }
+    .container {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-areas: "far-left-top left-top right-top far-right-top far-far-right-top"
+        "left-mid left-mid right-mid right-mid right-mid"
+        "left-bot mid-bot mid-bot mid-bot right-bot";
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .container > div {
+        align-self: center;
+        padding: 16px;
+    }
+    .far-left-top {
+        grid-area: far-left-top;
+    }
+    .left-top {
+        grid-area: left-top;
+    }
+    .right-top {
+        grid-area: right-top;
+    }
+    .far-right-top {
+        grid-area: far-right-top;
+    }
+    .far-far-right-top {
+        grid-area: far-far-right-top;
+    }
+    .left-mid {
+        grid-area: left-mid;
+    }
+    .right-mid {
+        grid-area: right-mid;
+    }
+    .left-bot {
+        grid-area: left-bot;
+    }
+    .mid-bot {
+        grid-area: mid-bot;
+    }
+    .right-bot {
+        grid-area: right-bot;
+    }
 </style>

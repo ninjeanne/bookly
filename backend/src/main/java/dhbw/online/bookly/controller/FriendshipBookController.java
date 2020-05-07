@@ -77,6 +77,24 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/image")
+    @ResponseBody
+    @ApiOperation(value = "Deletes the cover for the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> deleteFile() {
+        try {
+            if (existsUser()) {
+                bookService.deleteCover();
+            }
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping
     @ApiOperation(value = "Update the cover title of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),

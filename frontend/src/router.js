@@ -8,6 +8,7 @@ import Help from '@/components/Help'
 import About from '@/components/About'
 import TermsOfService from '@/components/TermsOfService'
 import Page from '@/components/Page';
+import PageEditor from "./components/PageEditor";
 
 Vue.use(Router);
 
@@ -23,6 +24,7 @@ const router = new Router({
         { path: '/about', component: About, meta: { requiresAuth: false }},
         { path: '/termsofservice', component: TermsOfService, meta: { requiresAuth: false }},
         { path: '/page', component: Page, meta: { requiresAuth: true }},
+        { path: '/pageeditor', component: PageEditor, meta: { requiresAuth: false }},
         // otherwise redirect to home
         { path: '*', redirect: '/'}
     ]

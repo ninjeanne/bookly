@@ -58,11 +58,27 @@ export default {
             }
         });
     },
-    getPage() {
+    getPages() {
         return AXIOS.get("/page", {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
             }
         })
     },
+    newPage() {
+        var formData = new FormData();
+        return AXIOS.post("/page", formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        })
+    },
+    updatePage() {
+        var formData = new FormData();
+        return AXIOS.put("/page", formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        })
+    }
 }

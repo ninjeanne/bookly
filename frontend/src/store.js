@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api from './components/backend-api'
+import apipublic from './components/backend-api-public'
 
 Vue.use(Vuex);
 
@@ -68,9 +69,64 @@ export default new Vuex.Store({
                     });
             })
         },
-        getPage() {
+        getPages() {
             return new Promise((resolve) => {
-                api.getPage()
+                api.getPages()
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        getPage({ },{uuid}) {
+            return new Promise((resolve) => {
+                apipublic.getPage(uuid)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        newPage() {
+            return new Promise((resolve) => {
+                api.newPage()
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        updatePage({ },{json}) {
+            return new Promise((resolve) => {
+                apipublic.updatePage(json)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        getPageImage({ },{uuid}) {
+            return new Promise((resolve) => {
+                apipublic.getPageImage(uuid)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        updatePageImage({ },{uuid, image}) {
+            return new Promise((resolve) => {
+                apipublic.updatePageImage(uuid, image)
                     .then(response => {
                         resolve(response)
                     })
