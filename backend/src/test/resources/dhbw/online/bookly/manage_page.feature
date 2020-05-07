@@ -12,7 +12,6 @@ Feature: As a registered User
     Given I login with "test-user""resu"
     And I navigate to friendship book
     When User pages are loaded
-    Then I can browse through the pages
 
   Scenario: Share link to create new Page
     Given I login with "test-user""resu"

@@ -24,7 +24,6 @@ Feature: As a registered User
 
   Scenario: Edit friendship book cover
     When I login with "test-user""resu"
-    Given I can create a friendship book cover
-    And I navigate to profile
+    And I navigate to friendship book
     When I can create a friendship book cover
 
