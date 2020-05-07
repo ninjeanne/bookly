@@ -27,8 +27,18 @@ This document is meant for internal use primarily.
 | [Blog](https://blog.bookly.online/) | 
 | [SAD](sad.md) | 
 | [Function Points](https://docs.google.com/spreadsheets/d/1CUD7vvflKn4G5ev69hePuDrN53YdeqnRC2GNkmY2Lxk/edit#gid=0) |
-| [UC Create Book](https://gitlab.com/project_bookly/bookly/blob/master/design/design_CreateBook.md)|
-**tbd** Other use cases are missing
+| [UC1 Create Book](https://gitlab.com/project_bookly/bookly/blob/master/design/design_CreateBook.md)|
+| [UC2 Read Book](https://gitlab.com/project_bookly/bookly/blob/master/design/ReadBook.md)|
+| [UC3 Update Book](https://gitlab.com/project_bookly/bookly/blob/master/design/ManageBook.md)|
+| [UC4 Create Page](https://gitlab.com/project_bookly/bookly/blob/master/design/CreatePage.md)|
+| [UC5 Read Page](https://gitlab.com/project_bookly/bookly/blob/master/design/ReadPage.md)|
+| [UC6 Update Page](https://gitlab.com/project_bookly/bookly/blob/master/design/EditPage.md)|
+| [UC7 Share Link Visibility Invite](https://gitlab.com/project_bookly/bookly/-/blob/master/design/sharelink_visibility_invite.md)|
+| [UC8 Manage Page Decorations](https://gitlab.com/project_bookly/bookly/-/blob/master/design/design_Manage_Page_Decorations.md)|
+| [UC9 Manage Cover Decorations](https://gitlab.com/project_bookly/bookly/-/blob/master/design/design_Manage_Cover_Decorations.md)|
+| [UC10 Navigate Footer](https://gitlab.com/project_bookly/bookly/-/blob/master/design/NavigateFooter.md)|
+| [UC11 Navigate Header](https://gitlab.com/project_bookly/bookly/-/tree/master/design/NavigateHeader.md)|
+| [UC12 Operate Account](https://gitlab.com/project_bookly/bookly/-/tree/master/design/OperateAccount.md)|
 ) |
 
 ## 2.	Evaluation Mission and Test Motivation
