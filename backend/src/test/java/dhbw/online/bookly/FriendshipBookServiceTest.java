@@ -10,11 +10,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -33,6 +31,7 @@ public class FriendshipBookServiceTest {
 
     @InjectMocks
     @Spy
+    @Autowired
     private FriendshipBookService friendshipBookService;
 
     @Mock
@@ -47,6 +46,7 @@ public class FriendshipBookServiceTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         Mockito.when(userService.getUser()).thenReturn(user);
         Mockito.when(authenticationService.getUser()).thenReturn(user);
         Mockito.when(authenticationService.getUsername()).thenReturn(user.getUsername());
@@ -57,8 +57,11 @@ public class FriendshipBookServiceTest {
 
     @Test
     public void testupdateTitle() {
-        Assert.assertEquals(friendshipBookService.updateTitle("Other title").getTitle(), "Other title");
-        verify(friendshipBook, times(1)).setTitle("Other title");
+        String title = "Other title";
+        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title);
+        Mockito.when(this.friendshipBook.getTitle()).thenReturn(title);
+        verify(friendshipBook, times(1)).setTitle(title);
+        Assert.assertEquals( title, friendshipBook.getTitle());
     }
 
     @Test
