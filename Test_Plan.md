@@ -25,7 +25,7 @@ This document is meant for internal use primarily.
 | Reference        | 
 | ------------- |
 | [Blog](https://blog.bookly.online/) | 
-| [SAD](sad.md) | 
+| [SAD](https://gitlab.com/project_bookly/bookly/blob/master/sad.md) | 
 | [Function Points](https://docs.google.com/spreadsheets/d/1CUD7vvflKn4G5ev69hePuDrN53YdeqnRC2GNkmY2Lxk/edit#gid=0) |
 | [UC1 Create Book](https://gitlab.com/project_bookly/bookly/blob/master/design/design_CreateBook.md)|
 | [UC2 Read Book](https://gitlab.com/project_bookly/bookly/blob/master/design/ReadBook.md)|
@@ -39,7 +39,6 @@ This document is meant for internal use primarily.
 | [UC10 Navigate Footer](https://gitlab.com/project_bookly/bookly/-/blob/master/design/NavigateFooter.md)|
 | [UC11 Navigate Header](https://gitlab.com/project_bookly/bookly/-/tree/master/design/NavigateHeader.md)|
 | [UC12 Operate Account](https://gitlab.com/project_bookly/bookly/-/tree/master/design/OperateAccount.md)|
-) |
 
 ## 2.	Evaluation Mission and Test Motivation
 ### 2.1	Background
