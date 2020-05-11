@@ -60,6 +60,7 @@ public class Page {
 
     public Page(){
         this.uuid=generateRandomUUID();
+        this.pageImage=new PageImage();
         this.name="";
         this.address="";
         this.telephone="";
