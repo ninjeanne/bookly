@@ -75,7 +75,7 @@ public class PageService {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
-            val newPage = new Page();
+            Page newPage = new Page();
             pages.add(newPage);
             pageRepository.save(newPage);
             friendshipBookRepository.save(book);

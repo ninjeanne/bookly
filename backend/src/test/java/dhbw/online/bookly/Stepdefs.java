@@ -182,9 +182,11 @@ public class Stepdefs {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
 
-        ResponseEntity<Page> response = oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
-        Assert.assertNotNull(response.getBody());
+        ResponseEntity<Page> response;
+        response= oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
+        Assert.assertNull(response.getBody());
         Assert.assertFalse(response.getBody().getUuid().isEmpty()); //there should be a uuid
+
         return response.getBody().getUuid();
     }
 
