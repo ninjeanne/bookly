@@ -64,7 +64,7 @@ public class TestData {
     }
 
     private Page initPage() {
-        Page page = new Page();
+        Page page = new Page("test:page:UUID");
         page.setAddress("Teststraße 12");
         page.setName("Max Mustermann");
         page.setTelephone("555555");
@@ -83,7 +83,7 @@ public class TestData {
     }
 
     private Page initSecondPage() {
-        Page page = new Page();
+        Page page = new Page("new:page:UUID");
         page.setAddress("Teststraße 12");
         page.setName("Maximila Musterfrau");
         page.setTelephone("012345");
