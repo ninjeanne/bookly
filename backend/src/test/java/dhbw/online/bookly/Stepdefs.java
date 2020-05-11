@@ -144,20 +144,20 @@ public class Stepdefs {
 
     @When("I select delete page")
     public void i_select_delete_page() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);//delete this specific page
     }
 
     @Then("I am not able to see the deleted page")
     public void i_am_not_able_to_see_the_deleted_page() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);
 
         ResponseEntity<Page[]> response = oAuth2RestTemplate.getForEntity("http://localhost:8080/api/page", Page[].class);
         Assert.assertNotNull(response.getBody());
         boolean status = true;
         for (Page page : response.getBody()) {
-            if (page.getUuid() == uuid) {
+            if (page.getUuid().equals(uuid)) {
                 status = false; //there should be no page with this uuid
                 break;
             }
@@ -167,24 +167,24 @@ public class Stepdefs {
 
     @When("I select add entry")
     public void i_select_add_entry() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);
     }
 
-    public void deletePage(int uuid) {
+    public void deletePage(String uuid) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
         ResponseEntity response = oAuth2RestTemplate.exchange("http://localhost:8080/api/page?uuid=" + uuid, HttpMethod.DELETE, request, String.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    public int createPage() {
+    public String createPage() {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
 
         ResponseEntity<Page> response = oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
         Assert.assertNotNull(response.getBody());
-        Assert.assertTrue(response.getBody().getUuid() > 0); //there should be a uuid
+        Assert.assertFalse(response.getBody().getUuid().isEmpty()); //there should be a uuid
         return response.getBody().getUuid();
     }
 
@@ -192,7 +192,7 @@ public class Stepdefs {
     public void i_can_edit_the_page() {
         /*Edit new page*/
         Page page = new Page();
-        page.setUuid(2);
+        page.setUuid("peachy:Peach:pearl");
         page.setName("Ein Edit Test");
 
         HttpHeaders headers = new HttpHeaders();
@@ -216,7 +216,7 @@ public class Stepdefs {
 
     @Then("I can copy the uuid for sharing the page")
     public void iCanCopyTheUuidForSharingThePage() {
-        int uuid = createPage();//it is possible to create a page and later on sharing
+        String uuid = createPage();//it is possible to create a page and later on sharing
         deletePage(uuid);//delete page for clean testing
     }
 
