@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import api from './components/backend-api'
 import apipublic from './components/backend-api-public'
 
+//
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
