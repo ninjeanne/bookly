@@ -18,7 +18,7 @@ import java.util.Random;
 @Builder
 @ApiModel(description = "page for a visitor")
 public class Page {
-    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String school_class, String school, String size,
+    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
                 String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
                 String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
                 String favoriteFood, String niceComment, String date, String leftOver) {
@@ -32,7 +32,7 @@ public class Page {
         this.address = address;
         this.telephone = telephone;
         this.mobile = mobile;
-        this.school_class = school_class;
+        this.schoolClass = schoolClass;
         this.school = school;
         this.size = size;
         this.hairColor = hairColor;
@@ -85,7 +85,7 @@ public class Page {
     private String mobile;
 
     @ApiModelProperty(notes = "school class where the friend is going to", position = 6)
-    private String school_class;
+    private String schoolClass;
 
     @ApiModelProperty(notes = "school where the friend is going to", position = 7)
     private String school;
