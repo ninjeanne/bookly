@@ -74,14 +74,14 @@ public class TestData {
         page.setTelephone("555555");
         page.setMobile("123456");
         page.setSchool("Driving School");
-        page.setSchool_class("1A");
+        page.setSchoolClass("1A");
         page.setSize("1.8m");
-        page.setHair_color("blond");
-        page.setMy_hobbies("Jogging, Dancing, Programming");
-        page.setEye_color("green");
-        page.setFavorite_movie("Star Trek, Lilo and Stitch");
-        page.setFavorite_food("Spaghetti");
-        page.setWhat_i_dont_like("learning");
+        page.setHairColor("blond");
+        page.setMyHobbies("Jogging, Dancing, Programming");
+        page.setEyeColor("green");
+        page.setFavoriteMovie("Star Trek, Lilo and Stitch");
+        page.setFavoriteFood("Spaghetti");
+        page.setWhatIDontLike("learning");
         page.setLeftOver("My last words are CHOCOLATE");
         return page;
     }
@@ -93,17 +93,17 @@ public class TestData {
         page.setTelephone("012345");
         page.setMobile("23412313");
         page.setSchool("MIT");
-        page.setSchool_class("1A");
+        page.setSchoolClass("1A");
         page.setSize("1.8m");
-        page.setHair_color("blond");
-        page.setMy_hobbies("Jogging, Dancing, Programming");
-        page.setEye_color("green");
-        page.setFavorite_job("Chillen");
-        page.setFavorite_book("1984");
-        page.setWhat_i_dont_like("learning");
+        page.setHairColor("blond");
+        page.setMyHobbies("Jogging, Dancing, Programming");
+        page.setEyeColor("green");
+        page.setFavoriteJob("Chillen");
+        page.setFavoriteBook("1984");
+        page.setWhatIDontLike("learning");
         page.setLeftOver("My last words are CHOCOLATE");
-        page.setFan_of("Doing nothing");
-        page.setNice_comment("Hi Neeeko :) Du kannst mich lesen");
+        page.setFanOf("Doing nothing");
+        page.setNiceComment("Hi Neeeko :) Du kannst mich lesen");
         return page;
     }
 
