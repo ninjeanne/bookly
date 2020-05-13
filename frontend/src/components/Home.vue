@@ -5,8 +5,11 @@
         <img src="./../assets/bookly.jpg">
       </div>
       <div class="right">
-        <input v-model="invite_code" placeholder="Code">
-        <a v-on:click="editPage" class="btn btn-primary">Go!</a>
+        <div class="card">
+          <input v-model="invite_code" placeholder="Code">
+          <br>
+          <a v-on:click="editPage" class="btn btn-primary">Go!</a>
+        </div>
       </div>
     </div>
     <div style="clear: both"></div>
@@ -44,13 +47,20 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   img {
     width: 100%;
   }
-  button {
+  input {
     width: 80%;
+  }
+  a {
+    width: 80%;
+  }
+  .card {
+    align-items: center;
+    padding: 32px;
+    margin: 20% 20%;
   }
   .separator {
     width: 100%;
@@ -65,5 +75,6 @@ export default {
     width: 50%;
     float: right;
     padding: 64px;
+    align-items: center;
   }
 </style>

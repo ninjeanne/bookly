@@ -17,17 +17,30 @@ const AXIOS = axios.create({
 
 export default {
     getUser() {
-        console.log(localStorage.getItem('vue-token'))
         return AXIOS.get("/user", {
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        })
+    },
+    updateUser(username, mail, firstName, lastName) {
+        var json = "{" +
+            '"username":"' + username + '",' +
+            '"mail":"' + mail + '",' +
+            '"first_name":"' + firstName + '",' +
+            '"last_name":"' + lastName + '"' +
+            "}";
+        return AXIOS.post("/user", json, {
+            headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                'Content-Type': 'application/json'
             }
         })
     },
     getBook() {
         return AXIOS.get("/friendshipbook", {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }
         });
     },
@@ -37,14 +50,14 @@ export default {
             {},
             {
                 headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                    'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
                 }
             });
     },
     getBookCover() {
         return AXIOS.get("/friendshipbook/image", {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }
         })
     },
@@ -54,14 +67,14 @@ export default {
         return AXIOS.post("/friendshipbook/image", formData, {
             headers: {
                 'content-type': 'multipart/form-data',
-                'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }
         });
     },
     getPages() {
         return AXIOS.get("/page", {
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('vue-token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }
         })
     },
@@ -76,6 +89,14 @@ export default {
     updatePage() {
         var formData = new FormData();
         return AXIOS.put("/page", formData, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        })
+    },
+    deletePage(uuid) {
+        console.log(uuid);
+        return AXIOS.delete("/page?uuid=" + uuid, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }
