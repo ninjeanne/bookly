@@ -4,13 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import dhbw.online.bookly.exception.PageException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.NoSuchFileException;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Data
@@ -23,7 +28,7 @@ public class Page {
             String what_i_dont_like, String favorite_job, String my_hobbies, String fan_of, String favorite_movie, String favorite_sport, String favorite_book,
             String favorite_food, String nice_comment, String date, String leftOver) {
         if (uuid == null || uuid.equals("")) {
-            this.uuid = generateRandomUUID();
+            this.uuid = generateRandomUUIDfromList();
         } else {
             this.uuid = uuid;
         }
@@ -56,7 +61,7 @@ public class Page {
     }
 
     public Page() {
-        this.uuid = generateRandomUUID();
+        this.uuid = generateRandomUUIDfromList();
     }
 
     public Page(String pageUUID) {
@@ -183,7 +188,8 @@ public class Page {
             con.setRequestMethod("GET");
             con.setConnectTimeout(5000);
             con.setReadTimeout(5000);
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
