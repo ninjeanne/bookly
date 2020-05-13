@@ -87,6 +87,19 @@ public class FriendshipBookService {
         return false;
     }
 
+    public boolean deleteCover() {
+        User user = userService.getUser();
+        FriendshipBook book = read();
+        if (book != null) {
+            book.setCover(null);
+            repository.save(book);
+            log.debug("Book cover of user {} with book id {} has been deleted", user.getUsername(), book.getUuid());
+            return true;
+        }
+        log.error("Book for user {} doesn't exist. ", user.getUsername());
+        return false;
+    }
+
     public FriendshipBook updateTitle(String title) {
         User user = userService.getUser();
         FriendshipBook book = read();

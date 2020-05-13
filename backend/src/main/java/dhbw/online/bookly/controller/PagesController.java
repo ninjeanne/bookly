@@ -70,8 +70,7 @@ public class PagesController extends Controller {
         if (existsUser()) {
             if (uuid != null) {
                 try {
-                    int uuidNumb = Integer.parseInt(uuid);
-                    val pages = pageService.delete(uuidNumb);
+                    val pages = pageService.delete(uuid);
                     return ResponseEntity.ok(pages);
                 } catch (NumberFormatException | BooklyException fbe) {
                     log.warn(fbe.getMessage());

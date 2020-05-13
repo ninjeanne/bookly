@@ -23,10 +23,7 @@ You will be able edit/update it later and you are able to delete the friendship 
 
 ### 2.2 Creation  
 
-After registering you have the opportunity to create a friendship book. Once you have created
-a new book you can create a personalized book cover. Later the book cover can also be 
-designed with different themes. You can decide whether you friendship book will be 
-public or private.
+After registering a user will have his own friendship book. It's correlated with his account.
 
 [Create Book](design_CreateBook.md "Create Book")
 
@@ -41,11 +38,14 @@ The view of the cover or a page includes a photo or picture, labels and text.
 
 ### 2.4 Edit
 
-During editing the user can modify his labels and text but also change the picture.
+During editing the user can modify the title and subtitle of his friendship book.
+Later on the user can also select a background image, a theme and further decorations. 
+See [Design Manage Cover](design_Manage_Cover_Decorations.md "Design Manage Cover")
 
 ### 2.5 Delete
 
-A friendship book shall only be deleted by the owner. The user can manage his cover within his profile.
+A friendship book shall only be deleted by the owner. This is only possible by deleting his whole account.
+See [Operate Account](OperateAccount.md "Operate Account")
 
 ## 3. Special Requirements
 
@@ -60,31 +60,25 @@ will be able to make changes to his cover page.
 ### 4.1 The user has to be logged in
 
 To ensure proper privacy of a friendship book the user has to be logged in when working with his book.
-He can make his friendship book visible to others if he wants to. Guests can only look inside the book,
-not manage it. See the privacy settings in the profile.
 
 ## 5. Postconditions
 
 ### 5.1 Create
 
-After adding data to the textfields and/or photos, you can save 
-your friendship book cover. It will be displayed according to your
-privacy settings.
-
-### 5.2 Read
-
-Either only the user who owns the friendship book will have read privileges of their 
-friendship book or it will be public and guests will be able to view it. 
+After adding data to the text fields and/or photos, the user can save 
+his friendship book cover. 
 
 ### 5.3 Edit
 
-You can edit your book cover as often as you like. You only need to be logged in. If you want to manage your friendship book entries, see the ManagePage UC.
+The user can edit your book cover as often as he like. 
+He only needs to be logged in. For Managing Pages see [ManagePage](ManagePage.md "Manage Page")
 
 
 ### 5.4 Delete
 
 After confirming the deletion dialog of a book, the book pages will be no longer displayed in the list 
-overview and all the book data will be permanently removed from the database.
+overview and all the book data will be permanently removed from the database. The book is correlated with
+the user account and only deletable by removing the account. See [OperateAccount](OperateAccount.md "Operate Account")
 
 ## 6. Feature Files
 [Feature Manage Book](../backend/src/test/resources/dhbw/online/bookly/ManageBook.feature)
