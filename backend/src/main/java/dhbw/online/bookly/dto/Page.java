@@ -4,18 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import dhbw.online.bookly.exception.PageException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.NoSuchFileException;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Data
@@ -23,16 +18,15 @@ import java.util.Random;
 @Builder
 @ApiModel(description = "page for a visitor")
 public class Page {
-    public Page(String uuid, PageImage pageImage, String name, String address, String telephone,
-                String mobile, String school_class, String school, String size,
-                String hair_color, String eye_color, String birthday, String star_sign,
-                String favorite_subject, String favorite_pet, String how_to_please_me,
-                String what_i_dont_like, String favorite_job, String my_hobbies,
-                String fan_of, String favorite_movie, String favorite_sport, String favorite_book,
-                String favorite_food, String nice_comment, String date, String leftOver) {
+    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String school_class, String school, String size,
+            String hair_color, String eye_color, String birthday, String star_sign, String favorite_subject, String favorite_pet, String how_to_please_me,
+            String what_i_dont_like, String favorite_job, String my_hobbies, String fan_of, String favorite_movie, String favorite_sport, String favorite_book,
+            String favorite_food, String nice_comment, String date, String leftOver) {
         if (uuid == null || uuid.equals("")) {
             this.uuid = generateRandomUUIDfromList();
-        } else this.uuid = uuid;
+        } else {
+            this.uuid = uuid;
+        }
         this.pageImage = pageImage;
         this.name = name;
         this.address = address;
@@ -63,69 +57,14 @@ public class Page {
 
     public Page() {
         this.uuid = generateRandomUUIDfromList();
-        this.pageImage = new PageImage();
-        this.name = null;
-        this.address = null;
-        this.telephone = null;
-        this.mobile = null;
-        this.school_class = null;
-        this.school = null;
-        this.size = null;
-        this.hair_color = null;
-        this.eye_color = null;
-        this.birthday = null;
-        this.star_sign = null;
-        this.favorite_subject = null;
-        this.favorite_pet = null;
-        this.how_to_please_me = null;
-        this.what_i_dont_like = null;
-        this.favorite_job = null;
-        this.my_hobbies = null;
-        this.fan_of = null;
-        this.favorite_movie = null;
-        this.favorite_sport = null;
-        this.favorite_book = null;
-        this.favorite_food = null;
-        this.nice_comment = null;
-        this.date = null;
-        this.leftOver = null;
     }
 
     public Page(String pageUUID) {
         this.uuid = pageUUID;
-        this.pageImage = new PageImage();
-        this.name = null;
-        this.address = null;
-        this.telephone = null;
-        this.mobile = null;
-        this.school_class = null;
-        this.school = null;
-        this.size = null;
-        this.hair_color = null;
-        this.eye_color = null;
-        this.birthday = null;
-        this.star_sign = null;
-        this.favorite_subject = null;
-        this.favorite_pet = null;
-        this.how_to_please_me = null;
-        this.what_i_dont_like = null;
-        this.favorite_job = null;
-        this.my_hobbies = null;
-        this.fan_of = null;
-        this.favorite_movie = null;
-        this.favorite_sport = null;
-        this.favorite_book = null;
-        this.favorite_food = null;
-        this.nice_comment = null;
-        this.date = null;
-        this.leftOver = null;
     }
 
     @Id
-    @ApiModelProperty(notes = "the unique identifier of a page of a book.",
-            example = "peachy:Peach:priest",
-            required = true,
-            position = 0)
+    @ApiModelProperty(notes = "the unique identifier of a page of a book.", example = "peachy:Peach:priest", required = true, position = 0)
     private String uuid;
 
     @JsonIgnore
@@ -213,17 +152,20 @@ public class Page {
         long randomLineNumber1 = getRandomNumberLong(1, numberOfLines);
         long randomLineNumber2 = getRandomNumberLong(1, numberOfLines);
         long randomLineNumber3 = getRandomNumberLong(1, numberOfLines);
-        StringBuilder newPageUUID=new StringBuilder();
+        StringBuilder newPageUUID = new StringBuilder();
         try {
-            try (FileReader readfile = new FileReader("./backend/src/main/resources/words_alpha.txt")) {
+            ClassLoader classLoader = getClass().getClassLoader();
+
+            URL resource = classLoader.getResource("words_alpha.txt");
+            File file = new File(resource.getFile());
+            try (FileReader readfile = new FileReader(file)) {
                 BufferedReader readbuffer = new BufferedReader(readfile);
                 for (long lineNumber = 1; lineNumber < numberOfLines; lineNumber++) {
-                    if (lineNumber == randomLineNumber1 ||
-                            lineNumber == randomLineNumber2 ||
-                            lineNumber == randomLineNumber3) {
-                        newPageUUID.append(readbuffer.readLine()+":");
-                    } else
+                    if (lineNumber == randomLineNumber1 || lineNumber == randomLineNumber2 || lineNumber == randomLineNumber3) {
+                        newPageUUID.append(readbuffer.readLine() + ":");
+                    } else {
                         readbuffer.readLine();
+                    }
                 }
                 readbuffer.close();
             }
@@ -241,8 +183,7 @@ public class Page {
             con.setRequestMethod("GET");
             con.setConnectTimeout(5000);
             con.setReadTimeout(5000);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
