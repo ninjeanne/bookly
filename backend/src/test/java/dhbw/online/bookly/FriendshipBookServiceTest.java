@@ -37,7 +37,6 @@ public class FriendshipBookServiceTest {
     @Mock
     private AuthenticationService authenticationService;
 
-
     private User user = User.builder().username("test-user").mail("tester@test.com").build();
     private User otherUser = User.builder().username("other-user").mail("testerchen@test.com").build();
 
@@ -53,15 +52,44 @@ public class FriendshipBookServiceTest {
         Mockito.when(friendshipBookRepository.findByUser(user)).thenReturn(Optional.of(friendshipBook));
         Mockito.when(friendshipBookRepository.existsByUser(user)).thenReturn(true);
         Mockito.when(friendshipBookRepository.existsByUser(otherUser)).thenReturn(false);
+        Mockito.when(friendshipBook.getUser()).thenReturn(user);
     }
 
     @Test
     public void testupdateTitle() {
         String title = "Other title";
-        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title);
-        Mockito.when(this.friendshipBook.getTitle()).thenReturn(title);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title, null);
         verify(friendshipBook, times(1)).setTitle(title);
-        Assert.assertEquals( title, friendshipBook.getTitle());
+        verify(friendshipBook, times(1)).setSubtitle(null);
+        verify(friendshipBookRepository, times(1)).save(friendshipBook);
+    }
+
+    @Test
+    public void testupdateSubtitle() {
+        String title = "Other subtitle";
+
+        FriendshipBook friendshipBook = friendshipBookService.updateTitle(null, title);
+        verify(friendshipBook, times(1)).setTitle(null);
+        verify(friendshipBook, times(1)).setSubtitle(title);
+        verify(friendshipBookRepository, times(1)).save(friendshipBook);
+    }
+
+    @Test
+    public void testupdateNullTitles() {
+        FriendshipBook friendshipBook = friendshipBookService.updateTitle(null, null);
+        verify(friendshipBook, times(1)).setTitle(null);
+        verify(friendshipBook, times(1)).setSubtitle(null);
+        verify(friendshipBookRepository, times(1)).save(friendshipBook);
+    }
+
+    @Test
+    public void testupdateTitles() {
+        String title = "title";
+        String subtitle = "subtitle";
+        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title, subtitle);
+        verify(friendshipBook, times(1)).setTitle(title);
+        verify(friendshipBook, times(1)).setSubtitle(subtitle);
+        verify(friendshipBookRepository, times(1)).save(friendshipBook);
     }
 
     @Test
