@@ -3,10 +3,34 @@
     <div class="wrapper">
       <div class="left">
         <div class="card">
-          <h2>Username: {{ username }}</h2>
-          <h3>E-Mail: {{ email }}</h3>
-          <h3>First Name: {{ firstName }}</h3>
-          <h3>Last Name: {{ lastName }}</h3>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Username</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default" v-model="username">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">E-Mail</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default" v-model="email">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">First Name</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default" v-model="firstName">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Last Name</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default" v-model="lastName">
+          </div>
           <button class="btn btn-info" v-on:click="saveUser">Save</button>
           <button class="btn btn-info" v-on:click="logout">Logout</button>
         </div>
@@ -21,8 +45,14 @@
         </div>
         <div class="card">
           <b-list-group>
-            <b-list-group-item v-for="page in pagesDisplay"> {{ page }}</b-list-group-item>
-            <button class="btn btn-danger" v-on:click="deletePage">Delete selected page</button>
+            <div class="page" v-for="page in pagesUUID">
+              <div class="left">
+                <h4>{{ page }}</h4>
+              </div>
+              <div class="right">
+                <button class="btn btn-danger" id="deletePage" v-on:click="deletePage(page)">Delete</button>
+              </div>
+            </div>
           </b-list-group>
         </div>
       </div>
@@ -47,7 +77,6 @@
         firstName: "",
         lastName: "",
         invite_code: "",
-        pagesDisplay: [],
         pagesUUID: []
       }
     },
@@ -65,7 +94,6 @@
         this.$store.dispatch("getPages")
                 .then((response) => {
                   response.data.forEach(page => {
-                    this.pagesDisplay.push("ID: " + page.uuid + ", Name: " + page.name);
                     this.pagesUUID.push(page.uuid);
                   });
                 })
@@ -74,10 +102,19 @@
         // NYI
       },
       saveUser: function () {
-        // NYI
+        this.$store.dispatch("updateUser",{username: this.username, email: this.email, firstName: this.firstName, lastName: this.lastName})
+                .then(() => {
+                  alert("saved");
+                })
       },
-      deletePage: function () {
-        // NYI
+      deletePage: function (uuid) {
+        this.$store.dispatch("deletePage",{uuid: uuid})
+                .then(() => {
+                  const index = this.pagesUUID.indexOf(uuid);
+                  if (index > -1) {
+                    this.pagesUUID.splice(index, 1);
+                  }
+                })
       },
       logout: function () {
         this.$router.push("/");
@@ -87,6 +124,7 @@
         this.$store.dispatch("newPage")
                 .then((response) => {
                   this.invite_code = response.data.uuid;
+                  this.pagesUUID.push(response.data.uuid);
                 })
       }
     }
@@ -105,6 +143,11 @@
     margin: 16px;
     padding: 16px;
   }
+  .page {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+  }
   .left {
     width: 50%;
     float: left;
@@ -112,5 +155,8 @@
   .right {
     width: 50%;
     float: right;
+  }
+  #deletePage {
+    margin: 0;
   }
 </style>

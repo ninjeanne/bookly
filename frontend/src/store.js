@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 import api from './components/backend-api'
 import apipublic from './components/backend-api-public'
 
-//
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -20,6 +18,17 @@ export default new Vuex.Store({
                         .catch(err => {
                             console.error(err);
                         });
+            })
+        },
+        updateUser({}, {username, email, firstName, lastName}) {
+            return new Promise((resolve) => {
+                api.updateUser(username, email, firstName, lastName)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
             })
         },
         getBook() {
@@ -107,6 +116,17 @@ export default new Vuex.Store({
         updatePage({ },{json}) {
             return new Promise((resolve) => {
                 apipublic.updatePage(json)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        deletePage({ },{uuid}) {
+            return new Promise((resolve) => {
+                api.deletePage(uuid)
                     .then(response => {
                         resolve(response)
                     })
