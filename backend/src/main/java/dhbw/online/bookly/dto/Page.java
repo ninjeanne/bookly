@@ -1,27 +1,76 @@
 package dhbw.online.bookly.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dhbw.online.bookly.exception.PageException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.NoSuchFileException;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 @Data
 @Entity
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(description = "page for a visitor")
 public class Page {
+    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String school_class, String school, String size,
+            String hair_color, String eye_color, String birthday, String star_sign, String favorite_subject, String favorite_pet, String how_to_please_me,
+            String what_i_dont_like, String favorite_job, String my_hobbies, String fan_of, String favorite_movie, String favorite_sport, String favorite_book,
+            String favorite_food, String nice_comment, String date, String leftOver) {
+        if (uuid == null || uuid.equals("")) {
+            this.uuid = generateRandomUUIDfromList();
+        } else {
+            this.uuid = uuid;
+        }
+        this.pageImage = pageImage;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.mobile = mobile;
+        this.school_class = school_class;
+        this.school = school;
+        this.size = size;
+        this.hair_color = hair_color;
+        this.eye_color = eye_color;
+        this.birthday = birthday;
+        this.star_sign = star_sign;
+        this.favorite_subject = favorite_subject;
+        this.favorite_pet = favorite_pet;
+        this.how_to_please_me = how_to_please_me;
+        this.what_i_dont_like = what_i_dont_like;
+        this.favorite_job = favorite_job;
+        this.my_hobbies = my_hobbies;
+        this.fan_of = fan_of;
+        this.favorite_movie = favorite_movie;
+        this.favorite_sport = favorite_sport;
+        this.favorite_book = favorite_book;
+        this.favorite_food = favorite_food;
+        this.nice_comment = nice_comment;
+        this.date = date;
+        this.leftOver = leftOver;
+    }
+
+    public Page() {
+        this.uuid = generateRandomUUIDfromList();
+    }
+
+    public Page(String pageUUID) {
+        this.uuid = pageUUID;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(notes = "the unique identifier of a page of a book.", example = "3", required = true, position = 0)
-    private int uuid;
+    @ApiModelProperty(notes = "the unique identifier of a page of a book.", example = "peachy:Peach:priest", required = true, position = 0)
+    private String uuid;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -103,4 +152,66 @@ public class Page {
     @ApiModelProperty(notes = "last words of the friend", position = 26)
     private String leftOver;
 
+    private String generateRandomUUIDfromList() {
+        final long numberOfLines = 370100L;
+        long randomLineNumber1 = getRandomNumberLong(1, numberOfLines);
+        long randomLineNumber2 = getRandomNumberLong(1, numberOfLines);
+        long randomLineNumber3 = getRandomNumberLong(1, numberOfLines);
+        StringBuilder newPageUUID = new StringBuilder();
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+
+            URL resource = classLoader.getResource("words_alpha.txt");
+            File file = new File(resource.getFile());
+            try (FileReader readfile = new FileReader(file)) {
+                BufferedReader readbuffer = new BufferedReader(readfile);
+                for (long lineNumber = 1; lineNumber < numberOfLines; lineNumber++) {
+                    if (lineNumber == randomLineNumber1 || lineNumber == randomLineNumber2 || lineNumber == randomLineNumber3) {
+                        newPageUUID.append(readbuffer.readLine() + ":");
+                    } else {
+                        readbuffer.readLine();
+                    }
+                }
+                readbuffer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return newPageUUID.toString();
+    }
+
+    private String generateRandomUUID() {
+        String pageUUID = "no:pageUUID:Set";
+        try {
+            URL url = new URL("https://random-word-api.herokuapp.com/word?number=3");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setConnectTimeout(5000);
+            con.setReadTimeout(5000);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder content = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                inputLine = inputLine.replaceAll("\\[\"", "");
+                inputLine = inputLine.replaceAll("\",\"", ":");
+                inputLine = inputLine.replaceAll("\"]", "");
+                content.append(inputLine);
+            }
+            pageUUID = content.toString();
+            in.close();
+            con.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (pageUUID.equals("no:UUID:Set")) {
+            throw new PageException("No UUID Set");
+        }
+        return pageUUID;
+    }
+
+    public static long getRandomNumberLong(long min, long max) {
+        Random random = new Random();
+        return random.longs(min, (max + 1)).findFirst().getAsLong();
+    }
 }

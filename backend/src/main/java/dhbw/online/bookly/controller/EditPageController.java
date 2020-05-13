@@ -32,7 +32,7 @@ public class EditPageController extends Controller {
             @ApiResponse(code = 404, message = "Not found - the page doesn't exist"), @ApiResponse(code = 409, message = "conflict - missing or wrong uuid") })
     public ResponseEntity<Page> getPublicPage(@RequestParam String uuid) {
         try {
-            Page page = pageService.findPageById(Integer.parseInt(uuid));
+            Page page = pageService.findPageById(uuid);
             return ResponseEntity.ok(page);
         } catch (NumberFormatException nfe) {
             log.warn(nfe.getMessage());
@@ -66,7 +66,7 @@ public class EditPageController extends Controller {
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<byte[]> getImage(@RequestParam String uuid) throws IOException {
         try {
-            Page page = pageService.findPageById(Integer.parseInt(uuid));
+            Page page = pageService.findPageById(uuid);
             if (existsPageImage(page)) {
                 return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageImage().getMediaType())).body(page.getPageImage().getData());
             } else {
@@ -89,7 +89,7 @@ public class EditPageController extends Controller {
             if (file == null) {
                 throw new PageException("There was no picture in the request for saving.");
             }
-            Page page = pageService.findPageById(Integer.parseInt(uuid));
+            Page page = pageService.findPageById(uuid);
             if (existsPage(page)) {
                 pageService.saveImageForPage(page, file);
             }

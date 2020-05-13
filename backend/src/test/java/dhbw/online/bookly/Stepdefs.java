@@ -22,9 +22,9 @@ import java.nio.file.Files;
 public class Stepdefs {
 
     private String getUser = "{\"username\":\"test-user\",\"mail\":\"max.mustermann@test.bookly.online\",\"first_name\":\"Max\",\"last_name\":\"Mustermann\"}";
-    private String getFriendshipbook = "{\"uuid\":1,\"title\":\"Unser super tolles Buch\",\"user\":{\"username\":\"test-user\",\"mail\":\"max.mustermann@test.bookly.online\",\"first_name\":\"Max\",\"last_name\":\"Mustermann\"},\"pages\":[{\"uuid\":2,\"name\":\"Max Mustermann\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"555555\",\"mobile\":\"123456\",\"school_class\":\"1A\",\"school\":\"Driving School\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":null,\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":null,\"favorite_movie\":\"Star Trek, Lilo and Stitch\",\"favorite_sport\":null,\"favorite_book\":null,\"favorite_food\":\"Spaghetti\",\"nice_comment\":null,\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"},{\"uuid\":3,\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}]}";
-    private String getPage = "[{\"uuid\":2,\"name\":\"Max Mustermann\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"555555\",\"mobile\":\"123456\",\"school_class\":\"1A\",\"school\":\"Driving School\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":null,\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":null,\"favorite_movie\":\"Star Trek, Lilo and Stitch\",\"favorite_sport\":null,\"favorite_book\":null,\"favorite_food\":\"Spaghetti\",\"nice_comment\":null,\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"},{\"uuid\":3,\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}]";
-    private String newPage = "{\"uuid\":3,\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}";
+    private String getFriendshipbook = "{\"uuid\":1,\"title\":\"Unser super tolles Buch\",\"user\":{\"username\":\"test-user\",\"mail\":\"max.mustermann@test.bookly.online\",\"first_name\":\"Max\",\"last_name\":\"Mustermann\"},\"pages\":[{\"uuid\":\"test:page:UUID\",\"name\":\"Max Mustermann\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"555555\",\"mobile\":\"123456\",\"school_class\":\"1A\",\"school\":\"Driving School\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":null,\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":null,\"favorite_movie\":\"Star Trek, Lilo and Stitch\",\"favorite_sport\":null,\"favorite_book\":null,\"favorite_food\":\"Spaghetti\",\"nice_comment\":null,\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"},{\"uuid\":\"new:page:UUID\",\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}]}";
+    private String getPage = "[{\"uuid\":\"test:page:UUID\",\"name\":\"Max Mustermann\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"555555\",\"mobile\":\"123456\",\"school_class\":\"1A\",\"school\":\"Driving School\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":null,\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":null,\"favorite_movie\":\"Star Trek, Lilo and Stitch\",\"favorite_sport\":null,\"favorite_book\":null,\"favorite_food\":\"Spaghetti\",\"nice_comment\":null,\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"},{\"uuid\":\"new:page:UUID\",\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}]";
+    private String newPage = "{\"uuid\":\"new:page:UUID\",\"name\":\"Maximila Musterfrau\",\"address\":\"TeststraÃ\u009Fe 12\",\"telephone\":\"012345\",\"mobile\":\"23412313\",\"school_class\":\"1A\",\"school\":\"MIT\",\"size\":\"1.8m\",\"hair_color\":\"blond\",\"eye_color\":\"green\",\"birthday\":null,\"star_sign\":null,\"favorite_subject\":null,\"favorite_pet\":null,\"how_to_please_me\":null,\"what_i_dont_like\":\"learning\",\"favorite_job\":\"Chillen\",\"my_hobbies\":\"Jogging, Dancing, Programming\",\"fan_of\":\"Doing nothing\",\"favorite_movie\":null,\"favorite_sport\":null,\"favorite_book\":\"1984\",\"favorite_food\":null,\"nice_comment\":\"Hi Neeeko :) Du kannst mich lesen\",\"date\":null,\"leftOver\":\"My last words are CHOCOLATE\"}";
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     private RestTemplate login(String username, String password) {
@@ -144,20 +144,20 @@ public class Stepdefs {
 
     @When("I select delete page")
     public void i_select_delete_page() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);//delete this specific page
     }
 
     @Then("I am not able to see the deleted page")
     public void i_am_not_able_to_see_the_deleted_page() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);
 
         ResponseEntity<Page[]> response = oAuth2RestTemplate.getForEntity("http://localhost:8080/api/page", Page[].class);
         Assert.assertNotNull(response.getBody());
         boolean status = true;
         for (Page page : response.getBody()) {
-            if (page.getUuid() == uuid) {
+            if (page.getUuid().equals(uuid)) {
                 status = false; //there should be no page with this uuid
                 break;
             }
@@ -167,32 +167,35 @@ public class Stepdefs {
 
     @When("I select add entry")
     public void i_select_add_entry() {
-        int uuid = createPage();
+        String uuid = createPage();
         deletePage(uuid);
     }
 
-    public void deletePage(int uuid) {
+    public void deletePage(String uuid) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
         ResponseEntity response = oAuth2RestTemplate.exchange("http://localhost:8080/api/page?uuid=" + uuid, HttpMethod.DELETE, request, String.class);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
-    public int createPage() {
+    public String createPage() {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
 
-        ResponseEntity<Page> response = oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
+        ResponseEntity<Page> response;
+        response= oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
         Assert.assertNotNull(response.getBody());
-        Assert.assertTrue(response.getBody().getUuid() > 0); //there should be a uuid
+        Assert.assertFalse(response.getBody().getUuid().isEmpty()); //there should be a uuid
+
         return response.getBody().getUuid();
     }
+
 
     @Then("I can edit the public page")
     public void i_can_edit_the_page() {
         /*Edit new page*/
         Page page = new Page();
-        page.setUuid(2);
+        page.setUuid("test:page:UUID");
         page.setName("Ein Edit Test");
 
         HttpHeaders headers = new HttpHeaders();
@@ -216,7 +219,7 @@ public class Stepdefs {
 
     @Then("I can copy the uuid for sharing the page")
     public void iCanCopyTheUuidForSharingThePage() {
-        int uuid = createPage();//it is possible to create a page and later on sharing
+        String uuid = createPage();//it is possible to create a page and later on sharing
         deletePage(uuid);//delete page for clean testing
     }
 
@@ -225,7 +228,7 @@ public class Stepdefs {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity response = restTemplate.exchange("http://localhost:8080/api/public/page?uuid=3", HttpMethod.GET, request, String.class);
+        ResponseEntity response = restTemplate.exchange("http://localhost:8080/api/public/page?uuid=new:page:UUID", HttpMethod.GET, request, String.class);
         Assert.assertEquals(newPage, response.getBody());
     }
 

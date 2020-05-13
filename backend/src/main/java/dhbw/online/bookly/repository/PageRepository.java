@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface PageRepository extends JpaRepository<Page, String> {
 
     @Transactional
-    Optional<Page> findByUuid(int uuid);
+    Optional<Page> findByUuid(String uuid);
 
-    boolean existsByUuid(int uuid);
+    boolean existsByUuid(String uuid);
 
 }
