@@ -17,34 +17,38 @@ For further details for reading, creating and updating pages look into their lin
 ### 2.1 Basic flow
 
 In general a user will create a friendship book page/ entry and list all inserted data of this specific page. 
-One will maybe edit/update it later and from time to time one will delete it.
+One will maybe edit/update it by sharing a specific link to a page or delete it.
 
 ### 2.2 Creation  
 
 The creation of a new page. The owner of the book has the opportunity to add new pages to his
-book. Later this option will lead to a link sharing. For now the adding option will automatically
-lead to the new page (a link with the userid and a uuid for this page).
+book. He will receive a uuid that he can share with anyone else for editing its data. See [ShareLink](sharelink_visibility_invite.md "Share link")
 
 [Create Book Entry](CreatePage.md "Create Book Entry")
 
 ### 2.3 Read
 
 A user can view an entry by browsing through his book. (Starting with the cover, he can reach all entries by arrows.)
-The functionality to the view of only one page includes a photo, labels and text.
+The functionality to the view of only one page includes a photo, labels, text and further decorations. 
+See [ManagePageDecorations](design_Manage_Page_Decorations.md "Manage Page Decorations")
 
 [Read Book Entry](ReadPage.md "Read Book Entry")
 
 ### 2.4 Edit
 
-During editing the user can modify his labels and text but also change the picture.
-
+During editing the visitor/writer can modify the text entries but also change the pictures and decorations.
 [Edit Book Entry](EditPage.md "Edit Book Entry")
+
+See also [ManagePageDecorations](design_Manage_Page_Decorations.md "Manage Page Decorations") 
 
 ### 2.5 Delete
 
 A page entry shall only be deleted by the user itself. The user can manage his pages within his profile.
-There he can scroll trough all of his pages and manually delete a page if he wants to. 
+There he can scroll trough all of his pages and manually delete a page if he wants to.
+By deleting his whole account, all pages will be deleted too.
 ![Profile](profile.png "Delete a page")
+
+See also [OperateAccount](OperateAccount.md "Operate Account") 
 
 ## 3. Special Requirements
 
@@ -58,8 +62,6 @@ and share it with the friend.
 ### 4.1 The user has to be logged in
 
 To ensure proper privacy of a friendship book the user has to be logged in when working with his book.
-(BUT: he can make his friendship book visible to others if he wants to. But there one can only look inside the book,
-not manage it. See the privacy settings in the profile.)
 
 ## 5. Postconditions
 
@@ -73,7 +75,7 @@ The user is able to read a page. No changes can be made.
 
 ### 5.3 Edit
 
-After a page has been edited, the data must have been changed in the database and thus when reloaded shown in the list overview.
+After a page has been edited by a friend, the data must have been changed in the database and thus when reloaded shown in the list overview.
 
 ### 5.4 Delete
 

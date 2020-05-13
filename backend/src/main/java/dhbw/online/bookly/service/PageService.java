@@ -52,18 +52,18 @@ public class PageService {
         }
     }
 
-    public Page findPageByUserAndId(int uuid) {
+    public Page findPageByUserAndId(String uuid) {
         List<Page> pagesByUser = read();
 
         for (Page page : pagesByUser) {
-            if (page.getUuid() == uuid) {
+            if (page.getUuid().equals( uuid)) {
                 return page;
             }
         }
         throw new PageException("Page couldn't be found");
     }
 
-    public Page findPageById(int uuid) {
+    public Page findPageById(String uuid) {
         Optional<Page> page = pageRepository.findByUuid(uuid);
         if (page.isPresent()) {
             return page.get();
@@ -75,9 +75,8 @@ public class PageService {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pages = book.getPages();
-            val newPage = new Page();
+            Page newPage = new Page();
             pages.add(newPage);
-            pageRepository.save(newPage);
             friendshipBookRepository.save(book);
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
             return newPage;
@@ -85,11 +84,11 @@ public class PageService {
         throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
     }
 
-    private Page getPage(int uuid) {
+    private Page getPage(String uuid) {
         return pageRepository.findByUuid(uuid).orElse(null);
     }
 
-    public List<Page> delete(int uuid) {
+    public List<Page> delete(String uuid) {
         FriendshipBook book = friendshipBookService.read();
         if (book != null) {
             val pagesFromDb = book.getPages();
@@ -97,6 +96,7 @@ public class PageService {
                 val pageFromDb = getPage(uuid);
                 pagesFromDb.remove(pageFromDb);
                 friendshipBookRepository.save(book);
+                pageRepository.delete(pageFromDb);
                 return pagesFromDb;
             }
             throw new FriendshipBookException("There is no page with uuid "+uuid+" for user " + authenticationService.getUsername());

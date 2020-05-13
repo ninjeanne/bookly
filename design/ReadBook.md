@@ -32,3 +32,6 @@ To ensure proper privacy of a friendship book the user has to be logged in when 
 (BUT: he can make his friendship book visible to others if he wants to. But there one can only look inside the book,
 not manage it. See the privacy settings in the profile.)
 
+## 5. Function Points
+
+![Read Book FPs](UC2_Read_Book.JPG "Create Book FPs")
