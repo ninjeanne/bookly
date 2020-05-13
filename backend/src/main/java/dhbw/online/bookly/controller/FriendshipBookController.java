@@ -94,6 +94,24 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/sticker/{stickerNumber}")
+    @ApiOperation(value = "Returns cover image of the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
+            response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<String> getSticker(@PathVariable int stickerNumber) {
+        FriendshipBook book = bookService.read();
+        if (stickerNumber == 1 && book.getSticker1() != null) {
+            return ResponseEntity.ok().contentType(MediaType.valueOf(book.getSticker1().getMediaType())).body(encodeBase64(book.getSticker1().getData()));
+        }
+        if (stickerNumber == 2 && book.getSticker2() != null){
+            return ResponseEntity.ok().contentType(MediaType.valueOf(book.getSticker2().getMediaType())).body(encodeBase64(book.getSticker2().getData()));
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping(value = "/sticker/{stickerNumber}")
     @ResponseBody
     @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
@@ -133,7 +151,7 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
+    @PostMapping("/title")
     @ApiOperation(value = "Update the cover title of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
@@ -155,7 +173,7 @@ public class FriendshipBookController extends Controller {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
-    @PutMapping
+    @PostMapping("/theme")
     @ApiOperation(value = "Update the theme of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
