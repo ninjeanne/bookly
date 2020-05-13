@@ -273,27 +273,28 @@
                 var text = '{ "uuid":"' + this.uuid + '",' +
                     ' "address":"' + this.address + '",' +
                     ' "birthday":"' + this.birthday + '",' +
-                    ' "eye_color":"' + this.eyecolor + '",' +
-                    ' "fan_of":"' + this.idol + '",' +
-                    ' "favorite_book":"' + this.book + '",' +
-                    ' "favorite_food":"' + this.food + '",' +
-                    ' "favorite_job":"' + this.job + '",' +
-                    ' "favorite_movie":"' + this.movie + '",' +
-                    ' "favorite_pet":"' + this.pet + '",' +
-                    ' "favorite_sport":"' + this.sport + '",' +
-                    ' "favorite_subject":"' + this.subject + '",' +
-                    ' "hair_color":"' + this.haircolor + '",' +
-                    ' "how_to_please_me":"' + this.love + '",' +
+                    ' "eyeColor":"' + this.eyecolor + '",' +
+                    ' "fanOf":"' + this.idol + '",' +
+                    ' "favoriteBook":"' + this.book + '",' +
+                    ' "favoriteFood":"' + this.food + '",' +
+                    ' "favoriteJob":"' + this.job + '",' +
+                    ' "favoriteMovie":"' + this.movie + '",' +
+                    ' "favoritePet":"' + this.pet + '",' +
+                    ' "favoriteSport":"' + this.sport + '",' +
+                    ' "favoriteSubject":"' + this.subject + '",' +
+                    ' "hairColor":"' + this.haircolor + '",' +
+                    ' "howToPleaseMe":"' + this.love + '",' +
+                    ' "whatIDontLike":"' + this.hate + '",' +
                     ' "leftOver":"' + this.leftover + '",' +
                     ' "mobile":"' + this.mobile + '",' +
-                    ' "my_hobbies":"' + this.hobbies + '",' +
+                    ' "myHobbies":"' + this.hobbies + '",' +
                     ' "name":"' + this.name + '",' +
-                    ' "nice_comment":"' + this.leftover + '",' +
+                    ' "niceComment":"' + this.leftover + '",' +
                     ' "school":"' + this.school + '",' +
-                    ' "school_class":"' + this.my_class + '",' +
+                    ' "schoolClass":"' + this.my_class + '",' +
                     ' "size":"' + this.height + '",' +
                     ' "telephone":"' + this.phone + '",' +
-                    ' "star_sign":"' + this.star_sign + '"' +
+                    ' "starSign":"' + this.star_sign + '"' +
                     ' }';
                 this.$store.dispatch("updatePage", {json: text})
                     .then((response) => {
@@ -304,25 +305,26 @@
                 this.name = response.data.name;
                 this.address = response.data.address;
                 this.phone = response.data.telephone;
+                this.mobile = response.data.mobile;
                 this.height = response.data.size;
-                this.haircolor = response.data.haircolor;
-                this.eyecolor = response.data.eyecolor;
+                this.haircolor = response.data.hairColor;
+                this.eyecolor = response.data.eyeColor;
                 this.birthday = response.data.birthday;
-                this.pet = response.data.favorite_pet;
-                this.my_class = response.data.school_class;
+                this.pet = response.data.favoritePet;
+                this.my_class = response.data.schoolClass;
                 this.school = response.data.school;
-                this.subject = response.data.favorite_subject;
-                this.love = response.data.how_to_please_me;
-                this.hate = response.data.what_i_dont_like;
-                this.job = response.data.favorite_job;
-                this.hobbies = response.data.my_hobbies;
-                this.idol = response.data.fan_of;
-                this.movie = response.data.favorite_movie;
-                this.sport = response.data.favorite_sport;
-                this.book = response.data.favorite_book;
-                this.food = response.data.favorite_food;
-                this.leftover = response.data.nice_comment;
-                this.star_sign = response.data.star_sign;
+                this.subject = response.data.favoriteSubject;
+                this.love = response.data.howToPleaseMe;
+                this.hate = response.data.whatIDontLike;
+                this.job = response.data.favoriteJob;
+                this.hobbies = response.data.myHobbies;
+                this.idol = response.data.fanOf;
+                this.movie = response.data.favoriteMovie;
+                this.sport = response.data.favoriteSport;
+                this.book = response.data.favoriteBook;
+                this.food = response.data.favoriteFood;
+                this.leftover = response.data.niceComment;
+                this.star_sign = response.data.starSign;
             },
             onChanged() {
                 if (this.$refs.pictureInput.file) {
