@@ -156,14 +156,14 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity updateTitle(@RequestParam @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book") String title) {
+    ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle) {
         if (title == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
         }
         if (existsUser()) {
             try {
-                FriendshipBook book = bookService.updateTitle(title);
+                FriendshipBook book = bookService.updateTitle(title, subtitle);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());

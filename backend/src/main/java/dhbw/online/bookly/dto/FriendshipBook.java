@@ -29,41 +29,46 @@ public class FriendshipBook {
             position = 0)
     private int uuid;
 
-    @ApiModelProperty(notes = "the cover title of the book",
+    @ApiModelProperty(notes = "the title of the book",
             example = "My super fancy friendship book",
             position = 1)
     private String title;
 
+    @ApiModelProperty(notes = "the subtitle title of the book",
+            example = "My super fancy subtitle",
+            position = 2)
+    private String subtitle;
+
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the cover image of the book",
-            position = 2)
+            position = 3)
     private FriendshipBookCover cover;
 
     @OneToOne
     @ApiModelProperty(notes = "the user of which the book belongs to. is extracted from the authentication",
-            position = 3)
+            position = 4)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Page.class)
     @ApiModelProperty(notes = "list of all pages of the book",
-            position = 4)
+            position = 5)
     private List<Page> pages;
 
     @ApiModelProperty(notes = "ID of the Theme template",
-            position = 5)
+            position = 6)
     private int theme;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the first sticker of the book",
-            position = 6)
+            position = 7)
     private FriendshipBookSticker sticker1;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the second sticker of the book",
-            position = 7)
+            position = 8)
     private FriendshipBookSticker sticker2;
 
     public void setTheme(int theme){

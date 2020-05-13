@@ -101,12 +101,13 @@ public class FriendshipBookService {
         return false;
     }
 
-    public FriendshipBook updateTitle(String title) {
+    public FriendshipBook updateTitle(String title, String subtitle) {
         FriendshipBook book = read();
         if (book != null) {
             book.setTitle(title);
+            book.setSubtitle(subtitle);
             repository.save(book);
-            log.debug("Book title of book from user {} and with book id {} and title {} has been updated", book.getUser().getUsername(), book.getUuid(), title);
+            log.debug("Book titles of book from user {} have been updated", book.getUser().getUsername());
             return book;
         }
         throw new FriendshipBookException("There is no book for user " + book.getUser().getUsername());
