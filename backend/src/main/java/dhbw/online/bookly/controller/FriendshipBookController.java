@@ -66,9 +66,8 @@ public class FriendshipBookController extends Controller {
             if (file == null) {
                 throw new FriendshipBookException("There was no picture in the request for saving.");
             }
-            FriendshipBook book = bookService.read();
-            if (existsUser() && existsBook(book)) {
-                bookService.saveImageForBook(book, file);
+            if (existsUser()) {
+                bookService.saveCover(file);
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
@@ -84,6 +83,45 @@ public class FriendshipBookController extends Controller {
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<?> deleteFile() {
+        try {
+            if (existsUser()) {
+                bookService.deleteCover();
+            }
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/sticker/{stickerNumber}")
+    @ResponseBody
+    @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> uploadSticker(@RequestParam("file") MultipartFile file, @PathVariable int stickerNumber) {
+        try {
+            if (file == null) {
+                throw new FriendshipBookException("There was no sticker image in the request for saving.");
+            }
+            if (existsUser()) {
+                bookService.saveSticker(file, stickerNumber);
+            }
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/sticker/{stickerNumber}")
+    @ResponseBody
+    @ApiOperation(value = "Deletes the sticker with a specific number for the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    public ResponseEntity<?> deleteSticker(@PathVariable int stickerNumber) {
         try {
             if (existsUser()) {
                 bookService.deleteCover();
@@ -111,6 +149,7 @@ public class FriendshipBookController extends Controller {
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
             }
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).build();

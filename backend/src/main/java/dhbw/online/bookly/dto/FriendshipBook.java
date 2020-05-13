@@ -1,6 +1,7 @@
 package dhbw.online.bookly.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dhbw.online.bookly.exception.FriendshipBookException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -48,4 +49,28 @@ public class FriendshipBook {
     @ApiModelProperty(notes = "list of all pages of the book",
             position = 4)
     private List<Page> pages;
+
+    @ApiModelProperty(notes = "ID of the Theme template",
+            position = 5)
+    private int theme;
+
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "the first sticker of the book",
+            position = 6)
+    private FriendshipBookSticker sticker1;
+
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "the second sticker of the book",
+            position = 7)
+    private FriendshipBookSticker sticker2;
+
+    public void setTheme(int theme){
+        if(theme < 0){
+            throw new FriendshipBookException("The theme number has to be positive");
+        } else {
+            this.theme = theme;
+        }
+    }
 }
