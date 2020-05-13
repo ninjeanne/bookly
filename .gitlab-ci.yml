@@ -17,6 +17,8 @@ test:
   stage: test
   script:
     - ./mvnw verify
+    # Print "Jacoco-Test-Coverage:xy.z%"
+    - cat backend/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
   artifacts:
     reports:
       junit:
