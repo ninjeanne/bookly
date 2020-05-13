@@ -124,7 +124,7 @@ public class FriendshipBookController extends Controller {
     public ResponseEntity<?> deleteSticker(@PathVariable int stickerNumber) {
         try {
             if (existsUser()) {
-                bookService.deleteCover();
+                bookService.deleteSticker(stickerNumber);
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
@@ -138,7 +138,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity update(@RequestParam @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book") String title) {
+    ResponseEntity updateTitle(@RequestParam @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book") String title) {
         if (title == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
@@ -146,6 +146,24 @@ public class FriendshipBookController extends Controller {
         if (existsUser()) {
             try {
                 FriendshipBook book = bookService.updateTitle(title);
+                return ResponseEntity.ok(book);
+            } catch (BooklyException fbe) {
+                log.warn(fbe.getMessage());
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Update the theme of the book of the logged in user")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
+            @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
+            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
+    ResponseEntity updateTheme(@RequestParam @ApiParam(value = "Theme number", example = "1") int theme) {
+        if (existsUser()) {
+            try {
+                FriendshipBook book = bookService.updateTheme(theme);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());

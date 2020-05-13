@@ -102,15 +102,25 @@ public class FriendshipBookService {
     }
 
     public FriendshipBook updateTitle(String title) {
-        User user = userService.getUser();
         FriendshipBook book = read();
         if (book != null) {
             book.setTitle(title);
             repository.save(book);
-            log.debug("Book title of book from user {} and with book id {} and title {} has been updated", user.getUsername(), book.getUuid(), title);
+            log.debug("Book title of book from user {} and with book id {} and title {} has been updated", book.getUser().getUsername(), book.getUuid(), title);
             return book;
         }
-        throw new FriendshipBookException("There is no book for user " + user.getUsername());
+        throw new FriendshipBookException("There is no book for user " + book.getUser().getUsername());
+    }
+
+    public FriendshipBook updateTheme(int theme) {
+        FriendshipBook book = read();
+        if (book != null) {
+            book.setTheme(theme);
+            repository.save(book);
+            log.debug("Cover theme from user {} has been updated", book.getUser().getUsername());
+            return book;
+        }
+        throw new FriendshipBookException("There is no book for user " + book.getUser().getUsername());
     }
 
     public void saveSticker(MultipartFile file, int stickerNumber) {
