@@ -184,7 +184,7 @@ public class Stepdefs {
 
         ResponseEntity<Page> response;
         response= oAuth2RestTemplate.postForEntity("http://localhost:8080/api/page", request, Page.class);
-        Assert.assertNull(response.getBody());
+        Assert.assertNotNull(response.getBody());
         Assert.assertFalse(response.getBody().getUuid().isEmpty()); //there should be a uuid
 
         return response.getBody().getUuid();

@@ -77,7 +77,6 @@ public class PageService {
             val pages = book.getPages();
             Page newPage = new Page();
             pages.add(newPage);
-            pageRepository.save(newPage);
             friendshipBookRepository.save(book);
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
             return newPage;
@@ -97,6 +96,7 @@ public class PageService {
                 val pageFromDb = getPage(uuid);
                 pagesFromDb.remove(pageFromDb);
                 friendshipBookRepository.save(book);
+                pageRepository.delete(pageFromDb);
                 return pagesFromDb;
             }
             throw new FriendshipBookException("There is no page with uuid "+uuid+" for user " + authenticationService.getUsername());

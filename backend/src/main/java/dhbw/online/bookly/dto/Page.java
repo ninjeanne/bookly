@@ -23,7 +23,7 @@ public class Page {
             String what_i_dont_like, String favorite_job, String my_hobbies, String fan_of, String favorite_movie, String favorite_sport, String favorite_book,
             String favorite_food, String nice_comment, String date, String leftOver) {
         if (uuid == null || uuid.equals("")) {
-            this.uuid = generateRandomUUIDfromList();
+            this.uuid = generateRandomUUID();
         } else {
             this.uuid = uuid;
         }
@@ -56,7 +56,7 @@ public class Page {
     }
 
     public Page() {
-        this.uuid = generateRandomUUIDfromList();
+        this.uuid = generateRandomUUID();
     }
 
     public Page(String pageUUID) {
