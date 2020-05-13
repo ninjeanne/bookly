@@ -46,7 +46,7 @@ public class TestData {
             if (!friendshipBookRepository.existsByUser(user)) {
                 friendshipBookRepository.save(friendshipBook);
                 try {
-                    friendshipBookService.saveImageForBook(friendshipBook, extractBytes("test_image.jpg"), 423867, "image/jpeg");
+                    friendshipBookService.saveCover(extractBytes("test_image.jpg"), 423867, "image/jpeg");
                     pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
                 } catch (IOException e) {
                     log.debug("Could not read test image in resources folder");
