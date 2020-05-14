@@ -13,28 +13,28 @@
                                     <span class="input-group-text">Name</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="name">
+                                       aria-describedby="inputGroup-sizing-default" v-model="name" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Phone</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="phone">
+                                       aria-describedby="inputGroup-sizing-default" v-model="phone" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Mobile</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="mobile">
+                                       aria-describedby="inputGroup-sizing-default" v-model="mobile" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Height</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="height">
+                                       aria-describedby="inputGroup-sizing-default" v-model="height" readonly>
                             </div>
                         </div>
                     </div>
@@ -45,28 +45,28 @@
                                     <span class="input-group-text">Haircolor</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="haircolor">
+                                       aria-describedby="inputGroup-sizing-default" v-model="haircolor" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Eyecolor</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="eyecolor">
+                                       aria-describedby="inputGroup-sizing-default" v-model="eyecolor" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Birthday</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="birthday">
+                                       aria-describedby="inputGroup-sizing-default" v-model="birthday" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Star Sign</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="star_sign">
+                                       aria-describedby="inputGroup-sizing-default" v-model="star_sign" readonly>
                             </div>
                         </div>
                     </div>
@@ -77,28 +77,28 @@
                                     <span class="input-group-text">Address</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="address">
+                                       aria-describedby="inputGroup-sizing-default" v-model="address" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Class</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="my_class">
+                                       aria-describedby="inputGroup-sizing-default" v-model="my_class" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">School</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="school">
+                                       aria-describedby="inputGroup-sizing-default" v-model="school" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Favorite Subject</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="subject">
+                                       aria-describedby="inputGroup-sizing-default" v-model="subject" readonly>
                             </div>
                         </div>
                     </div>
@@ -119,35 +119,35 @@
                                     <span class="input-group-text">Pet</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="pet">
+                                       aria-describedby="inputGroup-sizing-default" v-model="pet" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">I love ...</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="love">
+                                       aria-describedby="inputGroup-sizing-default" v-model="love" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">I hate ...</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="hate">
+                                       aria-describedby="inputGroup-sizing-default" v-model="hate" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Dreamjob</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="job">
+                                       aria-describedby="inputGroup-sizing-default" v-model="job" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Hobbies</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="hobbies">
+                                       aria-describedby="inputGroup-sizing-default" v-model="hobbies" readonly>
                             </div>
                         </div>
                     </div>
@@ -163,42 +163,42 @@
                                     <span class="input-group-text">Idol</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="idol">
+                                       aria-describedby="inputGroup-sizing-default" v-model="idol" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Movie</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="movie">
+                                       aria-describedby="inputGroup-sizing-default" v-model="movie" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Sport</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="sport">
+                                       aria-describedby="inputGroup-sizing-default" v-model="sport" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Book</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="book">
+                                       aria-describedby="inputGroup-sizing-default" v-model="book" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Food</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="food">
+                                       aria-describedby="inputGroup-sizing-default" v-model="food" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">What I wanted to say</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
-                                       aria-describedby="inputGroup-sizing-default" v-model="leftover">
+                                       aria-describedby="inputGroup-sizing-default" v-model="leftover" readonly>
                             </div>
                         </div>
                     </div>
@@ -209,11 +209,13 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div style="text-align: right" class="card-body">
-                    <a v-on:click="back" class="btn btn-primary">Back</a>
-                </div>
-                <div style="text-align: right" class="card-body">
-                    <a v-on:click="forward" class="btn btn-primary">Next</a>
+                <div>
+                    <div style="text-align: left" class="card-body left">
+                        <a v-on:click="back" class="btn btn-primary">Back</a>
+                    </div>
+                    <div style="text-align: right" class="card-body right">
+                        <a v-on:click="forward" class="btn btn-primary">Next</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -273,29 +275,29 @@
                             this.page_available = false;
                         }
                         this.uuid = page.uuid;
-                        this.name = page.name;
-                        this.address = page.address;
-                        this.phone = page.telephone;
-                        this.mobile = page.mobile;
-                        this.height = page.size;
-                        this.haircolor = page.hairColor;
-                        this.eyecolor = page.eyeColor;
-                        this.birthday = page.birthday;
-                        this.pet = page.favoritePet;
-                        this.my_class = page.schoolClass;
-                        this.school = page.school;
-                        this.subject = page.favoriteSubject;
-                        this.love = page.howToPleaseMe;
-                        this.hate = page.whatIDontLike;
-                        this.job = page.favoriteJob;
-                        this.hobbies = page.myHobbies;
-                        this.idol = page.fanOf;
-                        this.movie = page.favoriteMovie;
-                        this.sport = page.favoriteSport;
-                        this.book = page.favoriteBook;
-                        this.food = page.favoriteFood;
-                        this.leftover = page.niceComment;
-                        this.star_sign = page.starSign;
+                        this.setField(this.name , page.name);
+                        this.setField(this.address, page.address);
+                        this.setField(this.phone, page.telephone);
+                        this.setField(this.mobile, page.mobile);
+                        this.setField(this.height, page.size);
+                        this.setField(this.haircolor, page.hairColor);
+                        this.setField(this.eyecolor, page.eyeColor);
+                        this.setField(this.birthday, page.birthday);
+                        this.setField(this.pet, page.favoritePet);
+                        this.setField(this.my_class, page.schoolClass);
+                        this.setField(this.school, page.school);
+                        this.setField(this.subject, page.favoriteSubject);
+                        this.setField(this.love, page.howToPleaseMe);
+                        this.setField(this.hate, page.whatIDontLike);
+                        this.setField(this.job, page.favoriteJob);
+                        this.setField(this.hobbies, page.myHobbies);
+                        this.setField(this.idol, page.fanOf);
+                        this.setField(this.movie, page.favoriteMovie);
+                        this.setField(this.sport, page.favoriteSport);
+                        this.setField(this.book, page.favoriteBook);
+                        this.setField(this.food, page.favoriteFood);
+                        this.setField(this.leftover, page.niceComment);
+                        this.setField(this.star_sign, page.starSign);
                         this.getImage();
                     })
             },
@@ -317,6 +319,13 @@
             },
             backToBook : function () {
                 this.$router.push('/book');
+            },
+            setField(textfield, value) {
+                if(value === "null") {
+                    textfield = "";
+                } else {
+                    textfield = value;
+                }
             }
         }
     }
@@ -330,6 +339,14 @@
         width: 100%;
         height: 1px;
         background: black;
+    }
+    .left {
+        width: 50%;
+        float: left;
+    }
+    .right {
+        width: 50%;
+        float: right;
     }
     img {
         width: 20vh;
