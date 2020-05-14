@@ -162,7 +162,7 @@ public class FriendshipBookService {
             if(stickerNumber == 1){
                 book.setSticker1(null);
             }
-            if(stickerNumber == 1){
+            if(stickerNumber == 2){
                 book.setSticker2(null);
             }
             repository.save(book);
