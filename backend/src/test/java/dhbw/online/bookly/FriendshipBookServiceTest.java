@@ -58,7 +58,7 @@ public class FriendshipBookServiceTest {
     @Test
     public void testupdateTitle() {
         String title = "Other title";
-        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title, null);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, null);
         verify(friendshipBook, times(1)).setTitle(title);
         verify(friendshipBook, times(1)).setSubtitle(null);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -68,7 +68,7 @@ public class FriendshipBookServiceTest {
     public void testupdateSubtitle() {
         String title = "Other subtitle";
 
-        FriendshipBook friendshipBook = friendshipBookService.updateTitle(null, title);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, title);
         verify(friendshipBook, times(1)).setTitle(null);
         verify(friendshipBook, times(1)).setSubtitle(title);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -76,7 +76,7 @@ public class FriendshipBookServiceTest {
 
     @Test
     public void testupdateNullTitles() {
-        FriendshipBook friendshipBook = friendshipBookService.updateTitle(null, null);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, null);
         verify(friendshipBook, times(1)).setTitle(null);
         verify(friendshipBook, times(1)).setSubtitle(null);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -86,46 +86,33 @@ public class FriendshipBookServiceTest {
     public void testupdateTitles() {
         String title = "title";
         String subtitle = "subtitle";
-        FriendshipBook friendshipBook = friendshipBookService.updateTitle(title, subtitle);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, subtitle);
         verify(friendshipBook, times(1)).setTitle(title);
         verify(friendshipBook, times(1)).setSubtitle(subtitle);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
     }
 
     @Test
-    public void testDelete() {
-        Assert.assertTrue(friendshipBookService.delete());
-        verify(friendshipBookRepository, times(1)).delete(friendshipBook);
-    }
-
-    @Test
-    public void testDeleteCover() {
-        Assert.assertTrue(friendshipBookService.deleteCover());
-        verify(friendshipBook, times(1)).setCover(null);
-        verify(friendshipBookRepository, atLeastOnce()).save(friendshipBook);
-    }
-
-    @Test
     public void testCreate() {
-        Assert.assertFalse(friendshipBookService.create());
-        doReturn(true).when(friendshipBookService).exists();
+        Assert.assertFalse(friendshipBookService.createBookForLoggedInUser());
+        doReturn(true).when(friendshipBookService).existsBookForLoggedInUser();
         verify(friendshipBookRepository, never()).save(friendshipBook);
 
         Mockito.when(userService.getUser()).thenReturn(otherUser);
         Mockito.when(authenticationService.getUser()).thenReturn(otherUser);
-        verify(friendshipBookService, times(1)).exists();
-        doReturn(false).when(friendshipBookService).exists();
-        Assert.assertTrue(friendshipBookService.create());
+        verify(friendshipBookService, times(1)).existsBookForLoggedInUser();
+        doReturn(false).when(friendshipBookService).existsBookForLoggedInUser();
+        Assert.assertTrue(friendshipBookService.createBookForLoggedInUser());
 
         verify(friendshipBookRepository, times(1)).save(any());
     }
 
     @Test
     public void testExists() {
-        Assert.assertTrue(friendshipBookService.exists());
+        Assert.assertTrue(friendshipBookService.existsBookForLoggedInUser());
         Mockito.when(userService.getUser()).thenReturn(otherUser);
         Mockito.when(authenticationService.getUser()).thenReturn(otherUser);
-        Assert.assertFalse(friendshipBookService.exists());
+        Assert.assertFalse(friendshipBookService.existsBookForLoggedInUser());
     }
 
 }
