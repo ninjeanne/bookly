@@ -33,7 +33,7 @@ public class FriendshipBookController extends Controller {
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     ResponseEntity read() {
         if (existsUser()) {
-            FriendshipBook book = bookService.read();
+            FriendshipBook book = bookService.getBookForLoggedInUser();
             if (existsBook(book)) {
                 return ResponseEntity.ok(book);
             }
@@ -47,7 +47,7 @@ public class FriendshipBookController extends Controller {
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<String> getImage() {
-        FriendshipBook book = bookService.read();
+        FriendshipBook book = bookService.getBookForLoggedInUser();
         if (existsCover(book)) {
             return ResponseEntity.ok().contentType(MediaType.valueOf(book.getCover().getMediaType())).body(encodeBase64(book.getCover().getData()));
         } else {
@@ -85,7 +85,7 @@ public class FriendshipBookController extends Controller {
     public ResponseEntity<?> deleteFile() {
         try {
             if (existsUser()) {
-                bookService.deleteCover();
+                bookService.deleteCoverForLoggedInUser();
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
@@ -100,7 +100,7 @@ public class FriendshipBookController extends Controller {
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<String> getSticker(@PathVariable int stickerNumber) {
-        FriendshipBook book = bookService.read();
+        FriendshipBook book = bookService.getBookForLoggedInUser();
         if (stickerNumber == 1 && book.getSticker1() != null) {
             return ResponseEntity.ok().contentType(MediaType.valueOf(book.getSticker1().getMediaType())).body(encodeBase64(book.getSticker1().getData()));
         }
@@ -163,7 +163,7 @@ public class FriendshipBookController extends Controller {
         }
         if (existsUser()) {
             try {
-                FriendshipBook book = bookService.updateTitle(title, subtitle);
+                FriendshipBook book = bookService.updateTitleForLoggedInUser(title, subtitle);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
@@ -181,7 +181,7 @@ public class FriendshipBookController extends Controller {
     ResponseEntity updateTheme(@RequestParam @ApiParam(value = "Theme number", example = "1") int theme) {
         if (existsUser()) {
             try {
-                FriendshipBook book = bookService.updateTheme(theme);
+                FriendshipBook book = bookService.updateCoverThemeOfLoggedInUser(theme);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());

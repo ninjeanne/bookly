@@ -18,7 +18,7 @@ public class DeleteAccountService {
 
     public void deleteAll() {
         pageService.deleteAllPages();
-        friendshipBookService.delete();
+        friendshipBookService.deleteBookForLoggedInUser();
         userService.delete();
     }
 }

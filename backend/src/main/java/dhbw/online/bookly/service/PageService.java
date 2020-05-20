@@ -31,7 +31,7 @@ public class PageService {
     private AuthenticationService authenticationService;
 
     public List<Page> read() {
-        return friendshipBookService.read().getPages();
+        return friendshipBookService.getBookForLoggedInUser().getPages();
     }
 
     public void saveImageForPage(Page page, MultipartFile file) {
@@ -72,7 +72,7 @@ public class PageService {
     }
 
     public Page add() {
-        FriendshipBook book = friendshipBookService.read();
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             val pages = book.getPages();
             Page newPage = new Page();
@@ -89,7 +89,7 @@ public class PageService {
     }
 
     public List<Page> delete(String uuid) {
-        FriendshipBook book = friendshipBookService.read();
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             val pagesFromDb = book.getPages();
             if (pageRepository.existsByUuid(uuid)) {
@@ -105,7 +105,7 @@ public class PageService {
     }
 
     public void deleteAllPages() {
-        FriendshipBook book = friendshipBookService.read();
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             pageRepository.deleteAll(book.getPages());
             log.debug("all pages for user {} have been deleted", book.getUser().getUsername());
