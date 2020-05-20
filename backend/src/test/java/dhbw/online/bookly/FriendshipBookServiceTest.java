@@ -93,19 +93,6 @@ public class FriendshipBookServiceTest {
     }
 
     @Test
-    public void testDelete() {
-        Assert.assertTrue(friendshipBookService.deleteBookForLoggedInUser());
-        verify(friendshipBookRepository, times(1)).delete(friendshipBook);
-    }
-
-    @Test
-    public void testDeleteCover() {
-        Assert.assertTrue(friendshipBookService.deleteCoverForLoggedInUser());
-        verify(friendshipBook, times(1)).setCover(null);
-        verify(friendshipBookRepository, atLeastOnce()).save(friendshipBook);
-    }
-
-    @Test
     public void testCreate() {
         Assert.assertFalse(friendshipBookService.createBookForLoggedInUser());
         doReturn(true).when(friendshipBookService).existsBookForLoggedInUser();
