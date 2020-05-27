@@ -35,9 +35,9 @@ public class UserService {
 
     public User getUser() {
         sync();
-        if (!friendshipBookService.exists()) {
+        if (!friendshipBookService.existsBookForLoggedInUser()) {
             log.debug("Friendship book for user does not exist!");
-            friendshipBookService.create();
+            friendshipBookService.createBookForLoggedInUser();
         }
         return authenticationService.getUser();
     }

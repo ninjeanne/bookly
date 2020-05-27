@@ -28,7 +28,7 @@ public class FriendshipBookService {
     @Autowired
     private UserService userService;
 
-    public boolean exists() {
+    public boolean existsBookForLoggedInUser() {
         User user = authenticationService.getUser();
         boolean exists = repository.existsByUser(user);
         if (!exists) {
@@ -37,15 +37,20 @@ public class FriendshipBookService {
         return exists;
     }
 
-    public boolean create() {
+    public boolean createBookForLoggedInUser() {
         User user = authenticationService.getUser();
-        if (!exists()) {
-            repository.save(FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build());
+        if (!existsBookForLoggedInUser()) {
+            FriendshipBook empty = createEmptyFriendshipBook(user);
+            repository.save(empty);
             log.debug("Book created for user {}", user.getUsername());
             return true;
         }
         log.debug("Book for user {} does already exist.", user.getUsername());
         return false;
+    }
+
+    private FriendshipBook createEmptyFriendshipBook(User user) {
+        return FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
     }
 
     public void saveCover(MultipartFile file) {
@@ -57,71 +62,55 @@ public class FriendshipBookService {
     }
 
     public void saveCover(byte[] data, long size, String contentType) {
-        try {
-            FriendshipBook friendshipBook = read();
-            friendshipBook.setCover(FriendshipBookCover.builder().data(data).size(size).mediaType(contentType).build());
-            repository.save(friendshipBook);
-            log.debug("Book cover updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
-        } catch (NullPointerException e) {
-            throw new FriendshipBookException("Image couldn't be saved.");
-        }
+        FriendshipBook friendshipBook = getBookForLoggedInUser();
+        FriendshipBookCover cover = createFriendshipBookCover(data, size, contentType);
+        friendshipBook.setCover(cover);
+        repository.save(friendshipBook);
+        log.debug("Book cover updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
-    @Nullable
-    public FriendshipBook read() {
+    private FriendshipBookCover createFriendshipBookCover(byte[] data, long size, String contentType) {
+        return FriendshipBookCover.builder().data(data).size(size).mediaType(contentType).build();
+    }
+
+    public FriendshipBook getBookForLoggedInUser() {
         User user = userService.getUser();
-        Optional<FriendshipBook> book = repository.findByUser(user);
-        if (!book.isPresent()) {
+        Optional<FriendshipBook> bookOptional = repository.findByUser(user);
+        if (!bookOptional.isPresent()) {
             log.warn("Requested user {} couldn't be found in database", user.getUsername());
+            throw new FriendshipBookException("Friendship Book couldn't be found!");
         }
-        return book.orElse(null);
+        return bookOptional.get();
     }
 
-    public boolean delete() {
-        FriendshipBook book = read();
-        if (book != null) {
-            repository.delete(book);
-            log.debug("Book of user {} with book id {} has been deleted", book.getUser().getUsername(), book.getUuid());
-            return true;
-        }
-        log.warn("Book for user {} doesn't exist. Has it already been deleted?", book.getUser().getUsername());
-        return false;
+    public void deleteBookForLoggedInUser() {
+        FriendshipBook book = getBookForLoggedInUser();
+        repository.delete(book);
+        log.debug("Book of user {} with book id {} has been deleted", book.getUser().getUsername(), book.getUuid());
     }
 
-    public boolean deleteCover() {
-        User user = userService.getUser();
-        FriendshipBook book = read();
-        if (book != null) {
-            book.setCover(null);
-            repository.save(book);
-            log.debug("Book cover of user {} with book id {} has been deleted", user.getUsername(), book.getUuid());
-            return true;
-        }
-        log.error("Book for user {} doesn't exist. ", user.getUsername());
-        return false;
+    public void deleteCoverForLoggedInUser() {
+        FriendshipBook book = getBookForLoggedInUser();
+        book.setCover(null);
+        repository.save(book);
+        log.debug("Book cover of user {} with book id {} has been deleted", book.getUser().getUsername(), book.getUuid());
     }
 
-    public FriendshipBook updateTitle(String title, String subtitle) {
-        FriendshipBook book = read();
-        if (book != null) {
-            book.setTitle(title);
-            book.setSubtitle(subtitle);
-            repository.save(book);
-            log.debug("Book titles of book from user {} have been updated", book.getUser().getUsername());
-            return book;
-        }
-        throw new FriendshipBookException("There is no book for user " + book.getUser().getUsername());
+    public FriendshipBook updateTitleForLoggedInUser(String title, String subtitle) {
+        FriendshipBook book = getBookForLoggedInUser();
+        book.setTitle(title);
+        book.setSubtitle(subtitle);
+        repository.save(book);
+        log.debug("Book titles of book from user {} have been updated", book.getUser().getUsername());
+        return book;
     }
 
-    public FriendshipBook updateTheme(int theme) {
-        FriendshipBook book = read();
-        if (book != null) {
-            book.setTheme(theme);
-            repository.save(book);
-            log.debug("Cover theme from user {} has been updated", book.getUser().getUsername());
-            return book;
-        }
-        throw new FriendshipBookException("There is no book for user " + book.getUser().getUsername());
+    public FriendshipBook updateCoverThemeOfLoggedInUser(int theme) {
+        FriendshipBook book = getBookForLoggedInUser();
+        book.setTheme(theme);
+        repository.save(book);
+        log.debug("Cover theme from user {} has been updated", book.getUser().getUsername());
+        return book;
     }
 
     public void saveSticker(MultipartFile file, int stickerNumber) {
@@ -129,7 +118,6 @@ public class FriendshipBookService {
             switch (stickerNumber) {
                 case 1:
                     saveSticker1(file.getBytes(), file.getSize(), file.getContentType());
-
                     break;
                 case 2:
                     saveSticker2(file.getBytes(), file.getSize(), file.getContentType());
@@ -143,32 +131,29 @@ public class FriendshipBookService {
     }
 
     private void saveSticker1(byte[] data, long size, String contentType) {
-        FriendshipBook friendshipBook = read();
+        FriendshipBook friendshipBook = getBookForLoggedInUser();
         friendshipBook.setSticker1(FriendshipBookSticker.builder().data(data).size(size).mediaType(contentType).build());
         repository.save(friendshipBook);
         log.debug("Sticker1 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
     private void saveSticker2(byte[] data, long size, String contentType) {
-        FriendshipBook friendshipBook = read();
+        FriendshipBook friendshipBook = getBookForLoggedInUser();
         friendshipBook.setSticker2(FriendshipBookSticker.builder().data(data).size(size).mediaType(contentType).build());
         repository.save(friendshipBook);
         log.debug("Sticker2 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
     public void deleteSticker(int stickerNumber) {
-        FriendshipBook book = read();
-        if (book != null) {
-            if(stickerNumber == 1){
-                book.setSticker1(null);
-            }
-            if(stickerNumber == 2){
-                book.setSticker2(null);
-            }
-            repository.save(book);
-            log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);
+        FriendshipBook book = getBookForLoggedInUser();
+        if (stickerNumber == 1) {
+            book.setSticker1(null);
         }
-        log.error("Book for user {} doesn't exist. ", book.getUser().getUsername());
-        throw new FriendshipBookException("Book for user " + book.getUser().getUsername() + " doesn't exist. ");
+        if (stickerNumber == 2) {
+            book.setSticker2(null);
+        }
+        repository.save(book);
+        log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);
     }
 }
+
