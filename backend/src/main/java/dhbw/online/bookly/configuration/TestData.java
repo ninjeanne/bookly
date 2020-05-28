@@ -1,7 +1,7 @@
 package dhbw.online.bookly.configuration;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -45,26 +45,9 @@ public class TestData {
         if (!userRepository.existsByUsername(user.getUsername())) {
             userRepository.save(user);
             if (!friendshipBookRepository.existsByUser(user)) {
-                try {
-                    Image cover = Image.builder().data(extractBytes("test_image.jpg")).size(423867).mediaType("image/jpeg").build();
-                    friendshipBook.setCover(cover);
-                    friendshipBookRepository.save(friendshipBook);
-                    pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
-                } catch (IOException e) {
-                    log.debug("Could not read test image in resources folder");
-                }
+                friendshipBookRepository.save(friendshipBook);
             }
         }
-    }
-
-    public byte[] extractBytes(String imageName) throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        URL resource = classLoader.getResource(imageName);
-        // open image
-        assert resource != null;
-        File imgPath = new File(resource.getFile());
-        return Files.readAllBytes(imgPath.toPath());
     }
 
     private Page initPage() {

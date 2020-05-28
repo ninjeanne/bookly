@@ -22,68 +22,79 @@ import java.util.List;
 public class FriendshipBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(notes = "Is extracted from the authentication and the user where it belongs to" +
-            "the unique identifier of the book.",
-            example = "3",
-            required = true,
-            position = 0)
+    @ApiModelProperty(notes = "Is extracted from the authentication and the user where it belongs to" + "the unique identifier of the book.", example = "3",
+            required = true, position = 0)
     private int uuid;
 
-    @ApiModelProperty(notes = "the title of the book",
-            example = "My super fancy friendship book",
-            position = 1)
+    @ApiModelProperty(notes = "the title of the book", example = "My super fancy friendship book", position = 1)
     private String title;
 
-    @ApiModelProperty(notes = "the subtitle title of the book",
-            example = "My super fancy subtitle",
-            position = 2)
+    @ApiModelProperty(notes = "the subtitle title of the book", example = "My super fancy subtitle", position = 2)
     private String subtitle;
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
-    @ApiModelProperty(notes = "the cover image of the book",
-            position = 3)
+    @OneToOne(cascade = { CascadeType.ALL })
+    @ApiModelProperty(notes = "the cover image of the book", position = 3)
     private Image cover;
 
     @OneToOne
-    @ApiModelProperty(notes = "the user of which the book belongs to. is extracted from the authentication",
-            position = 4)
+    @ApiModelProperty(notes = "the user of which the book belongs to. is extracted from the authentication", position = 4)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Page.class)
-    @ApiModelProperty(notes = "list of all pages of the book",
-            position = 5)
+    @ApiModelProperty(notes = "list of all pages of the book", position = 5)
     private List<Page> pages = new ArrayList<>();
 
-    @ApiModelProperty(notes = "ID of the Theme template",
-            position = 6)
+    @ApiModelProperty(notes = "ID of the Theme template", position = 6)
     private int theme;
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
-    @ApiModelProperty(notes = "the first sticker of the book",
-            position = 7)
+    @OneToOne(cascade = { CascadeType.ALL })
+    @ApiModelProperty(notes = "the first sticker of the book", position = 7)
     private Image sticker1;
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
-    @ApiModelProperty(notes = "the second sticker of the book",
-            position = 8)
+    @OneToOne(cascade = { CascadeType.ALL })
+    @ApiModelProperty(notes = "the second sticker of the book", position = 8)
     private Image sticker2;
 
-    public void setTheme(int theme){
-        if(theme < 0){
+    public void setTheme(int theme) {
+        if (theme < 0) {
             throw new FriendshipBookException("The theme number has to be positive");
         } else {
             this.theme = theme;
         }
     }
 
-    public void setPages(ArrayList<Page> pages){
-        if(pages == null){
+    public void setPages(ArrayList<Page> pages) {
+        if (pages == null) {
             this.pages = new ArrayList<>();
             return;
         }
         this.pages = pages;
+    }
+
+    public void setCover(Image cover) {
+        if (cover == null) {
+            this.cover = new DummyImage();
+            return;
+        }
+        this.cover = cover;
+    }
+
+    public void setSticker1(Image sticker1) {
+        if (sticker1 == null) {
+            this.sticker1 = new DummyImage();
+            return;
+        }
+        this.sticker1 = sticker1;
+    }
+
+    public void setSticker2(Image sticker2) {
+        if (sticker2 == null) {
+            this.sticker2 = new DummyImage();
+            return;
+        }
+        this.sticker2 = sticker2;
     }
 }
