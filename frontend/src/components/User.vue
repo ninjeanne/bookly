@@ -108,13 +108,16 @@
       deletePage: function (uuid) {
         this.$store.dispatch("deletePage",{uuid: uuid})
                 .then(() => {
+                  function remove(array, element) {
+                    return array.filter(el => el !== element);
+                  }
                   const index = this.pagesUUID.indexOf(uuid);
                   if (index > -1) {
-                    this.pagesUUID.splice(index, 1);
-                    console.log(this.pagesUUID.splice(index, 1));
+                    this.pagesUUID = remove(this.pagesUUID, uuid);
                   }
                 })
       },
+
       logout: function () {
         this.$router.push("/");
         keycloak.logout();
