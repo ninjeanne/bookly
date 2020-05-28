@@ -7,9 +7,10 @@
 
 ### 2.Installation
 
-### 2.1 Clone code from directory via URL or SSH:
+### 2.1 Clone code from directory via URL or HTTPS:
 
 URL:    git@gitlab.com:project_bookly/bookly.git 
+
 HTTPS:  https://gitlab.com/project_bookly/bookly.git
 
 ### 2.2 Go to your project directory. 
