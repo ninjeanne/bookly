@@ -118,31 +118,9 @@ export default new Vuex.Store({
                     });
             })
         },
-        getPage({ },{uuid}) {
-            return new Promise((resolve) => {
-                apipublic.getPage(uuid)
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(err => {
-                        console.error(err);
-                    });
-            })
-        },
         newPage() {
             return new Promise((resolve) => {
                 api.newPage()
-                    .then(response => {
-                        resolve(response)
-                    })
-                    .catch(err => {
-                        console.error(err);
-                    });
-            })
-        },
-        updatePage({ },{json}) {
-            return new Promise((resolve) => {
-                apipublic.updatePage(json)
                     .then(response => {
                         resolve(response)
                     })
@@ -162,6 +140,17 @@ export default new Vuex.Store({
                     });
             })
         },
+        getPage({ },{uuid}) {
+            return new Promise((resolve) => {
+                apipublic.getPage(uuid)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
         getPageImage({ },{uuid}) {
             return new Promise((resolve) => {
                 apipublic.getPageImage(uuid)
@@ -169,6 +158,30 @@ export default new Vuex.Store({
                         resolve(response)
                     })
                     .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        updatePage({ },{json}) {
+            return new Promise((resolve) => {
+                apipublic.updatePage(json)
+                    .then(response => {
+                        resolve(response)
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+        },
+        getPageSticker({}, {uuid, number}) {
+            return new Promise((resolve) => {
+                apipublic.getPageSticker(uuid, number)
+                    .then((response) => {
+                        if(response.status === 200) {
+                            resolve(response)
+                        }
+                    })
+                    .catch(err=>{
                         console.error(err);
                     });
             })
@@ -183,7 +196,21 @@ export default new Vuex.Store({
                         console.error(err);
                     });
             })
-        }
+        },
+        editPageSticker({}, {uuid, image, number}) {
+            return new Promise((resolve) => {
+                apipublic.editPageSticker(uuid, image, number)
+                    .then(response => {
+                        if(response.status === 200) {
+                            console.log("success");
+                        }
+                        resolve(response)
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    });
+            })
+        },
     },
     getters: { }
 })

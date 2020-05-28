@@ -112,7 +112,6 @@ export default {
         })
     },
     deletePage(uuid) {
-        console.log(uuid);
         return AXIOS.delete("/page?uuid=" + uuid, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('vue-token')

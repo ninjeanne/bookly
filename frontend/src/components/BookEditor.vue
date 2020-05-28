@@ -25,6 +25,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
                 <picture-input
                         ref="pictureInputSticker1"
                         @change="onChangedSticker1"
@@ -35,6 +36,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
                 <picture-input
                         ref="pictureInputSticker2"
                         @change="onChangedSticker2"
@@ -45,7 +47,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUpload" v-bind:class="{ disabled: !image }">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
             </div>
         </div>
         <div style="clear: both"></div>
@@ -95,6 +97,13 @@
             onRemoved() {
                 this.image = '';
             },
+            attemptUploadImage() {
+                if (this.image) {
+                    this.$store.dispatch("editBookCover", {image: this.image})
+                        .then((response) => {
+                        })
+                }
+            },
             onChangedSticker1() {
                 if (this.$refs.pictureInputSticker1.file) {
                     this.sticker1 = this.$refs.pictureInputSticker1.file;
@@ -104,6 +113,12 @@
             },
             onRemovedSticker1() {
                 this.sticker1 = '';
+            },
+            attemptUploadSticker1() {
+                if (this.sticker1) {
+                    this.$store.dispatch("editBookSticker", {image: this.sticker1, number: "1"})
+                        .then((response) => { })
+                }
             },
             onChangedSticker2() {
                 if (this.$refs.pictureInputSticker2.file) {
@@ -115,15 +130,7 @@
             onRemovedSticker2() {
                 this.sticker2 = '';
             },
-            attemptUpload() {
-                if (this.image) {
-                    this.$store.dispatch("editBookCover", {image: this.image})
-                        .then((response) => { })
-                }
-                if (this.sticker1) {
-                    this.$store.dispatch("editBookSticker", {image: this.sticker1, number: "1"})
-                        .then((response) => { })
-                }
+            attemptUploadSticker2() {
                 if (this.sticker2) {
                     this.$store.dispatch("editBookSticker", {image: this.sticker2, number: "2"})
                         .then((response) => { })

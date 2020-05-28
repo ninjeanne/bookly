@@ -42,14 +42,14 @@
                         <div style="padding: 16px; text-align: left">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Haircolor</span>
+                                    <span class="input-group-text">Hair color</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
                                        aria-describedby="inputGroup-sizing-default" v-model="haircolor" readonly>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Eyecolor</span>
+                                    <span class="input-group-text">Eye color</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
                                        aria-describedby="inputGroup-sizing-default" v-model="eyecolor" readonly>
@@ -104,12 +104,12 @@
                     </div>
                     <div class="far-far-right-top">
                         <div class="far-left-top">
-                            <img :src="image">
+                            <img :src="sticker1">
                         </div>
                     </div>
                     <div class="left-mid">
                         <div class="far-left-top">
-                            <img id="img-large" :src="image">
+                            <img id="img-large" :src="sticker2">
                         </div>
                     </div>
                     <div class="right-mid">
@@ -137,7 +137,7 @@
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Dreamjob</span>
+                                    <span class="input-group-text">Dream job</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Default"
                                        aria-describedby="inputGroup-sizing-default" v-model="job" readonly>
@@ -153,7 +153,7 @@
                     </div>
                     <div class="left-bot">
                         <div class="far-left-top">
-                            <img :src="image">
+                            <img :src="sticker3">
                         </div>
                     </div>
                     <div class="mid-bot">
@@ -204,7 +204,7 @@
                     </div>
                     <div class="right-bot">
                         <div class="far-left-top">
-                            <img :src="image">
+                            <img :src="sticker4">
                         </div>
                     </div>
                 </div>
@@ -239,6 +239,10 @@
                 page_available: true,
                 uuid: null,
                 image: "",
+                sticker1: "",
+                sticker2: "",
+                sticker3: "",
+                sticker4: "",
                 name: "",
                 phone: "",
                 mobile: "",
@@ -299,12 +303,40 @@
                         this.setField(this.leftover, page.niceComment);
                         this.setField(this.star_sign, page.starSign);
                         this.getImage();
+                        this.getImage1();
+                        this.getImage2();
+                        this.getImage3();
+                        this.getImage4();
                     })
             },
             getImage() {
                 this.$store.dispatch("getPageImage", {uuid: this.uuid})
                     .then((response) => {
                         this.image = 'data:image/jpeg;base64,'.concat(response.data);
+                    })
+            },
+            getImage1() {
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "1"})
+                    .then((response) => {
+                        this.sticker1 = 'data:image/jpeg;base64,'.concat(response.data);
+                    })
+            },
+            getImage2() {
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "2"})
+                    .then((response) => {
+                        this.sticker2 = 'data:image/jpeg;base64,'.concat(response.data);
+                    })
+            },
+            getImage3() {
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "3"})
+                    .then((response) => {
+                        this.sticker3 = 'data:image/jpeg;base64,'.concat(response.data);
+                    })
+            },
+            getImage4() {
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "4"})
+                    .then((response) => {
+                        this.sticker4 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             back : function () {
