@@ -6,7 +6,6 @@ import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.exception.AuthenticationException;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.PageException;
-import dhbw.online.bookly.service.FriendshipBookService;
 import dhbw.online.bookly.service.PageService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,7 +36,7 @@ public class PagesController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity createPage() {
+    public ResponseEntity createPage() {
         if (existsUser()) {
             try {
                 val newpage = pageService.addNewPage();
@@ -58,7 +57,7 @@ public class PagesController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity readPage() {
+    public ResponseEntity readPage() {
         if (existsUser()) {
             val pages = pageService.readPages();
             return ResponseEntity.ok(pages);
@@ -71,7 +70,7 @@ public class PagesController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns list of the current pages", response = Page.class),
             @ApiResponse(code = 409, message = "Conflict - the page couldn't be found and deleted"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity deletePage(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
+    public ResponseEntity deletePage(@RequestParam @ApiParam(value = "The uuid of the page that shall be deleted", required = true, example = "2") String uuid) {
         if (existsUser()) {
             if (uuid != null) {
                 try {
@@ -92,7 +91,7 @@ public class PagesController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the deleting failed"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity deletePage() {
+    public ResponseEntity deletePage() {
         pageService.deleteAllPages();
         return ResponseEntity.ok().build();
     }
@@ -127,7 +126,7 @@ public class PagesController extends Controller {
     @ApiOperation(value = "Send a new page sticker")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data")})
-    public ResponseEntity<?> uploadSticker(@RequestParam("file") MultipartFile file,@RequestParam String uuid, @PathVariable int stickerNumber) {
+    public ResponseEntity uploadSticker(@RequestParam("file") MultipartFile file,@RequestParam String uuid, @PathVariable int stickerNumber) {
         try {
             if (file == null) {
                 throw new PageException("There was no sticker in the request for saving.");
@@ -146,7 +145,7 @@ public class PagesController extends Controller {
     @ApiOperation(value = "Deletes the sticker with a specific number for the page")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data")})
-    public ResponseEntity<?> deleteSticker(@RequestParam String uuid, @PathVariable int stickerNumber) {
+    public ResponseEntity deleteSticker(@RequestParam String uuid, @PathVariable int stickerNumber) {
         try {
             Page page=pageService.findPageById(uuid);
             pageService.deleteSticker(page, stickerNumber);
