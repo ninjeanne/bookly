@@ -156,18 +156,21 @@ public class PageService {
     }
 
     public void deleteSticker(Page page, int stickerNumber) {
-
-        if (stickerNumber == 1) {
-            page.setPageStickerOne(new DummyImage());
-        }
-        if (stickerNumber == 2) {
-            page.setPageStickerTwo(new DummyImage());
-        }
-        if (stickerNumber == 3) {
-            page.setPageStickerThree(new DummyImage());
-        }
-        if (stickerNumber == 4) {
-            page.setPageStickerFour(new DummyImage());
+        switch (stickerNumber){
+            case 1:
+                page.setPageStickerOne(new DummyImage());
+                break;
+            case 2:
+                page.setPageStickerTwo(new DummyImage());
+                break;
+            case 3:
+                page.setPageStickerThree(new DummyImage());
+                break;
+            case 4:
+                page.setPageStickerFour(new DummyImage());
+                break;
+            default:
+                throw new PageException("Wrong sticker number");
         }
         pageRepository.save(page);
         log.debug("Page sticker of page {} with sticker {} has been deleted", page.getUuid(), stickerNumber);
