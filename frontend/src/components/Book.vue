@@ -2,17 +2,32 @@
     <div id="main">
         <div class="card">
             <div class="content">
-                <div class="container">
-                    <div class="top-left">
+                <div class="container-0" v-if="theme === 0">
+                    <div class="top-left-0">
                         <img :src="sticker1">
                     </div>
-                    <div class="top-right">
+                    <div class="top-right-0">
                         <img :src="sticker2">
                     </div>
-                    <div class="mid">
+                    <div class="mid-0">
                         <img :src="cover">
                     </div>
-                    <div class="bot">
+                    <div class="bot-0">
+                        <h4 class="card-title"><strong>{{ title }}</strong></h4>
+                        <h5 class="card-title"><strong>{{ subtitle }}</strong></h5>
+                    </div>
+                </div>
+                <div class="container-1" v-else-if="theme === 1">
+                    <div class="top-1">
+                        <img :src="cover">
+                    </div>
+                    <div class="mid-left-1">
+                        <img :src="sticker1">
+                    </div>
+                    <div class="mid-right-1">
+                        <img :src="sticker2">
+                    </div>
+                    <div class="bot-1">
                         <h4 class="card-title"><strong>{{ title }}</strong></h4>
                         <h5 class="card-title"><strong>{{ subtitle }}</strong></h5>
                     </div>
@@ -39,6 +54,7 @@
         },
         data() {
             return {
+                theme: 0,
                 title: "",
                 subtitle: "",
                 cover: "",
@@ -68,9 +84,17 @@
             getBook() {
                 this.$store.dispatch("getBook")
                     .then((response) => {
-                        this.title = response.data.title;
-                        this.subtitle = response.data.subtitle;
+                        this.setField(this.title, response.data.title);
+                        this.setField(this.subtitle, response.data.subtitle);
+                        this.setField(this.theme, response.data.theme);
                     })
+            },
+            setField(textfield, value) {
+                if(value === "null") {
+                    textfield = "";
+                } else {
+                    textfield = value;
+                }
             }
         }
     }
@@ -91,27 +115,51 @@
     img {
         max-height: 30vh;
     }
-    .container {
+    /* Theme 0 */
+    .container-0 {
         display: grid;
         width: 100%;
         height: 100%;
-        grid-template-areas: "top-left top-right"
-        "mid mid"
-        "bot bot"
-        "bot bot";
+        grid-template-areas: "top-left-0 top-right-0"
+        "mid-0 mid-0"
+        "bot-0 bot-0"
+        "bot-0 bot-0";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr 0.1fr;
     }
-    .top-left {
-        grid-area: top-left;
+    .top-left-0 {
+        grid-area: top-left-0;
     }
-    .top-right {
-        grid-area: top-right;
+    .top-right-0 {
+        grid-area: top-right-0;
     }
-    .mid {
-        grid-area: mid;
+    .mid-0 {
+        grid-area: mid-0;
     }
-    .bot {
-        grid-area: bot;
+    .bot-0 {
+        grid-area: bot-0;
+    }
+    /* Theme 1 */
+    .container-1 {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-areas: "top-1 top-1"
+        "mid-left-1 mid-right-1"
+        "bot-1 bot-1";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 0.1fr;
+    }
+    .top-1 {
+        grid-area: top-1;
+    }
+    .mid-left-1 {
+        grid-area: mid-left-1;
+    }
+    .mid-right-1 {
+        grid-area: mid-right-1;
+    }
+    .bot-1 {
+        grid-area: bot-1;
     }
 </style>

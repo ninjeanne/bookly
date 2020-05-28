@@ -248,7 +248,7 @@
                 <button class="btn btn-primary" @click="attemptUploadSticker4">Upload</button>
             </div>
         </div>
-        <a v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</a>
+        <button v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</button>
     </div>
     <div v-else class="main">
         <h2>Whoops, something went wrong :/</h2>

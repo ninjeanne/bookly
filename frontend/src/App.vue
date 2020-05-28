@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="footer-copyright text-center py-3">© 2019 Copyright:
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
         <a href="https://bookly.online"> bookly.online</a>
       </div>
     </footer>

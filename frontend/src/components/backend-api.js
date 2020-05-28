@@ -44,9 +44,11 @@ export default {
             }
         });
     },
-    editBook(title, subtitle) {
-        return AXIOS.post("/friendshipbook/title" +
-            "?title=" + title + "&subtitle=" + subtitle,
+    editBook(title, subtitle, theme) {
+        return AXIOS.post("/friendshipbook"
+            + "?title=" + title
+            + "&subtitle=" + subtitle
+            + "&theme=" + theme,
             { },
             {
                 headers: {

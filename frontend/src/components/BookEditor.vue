@@ -11,6 +11,11 @@
                     <br>
                     <input id="subtitle" v-model="subtitle" type="text" name="subtitle">
                     <br>
+                    <select v-model="theme">
+                        <option selected>0</option>
+                        <option>1</option>
+                    </select>
+                    <br>
                     <button type="submit" class="btn btn-primary">Confirm</button>
                 </form>
             </div>
@@ -70,6 +75,7 @@
                 username: '',
                 title: "",
                 subtitle: "",
+                theme: "0",
                 image: "",
                 sticker1: "",
                 sticker2: ""
@@ -84,7 +90,7 @@
                     })
             },
             editBook() {
-                this.$store.dispatch("editBook", {title: this.title, subtitle: this.subtitle})
+                this.$store.dispatch("editBook", {title: this.title, subtitle: this.subtitle, theme: this.theme})
                     .then((response) => { })
             },
             onChanged() {

@@ -42,9 +42,9 @@ export default new Vuex.Store({
                     });
             })
         },
-        editBook({commit}, {title, subtitle}) {
+        editBook({commit}, {title, subtitle, theme}) {
             return new Promise((resolve) => {
-                api.editBook(title, subtitle)
+                api.editBook(title, subtitle, theme)
                     .then(response => {
                         resolve(response)
                     })
