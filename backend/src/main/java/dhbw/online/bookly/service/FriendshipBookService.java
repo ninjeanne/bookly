@@ -49,7 +49,7 @@ public class FriendshipBookService {
     }
 
     private FriendshipBook createEmptyFriendshipBook(User user) {
-        return FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
+        return FriendshipBook.builder().cover(new DummyImage()).user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
     }
 
     public void saveCover(MultipartFile file) {

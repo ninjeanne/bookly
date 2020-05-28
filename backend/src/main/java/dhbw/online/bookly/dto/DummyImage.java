@@ -1,7 +1,6 @@
 package dhbw.online.bookly.dto;
 
 import io.swagger.annotations.ApiModel;
-import lombok.Data;
 
 import javax.persistence.Entity;
 import java.io.File;
@@ -9,22 +8,27 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 
-@Data
 @Entity
-@ApiModel(description = "Class representing the dummy image of a page entry.")
+@ApiModel(description = "Class representing any dummy image.")
 public class DummyImage extends Image {
-    @Override
-    public void setUuid(int uuid) {
-        super.setUuid(0);
-    }
 
-    public DummyImage() {
+    @Override
+    public byte[] getData() {
         try {
-            setData(extractBytes("test_image.jpg"));
+            return extractBytes("test_image.jpg");
         } catch (IOException e) {
         }
-        setSize(423867);
-        setMediaType("image/jpeg");
+        return null;
+    }
+
+    @Override
+    public long getSize() {
+        return 423867;
+    }
+
+    @Override
+    public String getMediaType() {
+        return "image/jpeg";
     }
 
     private byte[] extractBytes(String imageName) throws IOException {
