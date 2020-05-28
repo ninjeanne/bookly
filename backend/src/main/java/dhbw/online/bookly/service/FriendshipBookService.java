@@ -155,3 +155,4 @@ public class FriendshipBookService {
         log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);
     }
 }
+
