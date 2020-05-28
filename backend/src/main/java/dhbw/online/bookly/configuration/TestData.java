@@ -29,10 +29,6 @@ public class TestData {
     private UserRepository userRepository;
     @Autowired
     private FriendshipBookRepository friendshipBookRepository;
-    @Autowired
-    private FriendshipBookService friendshipBookService;
-    @Autowired
-    private PageService pageService;
 
     @PostConstruct
     private void initialize() {
@@ -40,8 +36,8 @@ public class TestData {
 
         Page page = initPage();
         Page secondPage = initSecondPage();
-        FriendshipBook friendshipBook = FriendshipBook.builder().title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
-
+        FriendshipBook friendshipBook = FriendshipBook.builder().cover(new DummyImage()).title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
+        System.out.println(friendshipBook.getCover().getSize());
         if (!userRepository.existsByUsername(user.getUsername())) {
             userRepository.save(user);
             if (!friendshipBookRepository.existsByUser(user)) {

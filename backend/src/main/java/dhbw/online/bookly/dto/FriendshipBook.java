@@ -35,7 +35,7 @@ public class FriendshipBook {
     @JsonIgnore
     @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "the cover image of the book", position = 3)
-    private Image cover;
+    private Image cover = new DummyImage();
 
     @OneToOne
     @ApiModelProperty(notes = "the user of which the book belongs to. is extracted from the authentication", position = 4)
@@ -51,12 +51,12 @@ public class FriendshipBook {
     @JsonIgnore
     @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "the first sticker of the book", position = 7)
-    private Image sticker1;
+    private Image sticker1 = new DummyImage();
 
     @JsonIgnore
     @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "the second sticker of the book", position = 8)
-    private Image sticker2;
+    private Image sticker2 = new DummyImage();
 
     public void setTheme(int theme) {
         if (theme < 0) {
@@ -74,27 +74,4 @@ public class FriendshipBook {
         this.pages = pages;
     }
 
-    public void setCover(Image cover) {
-        if (cover == null) {
-            this.cover = new DummyImage();
-            return;
-        }
-        this.cover = cover;
-    }
-
-    public void setSticker1(Image sticker1) {
-        if (sticker1 == null) {
-            this.sticker1 = new DummyImage();
-            return;
-        }
-        this.sticker1 = sticker1;
-    }
-
-    public void setSticker2(Image sticker2) {
-        if (sticker2 == null) {
-            this.sticker2 = new DummyImage();
-            return;
-        }
-        this.sticker2 = sticker2;
-    }
 }
