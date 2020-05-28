@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
 
 @Data
 @Entity
@@ -21,13 +20,18 @@ public class Page {
     public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
                 String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
                 String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
-                String favoriteFood, String niceComment, String date, String leftOver) {
+                String favoriteFood, String niceComment, String date, String leftOver, PageSticker pageStickerOne,
+                PageSticker pageStickerTwo,PageSticker pageStickerThree, PageSticker pageStickerFour) {
         if (uuid == null || uuid.equals("")) {
-            this.uuid = generateRandomUUIDfromList();
+            this.uuid = generateRandomUUID();
         } else {
             this.uuid = uuid;
         }
         this.pageImage = pageImage;
+        this.pageStickerOne = pageStickerOne;
+        this.pageStickerTwo = pageStickerTwo;
+        this.pageStickerThree = pageStickerThree;
+        this.pageStickerFour = pageStickerFour;
         this.name = name;
         this.address = address;
         this.telephone = telephone;
@@ -56,7 +60,7 @@ public class Page {
     }
 
     public Page() {
-        this.uuid = generateRandomUUIDfromList();
+        this.uuid = generateRandomUUID();
     }
 
     public Page(String pageUUID) {
@@ -147,33 +151,26 @@ public class Page {
     @ApiModelProperty(notes = "last words of the friend", position = 26)
     private String leftOver;
 
-    private String generateRandomUUIDfromList() {
-        final long numberOfLines = 370100L;
-        long randomLineNumber1 = getRandomNumberLong(1, numberOfLines);
-        long randomLineNumber2 = getRandomNumberLong(1, numberOfLines);
-        long randomLineNumber3 = getRandomNumberLong(1, numberOfLines);
-        StringBuilder newPageUUID = new StringBuilder();
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "Page Sticker", position = 27)
+    private PageSticker pageStickerOne;
 
-            URL resource = classLoader.getResource("words_alpha.txt");
-            File file = new File(resource.getFile());
-            try (FileReader readfile = new FileReader(file)) {
-                BufferedReader readbuffer = new BufferedReader(readfile);
-                for (long lineNumber = 1; lineNumber < numberOfLines; lineNumber++) {
-                    if (lineNumber == randomLineNumber1 || lineNumber == randomLineNumber2 || lineNumber == randomLineNumber3) {
-                        newPageUUID.append(readbuffer.readLine() + ":");
-                    } else {
-                        readbuffer.readLine();
-                    }
-                }
-                readbuffer.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return newPageUUID.toString();
-    }
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "Page Sticker", position = 28)
+    private PageSticker pageStickerTwo;
+
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "Page Sticker", position = 29)
+    private PageSticker pageStickerThree;
+
+    @JsonIgnore
+    @OneToOne(cascade = {CascadeType.ALL})
+    @ApiModelProperty(notes = "Page Sticker", position = 30)
+    private PageSticker pageStickerFour;
+
 
     private String generateRandomUUID() {
         String pageUUID = "no:pageUUID:Set";
@@ -205,8 +202,4 @@ public class Page {
         return pageUUID;
     }
 
-    public static long getRandomNumberLong(long min, long max) {
-        Random random = new Random();
-        return random.longs(min, (max + 1)).findFirst().getAsLong();
-    }
 }

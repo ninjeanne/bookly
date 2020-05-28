@@ -15,11 +15,11 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "Class representing the book cover of a friendship book")
-public class FriendshipBookCover {
+@ApiModel(description = "Class representing a sticker of a friendship book")
+public class FriendshipBookSticker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ApiModelProperty(notes = "the unique identifier of the cover image",
+    @ApiModelProperty(notes = "the unique identifier of the sticker image",
             example = "3",
             position = 0)
     private int uuid;
@@ -27,16 +27,16 @@ public class FriendshipBookCover {
     @Lob
     @Column(length=100000)
     @Type(type = "org.hibernate.type.ImageType")
-    @ApiModelProperty(notes = "the binary data of the cover image",
+    @ApiModelProperty(notes = "the binary data of the sticker image",
             position = 1)
     private byte[] data;
 
-    @ApiModelProperty(notes = "the size of the cover image",
+    @ApiModelProperty(notes = "the size of the sticker image",
             example = "985494823",
             position = 2)
     private long size;
 
-    @ApiModelProperty(notes = "the media type of the cover image",
+    @ApiModelProperty(notes = "the media type of the sticker image",
             example = "image/png",
             position = 0)
     private String mediaType;

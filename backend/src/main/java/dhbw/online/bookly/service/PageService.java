@@ -2,6 +2,7 @@ package dhbw.online.bookly.service;
 
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Page;
+import dhbw.online.bookly.dto.PageSticker;
 import dhbw.online.bookly.dto.PageImage;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
@@ -21,6 +22,8 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class PageService {
+    private String updateMessage="Sticker updated for page {}";
+    private String noBookForUserMessage="There is no book for user ";
     @Autowired
     private FriendshipBookService friendshipBookService;
     @Autowired
@@ -30,8 +33,8 @@ public class PageService {
     @Autowired
     private AuthenticationService authenticationService;
 
-    public List<Page> read() {
-        return friendshipBookService.read().getPages();
+    public List<Page> readPages() {
+        return friendshipBookService.getBookForLoggedInUser().getPages();
     }
 
     public void saveImageForPage(Page page, MultipartFile file) {
@@ -53,10 +56,10 @@ public class PageService {
     }
 
     public Page findPageByUserAndId(String uuid) {
-        List<Page> pagesByUser = read();
+        List<Page> pagesByUser = readPages();
 
         for (Page page : pagesByUser) {
-            if (page.getUuid().equals( uuid)) {
+            if (page.getUuid().equals(uuid)) {
                 return page;
             }
         }
@@ -71,8 +74,8 @@ public class PageService {
         throw new PageException("Page couldn't be found");
     }
 
-    public Page add() {
-        FriendshipBook book = friendshipBookService.read();
+    public Page addNewPage() {
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             val pages = book.getPages();
             Page newPage = new Page();
@@ -81,7 +84,7 @@ public class PageService {
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
             return newPage;
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     private Page getPage(String uuid) {
@@ -89,7 +92,7 @@ public class PageService {
     }
 
     public List<Page> delete(String uuid) {
-        FriendshipBook book = friendshipBookService.read();
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             val pagesFromDb = book.getPages();
             if (pageRepository.existsByUuid(uuid)) {
@@ -99,13 +102,13 @@ public class PageService {
                 pageRepository.delete(pageFromDb);
                 return pagesFromDb;
             }
-            throw new FriendshipBookException("There is no page with uuid "+uuid+" for user " + authenticationService.getUsername());
+            throw new FriendshipBookException("There is no page with uuid " + uuid + " for user " + authenticationService.getUsername());
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     public void deleteAllPages() {
-        FriendshipBook book = friendshipBookService.read();
+        FriendshipBook book = friendshipBookService.getBookForLoggedInUser();
         if (book != null) {
             pageRepository.deleteAll(book.getPages());
             log.debug("all pages for user {} have been deleted", book.getUser().getUsername());
@@ -115,7 +118,7 @@ public class PageService {
             log.debug("Book for user {} has been updated", book.getUser().getUsername());
             return;
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     public boolean update(Page apiPage) {
@@ -125,6 +128,74 @@ public class PageService {
             return true;
         }
         return false;
+    }
+
+    private void saveStickerOne(Page page,byte[] data, long size, String contentType) {
+
+        page.setPageStickerOne(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+        pageRepository.save(page);
+        log.debug(updateMessage, page.getUuid());
+    }
+
+    private void saveStickerTwo(Page page,byte[] data, long size, String contentType) {
+        page.setPageStickerTwo(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+        pageRepository.save(page);
+        log.debug(updateMessage, page.getUuid());
+    }
+
+    private void saveStickerThree(Page page,byte[] data, long size, String contentType) {
+        page.setPageStickerThree(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+        pageRepository.save(page);
+        log.debug(updateMessage, page.getUuid());
+    }
+
+    private void saveStickerFour(Page page,byte[] data, long size, String contentType) {
+        page.setPageStickerFour(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+        pageRepository.save(page);
+        log.debug(updateMessage, page.getUuid());
+    }
+
+    public void deleteSticker(Page page, int stickerNumber) {
+
+        if (stickerNumber == 1) {
+            page.setPageStickerOne(null);
+        }
+        if (stickerNumber == 2) {
+            page.setPageStickerTwo(null);
+        }
+        if (stickerNumber == 3) {
+            page.setPageStickerThree(null);
+        }
+        if (stickerNumber == 4) {
+            page.setPageStickerFour(null);
+        }
+        pageRepository.save(page);
+        log.debug("Page sticker of page {} with sticker {} has been deleted",page.getUuid(), stickerNumber);
+
+    }
+
+
+    public void saveSticker(Page page, MultipartFile file, int stickerNumber) {
+        try {
+            switch (stickerNumber) {
+                case 1:
+                    saveStickerOne(page,file.getBytes(), file.getSize(), file.getContentType());
+                    break;
+                case 2:
+                    saveStickerTwo(page,file.getBytes(), file.getSize(), file.getContentType());
+                    break;
+                case 3:
+                    saveStickerThree(page,file.getBytes(), file.getSize(), file.getContentType());
+                    break;
+                case 4:
+                    saveStickerFour(page,file.getBytes(), file.getSize(), file.getContentType());
+                    break;
+                default:
+                    throw new FriendshipBookException("Wrong sticker number");
+            }
+        } catch (IOException e) {
+            throw new FriendshipBookException("Sticker " + stickerNumber + " couldn't be saved.");
+        }
     }
 
 }
