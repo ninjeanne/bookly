@@ -235,8 +235,8 @@ Human Resources
 
 | Milestone | Planned Start Date | Actual Start Date | Planned End Date | Actual End Date |
 |---|---|---|---|---|
-| Have Unit Tests | 13.5.2020 | 13.5.2020   | 4.6.2020   | **tbd**   |
-| 20% coverage | 13.5.2020 | 13.5.2020   | 4.6.2020   | 13.5.2020   |
+| Have Unit Tests | 13.5.2020 | 13.5.2020   | 4.6.2020   | 28.5.2020  |
+| 20% coverage | 13.5.2020 | 13.5.2020   | 4.6.2020   | 28.5.2020   |
 | Tests integrated in CI | 13.5.2020 | 13.5.2020 | 13.5.2020 | 13.5.2020 |
 
 
