@@ -30,7 +30,7 @@ public class Image {
     @ApiModelProperty(notes = "the binary data of the page image",
             position = 1)
     private byte[] data;
-
+//TBD
     @ApiModelProperty(notes = "the size of the page image",
             example = "985494823",
             position = 2)
