@@ -1,6 +1,7 @@
 package dhbw.online.bookly.controller;
 
 import dhbw.online.bookly.dto.FriendshipBook;
+import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.service.FriendshipBookService;
@@ -95,26 +96,24 @@ public class FriendshipBookController extends Controller {
     }
 
     @GetMapping(value = "/sticker/{stickerNumber}")
-    @ApiOperation(value = "Returns cover image of the book of the logged in user")
+    @ApiOperation(value = "Returns sticker 0 or 1 of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the cover image of the book of the logged in user, returns byte array",
             response = byte[].class), @ApiResponse(code = 404, message = "Not found - the image doesn't exist"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity<String> getSticker(@PathVariable int stickerNumber) {
         FriendshipBook book = bookService.getBookForLoggedInUser();
-        if (stickerNumber == 1 && book.getSticker1() != null) {
-            return ResponseEntity.ok().contentType(MediaType.valueOf(book.getSticker1().getMediaType())).body(encodeBase64(book.getSticker1().getData()));
-        }
-        if (stickerNumber == 2 && book.getSticker2() != null){
-            return ResponseEntity.ok().contentType(MediaType.valueOf(book.getSticker2().getMediaType())).body(encodeBase64(book.getSticker2().getData()));
-        }
-        else {
-            return ResponseEntity.notFound().build();
+        try {
+            Image sticker = book.getSticker(stickerNumber);
+            return ResponseEntity.ok().contentType(MediaType.valueOf(sticker.getMediaType())).body(encodeBase64(sticker.getData()));
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
     @PostMapping(value = "/sticker/{stickerNumber}")
     @ResponseBody
-    @ApiOperation(value = "Send a new image as cover for the book of the logged in user")
+    @ApiOperation(value = "Send a new sticker 0-3 for the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
@@ -124,7 +123,7 @@ public class FriendshipBookController extends Controller {
                 throw new FriendshipBookException("There was no sticker image in the request for saving.");
             }
             if (existsUser()) {
-                bookService.saveSticker(file, stickerNumber);
+                bookService.saveSticker(stickerNumber, file);
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
@@ -146,7 +145,7 @@ public class FriendshipBookController extends Controller {
             }
         } catch (BooklyException e) {
             log.warn(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -156,7 +155,11 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle, @RequestParam(required = false) @ApiParam(required = false, value = "New theme", example = "number of the theme") int theme) {
+    public ResponseEntity updateTitle(
+            @RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book",
+                    required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle",
+            example = "My super duper fancy sub title") String subtitle,
+            @RequestParam(required = false) @ApiParam(required = false, value = "New theme", example = "number of the theme") int theme) {
         if (title == null || subtitle == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();

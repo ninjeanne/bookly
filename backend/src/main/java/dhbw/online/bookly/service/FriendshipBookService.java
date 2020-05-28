@@ -105,45 +105,20 @@ public class FriendshipBookService {
         return book;
     }
 
-    public void saveSticker(MultipartFile file, int stickerNumber) {
+    public void saveSticker(int stickerNumber, MultipartFile file) {
+        FriendshipBook friendshipBook = getBookForLoggedInUser();
         try {
-            switch (stickerNumber) {
-                case 1:
-                    saveSticker1(file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                case 2:
-                    saveSticker2(file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                default:
-                    throw new FriendshipBookException("Wrong sticker number");
-            }
+            friendshipBook.setSticker(stickerNumber, Image.builder().data(file.getBytes()).size(file.getSize()).mediaType(file.getContentType()).build());
         } catch (IOException e) {
-            throw new FriendshipBookException("Sticker " + stickerNumber + " couldn't be saved.");
+           throw new FriendshipBookException("Couldn't update sticker " + stickerNumber);
         }
-    }
-
-    private void saveSticker1(byte[] data, long size, String contentType) {
-        FriendshipBook friendshipBook = getBookForLoggedInUser();
-        friendshipBook.setSticker1(Image.builder().data(data).size(size).mediaType(contentType).build());
         repository.save(friendshipBook);
-        log.debug("Sticker1 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
-    }
-
-    private void saveSticker2(byte[] data, long size, String contentType) {
-        FriendshipBook friendshipBook = getBookForLoggedInUser();
-        friendshipBook.setSticker2(Image.builder().data(data).size(size).mediaType(contentType).build());
-        repository.save(friendshipBook);
-        log.debug("Sticker2 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
+        log.debug("Sticker {} updated for user {} and its book id {}", stickerNumber, friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
     public void deleteSticker(int stickerNumber) {
         FriendshipBook book = getBookForLoggedInUser();
-        if (stickerNumber == 1) {
-            book.setSticker1(new DummyImage());
-        }
-        if (stickerNumber == 2) {
-            book.setSticker2(new DummyImage());
-        }
+        book.setSticker(stickerNumber, new DummyImage());
         repository.save(book);
         log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);
     }

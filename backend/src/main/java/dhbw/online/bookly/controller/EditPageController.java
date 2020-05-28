@@ -1,5 +1,6 @@
 package dhbw.online.bookly.controller;
 
+import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.exception.BooklyException;
 import dhbw.online.bookly.exception.PageException;
@@ -101,28 +102,20 @@ public class EditPageController extends Controller {
         return ResponseEntity.ok().build();
     }
 
-
     @GetMapping(value = "/sticker/{stickerNumber}")
     @ApiOperation(value = "Returns page sticker")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the sticker of the logged in user, returns byte array",
-            response = byte[].class), @ApiResponse(code = 404, message = "Not found - the sticker doesn't exist"),
-            @ApiResponse(code = 409, message = "conflict - missing or wrong uuid") })
-    public ResponseEntity<String> getSticker(@RequestParam String uuid,@PathVariable int stickerNumber) {
-        Page page =pageService.findPageById(uuid);
-        if (stickerNumber == 1 && page.getPageStickerOne() != null) {
-            return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageStickerOne().getMediaType())).body(encodeBase64(page.getPageStickerOne().getData()));
-        }
-        if (stickerNumber == 2 && page.getPageStickerTwo() != null){
-            return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageStickerTwo().getMediaType())).body(encodeBase64(page.getPageStickerTwo().getData()));
-        }
-        if (stickerNumber == 3 && page.getPageStickerThree() != null){
-            return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageStickerThree().getMediaType())).body(encodeBase64(page.getPageStickerThree().getData()));
-        }
-        if (stickerNumber == 4 && page.getPageStickerFour() != null){
-            return ResponseEntity.ok().contentType(MediaType.valueOf(page.getPageStickerFour().getMediaType())).body(encodeBase64(page.getPageStickerFour().getData()));
-        }
-        else {
-            return ResponseEntity.notFound().build();
+    @ApiResponses(
+            value = { @ApiResponse(code = 200, message = "Success - returns the sticker of the logged in user, returns byte array", response = byte[].class),
+                    @ApiResponse(code = 404, message = "Not found - the sticker doesn't exist"),
+                    @ApiResponse(code = 409, message = "conflict - missing or wrong uuid") })
+    public ResponseEntity<String> getSticker(@RequestParam String uuid, @PathVariable int stickerNumber) {
+        try {
+            Page page = pageService.findPageById(uuid);
+            Image sticker = page.getSticker(stickerNumber);
+            return ResponseEntity.ok().contentType(MediaType.valueOf(sticker.getMediaType())).body(encodeBase64(sticker.getData()));
+        } catch (BooklyException e) {
+            log.warn(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
@@ -130,14 +123,14 @@ public class EditPageController extends Controller {
     @ResponseBody
     @ApiOperation(value = "Send a new page sticker")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data")})
-    public ResponseEntity uploadSticker(@RequestParam("file") MultipartFile file,@RequestParam String uuid, @PathVariable int stickerNumber) {
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data") })
+    public ResponseEntity uploadSticker(@RequestParam("file") MultipartFile file, @RequestParam String uuid, @PathVariable int stickerNumber) {
         try {
             if (file == null) {
                 throw new PageException("There was no sticker in the request for saving.");
             }
-            Page page=pageService.findPageById(uuid);
-            pageService.saveSticker(page, file, stickerNumber);
+            Page page = pageService.findPageById(uuid);
+            pageService.saveSticker(page, stickerNumber, file);
         } catch (BooklyException e) {
             log.warn(e.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -149,10 +142,10 @@ public class EditPageController extends Controller {
     @ResponseBody
     @ApiOperation(value = "Deletes the sticker with a specific number for the page")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data")})
+            @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data") })
     public ResponseEntity deleteSticker(@RequestParam String uuid, @PathVariable int stickerNumber) {
         try {
-            Page page=pageService.findPageById(uuid);
+            Page page = pageService.findPageById(uuid);
             pageService.deleteSticker(page, stickerNumber);
 
         } catch (BooklyException e) {
@@ -161,9 +154,6 @@ public class EditPageController extends Controller {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
 
     private String encodeBase64(byte[] data) {
         byte[] encoded = Base64.getEncoder().encode(data);

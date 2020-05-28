@@ -130,68 +130,18 @@ public class PageService {
         return false;
     }
 
-    private void saveStickerOne(Page page, byte[] data, long size, String contentType) {
-
-        page.setPageStickerOne(Image.builder().data(data).size(size).mediaType(contentType).build());
-        pageRepository.save(page);
-        log.debug(updateMessage, page.getUuid());
-    }
-
-    private void saveStickerTwo(Page page, byte[] data, long size, String contentType) {
-        page.setPageStickerTwo(Image.builder().data(data).size(size).mediaType(contentType).build());
-        pageRepository.save(page);
-        log.debug(updateMessage, page.getUuid());
-    }
-
-    private void saveStickerThree(Page page, byte[] data, long size, String contentType) {
-        page.setPageStickerThree(Image.builder().data(data).size(size).mediaType(contentType).build());
-        pageRepository.save(page);
-        log.debug(updateMessage, page.getUuid());
-    }
-
-    private void saveStickerFour(Page page, byte[] data, long size, String contentType) {
-        page.setPageStickerFour(Image.builder().data(data).size(size).mediaType(contentType).build());
-        pageRepository.save(page);
-        log.debug(updateMessage, page.getUuid());
-    }
-
     public void deleteSticker(Page page, int stickerNumber) {
-
-        if (stickerNumber == 1) {
-            page.setPageStickerOne(new DummyImage());
-        }
-        if (stickerNumber == 2) {
-            page.setPageStickerTwo(new DummyImage());
-        }
-        if (stickerNumber == 3) {
-            page.setPageStickerThree(new DummyImage());
-        }
-        if (stickerNumber == 4) {
-            page.setPageStickerFour(new DummyImage());
-        }
+        page.setSticker(stickerNumber, new DummyImage());
         pageRepository.save(page);
         log.debug("Page sticker of page {} with sticker {} has been deleted", page.getUuid(), stickerNumber);
 
     }
 
-    public void saveSticker(Page page, MultipartFile file, int stickerNumber) {
+    public void saveSticker(Page page, int stickerNumber, MultipartFile file) {
         try {
-            switch (stickerNumber) {
-                case 1:
-                    saveStickerOne(page, file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                case 2:
-                    saveStickerTwo(page, file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                case 3:
-                    saveStickerThree(page, file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                case 4:
-                    saveStickerFour(page, file.getBytes(), file.getSize(), file.getContentType());
-                    break;
-                default:
-                    throw new FriendshipBookException("Wrong sticker number");
-            }
+            page.setSticker(stickerNumber, Image.builder().data(file.getBytes()).size(file.getSize()).mediaType(file.getContentType()).build());
+            pageRepository.save(page);
+            log.debug(updateMessage, page.getUuid());
         } catch (IOException e) {
             throw new FriendshipBookException("Sticker " + stickerNumber + " couldn't be saved.");
         }

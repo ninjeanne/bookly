@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,18 +24,13 @@ public class Page {
     public Page(String uuid, Image pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
             String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
             String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
-            String favoriteFood, String niceComment, String date, String leftOver, Image pageStickerOne, Image pageStickerTwo, Image pageStickerThree,
-            Image pageStickerFour) {
+            String favoriteFood, String niceComment, String date, String leftOver, List<Image> stickers) {
         if (uuid == null || uuid.equals("")) {
             this.uuid = generateRandomUUID();
         } else {
             this.uuid = uuid;
         }
         this.pageImage = pageImage;
-        this.pageStickerOne = pageStickerOne;
-        this.pageStickerTwo = pageStickerTwo;
-        this.pageStickerThree = pageStickerThree;
-        this.pageStickerFour = pageStickerFour;
         this.name = name;
         this.address = address;
         this.telephone = telephone;
@@ -51,6 +48,7 @@ public class Page {
         this.whatIDontLike = whatIDontLike;
         this.favoriteJob = favoriteJob;
         this.myHobbies = myHobbies;
+        this.stickers = stickers;
         this.fanOf = fanOf;
         this.favoriteMovie = favoriteMovie;
         this.favoriteSport = favoriteSport;
@@ -154,24 +152,14 @@ public class Page {
     private String leftOver;
 
     @JsonIgnore
-    @OneToOne(cascade = { CascadeType.ALL })
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Image.class)
     @ApiModelProperty(notes = "Page Sticker", position = 27)
-    private Image pageStickerOne = new DummyImage();
-
-    @JsonIgnore
-    @OneToOne(cascade = { CascadeType.ALL })
-    @ApiModelProperty(notes = "Page Sticker", position = 28)
-    private Image pageStickerTwo = new DummyImage();
-
-    @JsonIgnore
-    @OneToOne(cascade = { CascadeType.ALL })
-    @ApiModelProperty(notes = "Page Sticker", position = 29)
-    private Image pageStickerThree = new DummyImage();
-
-    @JsonIgnore
-    @OneToOne(cascade = { CascadeType.ALL })
-    @ApiModelProperty(notes = "Page Sticker", position = 30)
-    private Image pageStickerFour = new DummyImage();
+    private List<Image> stickers = new ArrayList<Image>() {{
+        add(new DummyImage());
+        add(new DummyImage());
+        add(new DummyImage());
+        add(new DummyImage());
+    }};
 
     private String generateRandomUUID() {
         String pageUUID = "no:pageUUID:Set";
@@ -200,6 +188,22 @@ public class Page {
             throw new PageException("No UUID Set");
         }
         return pageUUID;
+    }
+
+    public void setSticker(int stickerNumber, Image sticker) {
+        if (stickerNumber < 0 || stickerNumber > 3) {
+            throw new PageException("Wrong sticker number " + stickerNumber);
+        }
+
+        stickers.remove(stickerNumber);
+        stickers.add(stickerNumber, (sticker == null ? new DummyImage() : sticker));
+    }
+
+    public Image getSticker(int stickerNumber) {
+        if (stickerNumber < 0 || stickerNumber > 3) {
+            throw new PageException("Wrong sticker number " + stickerNumber);
+        }
+        return stickers.get(stickerNumber);
     }
 
 }

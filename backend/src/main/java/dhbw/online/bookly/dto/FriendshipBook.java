@@ -49,9 +49,12 @@ public class FriendshipBook {
     private int theme;
 
     @JsonIgnore
-    @OneToOne(cascade = { CascadeType.ALL })
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Image.class)
     @ApiModelProperty(notes = "the first sticker of the book", position = 7)
-    private Image sticker1 = new DummyImage();
+    private List<Image> stickers = new ArrayList<Image>() {{
+        add(new DummyImage());
+        add(new DummyImage());
+    }};
 
     @JsonIgnore
     @OneToOne(cascade = { CascadeType.ALL })
@@ -72,6 +75,22 @@ public class FriendshipBook {
             return;
         }
         this.pages = pages;
+    }
+
+    public void setSticker(int stickerNumber, Image sticker) {
+        if (stickerNumber < 0 || stickerNumber > 1) {
+            throw new FriendshipBookException("Wrong sticker number " + stickerNumber);
+        }
+
+        stickers.remove(stickerNumber);
+        stickers.add(stickerNumber, (sticker == null ? new DummyImage() : sticker));
+    }
+
+    public Image getSticker(int stickerNumber) {
+        if (stickerNumber < 0 || stickerNumber > 1) {
+            throw new FriendshipBookException("Wrong sticker number " + stickerNumber);
+        }
+        return stickers.get(stickerNumber);
     }
 
 }
