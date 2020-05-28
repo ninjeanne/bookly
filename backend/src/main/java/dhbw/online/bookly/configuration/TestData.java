@@ -1,7 +1,7 @@
 package dhbw.online.bookly.configuration;
 
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.FriendshipBookCover;
+import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -46,7 +46,7 @@ public class TestData {
             userRepository.save(user);
             if (!friendshipBookRepository.existsByUser(user)) {
                 try {
-                    FriendshipBookCover cover = FriendshipBookCover.builder().data(extractBytes("test_image.jpg")).size(423867).mediaType("image/jpeg").build();
+                    Image cover = Image.builder().data(extractBytes("test_image.jpg")).size(423867).mediaType("image/jpeg").build();
                     friendshipBook.setCover(cover);
                     friendshipBookRepository.save(friendshipBook);
                     pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
