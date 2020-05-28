@@ -8,20 +8,20 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class KeycloakConfiguration {
     @Value("${keycloak.auth-server-url}")
-    public String KEYCLOAK_URL;
+    public String keycloakUrl;
 
     @Value("${keycloak.realm}")
-    public String KEYCLOAK_REALM;
+    public String keycloakRealm;
 
     @Value("${admin.keycloak.resource}")
-    public String KEYCLOAK_RESOURCE;
+    public String keycloakResource;
 
     @Value("${admin.keycloak.credentials}")
-    public String KEYCLOAK_CREDENTIALS;
+    public String keycloakCredentials;
 
     @Value("${admin.keycloak.user}")
-    public String KEYCLOAK_USER;
+    public String keycloakUser;
 
     @Value("${admin.keycloak.user.password}")
-    public String KEYCLOAK_USER_PASSWORD;
+    public String keycloakUserPassword;
 }

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 @Service
@@ -43,20 +42,20 @@ public class AuthenticationService {
 
     public Keycloak getAdminKeycloakInstance() {
         return KeycloakBuilder.builder()
-                .serverUrl(keycloakConfiguration.getKEYCLOAK_URL())
-                .realm(keycloakConfiguration.getKEYCLOAK_REALM())
+                .serverUrl(keycloakConfiguration.getKeycloakUrl())
+                .realm(keycloakConfiguration.getKeycloakRealm())
                 .grantType(OAuth2Constants.PASSWORD)
-                .clientId(keycloakConfiguration.getKEYCLOAK_RESOURCE())
-                .clientSecret(keycloakConfiguration.getKEYCLOAK_CREDENTIALS())
-                .username(keycloakConfiguration.getKEYCLOAK_USER())
-                .password(keycloakConfiguration.getKEYCLOAK_USER_PASSWORD())
+                .clientId(keycloakConfiguration.getKeycloakResource())
+                .clientSecret(keycloakConfiguration.getKeycloakCredentials())
+                .username(keycloakConfiguration.getKeycloakUser())
+                .password(keycloakConfiguration.getKeycloakUserPassword())
                 .build();
     }
 
     public UserResource getUserResource() {
         Keycloak keycloak = getAdminKeycloakInstance();
 
-        RealmResource realmResource = keycloak.realm(keycloakConfiguration.getKEYCLOAK_REALM());
+        RealmResource realmResource = keycloak.realm(keycloakConfiguration.getKeycloakRealm());
         UsersResource usersRessource = realmResource.users();
 
         String subjectId = getAccessToken().getSubject();
