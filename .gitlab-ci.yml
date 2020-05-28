@@ -13,18 +13,6 @@ cache:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2"
 
-test:
-  stage: test
-  script:
-    - mvn verify
-    # Print "Jacoco-Test-Coverage:xy.z%"
-    -  cat backend/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | grep -o '[0-9]\?[0-9]\?\.\?[0-9]\?[0-9]\?%'
-  artifacts:
-    reports:
-      junit:
-        - backend/target/surefire-reports/TEST-*.xml
-        - backend/target/failsafe-reports/TEST-*.xml
-
 build:
   stage: build
   script:
