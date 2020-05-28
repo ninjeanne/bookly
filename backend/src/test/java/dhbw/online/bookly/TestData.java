@@ -1,22 +1,16 @@
 package dhbw.online.bookly;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.FriendshipBookCover;
 import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
 import dhbw.online.bookly.repository.UserRepository;
-import dhbw.online.bookly.service.FriendshipBookService;
-import dhbw.online.bookly.service.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
 import java.util.Arrays;
 
 @Component
@@ -27,10 +21,6 @@ public class TestData {
     private UserRepository userRepository;
     @Autowired
     private FriendshipBookRepository friendshipBookRepository;
-    @Autowired
-    private FriendshipBookService friendshipBookService;
-    @Autowired
-    private PageService pageService;
 
     @PostConstruct
     private void initialize() {
@@ -38,31 +28,15 @@ public class TestData {
 
         Page page = initPage();
         Page secondPage = initSecondPage();
-        FriendshipBook friendshipBook = FriendshipBook.builder().title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
+        FriendshipBook friendshipBook = FriendshipBook.builder().cover(new DummyImage()).title("Unser super tolles Buch").user(user)
+                .pages(Arrays.asList(page, secondPage)).build();
 
         if (!userRepository.existsByUsername(user.getUsername())) {
             userRepository.save(user);
             if (!friendshipBookRepository.existsByUser(user)) {
-                try {
-                    FriendshipBookCover cover = FriendshipBookCover.builder().data(extractBytes("test_image.jpg")).size(423867).mediaType("image/jpeg").build();
-                    friendshipBook.setCover(cover);
-                    friendshipBookRepository.save(friendshipBook);
-                    pageService.saveImageForPage(page, extractBytes("test_image.jpg"), 423867, "image/jpeg");
-                } catch (IOException e) {
-                    log.debug("Could not read test image in resources folder");
-                }
+                friendshipBookRepository.save(friendshipBook);
             }
         }
-    }
-
-    public byte[] extractBytes(String imageName) throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        URL resource = classLoader.getResource(imageName);
-        // open image
-        assert resource != null;
-        File imgPath = new File(resource.getFile());
-        return Files.readAllBytes(imgPath.toPath());
     }
 
     private Page initPage() {

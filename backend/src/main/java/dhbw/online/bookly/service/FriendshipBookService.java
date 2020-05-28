@@ -1,8 +1,8 @@
 package dhbw.online.bookly.service;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
-import dhbw.online.bookly.dto.FriendshipBookCover;
-import dhbw.online.bookly.dto.FriendshipBookSticker;
+import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -49,7 +49,7 @@ public class FriendshipBookService {
     }
 
     private FriendshipBook createEmptyFriendshipBook(User user) {
-        return FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
+        return FriendshipBook.builder().cover(new DummyImage()).user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
     }
 
     public void saveCover(MultipartFile file) {
@@ -62,14 +62,14 @@ public class FriendshipBookService {
 
     public void saveCover(byte[] data, long size, String contentType) {
         FriendshipBook friendshipBook = getBookForLoggedInUser();
-        FriendshipBookCover cover = createFriendshipBookCover(data, size, contentType);
+        Image cover = createFriendshipBookCover(data, size, contentType);
         friendshipBook.setCover(cover);
         repository.save(friendshipBook);
         log.debug("Book cover updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
-    private FriendshipBookCover createFriendshipBookCover(byte[] data, long size, String contentType) {
-        return FriendshipBookCover.builder().data(data).size(size).mediaType(contentType).build();
+    private Image createFriendshipBookCover(byte[] data, long size, String contentType) {
+        return Image.builder().data(data).size(size).mediaType(contentType).build();
     }
 
     public FriendshipBook getBookForLoggedInUser() {
@@ -131,14 +131,14 @@ public class FriendshipBookService {
 
     private void saveSticker1(byte[] data, long size, String contentType) {
         FriendshipBook friendshipBook = getBookForLoggedInUser();
-        friendshipBook.setSticker1(FriendshipBookSticker.builder().data(data).size(size).mediaType(contentType).build());
+        friendshipBook.setSticker1(Image.builder().data(data).size(size).mediaType(contentType).build());
         repository.save(friendshipBook);
         log.debug("Sticker1 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
 
     private void saveSticker2(byte[] data, long size, String contentType) {
         FriendshipBook friendshipBook = getBookForLoggedInUser();
-        friendshipBook.setSticker2(FriendshipBookSticker.builder().data(data).size(size).mediaType(contentType).build());
+        friendshipBook.setSticker2(Image.builder().data(data).size(size).mediaType(contentType).build());
         repository.save(friendshipBook);
         log.debug("Sticker2 updated for user {} and its book id {}", friendshipBook.getUser().getUsername(), friendshipBook.getUuid());
     }
@@ -146,10 +146,10 @@ public class FriendshipBookService {
     public void deleteSticker(int stickerNumber) {
         FriendshipBook book = getBookForLoggedInUser();
         if (stickerNumber == 1) {
-            book.setSticker1(null);
+            book.setSticker1(new DummyImage());
         }
         if (stickerNumber == 2) {
-            book.setSticker2(null);
+            book.setSticker2(new DummyImage());
         }
         repository.save(book);
         log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);
