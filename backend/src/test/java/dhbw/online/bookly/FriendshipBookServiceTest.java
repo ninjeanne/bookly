@@ -58,7 +58,7 @@ public class FriendshipBookServiceTest {
     @Test
     public void testupdateTitle() {
         String title = "Other title";
-        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, null);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, null, 0);
         verify(friendshipBook, times(1)).setTitle(title);
         verify(friendshipBook, times(1)).setSubtitle(null);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -68,7 +68,7 @@ public class FriendshipBookServiceTest {
     public void testupdateSubtitle() {
         String title = "Other subtitle";
 
-        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, title);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, title, 0);
         verify(friendshipBook, times(1)).setTitle(null);
         verify(friendshipBook, times(1)).setSubtitle(title);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -76,7 +76,7 @@ public class FriendshipBookServiceTest {
 
     @Test
     public void testupdateNullTitles() {
-        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, null);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(null, null,0);
         verify(friendshipBook, times(1)).setTitle(null);
         verify(friendshipBook, times(1)).setSubtitle(null);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);
@@ -86,7 +86,7 @@ public class FriendshipBookServiceTest {
     public void testupdateTitles() {
         String title = "title";
         String subtitle = "subtitle";
-        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, subtitle);
+        FriendshipBook friendshipBook = friendshipBookService.updateTitleForLoggedInUser(title, subtitle, 0);
         verify(friendshipBook, times(1)).setTitle(title);
         verify(friendshipBook, times(1)).setSubtitle(subtitle);
         verify(friendshipBookRepository, times(1)).save(friendshipBook);

@@ -95,20 +95,13 @@ public class FriendshipBookService {
         log.debug("Book cover of user {} with book id {} has been deleted", book.getUser().getUsername(), book.getUuid());
     }
 
-    public FriendshipBook updateTitleForLoggedInUser(String title, String subtitle) {
+    public FriendshipBook updateTitleForLoggedInUser(String title, String subtitle, int theme) {
         FriendshipBook book = getBookForLoggedInUser();
         book.setTitle(title);
         book.setSubtitle(subtitle);
-        repository.save(book);
-        log.debug("Book titles of book from user {} have been updated", book.getUser().getUsername());
-        return book;
-    }
-
-    public FriendshipBook updateCoverThemeOfLoggedInUser(int theme) {
-        FriendshipBook book = getBookForLoggedInUser();
         book.setTheme(theme);
         repository.save(book);
-        log.debug("Cover theme from user {} has been updated", book.getUser().getUsername());
+        log.debug("Book titles and theme of book from user {} have been updated", book.getUser().getUsername());
         return book;
     }
 

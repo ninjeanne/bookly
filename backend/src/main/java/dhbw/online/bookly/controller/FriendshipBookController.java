@@ -151,37 +151,19 @@ public class FriendshipBookController extends Controller {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/title")
+    @PostMapping
     @ApiOperation(value = "Update the cover title of the book of the logged in user")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle) {
-        if (title == null) {
+    public ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle, @RequestParam(required = false) @ApiParam(required = false, value = "New theme", example = "number of the theme") int theme) {
+        if (title == null || subtitle == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
         }
         if (existsUser()) {
             try {
-                FriendshipBook book = bookService.updateTitleForLoggedInUser(title, subtitle);
-                return ResponseEntity.ok(book);
-            } catch (BooklyException fbe) {
-                log.warn(fbe.getMessage());
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(fbe.getMessage());
-            }
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
-    }
-
-    @PostMapping("/theme")
-    @ApiOperation(value = "Update the theme of the book of the logged in user")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
-            @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
-            @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity updateTheme(@RequestParam @ApiParam(value = "Theme number", example = "1") int theme) {
-        if (existsUser()) {
-            try {
-                FriendshipBook book = bookService.updateCoverThemeOfLoggedInUser(theme);
+                FriendshipBook book = bookService.updateTitleForLoggedInUser(title, subtitle, theme);
                 return ResponseEntity.ok(book);
             } catch (BooklyException fbe) {
                 log.warn(fbe.getMessage());
