@@ -202,44 +202,4 @@ public class Page {
         return pageUUID;
     }
 
-    public void setPageStickerOne(Image pageStickerOne) {
-        if (pageStickerOne == null) {
-            this.pageStickerOne = new DummyImage();
-            return;
-        }
-        this.pageStickerOne = pageStickerOne;
-    }
-
-    public void setPageImage(Image pageImage) {
-        if (pageImage == null) {
-            this.pageImage = new DummyImage();
-            return;
-        }
-        this.pageImage = pageImage;
-    }
-
-    public void setPageStickerTwo(Image pageStickerTwo) {
-        if (pageStickerTwo == null) {
-            this.pageStickerTwo = new DummyImage();
-            return;
-        }
-        this.pageStickerTwo = pageStickerTwo;
-    }
-
-    public void setPageStickerThree(Image pageStickerThree) {
-        if (pageStickerThree == null) {
-            this.pageStickerThree = new DummyImage();
-            return;
-        }
-        this.pageStickerThree = pageStickerThree;
-    }
-
-    public void setPageStickerFour(Image pageStickerFour) {
-        if (pageStickerFour == null) {
-            this.pageStickerFour = new DummyImage();
-            return;
-        }
-        this.pageStickerFour = pageStickerFour;
-    }
-
 }

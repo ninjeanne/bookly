@@ -1,5 +1,6 @@
 package dhbw.online.bookly.service;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.Page;
@@ -157,16 +158,16 @@ public class PageService {
     public void deleteSticker(Page page, int stickerNumber) {
 
         if (stickerNumber == 1) {
-            page.setPageStickerOne(null);
+            page.setPageStickerOne(new DummyImage());
         }
         if (stickerNumber == 2) {
-            page.setPageStickerTwo(null);
+            page.setPageStickerTwo(new DummyImage());
         }
         if (stickerNumber == 3) {
-            page.setPageStickerThree(null);
+            page.setPageStickerThree(new DummyImage());
         }
         if (stickerNumber == 4) {
-            page.setPageStickerFour(null);
+            page.setPageStickerFour(new DummyImage());
         }
         pageRepository.save(page);
         log.debug("Page sticker of page {} with sticker {} has been deleted", page.getUuid(), stickerNumber);

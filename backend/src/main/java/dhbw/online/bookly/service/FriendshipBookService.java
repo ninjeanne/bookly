@@ -1,5 +1,6 @@
 package dhbw.online.bookly.service;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
 import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.User;
@@ -48,7 +49,7 @@ public class FriendshipBookService {
     }
 
     private FriendshipBook createEmptyFriendshipBook(User user) {
-        return FriendshipBook.builder().user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
+        return FriendshipBook.builder().cover(new DummyImage()).user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
     }
 
     public void saveCover(MultipartFile file) {
@@ -145,10 +146,10 @@ public class FriendshipBookService {
     public void deleteSticker(int stickerNumber) {
         FriendshipBook book = getBookForLoggedInUser();
         if (stickerNumber == 1) {
-            book.setSticker1(null);
+            book.setSticker1(new DummyImage());
         }
         if (stickerNumber == 2) {
-            book.setSticker2(null);
+            book.setSticker2(new DummyImage());
         }
         repository.save(book);
         log.debug("Book sticker of user {} with sticker {} has been deleted", book.getUser().getUsername(), stickerNumber);

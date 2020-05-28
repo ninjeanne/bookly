@@ -6,8 +6,6 @@ import dhbw.online.bookly.dto.Page;
 import dhbw.online.bookly.dto.User;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
 import dhbw.online.bookly.repository.UserRepository;
-import dhbw.online.bookly.service.FriendshipBookService;
-import dhbw.online.bookly.service.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,7 +28,8 @@ public class TestData {
 
         Page page = initPage();
         Page secondPage = initSecondPage();
-        FriendshipBook friendshipBook = FriendshipBook.builder().title("Unser super tolles Buch").user(user).pages(Arrays.asList(page, secondPage)).build();
+        FriendshipBook friendshipBook = FriendshipBook.builder().cover(new DummyImage()).title("Unser super tolles Buch").user(user)
+                .pages(Arrays.asList(page, secondPage)).build();
 
         if (!userRepository.existsByUsername(user.getUsername())) {
             userRepository.save(user);
