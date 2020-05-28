@@ -2,8 +2,8 @@ image: maven:3.5.0-jdk-8
 
 stages:
   - test
-  - metrics
   - build
+  - metrics
   - deploy
 
 cache:
