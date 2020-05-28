@@ -23,6 +23,7 @@ import java.util.Optional;
 @Slf4j
 public class PageService {
     private String updateMessage="Sticker updated for page {}";
+    private String noBookForUserMessage="There is no book for user ";
     @Autowired
     private FriendshipBookService friendshipBookService;
     @Autowired
@@ -84,7 +85,7 @@ public class PageService {
             log.debug("New page has been created for user {} ", authenticationService.getUsername());
             return newPage;
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     private Page getPage(String uuid) {
@@ -104,7 +105,7 @@ public class PageService {
             }
             throw new FriendshipBookException("There is no page with uuid " + uuid + " for user " + authenticationService.getUsername());
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     public void deleteAllPages() {
@@ -118,7 +119,7 @@ public class PageService {
             log.debug("Book for user {} has been updated", book.getUser().getUsername());
             return;
         }
-        throw new FriendshipBookException("There is no book for user " + authenticationService.getUsername());
+        throw new FriendshipBookException(noBookForUserMessage + authenticationService.getUsername());
     }
 
     public boolean update(Page apiPage) {
