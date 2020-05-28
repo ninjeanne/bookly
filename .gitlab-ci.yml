@@ -1,6 +1,7 @@
 image: maven:3.5.0-jdk-8
 
 stages:
+  - test
   - build
   - metrics
   - deploy
@@ -12,6 +13,18 @@ cache:
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2"
+
+test:
+  stage: test
+  script:
+    - mvn verify
+    # Print "Jacoco-Test-Coverage:xy.z%"
+    -  cat backend/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | grep -o '[0-9]\?[0-9]\?\.\?[0-9]\?[0-9]\?%'
+  artifacts:
+    reports:
+      junit:
+        - backend/target/surefire-reports/TEST-*.xml
+        - backend/target/failsafe-reports/TEST-*.xml
 
 build:
   stage: build
@@ -28,7 +41,7 @@ metrics:
     - cd backend
     - pwd
     - ls
-    - mvn install sonar:sonar -Dsonar.projectKey=testbookly -Dsonar.host.url=http://194.13.81.160:9999/ -Dsonar.login=$SONAR_TOKEN
+    - mvn install sonar:sonar -DskipTests -Dsonar.projectKey=testbookly -Dsonar.host.url=http://194.13.81.160:9999/ -Dsonar.login=$SONAR_TOKEN
 
 deploy-prod:
   when: manual
