@@ -8,7 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,11 +19,11 @@ import java.net.URL;
 @Builder
 @ApiModel(description = "page for a visitor")
 public class Page {
-    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
-                String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
-                String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
-                String favoriteFood, String niceComment, String date, String leftOver, PageSticker pageStickerOne,
-                PageSticker pageStickerTwo,PageSticker pageStickerThree, PageSticker pageStickerFour) {
+    public Page(String uuid, Image pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
+            String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
+            String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
+            String favoriteFood, String niceComment, String date, String leftOver, Image pageStickerOne, Image pageStickerTwo, Image pageStickerThree,
+            Image pageStickerFour) {
         if (uuid == null || uuid.equals("")) {
             this.uuid = generateRandomUUID();
         } else {
@@ -74,7 +76,7 @@ public class Page {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ApiModelProperty(notes = "the image of the page", position = 1)
-    private PageImage pageImage;
+    private Image pageImage = new DummyImage();
 
     @ApiModelProperty(notes = "name of the friend", position = 2)
     private String name;
@@ -152,25 +154,24 @@ public class Page {
     private String leftOver;
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "Page Sticker", position = 27)
-    private PageSticker pageStickerOne;
+    private Image pageStickerOne = new DummyImage();
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "Page Sticker", position = 28)
-    private PageSticker pageStickerTwo;
+    private Image pageStickerTwo = new DummyImage();
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "Page Sticker", position = 29)
-    private PageSticker pageStickerThree;
+    private Image pageStickerThree = new DummyImage();
 
     @JsonIgnore
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = { CascadeType.ALL })
     @ApiModelProperty(notes = "Page Sticker", position = 30)
-    private PageSticker pageStickerFour;
-
+    private Image pageStickerFour = new DummyImage();
 
     private String generateRandomUUID() {
         String pageUUID = "no:pageUUID:Set";
@@ -180,8 +181,7 @@ public class Page {
             con.setRequestMethod("GET");
             con.setConnectTimeout(5000);
             con.setReadTimeout(5000);
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {

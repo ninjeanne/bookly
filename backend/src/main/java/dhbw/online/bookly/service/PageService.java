@@ -1,9 +1,9 @@
 package dhbw.online.bookly.service;
 
+import dhbw.online.bookly.dto.DummyImage;
 import dhbw.online.bookly.dto.FriendshipBook;
+import dhbw.online.bookly.dto.Image;
 import dhbw.online.bookly.dto.Page;
-import dhbw.online.bookly.dto.PageSticker;
-import dhbw.online.bookly.dto.PageImage;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import dhbw.online.bookly.exception.PageException;
 import dhbw.online.bookly.repository.FriendshipBookRepository;
@@ -22,8 +22,8 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class PageService {
-    private String updateMessage="Sticker updated for page {}";
-    private String noBookForUserMessage="There is no book for user ";
+    private String updateMessage = "Sticker updated for page {}";
+    private String noBookForUserMessage = "There is no book for user ";
     @Autowired
     private FriendshipBookService friendshipBookService;
     @Autowired
@@ -47,7 +47,7 @@ public class PageService {
 
     public void saveImageForPage(Page page, byte[] data, long size, String contentType) {
         try {
-            page.setPageImage(PageImage.builder().data(data).size(size).mediaType(contentType).build());
+            page.setPageImage(Image.builder().data(data).size(size).mediaType(contentType).build());
             log.debug("Page image has been set for page with uuid {}", page.getUuid());
             pageRepository.save(page);
         } catch (NullPointerException e) {
@@ -130,27 +130,27 @@ public class PageService {
         return false;
     }
 
-    private void saveStickerOne(Page page,byte[] data, long size, String contentType) {
+    private void saveStickerOne(Page page, byte[] data, long size, String contentType) {
 
-        page.setPageStickerOne(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+        page.setPageStickerOne(Image.builder().data(data).size(size).mediaType(contentType).build());
         pageRepository.save(page);
         log.debug(updateMessage, page.getUuid());
     }
 
-    private void saveStickerTwo(Page page,byte[] data, long size, String contentType) {
-        page.setPageStickerTwo(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+    private void saveStickerTwo(Page page, byte[] data, long size, String contentType) {
+        page.setPageStickerTwo(Image.builder().data(data).size(size).mediaType(contentType).build());
         pageRepository.save(page);
         log.debug(updateMessage, page.getUuid());
     }
 
-    private void saveStickerThree(Page page,byte[] data, long size, String contentType) {
-        page.setPageStickerThree(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+    private void saveStickerThree(Page page, byte[] data, long size, String contentType) {
+        page.setPageStickerThree(Image.builder().data(data).size(size).mediaType(contentType).build());
         pageRepository.save(page);
         log.debug(updateMessage, page.getUuid());
     }
 
-    private void saveStickerFour(Page page,byte[] data, long size, String contentType) {
-        page.setPageStickerFour(PageSticker.builder().data(data).size(size).mediaType(contentType).build());
+    private void saveStickerFour(Page page, byte[] data, long size, String contentType) {
+        page.setPageStickerFour(Image.builder().data(data).size(size).mediaType(contentType).build());
         pageRepository.save(page);
         log.debug(updateMessage, page.getUuid());
     }
@@ -158,37 +158,36 @@ public class PageService {
     public void deleteSticker(Page page, int stickerNumber) {
 
         if (stickerNumber == 1) {
-            page.setPageStickerOne(null);
+            page.setPageStickerOne(new DummyImage());
         }
         if (stickerNumber == 2) {
-            page.setPageStickerTwo(null);
+            page.setPageStickerTwo(new DummyImage());
         }
         if (stickerNumber == 3) {
-            page.setPageStickerThree(null);
+            page.setPageStickerThree(new DummyImage());
         }
         if (stickerNumber == 4) {
-            page.setPageStickerFour(null);
+            page.setPageStickerFour(new DummyImage());
         }
         pageRepository.save(page);
-        log.debug("Page sticker of page {} with sticker {} has been deleted",page.getUuid(), stickerNumber);
+        log.debug("Page sticker of page {} with sticker {} has been deleted", page.getUuid(), stickerNumber);
 
     }
-
 
     public void saveSticker(Page page, MultipartFile file, int stickerNumber) {
         try {
             switch (stickerNumber) {
                 case 1:
-                    saveStickerOne(page,file.getBytes(), file.getSize(), file.getContentType());
+                    saveStickerOne(page, file.getBytes(), file.getSize(), file.getContentType());
                     break;
                 case 2:
-                    saveStickerTwo(page,file.getBytes(), file.getSize(), file.getContentType());
+                    saveStickerTwo(page, file.getBytes(), file.getSize(), file.getContentType());
                     break;
                 case 3:
-                    saveStickerThree(page,file.getBytes(), file.getSize(), file.getContentType());
+                    saveStickerThree(page, file.getBytes(), file.getSize(), file.getContentType());
                     break;
                 case 4:
-                    saveStickerFour(page,file.getBytes(), file.getSize(), file.getContentType());
+                    saveStickerFour(page, file.getBytes(), file.getSize(), file.getContentType());
                     break;
                 default:
                     throw new FriendshipBookException("Wrong sticker number");
