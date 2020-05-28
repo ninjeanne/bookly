@@ -50,11 +50,8 @@ public class EditPageController extends Controller {
             @ApiResponse(code = 409, message = "Conflict - the updatable page or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity update(@RequestBody Page page) {
-        if (existsPage(page)) {
-            boolean status = pageService.update(page);
-            if (status) {
-                return ResponseEntity.ok().build();
-            }
+        if (existsPage(page) && pageService.update(page)) {
+            return ResponseEntity.ok().build();
         }
         log.warn("Couldn't update page for user");
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -161,9 +158,6 @@ public class EditPageController extends Controller {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
 
     private String encodeBase64(byte[] data) {
         byte[] encoded = Base64.getEncoder().encode(data);
