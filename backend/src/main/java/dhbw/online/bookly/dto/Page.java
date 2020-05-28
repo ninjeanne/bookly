@@ -17,11 +17,11 @@ import java.net.URL;
 @Builder
 @ApiModel(description = "page for a visitor")
 public class Page {
-    public Page(String uuid, PageImage pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
+    public Page(String uuid, Image pageImage, String name, String address, String telephone, String mobile, String schoolClass, String school, String size,
                 String hairColor, String eyeColor, String birthday, String starSign, String favoriteSubject, String favoritePet, String howToPleaseMe,
                 String whatIDontLike, String favoriteJob, String myHobbies, String fanOf, String favoriteMovie, String favoriteSport, String favoriteBook,
-                String favoriteFood, String niceComment, String date, String leftOver, PageSticker pageStickerOne,
-                PageSticker pageStickerTwo,PageSticker pageStickerThree, PageSticker pageStickerFour) {
+                String favoriteFood, String niceComment, String date, String leftOver, Image pageStickerOne,
+                Image pageStickerTwo,Image pageStickerThree, Image pageStickerFour) {
         if (uuid == null || uuid.equals("")) {
             this.uuid = generateRandomUUID();
         } else {
@@ -74,7 +74,7 @@ public class Page {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ApiModelProperty(notes = "the image of the page", position = 1)
-    private PageImage pageImage;
+    private Image pageImage;
 
     @ApiModelProperty(notes = "name of the friend", position = 2)
     private String name;
@@ -154,22 +154,22 @@ public class Page {
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "Page Sticker", position = 27)
-    private PageSticker pageStickerOne;
+    private Image pageStickerOne;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "Page Sticker", position = 28)
-    private PageSticker pageStickerTwo;
+    private Image pageStickerTwo;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "Page Sticker", position = 29)
-    private PageSticker pageStickerThree;
+    private Image pageStickerThree;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "Page Sticker", position = 30)
-    private PageSticker pageStickerFour;
+    private Image pageStickerFour;
 
 
     private String generateRandomUUID() {

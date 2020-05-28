@@ -34,13 +34,12 @@ build:
     expire_in: 2h
     paths:
       - backend/target/*.jar
+      - backend/target/site/jacoco/jacoco.xml
 
 metrics:
   stage: metrics
   script:
     - cd backend
-    - pwd
-    - ls
     - mvn install sonar:sonar -DskipTests -Dsonar.projectKey=testbookly -Dsonar.host.url=http://194.13.81.160:9999/ -Dsonar.login=$SONAR_TOKEN
 
 deploy-prod:

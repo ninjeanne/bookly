@@ -43,7 +43,7 @@ public class FriendshipBook {
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the cover image of the book",
             position = 3)
-    private FriendshipBookCover cover;
+    private Image cover;
 
     @OneToOne
     @ApiModelProperty(notes = "the user of which the book belongs to. is extracted from the authentication",
@@ -63,13 +63,13 @@ public class FriendshipBook {
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the first sticker of the book",
             position = 7)
-    private FriendshipBookSticker sticker1;
+    private Image sticker1;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     @ApiModelProperty(notes = "the second sticker of the book",
             position = 8)
-    private FriendshipBookSticker sticker2;
+    private Image sticker2;
 
     public void setTheme(int theme){
         if(theme < 0){
