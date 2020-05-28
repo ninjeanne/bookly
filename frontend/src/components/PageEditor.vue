@@ -12,7 +12,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUpload" v-bind:class="{ disabled: !image }">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
             </div>
             <div class="left-top">
                 <div style="padding: 16px; text-align: left">
@@ -111,10 +111,30 @@
                 </div>
             </div>
             <div class="far-far-right-top">
-
+                <picture-input
+                        ref="pictureInputSticker1"
+                        @change="onChangedSticker1"
+                        @remove="onRemovedSticker1"
+                        :width="500"
+                        :removable="true"
+                        :height="500"
+                        accept="image/jpeg, image/png"
+                        :customStrings="{drag: 'Drag and drop your image here'}">
+                </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
             </div>
             <div class="left-mid">
-
+                <picture-input
+                        ref="pictureInputSticker2"
+                        @change="onChangedSticker2"
+                        @remove="onRemovedSticker2"
+                        :width="500"
+                        :removable="true"
+                        :height="500"
+                        accept="image/jpeg, image/png"
+                        :customStrings="{drag: 'Drag and drop your image here'}">
+                </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
             </div>
             <div class="right-mid">
                 <div style="padding: 16px; text-align: left">
@@ -156,7 +176,17 @@
                 </div>
             </div>
             <div class="left-bot">
-
+                <picture-input
+                        ref="pictureInputSticker3"
+                        @change="onChangedSticker3"
+                        @remove="onRemovedSticker3"
+                        :width="500"
+                        :removable="true"
+                        :height="500"
+                        accept="image/jpeg, image/png"
+                        :customStrings="{drag: 'Drag and drop your image here'}">
+                </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadSticker3">Upload</button>
             </div>
             <div class="mid-bot">
                 <div style="padding: 16px; text-align: left">
@@ -205,10 +235,20 @@
                 </div>
             </div>
             <div class="right-bot">
-
+                <picture-input
+                        ref="pictureInputSticker4"
+                        @change="onChangedSticker4"
+                        @remove="onRemovedSticker4"
+                        :width="500"
+                        :removable="true"
+                        :height="500"
+                        accept="image/jpeg, image/png"
+                        :customStrings="{drag: 'Drag and drop your image here'}">
+                </picture-input>
+                <button class="btn btn-primary" @click="attemptUploadSticker4">Upload</button>
             </div>
         </div>
-        <a v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</a>
+        <button v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</button>
     </div>
     <div v-else class="main">
         <h2>Whoops, something went wrong :/</h2>
@@ -233,6 +273,10 @@
                 uuid: "",
                 uuid_exists: false,
                 image: "",
+                sticker1: "",
+                sticker2: "",
+                sticker3: "",
+                sticker4: "",
                 name: "",
                 phone: "",
                 mobile: "",
@@ -336,16 +380,76 @@
             onRemoved() {
                 this.image = '';
             },
-            attemptUpload() {
+            attemptUploadImage() {
                 if (this.image) {
                     this.$store.dispatch("updatePageImage", {uuid: this.uuid, image: this.image})
-                        .then((response) => {
-                            if(response.status === 200) {
-                                alert("successful");
-                            }
-                        })
+                        .then((response) => { })
                 }
-            }
+            },
+            onChangedSticker1() {
+                if (this.$refs.pictureInputSticker1.file) {
+                    this.sticker1 = this.$refs.pictureInputSticker1.file;
+                } else {
+                    console.log("Old browser. No support for Filereader API");
+                }
+            },
+            onRemovedSticker1() {
+                this.sticker1 = '';
+            },
+            attemptUploadSticker1() {
+                if (this.sticker1) {
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker1, number: 1})
+                        .then((response) => { })
+                }
+            },
+            onChangedSticker2() {
+                if (this.$refs.pictureInputSticker2.file) {
+                    this.sticker2 = this.$refs.pictureInputSticker2.file;
+                } else {
+                    console.log("Old browser. No support for Filereader API");
+                }
+            },
+            onRemovedSticker2() {
+                this.sticker2 = '';
+            },
+            attemptUploadSticker2() {
+                if (this.sticker2) {
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker2, number: 2})
+                        .then((response) => { })
+                }
+            },
+            onChangedSticker3() {
+                if (this.$refs.pictureInputSticker3.file) {
+                    this.sticker3 = this.$refs.pictureInputSticker3.file;
+                } else {
+                    console.log("Old browser. No support for Filereader API");
+                }
+            },
+            onRemovedSticker3() {
+                this.sticker3 = '';
+            },
+            attemptUploadSticker3() {
+                if (this.sticker3) {
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker3, number: 3})
+                        .then((response) => { })
+                }
+            },
+            onChangedSticker4() {
+                if (this.$refs.pictureInputSticker4.file) {
+                    this.sticker4 = this.$refs.pictureInputSticker4.file;
+                } else {
+                    console.log("Old browser. No support for Filereader API");
+                }
+            },
+            onRemovedSticker4() {
+                this.sticker4 = '';
+            },
+            attemptUploadSticker4() {
+                if (this.sticker4) {
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker4, number: 4})
+                        .then((response) => { })
+                }
+            },
         }
     }
 </script>

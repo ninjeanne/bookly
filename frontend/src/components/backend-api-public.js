@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let baseURL;
-if(location.hostname === "localhost"){
+if(location.hostname === "localhost") {
     baseURL = "http://localhost:8080/api/public"
 }
 else {
@@ -33,11 +33,24 @@ export default {
     updatePageImage(uuid, image) {
         var formData = new FormData();
         formData.append("file", image);
-        formData.append("uuid", uuid);
-        return AXIOS.post("/page/image", formData, {
+        return AXIOS.post("/page/image?uuid=" + uuid, formData, {
             headers: {
-                'uuid': uuid,
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+            }
+        });
+    },
+    getPageSticker(uuid, number) {
+        return AXIOS.get("/page/sticker/" + number + "?uuid=" + uuid, {
+            headers: { }
+        })
+    },
+    editPageSticker(uuid, image, number) {
+        console.log(uuid + " " + image + " " + number);
+        var formData = new FormData();
+        formData.append("file", image);
+        return AXIOS.post("/page/sticker/" + number + "?uuid=" + uuid, formData, {
+            headers: {
+                'content-type': 'multipart/form-data',
             }
         });
     }

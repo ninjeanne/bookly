@@ -8,7 +8,7 @@
               <span class="input-group-text">Username</span>
             </div>
             <input type="text" class="form-control" aria-label="Default"
-                   aria-describedby="inputGroup-sizing-default" v-model="username">
+                   aria-describedby="inputGroup-sizing-default" v-model="username" readonly>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -19,14 +19,14 @@
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">First Name</span>
+              <span class="input-group-text">First name</span>
             </div>
             <input type="text" class="form-control" aria-label="Default"
                    aria-describedby="inputGroup-sizing-default" v-model="firstName">
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">Last Name</span>
+              <span class="input-group-text">Last name</span>
             </div>
             <input type="text" class="form-control" aria-label="Default"
                    aria-describedby="inputGroup-sizing-default" v-model="lastName">
@@ -36,7 +36,7 @@
         </div>
         <div class="card">
           <h2>Code: {{ invite_code }} </h2>
-          <button class="btn btn-info" v-on:click="invite">Invite Friend</button>
+          <button class="btn btn-info" v-on:click="invite">Invite friend</button>
         </div>
       </div>
       <div class="right">
@@ -84,10 +84,10 @@
       getUser() {
         this.$store.dispatch("getUser")
                 .then((response) => {
-                  this.username = response.data.username;
-                  this.email = response.data.mail;
-                  this.firstName = response.data.first_name;
-                  this.lastName = response.data.last_name;
+                    this.username = response.data.username;
+                    this.email = response.data.mail;
+                    this.firstName = response.data.first_name;
+                    this.lastName = response.data.last_name;
                 })
       },
       getPages() {
@@ -103,19 +103,21 @@
       },
       saveUser: function () {
         this.$store.dispatch("updateUser",{username: this.username, email: this.email, firstName: this.firstName, lastName: this.lastName})
-                .then(() => {
-                  alert("saved");
-                })
+                .then((response) => { })
       },
       deletePage: function (uuid) {
         this.$store.dispatch("deletePage",{uuid: uuid})
                 .then(() => {
+                  function remove(array, element) {
+                    return array.filter(el => el !== element);
+                  }
                   const index = this.pagesUUID.indexOf(uuid);
                   if (index > -1) {
-                    this.pagesUUID.splice(index, 1);
+                    this.pagesUUID = remove(this.pagesUUID, uuid);
                   }
                 })
       },
+
       logout: function () {
         this.$router.push("/");
         keycloak.logout();
@@ -135,6 +137,9 @@
 <style scoped>
   button {
     margin-top: 16px;
+  }
+  .input-group-text {
+    min-width: 120px;
   }
   .main {
     padding: 32px;

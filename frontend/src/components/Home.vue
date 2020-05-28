@@ -8,7 +8,7 @@
         <div class="card">
           <input v-model="invite_code" placeholder="Code">
           <br>
-          <a v-on:click="editPage" class="btn btn-primary">Go!</a>
+          <button v-on:click="editPage" class="btn btn-primary">Go!</button>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {
   input {
     width: 80%;
   }
-  a {
+  button {
     width: 80%;
   }
   .card {
