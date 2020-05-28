@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class FriendshipBook {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Page.class)
     @ApiModelProperty(notes = "list of all pages of the book",
             position = 5)
-    private List<Page> pages;
+    private List<Page> pages = new ArrayList<>();
 
     @ApiModelProperty(notes = "ID of the Theme template",
             position = 6)
@@ -77,5 +78,13 @@ public class FriendshipBook {
         } else {
             this.theme = theme;
         }
+    }
+
+    public void setPages(ArrayList<Page> pages){
+        if(pages == null){
+            this.pages = new ArrayList<>();
+            return;
+        }
+        this.pages = pages;
     }
 }

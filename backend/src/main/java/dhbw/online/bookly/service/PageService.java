@@ -32,6 +32,7 @@ public class PageService {
     @Autowired
     private AuthenticationService authenticationService;
 
+
     public List<Page> readPages() {
         return friendshipBookService.getBookForLoggedInUser().getPages();
     }
