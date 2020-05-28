@@ -31,7 +31,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the book for the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content or user couldn't be found"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity read() {
+    public ResponseEntity read() {
         if (existsUser()) {
             FriendshipBook book = bookService.getBookForLoggedInUser();
             if (existsBook(book)) {
@@ -61,7 +61,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             if (file == null) {
                 throw new FriendshipBookException("There was no picture in the request for saving.");
@@ -82,7 +82,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<?> deleteFile() {
+    public ResponseEntity deleteFile() {
         try {
             if (existsUser()) {
                 bookService.deleteCoverForLoggedInUser();
@@ -118,7 +118,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<?> uploadSticker(@RequestParam("file") MultipartFile file, @PathVariable int stickerNumber) {
+    public ResponseEntity uploadSticker(@RequestParam("file") MultipartFile file, @PathVariable int stickerNumber) {
         try {
             if (file == null) {
                 throw new FriendshipBookException("There was no sticker image in the request for saving.");
@@ -139,7 +139,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<?> deleteSticker(@PathVariable int stickerNumber) {
+    public ResponseEntity deleteSticker(@PathVariable int stickerNumber) {
         try {
             if (existsUser()) {
                 bookService.deleteSticker(stickerNumber);
@@ -156,7 +156,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle) {
+    public ResponseEntity updateTitle(@RequestParam(required = false) @ApiParam(value = "New book cover title", example = "My super duper fancy friendship book", required = false) String title, @RequestParam(required = false) @ApiParam(required = false, value = "New book subtitle", example = "My super duper fancy sub title") String subtitle) {
         if (title == null) {
             log.warn("Couldn't update book title with empty title");
             return ResponseEntity.noContent().build();
@@ -178,7 +178,7 @@ public class FriendshipBookController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - returns the updated book of the logged in user", response = FriendshipBook.class),
             @ApiResponse(code = 409, message = "Conflict - the content couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity updateTheme(@RequestParam @ApiParam(value = "Theme number", example = "1") int theme) {
+    public ResponseEntity updateTheme(@RequestParam @ApiParam(value = "Theme number", example = "1") int theme) {
         if (existsUser()) {
             try {
                 FriendshipBook book = bookService.updateCoverThemeOfLoggedInUser(theme);

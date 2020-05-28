@@ -85,7 +85,7 @@ public class EditPageController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 409, message = "Conflict - the saving of the data failed maybe there was corrupted data"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam String uuid) {
+    public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file, @RequestParam String uuid) {
         try {
             if (file == null) {
                 throw new PageException("There was no picture in the request for saving.");

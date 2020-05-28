@@ -32,7 +32,7 @@ public class UserController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success - reads user data from db", response = User.class),
             @ApiResponse(code = 409, message = "Conflict - the user couldn't be found or something critical happened"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity read() {
+    public ResponseEntity read() {
         User user = userService.getUser();
         try {
             if (existsUser()) {
@@ -48,7 +48,7 @@ public class UserController extends Controller {
     @ApiOperation(value = "Update the logged in user profile (not the password or username)")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity updateProfile(@RequestBody User user) {
+    public ResponseEntity updateProfile(@RequestBody User user) {
         userService.update(user);
         return ResponseEntity.ok().build();
     }
@@ -57,7 +57,7 @@ public class UserController extends Controller {
     @ApiOperation(value = "Delete the logged in user profile including the friendship book, images and pages")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be deleted and logged out."),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
-    ResponseEntity deleteProfile(HttpServletRequest request) {
+    public ResponseEntity deleteProfile(HttpServletRequest request) {
         User user = userService.getUser();
         deleteAccountService.deleteAll();
         try {
