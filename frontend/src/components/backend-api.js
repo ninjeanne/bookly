@@ -44,10 +44,10 @@ export default {
             }
         });
     },
-    editBook(title) {
-        return AXIOS.put("/friendshipbook" +
-            "?title=" + title,
-            {},
+    editBook(title, subtitle) {
+        return AXIOS.post("/friendshipbook/title" +
+            "?title=" + title + "&subtitle=" + subtitle,
+            { },
             {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
@@ -71,6 +71,23 @@ export default {
             }
         });
     },
+    getBookSticker(number) {
+        return AXIOS.get("/friendshipbook/sticker/" + number, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        })
+    },
+    editBookSticker(image, number) {
+        var formData = new FormData();
+        formData.append("file", image);
+        return AXIOS.post("/friendshipbook/sticker/" + number, formData, {
+            headers: {
+                'content-type': 'multipart/form-data',
+                'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
+            }
+        });
+    },
     getPages() {
         return AXIOS.get("/page", {
             headers: {
@@ -88,7 +105,7 @@ export default {
     },
     updatePage() {
         var formData = new FormData();
-        return AXIOS.put("/page", formData, {
+        return AXIOS.post("/page", formData, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('vue-token')
             }

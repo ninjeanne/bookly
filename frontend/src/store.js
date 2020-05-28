@@ -42,9 +42,9 @@ export default new Vuex.Store({
                     });
             })
         },
-        editBook({commit}, {title}) {
+        editBook({commit}, {title, subtitle}) {
             return new Promise((resolve) => {
-                api.editBook(title)
+                api.editBook(title, subtitle)
                     .then(response => {
                         resolve(response)
                     })
@@ -66,9 +66,36 @@ export default new Vuex.Store({
                         });
             })
         },
-        editBookCover({commit}, {image}) {
+        editBookCover({}, {image}) {
             return new Promise((resolve) => {
                 api.editBookCover(image)
+                    .then(response => {
+                        if(response.status === 200) {
+                            console.log("success");
+                        }
+                        resolve(response)
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    });
+            })
+        },
+        getBookSticker({}, {number}) {
+            return new Promise((resolve) => {
+                api.getBookSticker(number)
+                    .then((response) => {
+                        if(response.status === 200) {
+                            resolve(response)
+                        }
+                    })
+                    .catch(err=>{
+                        console.error(err);
+                    });
+            })
+        },
+        editBookSticker({}, {image, number}) {
+            return new Promise((resolve) => {
+                api.editBookSticker(image, number)
                     .then(response => {
                         if(response.status === 200) {
                             console.log("success");
