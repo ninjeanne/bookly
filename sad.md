@@ -131,7 +131,6 @@ N/A
 ## 7. Deployment View
 
 This is our deployment view:
-
 ![DeploymentView](design/deployment_view.png "Deployment View")
 
 This is our deployment process. Our code is hosted on GitLab. To be deployed,
