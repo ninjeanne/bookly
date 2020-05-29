@@ -172,6 +172,7 @@ enables us to get rid of some code duplication.
 
 Before Design Pattern:
 ![FriendshipBookServiceWithoutSOFA](design/FriendshipBookServiceWithoutSOFA.png "FriendshipBookServiceWithoutSOFA")
+
 Excerpt before Design Pattern:
 ![FriedshipBookBeforeDesignPatter](design/FriendshipBookBeforeDesignPattern.JPG "Before Design Pattern")
 
