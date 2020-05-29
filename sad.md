@@ -7,7 +7,7 @@
 | Date       | Version | Description                                          | Author           |
 |------------|---------|------------------------------------------------------|------------------|
 | 28/11/2019 | 1.0     | Initial Documentation                                | Alexandra Stober |
-| 			 |  	   |                                                      |                  |
+| 29/05/2020 | 2.0 	   | Update for Final Exam                                                    |                  |
 
 # Table of Contents
 - [Introduction](#1-introduction)
@@ -156,4 +156,12 @@ It's also possible to test an API and see all possible responses.
 
 ## 12. Patterns
 
-N/A
+We decided to go with the Null Object Design Pattern. 
+The intent of a Null Object is to encapsulate the absence
+of an object by providing a substitutable alternative 
+that offers suitable default do nothing behavior.
+As we have various pictures and stickers, we decided to
+use the Null Object Design Pattern to implement our
+DummyImage. It allows us the abstract handling of null 
+away from the client. Apart from that the refactoring 
+enables us to get rid of some code duplication.
