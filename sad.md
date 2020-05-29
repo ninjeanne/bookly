@@ -171,6 +171,7 @@ away from the client. Apart from that the refactoring
 enables us to get rid of some code duplication.
 
 Before Design Pattern:
+
 ![FriendshipBookServiceWithoutSOFA](design/FriendshipBookServiceWithoutSOFA.png "FriendshipBookServiceWithoutSOFA")
 
 Excerpt before Design Pattern:
