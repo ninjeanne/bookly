@@ -14,7 +14,7 @@ See our Test Plan here: [TestPlan](Test_Plan.md "Test_Plan.md")
 Master Branch:
 [![coverage report](https://gitlab.com/project_bookly/bookly/badges/master/coverage.svg)](https://gitlab.com/project_bookly/bookly/-/commits/master)
 
-### Metrics: Sonar Qube
+### Metrics: SonarQube
 
 [![Quality gate](http://194.13.81.160:9999/api/project_badges/quality_gate?project=testbookly)](http://194.13.81.160:9999/dashboard?id=testbookly)
 
