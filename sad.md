@@ -1,6 +1,6 @@
 # Bookly - Software Architecture Document
 
-### Version 4.0
+### Version 5.0
 
 # Revision history
 
@@ -10,6 +10,7 @@
 | 2/12/2019	 | 2.0 	   | Architecture                                         | Jeanne Helm      |
 | 30/4/2020	 | 3.0 	   | Deployment Images                                    | Jeanne Helm      |
 | 29/5/2020	 | 4.0 	   | Update Schemes and pictures                          | Jeanne Helm      |
+| 29/5/2020	 | 5.0 	   | Implementation View                                  | Jeanne Helm      |
 
 # Table of Contents
 - [Introduction](#1-introduction)
@@ -142,7 +143,12 @@ If a visitor wants to log in, every authentication request is redirected to the 
 
 ## 8. Implementation View
 
-N/A
+You can find the stage system here: ![Stagesystem](https://bookly.online/ "Stagesystem")
+You can find the current state of the dev system here: ![Devsystem](https://dev.bookly.online/ "Devsystem")
+
+As we are using swagger for the backend implementation the API can be tested and seen here:
+Stage: ![StageSwagger](https://bookly.online/swagger-ui.html "Swagger Stage")
+Dev: ![DevSwagger](https://dev.bookly.online/swagger-ui.html "Swagger Dev")
 
 ## 9. Data View
 

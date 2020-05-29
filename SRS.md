@@ -119,8 +119,6 @@ This document is designed for internal use only and will outline the development
 | **FAQ**  | Frequently Asked Questions          |
 | **REST** | Representational State Transfer     |
 
-(tbd)
-
 ### 1.4 References
 
 | Title                                                                                                 | Date       |
@@ -129,6 +127,10 @@ This document is designed for internal use only and will outline the development
 | [Gitlab](https://gitlab.com/project_bookly/)                                                          | 17/10/2019 |
 | [Use Case Diagram](design/usecase.png)                                                                | 17/10/2019 |
 | [Youtrack](https://nicoschinacher.myjetbrains.com/youtrack/agiles)                                    | 02/12/2019 |
+| <a href="https://sonarqube.bookly.online">SonarQube</a>			                                    | 29/5/2020  |
+| <a href="https://bookly.online">bookly.online</a>			                                            | 29/5/2020  |
+| <a href="https://bookly.online">dev.bookly.online</a>			                                        | 29/5/2020  |
+| <a href="https://bookly.online">keycloak.bookly.online</a>			                                | 29/5/2020  |
 
 ### 1.5 Overview
 
@@ -149,7 +151,6 @@ The following are the main features that are included in the bookly website.
 of updating and viewing profiles. You can view your friendship and invite friends to design a page.
 -	Number of users being supported by the system: Though the number is precisely not mentioned but the system is 
 able to support a large number of online users at a time.
--	FAQs section: Frequently asked section contains answers to problems which bookly users frequently faced.
 
 ### 2.2 Product functions
 
@@ -157,8 +158,11 @@ At registration, the data provided by the user is stored in the backend. It is n
 -	User System: login, register, invite friends, logout, edit, close account
 
 A user can give permissions to other users so they’re able to design a new page in the friendship book. Users are able to design their own friendship book covers. According use cases are:
--	friendship book: design cover, design friendship book page, share friendship book
+-	friendship book: design cover, upload custom images, edit title, delete/add pages
+-	page: add entries, add cover image, add stickers, share page
 
+Additional content:
+- footer and header for navigation and additional information
 
 **Our Use-Case-Diagram**
 
@@ -172,23 +176,26 @@ Nevertheless, our main target group consists of children.
 
 ### 2.4 Dependencies
 
-Whether the website will be mobile compatible depends on the Vue.js framework. We have to decide whether we will 
-implement an individual design or use a predefined template. 
 The project has the dependencies that are due to our choice in technology. 
 Requirements subsets
--	database
--	VM
--	domain
--	gitLab
+-	VM with debian buster
+-   Apache2 webserver
+-   Wordpress
+-	Domain
+-   Docker
+-   Java (including Jacoco, Maven, Lombok, SpringBoot, Hibernate JPA, Swagger, Cucumber, JUnit, Mockito)
+-   VueJS (including Bootstrap)
+-	GitLab (including CI)
 -	IntelliJ IDE
 -	YouTrack
--   Keycloak
--   Postgres
+-   Keycloak (including OAuth2 Module for SpringBoot and VueJS)
+-   PostgreSQL (including PgAdmin)
+-   SonarQube
+-   H2
 
 ### 2.5 Constraints
-Our database limit is under 15 GB.
-(tbd)
-
+Our database limit is under 15 GB. We have 2 Servers with 2GB RAM each.
+The metrics server and the blog are seperated from the application server.
 
 ## 3. Specific Requirements
 This section contains all of the functional and quality requirements of the system. It gives a detailed description 
@@ -202,9 +209,8 @@ reasons data is filtered by the backend. It is then packed in the right format w
 data is kept inside a database and maintained by the backend.
 
 #### 3.1.1 User system
-
-At registration, the data provided by the user is stored in the backend. It is needed to log in/logout, unregister, edit the profile 
-and also provides the basis for a permission-system.
+For the identity management we are using Keycloak. There we have the opportunity to login/logout/register/delete an user.
+Additional information about a user that uses our application we store the data in our application too and are synchronising the data.
 The According use cases:
 
 -   [Operate Account](design/OperateAccount.md)
@@ -213,8 +219,7 @@ The According use cases:
 
 #### 3.1.2 Friendship book
 
-A friendship book consists of a cover and friendship book entries. These entries can be created by friend after 
-inviting them to contribute to your friendship book.
+A friendship book consists of a cover and friendship book entries. These entries can be created by the friendship book owner and can be edited public by a friend.
 According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
@@ -235,7 +240,7 @@ Incoming data needs to be checked if the sent values represent the correct data 
 request has the permissions to do so. 
 #### 3.1.5 Provide data
 
-After data is requested from the frontend and the user is allowed to do so, the backend sends data. In addition, 
+After data is requested from the frontend and the user is authorised to do so, the backend sends data. In addition, 
 the response contains a HTTP status code even if the request failed so that the frontend knows if it just received 
 data or an error.
 
@@ -270,7 +275,7 @@ one or two hours from the point on we noticed.
 
 #### 3.4.3 Accuracy
 
--	N\\A
+-	N\A
 
 
 ### 3.5 Performance
@@ -280,14 +285,14 @@ hosting provider is currently having issues.
 
 #### 3.5.1 Response time
 
-tbd
+Should be as low as possible. Maximum response time is 3 seconds. Average response time should be less than 1 second.
 
 #### 3.5.2 Throughput
-tbd
+Should be as large as possible.
 
 #### 3.5.3 Capacity
 
-tbd
+The current system should be capable to manage 100k of registered users and up to 1k users at the same time.
 
 ### 3.6 Supportability
 
@@ -306,16 +311,17 @@ are listed, but they represent just a small fraction of the whole project and ar
 #### 3.7.1 Development tools
 
 -   Git: version control system
--   JetBrains IntelliJ: Spring MVC backend development and Vue.js frontend development
+-   JetBrains IntelliJ: Spring MVC backend development (including Swagger) and Vue.js frontend development
 -   YouTrack: Project planning tool
--	Database: H2
+-	Database: H2 (local), Postgres (prod)
+-	Browser: Firefox, Chrome
 
 #### 3.7.2 Spring Boot
 
 Spring Boot is built on top of the Spring framework and provides the developer with helpful features to create and 
 run web applications. In our case, a REST Web Service
 which represents the interface between our front- and backend. As we want to benefit from the newest features of Java 8, 
-the platform this service will be hosted on needs to support Java 8 or higher.
+the platform this service will be hosted on needs to support Java 8.
 
 
 #### 3.7.3 Supported Platforms
@@ -326,13 +332,13 @@ current versions of Mozilla Firefox or Google Chrome.
 
 ### 3.8 Online User Documentation and Help System Requirements
 
-We want to provide a F.A.Q. for possible questions that can come up when using our application. Since it can be 
+We want to provide a small F.A.Q. for possible questions that can come up when using our application. Since it can be 
 frustrating for children if they don't know what to do we will include step-by-step
 instructions and enough pictures to show the user exactly what to click at.
 
 ### 3.9 Purchased Components
 
--   N\\A
+-   N\A
 
 ### 3.10 Interfaces
 
@@ -344,7 +350,7 @@ To navigate between these sites the user will find a menu bar at the top.
 
 #### 3.10.2 Hardware Interfaces
 
--   N\\A
+-   N\A
 
 #### 3.10.3 Software Interfaces
 
@@ -365,11 +371,11 @@ Our project runs under the MIT License. This way everyone is allowed to create h
 
 ### 3.12 Legal, Copyright and other Notices
 
--   N\\A
+-   N\A
 
 ### 3.13 Applicable Standards
 
--   N\\A
+-   N\A
 
 ## 4. Supporting Information
 
