@@ -1,6 +1,7 @@
 package dhbw.online.bookly.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import dhbw.online.bookly.exception.FriendshipBookException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,9 +18,15 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(description = "Class representing the friendship book of a user.")
 public class FriendshipBook {
+
+    public FriendshipBook(){
+        stickers = new ArrayList<>();
+        stickers.add(new DummyImage());
+        stickers.add(new DummyImage());
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty(notes = "Is extracted from the authentication and the user where it belongs to" + "the unique identifier of the book.", example = "3",
@@ -51,10 +58,7 @@ public class FriendshipBook {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Image.class)
     @ApiModelProperty(notes = "the first sticker of the book", position = 7)
-    private List<Image> stickers = new ArrayList<Image>() {{
-        add(new DummyImage());
-        add(new DummyImage());
-    }};
+    private List<Image> stickers;
 
     @JsonIgnore
     @OneToOne(cascade = { CascadeType.ALL })
@@ -91,6 +95,14 @@ public class FriendshipBook {
             throw new FriendshipBookException("Wrong sticker number " + stickerNumber);
         }
         return stickers.get(stickerNumber);
+    }
+
+    public static List<Image> emptyStickers(){
+        List<Image> stickers = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            stickers.add(new DummyImage());
+        }
+        return stickers;
     }
 
 }

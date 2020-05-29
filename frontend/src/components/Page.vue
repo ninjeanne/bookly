@@ -316,25 +316,25 @@
                     })
             },
             getImage1() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "1"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "0"})
                     .then((response) => {
                         this.sticker1 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage2() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "2"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "1"})
                     .then((response) => {
                         this.sticker2 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage3() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "3"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "2"})
                     .then((response) => {
                         this.sticker3 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage4() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "4"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "3"})
                     .then((response) => {
                         this.sticker4 = 'data:image/jpeg;base64,'.concat(response.data);
                     })

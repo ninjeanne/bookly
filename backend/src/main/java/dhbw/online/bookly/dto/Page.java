@@ -61,10 +61,12 @@ public class Page {
 
     public Page() {
         this.uuid = generateRandomUUID();
+        stickers = emptyStickers();
     }
 
     public Page(String pageUUID) {
         this.uuid = pageUUID;
+        stickers = emptyStickers();
     }
 
     @Id
@@ -154,12 +156,7 @@ public class Page {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Image.class)
     @ApiModelProperty(notes = "Page Sticker", position = 27)
-    private List<Image> stickers = new ArrayList<Image>() {{
-        add(new DummyImage());
-        add(new DummyImage());
-        add(new DummyImage());
-        add(new DummyImage());
-    }};
+    private List<Image> stickers;
 
     private String generateRandomUUID() {
         String pageUUID = "no:pageUUID:Set";
@@ -204,6 +201,14 @@ public class Page {
             throw new PageException("Wrong sticker number " + stickerNumber);
         }
         return stickers.get(stickerNumber);
+    }
+
+    public static List<Image> emptyStickers(){
+        List<Image> stickers = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            stickers.add(new DummyImage());
+        }
+        return stickers;
     }
 
 }
