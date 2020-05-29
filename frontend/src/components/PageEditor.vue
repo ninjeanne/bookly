@@ -398,7 +398,7 @@
             },
             attemptUploadSticker1() {
                 if (this.sticker1) {
-                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker1, number: 1})
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker1, number: 0})
                         .then((response) => { })
                 }
             },
@@ -414,7 +414,7 @@
             },
             attemptUploadSticker2() {
                 if (this.sticker2) {
-                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker2, number: 2})
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker2, number: 1})
                         .then((response) => { })
                 }
             },
@@ -430,7 +430,7 @@
             },
             attemptUploadSticker3() {
                 if (this.sticker3) {
-                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker3, number: 3})
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker3, number: 2})
                         .then((response) => { })
                 }
             },
@@ -446,7 +446,7 @@
             },
             attemptUploadSticker4() {
                 if (this.sticker4) {
-                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker4, number: 4})
+                    this.$store.dispatch("editPageSticker", {uuid: this.uuid, image: this.sticker4, number: 3})
                         .then((response) => { })
                 }
             },
