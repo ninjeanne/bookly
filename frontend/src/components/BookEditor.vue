@@ -122,7 +122,7 @@
             },
             attemptUploadSticker1() {
                 if (this.sticker1) {
-                    this.$store.dispatch("editBookSticker", {image: this.sticker1, number: "1"})
+                    this.$store.dispatch("editBookSticker", {image: this.sticker1, number: "0"})
                         .then((response) => { })
                 }
             },
@@ -138,7 +138,7 @@
             },
             attemptUploadSticker2() {
                 if (this.sticker2) {
-                    this.$store.dispatch("editBookSticker", {image: this.sticker2, number: "2"})
+                    this.$store.dispatch("editBookSticker", {image: this.sticker2, number: "1"})
                         .then((response) => { })
                 }
             }
