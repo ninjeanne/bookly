@@ -173,12 +173,12 @@ enables us to get rid of some code duplication.
 Before Design Pattern:
 ![FriendshipBookServiceWithoutSOFA](design/FriendshipBookServiceWithoutSOFA.png "FriendshipBookServiceWithoutSOFA")
 Excerpt before Design Pattern:
-![FriedshipBookBeforeDesignPatter](design/FriedshipBookBeforeDesignPattern.JPG "Before Design Pattern")
+![FriedshipBookBeforeDesignPatter](design/FriendshipBookBeforeDesignPattern.JPG "Before Design Pattern")
 
 After Design Pattern:
 ![dtoWithNullObjectDesignPattern](design/dtoWithNullObjectDesignPattern.jpg "dtoWithNullObjectDesignPattern")
 Excerpt after Design Pattern:
-![FriedshipBookAfterDesignPatter](design/FriedshipBookAfterDesignPattern.JPG "After Design Pattern")
+![FriedshipBookAfterDesignPatter](design/FriendshipBookAfterDesignPattern.JPG "After Design Pattern")
 
 The Pattern can be found in the highlighted classes:
 ![OverallMarkedPatter](design/OverallWithNullObjectPattern.jpg "Overall")
