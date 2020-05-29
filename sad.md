@@ -1,13 +1,15 @@
 # Bookly - Software Architecture Document
 
-### Version 1.0
+### Version 4.0
 
 # Revision history
 
 | Date       | Version | Description                                          | Author           |
 |------------|---------|------------------------------------------------------|------------------|
 | 28/11/2019 | 1.0     | Initial Documentation                                | Alexandra Stober |
-| 			 |  	   |                                                      |                  |
+| 2/12/2019	 | 2.0 	   | Architecture                                         | Jeanne Helm      |
+| 30/4/2020	 | 3.0 	   | Deployment Images                                    | Jeanne Helm      |
+| 29/5/2020	 | 4.0 	   | Update Schemes and pictures                          | Jeanne Helm      |
 
 # Table of Contents
 - [Introduction](#1-introduction)
@@ -64,6 +66,10 @@ well as the structure of classes.
 | <a href="https://blog.bookly.online/">Bookly Blog</a>                         						    | 28/10/2019 |
 | <a href="https://gitlab.com/project_bookly/bookly">GitLab Repository</a>         				            | 28/10/2019 |
 | <a href="https://nicoschinacher.myjetbrains.com/youtrack/issues?q=project:%20bookly">YouTrack</a>			| 28/10/2019 |
+| <a href="https://sonarqube.bookly.online">SonarQube</a>			                                        | 29/5/2020  |
+| <a href="https://bookly.online">bookly.online</a>			                                                | 29/5/2020  |
+| <a href="https://bookly.online">dev.bookly.online</a>			                                            | 29/5/2020  |
+| <a href="https://bookly.online">keycloak.bookly.online</a>			                                    | 29/5/2020  |
 
 ### 1.5 Overview
 
@@ -75,6 +81,11 @@ implementation and data views.
 Our project bookly uses the classic MVC structure as follows:
 
 ![booklyMVC](booklyMVC.png "MVC diagram")
+
+As special feature we are using [Keycloak](https://www.keycloak.org/ "Keycloak") as identity management server. It handles automatically the authentication and authorization when a visitor is trying to access
+some restricted site / data.
+
+![booklyMVCKeycloak](design/booklyMVCKeycloak.png "MVC diagram")
 
 ## 3. Architectural Goals And Constraints
 
@@ -147,8 +158,23 @@ N/A
 
 To ensure a high quality we are using continuous integration. It automatically builds, tests, 
 measures and deploys the application, if the respective previous step has not failed. This happens periodically and when 
-changes are pushed to a branch. When merging the master branch into the deployment branch, the application will 
-automatically be deployed as well after pushing the button.
+changes are pushed to a branch.
+
+![Pipelines](design/pipelines_metrics.png "Pipelines")
+
+Our first pipeline is executing our tests. The results are displayed in the log and are summed up in a tab next to the pipeline as well (See tab "Tests").
+The test pipeline also calculated the overall test coverage and is creating a badge. For example the badge for the master branch: [![coverage report](https://gitlab.com/project_bookly/bookly/badges/master/coverage.svg)](https://gitlab.com/project_bookly/bookly/-/commits/master)
+
+After that our whole project is measured. We are using SonarQube that analyzes our code. If one wants a specific metric report of a branch or commit one should repeat this specific pipeline.
+Sonarqube is also able to generate some badges for the last scan:
+
+[![Quality gate](http://194.13.81.160:9999/api/project_badges/quality_gate?project=testbookly)](http://194.13.81.160:9999/dashboard?id=testbookly)
+
+[![Reliability Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=reliability_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
+
+[![Security Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=security_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
+
+After measuring the last pipelines are building and deploying. 
 
 For serving a most current documentation of our API, we are using Swagger. It is an open-source software framework backed by a large ecosystem of tools that helps developers 
 design, build, document, and consume RESTful web services. It is accessible at PATH/swagger-ui.html.
@@ -156,4 +182,4 @@ It's also possible to test an API and see all possible responses.
 
 ## 12. Patterns
 
-N/A
+**tbd**
