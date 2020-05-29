@@ -39,8 +39,10 @@ The view of the cover or a page includes a photo or picture, labels and text.
 ### 2.4 Edit
 
 During editing the user can modify the title and subtitle of his friendship book.
-Later on the user can also select a background image, a theme and further decorations. 
-See [Design Manage Cover](design_Manage_Cover_Decorations.md "Design Manage Cover")
+Later on the user can also select a background image, a theme and further decorations.
+[Update Book](design_UpdateBook.md "Update Book Cover")
+
+See also [Design Manage Cover](design_Manage_Cover_Decorations.md "Design Manage Cover")
 
 ### 2.5 Delete
 
