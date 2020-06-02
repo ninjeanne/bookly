@@ -82,7 +82,15 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: #8B4513;
     padding-bottom: 16px;
+  }
+
+  a:hover {
+    color: #CD853F !important;
+  }
+
+  a {
+    color: #800000 !important;
   }
 </style>
