@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div>
+    <div v-if="notHomePage()">
       <b-card-header header-tag="nav">
         <b-nav card-header tabs align="center">
           <b-nav-item to="/" exact exact-active-class="active">Home</b-nav-item>
@@ -62,6 +62,11 @@ export default {
   data () {
     return {
       msg: 'Welcome to bookly!'
+    }
+  },
+  methods: {
+    notHomePage() {
+      return document.location.pathname !== "/";
     }
   }
 }
