@@ -174,11 +174,7 @@ The test pipeline also calculated the overall test coverage and is creating a ba
 After that our whole project is measured. We are using SonarQube that analyzes our code. If one wants a specific metric report of a branch or commit one should repeat this specific pipeline.
 Sonarqube is also able to generate some badges for the last scan:
 
-[![Quality gate](http://194.13.81.160:9999/api/project_badges/quality_gate?project=testbookly)](http://194.13.81.160:9999/dashboard?id=testbookly)
-
-[![Reliability Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=reliability_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
-
-[![Security Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=security_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
+[![Quality gate](https://sonarqube.bookly.online/api/project_badges/quality_gate?project=testbookly)](https://sonarqube.bookly.online/dashboard?id=testbookly)
 
 After measuring the last pipelines are building and deploying. 
 
