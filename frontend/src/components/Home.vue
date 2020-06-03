@@ -27,7 +27,7 @@
       <div class="edit infotext">
         <p>Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
         <input type="text" v-model="invite_code" maxlength="30" style="margin-right: 10px;" placeholder="this:is:an:example" class="code">
-        <button v-on:click="editPage" class="code btn btn-dark" style="width:15%">Go!</button>
+        <button v-on:click="editPage" class="code btn btn-dark" style="width:17%">Go!</button>
       </div>
     </div>
   </div>
@@ -114,9 +114,6 @@
 
   .code {
     width: 70%;
-    display: inline-block;
-    margin-right: 13px;
-    margin-left: 13px;
   }
 
   .infotext {
@@ -131,7 +128,7 @@
 
   .book:hover, .book {
     float: left;
-    width: 49%;
+    width: 46%;
     height: 120px;
     text-align: center;
     vertical-align: middle;
@@ -141,9 +138,10 @@
 
   .edit {
     float: right;
-    width: 49%;
+    width: 53%;
     padding: 10px;
     height: 120px;
+    text-align: center;
   }
 
 </style>
