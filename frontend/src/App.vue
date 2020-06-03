@@ -41,7 +41,7 @@
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="https://sonarqube.bookly.online">SonarQube</router-link>
+              <a href="https://sonarqube.bookly.online">SonarQube</a>
             </h6>
           </div>
         </div>
