@@ -16,12 +16,12 @@
         <div class="row text-center d-flex justify-content-center pt-5 mb-3">
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="/about">About us</router-link>
+              <router-link to="/help">Help</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <a href="https://blog.bookly.online">Blog</a>
+              <router-link to="/about">About us</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
@@ -36,7 +36,12 @@
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="/help">Help</router-link>
+              <a href="https://blog.bookly.online">Blog</a>
+            </h6>
+          </div>
+          <div class="col-md-2 mb-3">
+            <h6 class="text-uppercase font-weight-bold">
+              <router-link to="https://sonarqube.bookly.online">SonarQube</router-link>
             </h6>
           </div>
         </div>
