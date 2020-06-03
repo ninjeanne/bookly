@@ -88,17 +88,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #8B4513;
+    color: #2c3e50;
     padding-bottom: 16px;
   }
 
-  a:hover {
-    color: #CD853F !important;
-    text-decoration: none !important;
-  }
-
-  a {
-    color: #800000 !important;
-    text-decoration: none !important;
-  }
 </style>
