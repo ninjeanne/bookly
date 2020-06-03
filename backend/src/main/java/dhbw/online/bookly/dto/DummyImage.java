@@ -1,14 +1,15 @@
 package dhbw.online.bookly.dto;
 
 import io.swagger.annotations.ApiModel;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 
 import javax.persistence.Entity;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
+import java.io.InputStream;
 
 @Entity
+@Slf4j
 @ApiModel(description = "Class representing any dummy image.")
 public class DummyImage extends Image {
 
@@ -17,6 +18,7 @@ public class DummyImage extends Image {
         try {
             return extractBytes("test_image.jpg");
         } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
         return null;
     }
@@ -34,10 +36,8 @@ public class DummyImage extends Image {
     private byte[] extractBytes(String imageName) throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
 
-        URL resource = classLoader.getResource(imageName);
-        // open image
-        assert resource != null;
-        File imgPath = new File(resource.getFile());
-        return Files.readAllBytes(imgPath.toPath());
+        InputStream stream = classLoader.getResourceAsStream(imageName);
+        assert stream != null;
+        return IOUtils.toByteArray(stream);
     }
 }
