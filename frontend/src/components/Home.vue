@@ -1,7 +1,8 @@
 <template>
   <div class="hero-image">
     <div class="hero-text">
-      <div class="panel panel-default infotext">
+      <img src="../assets/bookly.jpg"/>
+      <div class="panel panel-default my-infotext">
         <div class="panel-heading" style="font-weight: bolder; font-size: x-large">Welcome!</div>
         <div class="panel-body">
           <div style="float: left; width: 50%;">
@@ -24,7 +25,7 @@
           Go to <b>YOUR</b> Book
         </router-link>
       </div>
-      <div class="edit infotext">
+      <div class="edit my-infotext">
         <p>Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
         <input type="text" v-model="invite_code" maxlength="30" style="margin-right: 10px;" placeholder="this:is:an:example" class="code">
         <button v-on:click="editPage" class="code btn btn-dark" style="width:17%">Go!</button>
@@ -72,13 +73,13 @@
 
   body, html {
     height: 100%;
-
+    color: black;
   }
 
   /* The hero image */
   .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("./../assets/bookly.jpg");
+    background-image: linear-gradient(rgba(255,255,255, 1), rgba(255,255,255, 1)), url("./../assets/bookly.jpg");
 
     /* Set a specific height */
     height: 50%;
@@ -106,6 +107,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: auto;
   }
 
   .panel-body {
@@ -116,7 +118,7 @@
     width: 70%;
   }
 
-  .infotext {
+  .my-infotext {
     background-color: white;
     padding: 40px;
     opacity: 97%;
