@@ -57,19 +57,19 @@
 
 <script>
 
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to bookly!'
+  export default {
+    name: "app",
+    data() {
+      return {
+        msg: "Welcome to bookly!"
+      };
+    },
+    methods: {
+      notHomePage() {
+        return document.location.pathname !== "/";
+      }
     }
-  },
-  methods: {
-    notHomePage() {
-      return document.location.pathname !== "/";
-    }
-  }
-}
+  };
 
 </script>
 
@@ -77,6 +77,7 @@ export default {
   #main {
     min-height: 100vh;
   }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -88,9 +89,11 @@ export default {
 
   a:hover {
     color: #CD853F !important;
+    text-decoration: none !important;
   }
 
   a {
     color: #800000 !important;
+    text-decoration: none !important;
   }
 </style>
