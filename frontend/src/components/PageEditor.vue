@@ -346,29 +346,29 @@
                     })
             },
             parsePage(response) {
-                this.name = response.data.name;
-                this.address = response.data.address;
-                this.phone = response.data.telephone;
-                this.mobile = response.data.mobile;
-                this.height = response.data.size;
-                this.haircolor = response.data.hairColor;
-                this.eyecolor = response.data.eyeColor;
-                this.birthday = response.data.birthday;
-                this.pet = response.data.favoritePet;
-                this.my_class = response.data.schoolClass;
-                this.school = response.data.school;
-                this.subject = response.data.favoriteSubject;
-                this.love = response.data.howToPleaseMe;
-                this.hate = response.data.whatIDontLike;
-                this.job = response.data.favoriteJob;
-                this.hobbies = response.data.myHobbies;
-                this.idol = response.data.fanOf;
-                this.movie = response.data.favoriteMovie;
-                this.sport = response.data.favoriteSport;
-                this.book = response.data.favoriteBook;
-                this.food = response.data.favoriteFood;
-                this.leftover = response.data.niceComment;
-                this.star_sign = response.data.starSign;
+                this.name = response.data.name === "null" ? "" : response.data.name;
+                this.address = response.data.address === "null" ? "" : response.data.address;
+                this.phone = response.data.telephone === "null" ? "" : response.data.telephone;
+                this.mobile = response.data.mobile === "null" ? "" : response.data.mobile;
+                this.height = response.data.size === "null" ? "" : response.data.size;
+                this.haircolor = response.data.hairColor === "null" ? "" : response.data.hairColor;
+                this.eyecolor = response.data.eyeColor === "null" ? "" : response.data.eyeColor;
+                this.birthday = response.data.birthday === "null" ? "" : response.data.birthday;
+                this.pet = response.data.favoritePet === "null" ? "" : response.data.favoritePet;
+                this.my_class = response.data.schoolClass === "null" ? "" : response.data.schoolClass;
+                this.school = response.data.school === "null" ? "" : response.data.school;
+                this.subject = response.data.favoriteSubject === "null" ? "" : response.data.favoriteSubject;
+                this.love = response.data.howToPleaseMe === "null" ? "" : response.data.howToPleaseMe;
+                this.hate = response.data.whatIDontLike === "null" ? "" : response.data.whatIDontLike;
+                this.job = response.data.favoriteJob === "null" ? "" : response.data.favoriteJob;
+                this.hobbies = response.data.myHobbies === "null" ? "" : response.data.myHobbies;
+                this.idol = response.data.fanOf === "null" ? "" : response.data.fanOf;
+                this.movie = response.data.favoriteMovie === "null" ? "" : response.data.favoriteMovie;
+                this.sport = response.data.favoriteSport === "null" ? "" : response.data.favoriteSport;
+                this.book = response.data.favoriteBook === "null" ? "" : response.data.favoriteBook;
+                this.food = response.data.favoriteFood === "null" ? "" : response.data.favoriteFood;
+                this.leftover = response.data.niceComment === "null" ? "" : response.data.niceComment;
+                this.star_sign = response.data.starSign === "null" ? "" : response.data.starSign;
             },
             onChanged() {
                 if (this.$refs.pictureInput.file) {
