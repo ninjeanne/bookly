@@ -1,34 +1,36 @@
 <template>
   <div class="hero-image">
     <div class="hero-text">
-
-      <div class="panel panel-default infotext">
+      <div class="panel panel-default">
         <div class="panel-body">
           <img src="../assets/logo.png" class="logo" alt="Logo" />
-          <hr>
-          <p>
-            Do you still remember the friendship book from your childhood days?
-            Whoever had the most pages and the greatest entries was highly regarded.
-            It was handcrafted, painted, drawn and designed.
-          </p>
-          <p>
-            As books become less important with digitalization,
-            we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
-          </p>
         </div>
       </div>
       <hr>
-      <div class="code">
-        <a href="/book" class="btn btn-light">Go to your book</a>
+      <div class="infotext">
+        <p>
+          Do you still remember the friendship book from your childhood days?
+          Whoever had the most pages and the greatest entries was highly regarded.
+          It was handcrafted, painted, drawn and designed.
+        </p>
+        <p>
+          As books become less important with digitalization,
+          we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
+        </p>
       </div>
       <hr>
-      <p style="text-align: center">OR</p>
-
-      <hr>
-      <div class="code">
-        <p>Enter your page edit code here.</p>
-        <input type="text" v-model="invite_code" placeholder="Code">
-        <button v-on:click="editPage" class="btn btn-light">Go!</button>
+      <div class="infotext">
+        <div class="center">
+          <router-link to="/book" class="btn btn-dark" style="margin-bottom: 15px; color:white !important;">
+            Go to YOUR Book
+          </router-link>
+        </div>
+        <p style="text-align: center;">OR</p>
+        <div class="center">
+          <p>Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
+          <input type="text" v-model="invite_code" maxlength="30" style="margin-right: 10px;" placeholder="this:is:an:example" class="code">
+          <button v-on:click="editPage" class="code btn btn-dark" style="width:15%">Go!</button>
+        </div>
       </div>
     </div>
   </div>
@@ -79,7 +81,7 @@
   /* The hero image */
   .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../assets/bookly.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("./../assets/bookly.jpg");
 
     /* Set a specific height */
     height: 50%;
@@ -98,17 +100,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-  }
-
-  .infotext {
-    text-align: left;
+    font-weight: bold;
   }
 
   .logo {
-    width: 30%;
+    width: 20%;
     background: white;
-    opacity: 80%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -118,7 +115,18 @@
     text-align: justify;
   }
 
-  .code {
+  .center {
     text-align: center;
   }
+
+  .code {
+    width: 45%;
+  }
+
+  .infotext {
+    background-color: white;
+    padding: 40px;
+  }
+
+
 </style>
