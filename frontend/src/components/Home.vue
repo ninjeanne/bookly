@@ -24,15 +24,15 @@
           </div>
           </div>
           <div class="card">
-            <router-link class="btn btn-dark" to="/book">Go to <b>YOUR</b> Book</router-link>
+            <router-link class="btn btn-dark" to="/book">Go to <b>YOUR</b> book</router-link>
           </div>
         </div>
         <div class="right">
-          <img src="../assets/logo.png" class="card"/>
+          <img src="../assets/logo.png" class="card img-right"/>
           <div class="card">
             <p style="font-size: large">Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
             <input type="text" v-model="invite_code">
-            <button v-on:click="editPage" class="btn btn-dark">Go!</button>
+            <button v-on:click="editPage" class="btn btn-dark" style="font-weight: bold">Let's go!</button>
           </div>
         </div>
       </div>
