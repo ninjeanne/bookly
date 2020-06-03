@@ -15,16 +15,16 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes: [
-        { path: '/', name: 'home', component: Home, meta: { requiresAuth: false }},
+        { path: '/', name: 'home', component: Home, meta: { title: "Welcome",requiresAuth: false }},
         { path: '/login', name: 'login', component: Page, meta: { requiresAuth: false }},
-        { path: '/user', component: User, meta: { requiresAuth: true }},
-        { path: '/book', component: Book, meta: { requiresAuth: true }},
-        { path: '/bookeditor', component: BookEditor, meta: { requiresAuth: true }},
-        { path: '/help', component: Help, meta: { requiresAuth: false }},
-        { path: '/about', component: About, meta: { requiresAuth: false }},
-        { path: '/termsofservice', component: TermsOfService, meta: { requiresAuth: false }},
-        { path: '/page', component: Page, meta: { requiresAuth: true }},
-        { path: '/pageeditor', component: PageEditor, meta: { requiresAuth: false }},
+        { path: '/user', component: User, meta: { title: "Profile", requiresAuth: true }},
+        { path: '/book', component: Book, meta: { title: "Friendship book", requiresAuth: true }},
+        { path: '/bookeditor', component: BookEditor, meta: { title: "Book editor", requiresAuth: true }},
+        { path: '/help', component: Help, meta: { title: "Help", requiresAuth: false }},
+        { path: '/about', component: About, meta: { title: "About us", requiresAuth: false }},
+        { path: '/termsofservice', component: TermsOfService, meta: { title: "Terms of service", requiresAuth: false }},
+        { path: '/page', component: Page, meta: { title: "Pages", requiresAuth: true }},
+        { path: '/pageeditor', component: PageEditor, meta: { title: "Page editor", requiresAuth: false }},
         // otherwise redirect to home
         { path: '*', redirect: '/'}
     ]

@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
-
 @RestController
 @CrossOrigin
 @Slf4j
@@ -91,11 +89,6 @@ public class PagesController extends Controller {
     public ResponseEntity deletePage() {
         pageService.deleteAllPages();
         return ResponseEntity.ok().build();
-    }
-
-    private String encodeBase64(byte[] data) {
-        byte[] encoded = Base64.getEncoder().encode(data);
-        return new String(encoded);
     }
 
 }

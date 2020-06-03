@@ -60,6 +60,10 @@ keycloak.init({
 });
 
 router.beforeEach((to, from, next) => {
+    const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
+    // If a route with a title was found, set the document (page) title to that value.
+    if(nearestWithTitle) document.title = nearestWithTitle.meta.title;
+
     if (to.meta.requiresAuth && localStorage.getItem("auth") === 'false') {
         let host = location.host;
         if(host.includes('localhost')){

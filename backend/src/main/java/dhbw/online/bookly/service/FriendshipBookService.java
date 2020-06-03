@@ -49,7 +49,7 @@ public class FriendshipBookService {
     }
 
     private FriendshipBook createEmptyFriendshipBook(User user) {
-        return FriendshipBook.builder().cover(new DummyImage()).user(user).title("My Friendship Book").pages(new ArrayList<>()).build();
+        return FriendshipBook.builder().cover(new DummyImage()).user(user).stickers(FriendshipBook.emptyStickers()).title("My Friendship Book").pages(new ArrayList<>()).build();
     }
 
     public void saveCover(MultipartFile file) {
@@ -90,7 +90,7 @@ public class FriendshipBookService {
 
     public void deleteCoverForLoggedInUser() {
         FriendshipBook book = getBookForLoggedInUser();
-        book.setCover(null);
+        book.setCover(new DummyImage());
         repository.save(book);
         log.debug("Book cover of user {} with book id {} has been deleted", book.getUser().getUsername(), book.getUuid());
     }

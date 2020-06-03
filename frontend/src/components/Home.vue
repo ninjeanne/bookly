@@ -1,80 +1,95 @@
 <template>
-  <div class="hello">
-    <div class="wrapper">
-      <div class="left">
-        <img src="./../assets/bookly.jpg">
+  <div class="main">
+    <div>
+      <div class="top">
+        <img class="card" src="../assets/bookly.jpg"/>
       </div>
-      <div class="right">
-        <div class="card">
-          <input v-model="invite_code" placeholder="Code">
-          <br>
-          <button v-on:click="editPage" class="btn btn-primary">Go!</button>
+      <div class="container">
+        <div class="left">
+          <div class="card">
+          <div style="font-weight: bolder; font-size: xx-large">Welcome!</div>
+            <br>
+          <div class="container">
+            <div style="font-size: large">
+              <p>
+              Do you still remember the friendship book from your childhood days?
+              Whoever had the most pages and the greatest entries was highly regarded.
+              It was handcrafted, painted, drawn and designed.
+              </p>
+              <p>
+              As books become less important with digitalization,
+              we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
+              </p>
+            </div>
+          </div>
+          </div>
+          <div class="card">
+            <router-link class="btn btn-dark" to="/book">Go to <b>YOUR</b> Book</router-link>
+          </div>
+        </div>
+        <div class="right">
+          <img src="../assets/logo.png" class="card"/>
+          <div class="card">
+            <p style="font-size: large">Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
+            <input type="text" v-model="invite_code">
+            <button v-on:click="editPage" class="btn btn-dark">Go!</button>
+          </div>
         </div>
       </div>
     </div>
-    <div style="clear: both"></div>
-    <div class="separator" style="margin-bottom: 16px"></div>
-    <h1>{{ hellomsg }}</h1>
-    <h3>Do you still remember the friendship book from your childhood days?
-      <br>
-      Whoever had the most pages and the greatest entries was highly regarded.
-      <br>
-      It was handcrafted, painted, drawn and designed.</h3>
-    <br>
-    <h4>As books become less important with digitalization,
-      <br>
-      we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
-    </h4>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'hello',
-  props: { hellomsg: { type: String, required: true } },
+  export default {
+    name: "hello",
+    props: {
+      hellomsg: {
+        type: String,
+        required: true
+      }
+    },
 
-  data() {
-    return {
-      invite_code: ""
+    data() {
+      return {
+        invite_code: ""
+      };
+    },
+    methods: {
+      editPage() {
+        this.$router.push("/pageeditor?id=" + this.invite_code);
+      }
     }
-  },
-  methods: {
-    editPage() {
-      this.$router.push('/pageeditor?id=' + this.invite_code);
-    }
-  }
-}
+  };
 
 </script>
 
 <style scoped>
-  img {
+  .btn {
     width: 100%;
-  }
-  input {
-    width: 80%;
-  }
-  button {
-    width: 80%;
+    margin-top: 16px;
   }
   .card {
-    align-items: center;
-    padding: 32px;
-    margin: 20% 20%;
-  }
-  .separator {
+    margin-top: 16px;
+    padding: 16px;
     width: 100%;
-    height: 2px;
-    background: black;
+  }
+  .container {
+    width: 100%;
   }
   .left {
-    width: 50%;
+    width: 48%;
     float: left;
+    margin-right: 2%;
   }
   .right {
-    width: 50%;
+    width: 48%;
     float: right;
-    padding: 64px;
-    align-items: center;
+    margin-left: 2%;
+  }
+  .main {
+    padding: 32px;
+    margin-left: 18%;
+    margin-right: 18%;
   }
 </style>

@@ -48,9 +48,6 @@
 
         beforeMount() {
             this.getBook();
-            this.getCover();
-            this.getSticker1();
-            this.getSticker2();
         },
         data() {
             return {
@@ -70,13 +67,13 @@
                     })
             },
             getSticker1() {
-                this.$store.dispatch("getBookSticker", {number: "1"})
+                this.$store.dispatch("getBookSticker", {number: "0"})
                     .then((response) => {
                         this.sticker1 = 'data:image/jpeg;base64,'.concat(this.sticker1.concat(response.data));
                     })
             },
             getSticker2() {
-                this.$store.dispatch("getBookSticker", {number: "2"})
+                this.$store.dispatch("getBookSticker", {number: "1"})
                     .then((response) => {
                         this.sticker2 = 'data:image/jpeg;base64,'.concat(this.sticker2.concat(response.data));
                     })
@@ -84,18 +81,14 @@
             getBook() {
                 this.$store.dispatch("getBook")
                     .then((response) => {
-                        this.setField(this.title, response.data.title);
-                        this.setField(this.subtitle, response.data.subtitle);
-                        this.setField(this.theme, response.data.theme);
+                        this.title = response.data.title === "null" ? "" : response.data.title;
+                        this.subtitle = response.data.subtitle === "null" ? "" : response.data.subtitle;
+                        this.theme = response.data.theme;
+                        this.getCover();
+                        this.getSticker1();
+                        this.getSticker2();
                     })
             },
-            setField(textfield, value) {
-                if(value === "null") {
-                    textfield = "";
-                } else {
-                    textfield = value;
-                }
-            }
         }
     }
 </script>

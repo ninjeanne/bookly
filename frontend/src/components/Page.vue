@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="container">
                     <div class="far-left-top">
-                        <img :src="image">
+                        <img class="card" :src="image">
                     </div>
                     <div class="left-top">
                         <div style="padding: 16px; text-align: left">
@@ -104,12 +104,12 @@
                     </div>
                     <div class="far-far-right-top">
                         <div class="far-left-top">
-                            <img :src="sticker1">
+                            <img class="card" :src="sticker1">
                         </div>
                     </div>
                     <div class="left-mid">
                         <div class="far-left-top">
-                            <img id="img-large" :src="sticker2">
+                            <img class="card" id="img-large" :src="sticker2">
                         </div>
                     </div>
                     <div class="right-mid">
@@ -153,7 +153,7 @@
                     </div>
                     <div class="left-bot">
                         <div class="far-left-top">
-                            <img :src="sticker3">
+                            <img class="card" :src="sticker3">
                         </div>
                     </div>
                     <div class="mid-bot">
@@ -204,7 +204,7 @@
                     </div>
                     <div class="right-bot">
                         <div class="far-left-top">
-                            <img :src="sticker4">
+                            <img class="card" :src="sticker4">
                         </div>
                     </div>
                 </div>
@@ -278,30 +278,31 @@
                         if(desiredPage >= totalPages) {
                             this.page_available = false;
                         }
+                        console.log(page.mobile)
                         this.uuid = page.uuid;
-                        this.setField(this.name , page.name);
-                        this.setField(this.address, page.address);
-                        this.setField(this.phone, page.telephone);
-                        this.setField(this.mobile, page.mobile);
-                        this.setField(this.height, page.size);
-                        this.setField(this.haircolor, page.hairColor);
-                        this.setField(this.eyecolor, page.eyeColor);
-                        this.setField(this.birthday, page.birthday);
-                        this.setField(this.pet, page.favoritePet);
-                        this.setField(this.my_class, page.schoolClass);
-                        this.setField(this.school, page.school);
-                        this.setField(this.subject, page.favoriteSubject);
-                        this.setField(this.love, page.howToPleaseMe);
-                        this.setField(this.hate, page.whatIDontLike);
-                        this.setField(this.job, page.favoriteJob);
-                        this.setField(this.hobbies, page.myHobbies);
-                        this.setField(this.idol, page.fanOf);
-                        this.setField(this.movie, page.favoriteMovie);
-                        this.setField(this.sport, page.favoriteSport);
-                        this.setField(this.book, page.favoriteBook);
-                        this.setField(this.food, page.favoriteFood);
-                        this.setField(this.leftover, page.niceComment);
-                        this.setField(this.star_sign, page.starSign);
+                        this.name = page.name === "null" ? "" : page.name;
+                        this.address = page.address === "null" ? "" : page.address;
+                        this.phone = page.telephone === "null" ? "" : page.telephone;
+                        this.mobile = page.mobile === "null" ? "" : page.mobile;
+                        this.height = page.size === "null" ? "" : page.size;
+                        this.haircolor = page.hairColor === "null" ? "" : page.hairColor;
+                        this.eyecolor = page.eyeColor === "null" ? "" : page.eyeColor;
+                        this.birthday = page.birthday === "null" ? "" : page.birthday;
+                        this.pet = page.favoritePet === "null" ? "" : page.favoritePet;
+                        this.my_class = page.schoolClass === "null" ? "" : page.schoolClass;
+                        this.school = page.school === "null" ? "" : page.school;
+                        this.subject = page.favoriteSubject === "null" ? "" : page.favoriteSubject;
+                        this.love = page.howToPleaseMe === "null" ? "" : page.howToPleaseMe;
+                        this.hate = page.whatIDontLike === "null" ? "" : page.whatIDontLike;
+                        this.job = page.favoriteJob === "null" ? "" : page.favoriteJob;
+                        this.hobbies = page.myHobbies === "null" ? "" : page.myHobbies;
+                        this.idol = page.fanOf === "null" ? "" : page.fanOf;
+                        this.movie = page.favoriteMovie === "null" ? "" : page.favoriteMovie;
+                        this.sport = page.favoriteSport === "null" ? "" : page.favoriteSport;
+                        this.book = page.favoriteBook === "null" ? "" : page.favoriteBook;
+                        this.food = page.favoriteFood === "null" ? "" : page.favoriteFood;
+                        this.leftover = page.niceComment === "null" ? "" : page.niceComment;
+                        this.star_sign = page.starSign === "null" ? "" : page.starSign;
                         this.getImage();
                         this.getImage1();
                         this.getImage2();
@@ -316,25 +317,25 @@
                     })
             },
             getImage1() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "1"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "0"})
                     .then((response) => {
                         this.sticker1 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage2() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "2"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "1"})
                     .then((response) => {
                         this.sticker2 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage3() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "3"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "2"})
                     .then((response) => {
                         this.sticker3 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
             },
             getImage4() {
-                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "4"})
+                this.$store.dispatch("getPageSticker", {uuid: this.uuid, number: "3"})
                     .then((response) => {
                         this.sticker4 = 'data:image/jpeg;base64,'.concat(response.data);
                     })
@@ -351,13 +352,6 @@
             },
             backToBook : function () {
                 this.$router.push('/book');
-            },
-            setField(textfield, value) {
-                if(value === "null") {
-                    textfield = "";
-                } else {
-                    textfield = value;
-                }
             }
         }
     }
