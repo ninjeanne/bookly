@@ -1,36 +1,33 @@
 <template>
   <div class="hero-image">
     <div class="hero-text">
-      <div class="panel panel-default">
+      <div class="panel panel-default infotext">
+        <div class="panel-heading" style="font-weight: bolder; font-size: x-large">Welcome!</div>
         <div class="panel-body">
-          <img src="../assets/logo.png" class="logo" alt="Logo" />
+          <div style="float: left; width: 50%;">
+            <p>
+              Do you still remember the friendship book from your childhood days?
+              Whoever had the most pages and the greatest entries was highly regarded.
+              It was handcrafted, painted, drawn and designed.
+            </p>
+            <p>
+              As books become less important with digitalization,
+              we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
+            </p>
+          </div>
+          <img src="../assets/logo.png" class="logo" alt="Logo" style="float: right; width: 50%;" />
         </div>
       </div>
       <hr>
-      <div class="infotext">
-        <p>
-          Do you still remember the friendship book from your childhood days?
-          Whoever had the most pages and the greatest entries was highly regarded.
-          It was handcrafted, painted, drawn and designed.
-        </p>
-        <p>
-          As books become less important with digitalization,
-          we want to maintain the old charm of friendship books and bring back the fun of designing and collecting.
-        </p>
+      <div class="book btn btn-dark">
+        <router-link to="/book" style="color:white !important;">
+          Go to <b>YOUR</b> Book
+        </router-link>
       </div>
-      <hr>
-      <div class="infotext">
-        <div class="center">
-          <router-link to="/book" class="btn btn-dark" style="margin-bottom: 15px; color:white !important;">
-            Go to YOUR Book
-          </router-link>
-        </div>
-        <p style="text-align: center;">OR</p>
-        <div class="center">
-          <p>Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
-          <input type="text" v-model="invite_code" maxlength="30" style="margin-right: 10px;" placeholder="this:is:an:example" class="code">
-          <button v-on:click="editPage" class="code btn btn-dark" style="width:15%">Go!</button>
-        </div>
+      <div class="edit infotext">
+        <p>Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
+        <input type="text" v-model="invite_code" maxlength="30" style="margin-right: 10px;" placeholder="this:is:an:example" class="code">
+        <button v-on:click="editPage" class="code btn btn-dark" style="width:15%">Go!</button>
       </div>
     </div>
   </div>
@@ -115,18 +112,38 @@
     text-align: justify;
   }
 
-  .center {
-    text-align: center;
-  }
-
   .code {
-    width: 45%;
+    width: 70%;
+    display: inline-block;
+    margin-right: 13px;
+    margin-left: 13px;
   }
 
   .infotext {
     background-color: white;
     padding: 40px;
+    opacity: 97%;
   }
 
+  .panel {
+    height: 400px;
+  }
+
+  .book:hover, .book {
+    float: left;
+    width: 49%;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+    font-size: xx-large;
+  }
+
+  .edit {
+    float: right;
+    width: 49%;
+    padding: 10px;
+    height: 120px;
+  }
 
 </style>
