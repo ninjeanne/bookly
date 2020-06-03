@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="container">
                     <div class="far-left-top">
-                        <img :src="image">
+                        <img class="card" :src="image">
                     </div>
                     <div class="left-top">
                         <div style="padding: 16px; text-align: left">
@@ -104,12 +104,12 @@
                     </div>
                     <div class="far-far-right-top">
                         <div class="far-left-top">
-                            <img :src="sticker1">
+                            <img class="card" :src="sticker1">
                         </div>
                     </div>
                     <div class="left-mid">
                         <div class="far-left-top">
-                            <img id="img-large" :src="sticker2">
+                            <img class="card" id="img-large" :src="sticker2">
                         </div>
                     </div>
                     <div class="right-mid">
@@ -153,7 +153,7 @@
                     </div>
                     <div class="left-bot">
                         <div class="far-left-top">
-                            <img :src="sticker3">
+                            <img class="card" :src="sticker3">
                         </div>
                     </div>
                     <div class="mid-bot">
@@ -204,7 +204,7 @@
                     </div>
                     <div class="right-bot">
                         <div class="far-left-top">
-                            <img :src="sticker4">
+                            <img class="card" :src="sticker4">
                         </div>
                     </div>
                 </div>

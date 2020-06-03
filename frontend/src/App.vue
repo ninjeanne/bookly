@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <div v-if="notHomePage()">
+    <div class="header">
       <b-card-header header-tag="nav">
         <b-nav card-header tabs align="center">
-          <b-nav-item to="/" exact exact-active-class="active">Home</b-nav-item>
-          <b-nav-item to="/book" exact exact-active-class="active">Book</b-nav-item>
-          <b-nav-item to="/user" exact exact-active-class="active">Profile</b-nav-item>
+          <b-nav-item class="nav-item" to="/" exact exact-active-class="active">Home</b-nav-item>
+          <b-nav-item class="nav-item" to="/book" exact exact-active-class="active">Book</b-nav-item>
+          <b-nav-item class="nav-item" to="/user" exact exact-active-class="active">Profile</b-nav-item>
         </b-nav>
       </b-card-header>
     </div>
     <router-view id="main" :hellomsg="msg"></router-view>
     <!-- Footer -->
-    <footer class="page-footer font-small indigo">
+    <footer class="page-footer font-small indigo footer">
       <div class="container">
         <div class="row text-center d-flex justify-content-center pt-5 mb-3">
           <div class="col-md-2 mb-3">
@@ -79,10 +79,18 @@
 </script>
 
 <style lang="scss">
-  #main {
-    min-height: 100vh;
+  .nav-item {
+    font-size: large;
   }
-
+  .footer {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+  }
+  #main {
+    min-height: 160vh;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -91,5 +99,4 @@
     color: #2c3e50;
     padding-bottom: 16px;
   }
-
 </style>
