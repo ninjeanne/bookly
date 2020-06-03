@@ -16,6 +16,10 @@ Master Branch:
 
 ### Metrics: SonarQube
 
+[![Quality gate2] (http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=alert_status)]
+
+http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=alert_status
+
 [![Quality gate](http://194.13.81.160:9999/api/project_badges/quality_gate?project=testbookly)](http://194.13.81.160:9999/dashboard?id=testbookly)
 
 [![Reliability Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=reliability_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
