@@ -279,29 +279,29 @@
                             this.page_available = false;
                         }
                         this.uuid = page.uuid;
-                        this.setField(this.name , page.name);
-                        this.setField(this.address, page.address);
-                        this.setField(this.phone, page.telephone);
-                        this.setField(this.mobile, page.mobile);
-                        this.setField(this.height, page.size);
-                        this.setField(this.haircolor, page.hairColor);
-                        this.setField(this.eyecolor, page.eyeColor);
-                        this.setField(this.birthday, page.birthday);
-                        this.setField(this.pet, page.favoritePet);
-                        this.setField(this.my_class, page.schoolClass);
-                        this.setField(this.school, page.school);
-                        this.setField(this.subject, page.favoriteSubject);
-                        this.setField(this.love, page.howToPleaseMe);
-                        this.setField(this.hate, page.whatIDontLike);
-                        this.setField(this.job, page.favoriteJob);
-                        this.setField(this.hobbies, page.myHobbies);
-                        this.setField(this.idol, page.fanOf);
-                        this.setField(this.movie, page.favoriteMovie);
-                        this.setField(this.sport, page.favoriteSport);
-                        this.setField(this.book, page.favoriteBook);
-                        this.setField(this.food, page.favoriteFood);
-                        this.setField(this.leftover, page.niceComment);
-                        this.setField(this.star_sign, page.starSign);
+                        this.name = response.data.name === "null" ? "" : response.data.name;
+                        this.address = response.data.address === "null" ? "" : response.data.address;
+                        this.phone = response.data.telephone === "null" ? "" : response.data.telephone;
+                        this.mobile = response.data.mobile === "null" ? "" : response.data.mobile;
+                        this.height = response.data.size === "null" ? "" : response.data.size;
+                        this.haircolor = response.data.hairColor === "null" ? "" : response.data.hairColor;
+                        this.eyecolor = response.data.eyeColor === "null" ? "" : response.data.eyeColor;
+                        this.birthday = response.data.birthday === "null" ? "" : response.data.birthday;
+                        this.pet = response.data.favoritePet === "null" ? "" : response.data.favoritePet;
+                        this.my_class = response.data.schoolClass === "null" ? "" : response.data.schoolClass;
+                        this.school = response.data.school === "null" ? "" : response.data.school;
+                        this.subject = response.data.favoriteSubject === "null" ? "" : response.data.favoriteSubject;
+                        this.love = response.data.howToPleaseMe === "null" ? "" : response.data.howToPleaseMe;
+                        this.hate = response.data.whatIDontLike === "null" ? "" : response.data.whatIDontLike;
+                        this.job = response.data.favoriteJob === "null" ? "" : response.data.favoriteJob;
+                        this.hobbies = response.data.myHobbies === "null" ? "" : response.data.myHobbies;
+                        this.idol = response.data.fanOf === "null" ? "" : response.data.fanOf;
+                        this.movie = response.data.favoriteMovie === "null" ? "" : response.data.favoriteMovie;
+                        this.sport = response.data.favoriteSport === "null" ? "" : response.data.favoriteSport;
+                        this.book = response.data.favoriteBook === "null" ? "" : response.data.favoriteBook;
+                        this.food = response.data.favoriteFood === "null" ? "" : response.data.favoriteFood;
+                        this.leftover = response.data.niceComment === "null" ? "" : response.data.niceComment;
+                        this.star_sign = response.data.starSign === "null" ? "" : response.data.starSign;
                         this.getImage();
                         this.getImage1();
                         this.getImage2();
@@ -351,13 +351,6 @@
             },
             backToBook : function () {
                 this.$router.push('/book');
-            },
-            setField(textfield, value) {
-                if(value === "null") {
-                    textfield = "";
-                } else {
-                    textfield = value;
-                }
             }
         }
     }
