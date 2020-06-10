@@ -143,12 +143,17 @@ If a visitor wants to log in, every authentication request is redirected to the 
 
 ## 8. Implementation View
 
-You can find the stage system here: ![Stagesystem](https://bookly.online/ "Stagesystem")
-You can find the current state of the dev system here: ![Devsystem](https://dev.bookly.online/ "Devsystem")
+
+You can find the stage system here: [Stagesystem](https://bookly.online/)
+You can find the current state of the dev system here: [Devsystem](https://dev.bookly.online/)
 
 As we are using swagger for the backend implementation the API can be tested and seen here:
-Stage: ![StageSwagger](https://bookly.online/swagger-ui.html "Swagger Stage")
-Dev: ![DevSwagger](https://dev.bookly.online/swagger-ui.html "Swagger Dev")
+Stage: [StageSwagger](https://bookly.online/swagger-ui.html)
+Dev: [DevSwagger](https://dev.bookly.online/swagger-ui.html)
+
+Here you can see our Swagger API:
+
+
 
 ## 9. Data View
 
