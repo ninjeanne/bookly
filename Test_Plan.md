@@ -154,9 +154,7 @@ The current coverage status of the master branch: [![coverage report](https://gi
 ### 7.3	Perceived Quality Reports
 We are using sonarqube for metrics. After every push to gitlab a pipeline is triggered that is updating the metrics on sonarqube.
 
-[![Quality gate](http://194.13.81.160:9999/api/project_badges/quality_gate?project=testbookly)](http://194.13.81.160:9999/dashboard?id=testbookly)
-[![Reliability Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=reliability_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
-[![Security Rating](http://194.13.81.160:9999/api/project_badges/measure?project=testbookly&metric=security_rating)](http://194.13.81.160:9999/dashboard?id=testbookly)
+[![Quality Gate Status](https://sonarqube.bookly.online/api/project_badges/measure?project=testbookly&metric=alert_status)](https://sonarqube.bookly.online/dashboard?id=testbookly)
 
 If one wants a specific metric report of a branch or commit one should repeat the specific pipeline.
 ![PipelineMetric](design/pipelines_metrics.png "Pipelines, including one for metrics")

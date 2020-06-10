@@ -3,6 +3,8 @@
 
 ### 1. Prerequisites
 
+- Maven
+- npm
 - Docker
 - Keycloak on Port 8180 (accessible) or use our running instance at keycloak.bookly.online
 
@@ -15,6 +17,7 @@ URL:    git@gitlab.com:project_bookly/bookly.git
 HTTPS:  https://gitlab.com/project_bookly/bookly.git
 
 ### Change the application properties of the backend
+-> backend/src/main/resources/application.properties
 ```
 server.port=8080
 
@@ -32,15 +35,19 @@ spring.jpa.generate-ddl=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
 ```
+### 2.2 Build the project in the root folder of the project.
+```
+mvn install -DskipTests
+```
 
-### 2.2 Go to your project directory. 
+### 2.3 Go to the backend folder 
 
 	Execute: cd backend
 	
-### 2.3 Launch bookly with.
+### 2.4 Launch bookly with.
 
 	docker-compose up
 
-### 2.4 Go to localhost:8080 to use bookly.
+### 2.5 Go to localhost:8080 to use bookly.
 
 

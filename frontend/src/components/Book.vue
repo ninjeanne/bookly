@@ -81,21 +81,14 @@
             getBook() {
                 this.$store.dispatch("getBook")
                     .then((response) => {
-                        this.setField(this.title, response.data.title);
-                        this.setField(this.subtitle, response.data.subtitle);
-                        this.setField(this.theme, response.data.theme);
+                        this.title = response.data.title === "null" ? "" : response.data.title;
+                        this.subtitle = response.data.subtitle === "null" ? "" : response.data.subtitle;
+                        this.theme = response.data.theme;
                         this.getCover();
                         this.getSticker1();
                         this.getSticker2();
                     })
             },
-            setField(textfield, value) {
-                if(value === "null") {
-                    textfield = "";
-                } else {
-                    textfield = value;
-                }
-            }
         }
     }
 </script>
