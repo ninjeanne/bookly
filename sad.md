@@ -156,6 +156,21 @@ Dev: [DevSwagger](https://dev.bookly.online/swagger-ui.html)
 
 Here you can see our Swagger API:
 
+![swagger_basic_error_controller](design/swagger_basic_error_controller_1.JPG "swagger_basic_error_controller")
+
+![swagger_edit_page_controller](design/swagger_edit_page_controller_2.JPG "swagger_edit_page_controller")
+
+![swagger_friendship_book_controller](design/swagger_friendship_book_controller_3.JPG "swagger_friendship_book_controller")
+
+![swagger_page_controller_and_user_controller](design/swagger_page_controller_and_user_controller_4.JPG "swagger_page_controller_and_user_controller")
+
+![swagger_vue_controller1](design/swagger_vue_controller_5.JPG "swagger_vue_controller")
+
+![swagger_vue_controller2](design/swagger_vue_controller_6.JPG "swagger_vue_controller")
+
+![swagger_vue_controller3](design/swagger_vue_controller_7.JPG "swagger_vue_controller")
+
+![swagger_models_8.JPG](design/swagger_models_8.JPG "swagger_models")
 
 
 ## 9. Data View
