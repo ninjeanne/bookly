@@ -7,9 +7,8 @@
 
 ### 1.1 Brief Description
 
-The main focus on this use case is to connect your book with your friends. This is achieved by three main methods:
-- Share friendshipbook using a link
-- invite friends, to add more pages to the friendshipbook
+The main focus of this use case is to connect your book with your friends. This is achieved by three main methods:
+- Share code to invite friends in order to add more pages to the friendshipbook
 
 ## 2. Flow of Events
 
