@@ -149,6 +149,7 @@ You can find the current state of the dev system here: [Devsystem](https://dev.b
 
 As we are using swagger for the backend implementation the API can be tested and seen here:
 Stage: [StageSwagger](https://bookly.online/swagger-ui.html)
+
 Dev: [DevSwagger](https://dev.bookly.online/swagger-ui.html)
 
 Here you can see our Swagger API:
