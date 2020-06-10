@@ -1,9 +1,9 @@
 # BOOKLY - Software Requirements Specification
-## Use-Case Specification: UC share link and invite friends
+## Use-Case Specification: UC share code to invite friends
 
-## 1. Use-Case: Share link and invite friends
+## 1. Use-Case: Share code to invite friends
 
-![sharelink_visibility_invite_mockup](sharelink_visibility_invite_mockup.png "Share link and invite friends")
+![sharelink_code_to_invite_friends](sharelink_visibility_invite_mockup.png "Share code to invite friends")
 
 ### 1.1 Brief Description
 
@@ -13,7 +13,7 @@ The main focus on this use case is to connect your book with your friends. This 
 
 ## 2. Flow of Events
 
-![sharelink_visibility_invite](sharelink_visibility_invite.png "Share link and invite friends")
+![share_invite](sharelink_visibility_invite.png "Share link and invite friends")
 
 
 ## 3. Preconditions
