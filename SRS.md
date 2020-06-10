@@ -224,7 +224,7 @@ According use cases are:
 
 -   [Manage book pages/entries](design/ManagePage.md "Manage book pages/entries")
 -   [Manage book](design/ManageBook.md "Manage book")
--   [Share link, Visibility & Invite](design/sharelink_visibility_invite.md)
+-   [Share link & Invite](design/sharelink_visibility_invite.md)
 -   [Manage page decorations](design/design_Manage_Page_Decorations.md)
 -   [Manage cover decorations](design/design_Manage_Cover_Decorations.md)
 
