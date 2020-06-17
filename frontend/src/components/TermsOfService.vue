@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <div class="card">
     <div class='impressum'>
       <h1>Impressum</h1>
       <h3>Angaben gemäß § 5 TMG</h3>
@@ -41,7 +42,8 @@
         Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung
         und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle
         der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.<br>
-      </p>
+
+    </div>
     </div>
   </div>
 </template>
@@ -61,6 +63,9 @@
     padding: 32px;
     margin-left: 18%;
     margin-right: 18%;
+  }
+  .card{
+    padding: 22px;
   }
 
 </style>
