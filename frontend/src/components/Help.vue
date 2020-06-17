@@ -4,10 +4,12 @@
 
         <p>This page will give you an idea of what bookly can do. Here you can find a quick overview of our help topics. You can choose the topic that interests you.</p>
         <table>
+            <ul>
             <li> <a href="#login">Log in to your account</a></li>
             <li> <a href="#inviteFriend">Invite friend to friendship book</a></li>
             <li> <a href="#register">Register for an account at bookly</a></li>
             <li> <a href="https://www.youtube.com/watch?v=6JA0YSH2aXc">Bookly help video</a></li>
+            </ul>
         </table>
         <br>
 
