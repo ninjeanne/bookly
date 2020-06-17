@@ -41,7 +41,7 @@
       </div>
       <div class="right">
         <div class="card">
-          <button class="btn btn-info" v-on:click="share">Share my book</button>
+          <button class="btn btn-info" v-on:click="share">Share my book (nyi)</button>
         </div>
         <div class="card">
           <b-list-group>

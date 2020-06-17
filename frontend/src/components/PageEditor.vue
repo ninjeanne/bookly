@@ -12,7 +12,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload image</button>
             </div>
             <div class="left-top">
                 <div style="padding: 16px; text-align: left">
@@ -121,7 +121,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload first sticker</button>
             </div>
             <div class="left-mid">
                 <picture-input
@@ -134,7 +134,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload second sticker</button>
             </div>
             <div class="right-mid">
                 <div style="padding: 16px; text-align: left">
@@ -186,7 +186,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker3">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker3">Upload third sticker</button>
             </div>
             <div class="mid-bot">
                 <div style="padding: 16px; text-align: left">
@@ -245,7 +245,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker4">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker4">Upload fourth sticker</button>
             </div>
         </div>
         <button v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</button>

@@ -4,13 +4,12 @@
             <div class="left">
                 <form id="app" @submit.prevent="editBook">
                     <label for="title">Title of your Book</label>
-                    <br>
                     <input id="title" v-model="title" type="text" name="title">
                     <br>
-                    <label for="subtitle">Title of your Book</label>
-                    <br>
+                    <label for="subtitle">Subtitle of your Book</label>
                     <input id="subtitle" v-model="subtitle" type="text" name="subtitle">
                     <br>
+                    <label>Theme: </label>
                     <select v-model="theme">
                         <option selected>0</option>
                         <option>1</option>
@@ -30,7 +29,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload cover</button>
                 <picture-input
                         ref="pictureInputSticker1"
                         @change="onChangedSticker1"
@@ -41,7 +40,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload first sticker</button>
                 <picture-input
                         ref="pictureInputSticker2"
                         @change="onChangedSticker2"
@@ -52,7 +51,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload second sticker</button>
             </div>
         </div>
         <div style="clear: both"></div>
@@ -153,6 +152,7 @@
     }
     label {
         margin-top: 16px;
+        margin-right: 16px;
     }
     .left {
         width: 50%;
@@ -167,5 +167,6 @@
     }
     button {
         margin-top: 16px;
+        width: 50%;
     }
 </style>
