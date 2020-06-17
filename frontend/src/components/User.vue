@@ -33,6 +33,16 @@
           </div>
           <button class="btn btn-info" v-on:click="saveUser" id="tooltip-target-saved">Save</button>
           <b-tooltip target="tooltip-target-saved" triggers="hover">May take 5min to update!</b-tooltip>
+          <div v-if="save_success">
+            <div class="alert alert-success" role="alert">
+              Saved successfully!
+            </div>
+          </div>
+          <div v-if="save_error">
+            <div class="alert alert-danger" role="alert">
+              Failed successfully!
+            </div>
+          </div>
           <button class="btn btn-info" v-on:click="logout">Logout</button>
         </div>
         <div class="card">
@@ -74,6 +84,8 @@
     },
     data() {
       return {
+        save_success: false,
+        save_error: false,
         username: "",
         email: "",
         firstName: "",
@@ -100,12 +112,16 @@
                   });
                 })
       },
-      share() {
-        // NYI
-      },
+      share() { },
       saveUser: function () {
         this.$store.dispatch("updateUser",{username: this.username, email: this.email, firstName: this.firstName, lastName: this.lastName})
-                .then((response) => { })
+                .then((response) => {
+                  let ref = this;
+                  ref.save_success = true;
+                  setTimeout(function() {
+                    ref.save_success = false;
+                  }, 5000);
+                });
       },
       deletePage: function (uuid) {
         this.$store.dispatch("deletePage",{uuid: uuid})

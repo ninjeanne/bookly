@@ -16,6 +16,16 @@
                     </select>
                     <br>
                     <button type="submit" class="btn btn-primary">Confirm</button>
+                    <div v-if="save_success">
+                        <div class="alert alert-success" role="alert">
+                            Saved successfully!
+                        </div>
+                    </div>
+                    <div v-if="save_error">
+                        <div class="alert alert-danger" role="alert">
+                            Failed successfully!
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="right">
@@ -71,6 +81,8 @@
         },
         data() {
             return {
+                save_success: false,
+                save_error: false,
                 username: '',
                 title: "",
                 subtitle: "",
@@ -91,7 +103,13 @@
             },
             editBook() {
                 this.$store.dispatch("editBook", {title: this.title, subtitle: this.subtitle, theme: this.theme})
-                    .then((response) => { })
+                    .then((response) => {
+                        let ref = this;
+                        ref.save_success = true;
+                        setTimeout(function() {
+                            ref.save_success = false;
+                        }, 5000);
+                    })
             },
             onChanged() {
                 if (this.$refs.pictureInput.file) {
@@ -164,6 +182,10 @@
         width: 50%;
         float: right;
         padding: 8px;
+    }
+    .alert {
+        width: 50%;
+        margin: 16px auto auto;
     }
     button {
         margin-top: 16px;

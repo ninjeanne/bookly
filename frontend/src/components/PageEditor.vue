@@ -248,7 +248,17 @@
                 <button class="btn btn-primary" @click="attemptUploadSticker4">Upload fourth sticker</button>
             </div>
         </div>
-        <button v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</button>
+        <button v-on:click="save" class="btn btn-primary">Save</button>
+        <div v-if="save_success">
+            <div class="alert alert-success" role="alert">
+                Saved successfully!
+            </div>
+        </div>
+        <div v-if="save_error">
+            <div class="alert alert-danger" role="alert">
+                Failed successfully!
+            </div>
+        </div>
     </div>
     <div v-else class="main">
         <h2>Whoops, something went wrong :/</h2>
@@ -270,6 +280,8 @@
         },
         data() {
             return {
+                save_success: false,
+                save_error: false,
                 uuid: "",
                 uuid_exists: false,
                 image: "",
@@ -342,7 +354,11 @@
                     ' }';
                 this.$store.dispatch("updatePage", {json: text})
                     .then((response) => {
-                        alert("saved");
+                        let ref = this;
+                        ref.save_success = true;
+                        setTimeout(function() {
+                            ref.save_success = false;
+                        }, 5000);
                     })
             },
             parsePage(response) {
@@ -464,6 +480,11 @@
     }
     button {
         margin-top: 16px;
+        width: 90%;
+    }
+    .alert {
+        width: 90%;
+        margin: 16px auto auto;
     }
     .container {
         display: grid;
