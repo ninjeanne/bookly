@@ -85,8 +85,9 @@
             getBook() {
                 this.$store.dispatch("getBook")
                     .then((response) => {
-                        this.title = response.data.title;
-                        this.subtitle = response.data.subtitle;
+                        this.title = (response.data.title === "null" ? "" : response.data.title) ;
+                        this.subtitle = (response.data.subtitle === "null" ? "" : response.data.subtitle);
+                        this.theme = response.data.theme;
                     })
             },
             editBook() {
