@@ -49,13 +49,19 @@ public class UserController extends Controller {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be updated"),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity updateProfile(@RequestBody User user) {
-        userService.update(user);
+        try {
+            userService.update(user);
+            log.debug("Updated the user {}", user.getUsername());
+        } catch (BooklyException e) {
+            ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     @ApiOperation(value = "Delete the logged in user profile including the friendship book, images and pages")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 409, message = "Conflict - the user couldn't be deleted and logged out."),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 409, message = "Conflict - the user couldn't be deleted and logged out."),
             @ApiResponse(code = 401, message = "Unauthorized - the credentials are missing or false"), })
     public ResponseEntity deleteProfile(HttpServletRequest request) {
         User user = userService.getUser();

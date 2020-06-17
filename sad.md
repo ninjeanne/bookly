@@ -143,12 +143,35 @@ If a visitor wants to log in, every authentication request is redirected to the 
 
 ## 8. Implementation View
 
-You can find the stage system here: ![Stagesystem](https://bookly.online/ "Stagesystem")
-You can find the current state of the dev system here: ![Devsystem](https://dev.bookly.online/ "Devsystem")
+
+You can find the stage system here: [Stagesystem](https://bookly.online/)
+
+You can find the current state of the dev system here: [Devsystem](https://dev.bookly.online/)
 
 As we are using swagger for the backend implementation the API can be tested and seen here:
-Stage: ![StageSwagger](https://bookly.online/swagger-ui.html "Swagger Stage")
-Dev: ![DevSwagger](https://dev.bookly.online/swagger-ui.html "Swagger Dev")
+
+Stage: [StageSwagger](https://bookly.online/swagger-ui.html)
+
+Dev: [DevSwagger](https://dev.bookly.online/swagger-ui.html)
+
+Here you can see our Swagger API:
+
+![swagger_basic_error_controller](design/swagger_basic_error_controller_1.JPG "swagger_basic_error_controller")
+
+![swagger_edit_page_controller](design/swagger_edit_page_controller_2.JPG "swagger_edit_page_controller")
+
+![swagger_friendship_book_controller](design/swagger_friendship_book_controller_3.JPG "swagger_friendship_book_controller")
+
+![swagger_page_controller_and_user_controller](design/swagger_page_controller_and_user_controller_4.JPG "swagger_page_controller_and_user_controller")
+
+![swagger_vue_controller1](design/swagger_vue_controller_5.JPG "swagger_vue_controller")
+
+![swagger_vue_controller2](design/swagger_vue_controller_6.JPG "swagger_vue_controller")
+
+![swagger_vue_controller3](design/swagger_vue_controller_7.JPG "swagger_vue_controller")
+
+![swagger_models_8.JPG](design/swagger_models_8.JPG "swagger_models")
+
 
 ## 9. Data View
 

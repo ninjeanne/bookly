@@ -1,12 +1,15 @@
 package dhbw.online.bookly.service;
 
 import dhbw.online.bookly.dto.User;
+import dhbw.online.bookly.exception.UserException;
 import dhbw.online.bookly.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -47,8 +50,16 @@ public class UserService {
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setFirstName(user.getFirst_name());
         userRepresentation.setLastName(user.getLast_name());
+        validateMail(user.getMail());
         userRepresentation.setEmail(user.getMail());
         return userRepresentation;
+    }
+
+    private void validateMail(String mail){
+        Pattern pattern = Pattern.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+        if (!pattern.matcher(mail).matches()) {
+            throw new UserException("Invalid mail address");
+        }
     }
 
     public boolean sync() {
