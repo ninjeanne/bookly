@@ -31,7 +31,8 @@
             <input type="text" class="form-control" aria-label="Default"
                    aria-describedby="inputGroup-sizing-default" v-model="lastName">
           </div>
-          <button class="btn btn-info" v-on:click="saveUser">Save</button>
+          <button class="btn btn-info" v-on:click="saveUser" id="tooltip-target-saved">Save</button>
+          <b-tooltip target="tooltip-target-saved" triggers="hover">May take 5min to update!</b-tooltip>
           <button class="btn btn-info" v-on:click="logout">Logout</button>
         </div>
         <div class="card">
@@ -41,7 +42,8 @@
       </div>
       <div class="right">
         <div class="card">
-          <button class="btn btn-info" v-on:click="share">Share my book (nyi)</button>
+          <button class="btn btn-info" v-on:click="share" id="tooltip-target-share">Share my book</button>
+          <b-tooltip target="tooltip-target-share" triggers="hover">Not yet implemented</b-tooltip>
         </div>
         <div class="card">
           <b-list-group>
