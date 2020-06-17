@@ -10,7 +10,7 @@
                         <img :src="sticker2">
                     </div>
                     <div class="mid-0">
-                        <img :src="cover">
+                        <img class="image-cover" :src="cover">
                     </div>
                     <div class="bot-0">
                         <h4 class="card-title"><strong>{{ title }}</strong></h4>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="container-1" v-else-if="theme === 1">
                     <div class="top-1">
-                        <img :src="cover">
+                        <img class="image-cover" :src="cover">
                     </div>
                     <div class="mid-left-1">
                         <img :src="sticker1">
@@ -108,6 +108,9 @@
     img {
         max-height: 30vh;
     }
+    .image-cover {
+        max-height: 50vh;
+    }
     /* Theme 0 */
     .container-0 {
         display: grid;
@@ -118,7 +121,7 @@
         "bot-0 bot-0"
         "bot-0 bot-0";
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 0.1fr;
+        grid-template-rows: 1fr 1fr 0.1fr;
     }
     .top-left-0 {
         grid-area: top-left-0;

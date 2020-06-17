@@ -80,7 +80,7 @@
 
 <style lang="scss">
   .nav-item {
-    font-size: large;
+    font-size: x-large;
   }
   .footer {
     position: absolute;

@@ -4,19 +4,28 @@
             <div class="left">
                 <form id="app" @submit.prevent="editBook">
                     <label for="title">Title of your Book</label>
-                    <br>
                     <input id="title" v-model="title" type="text" name="title">
                     <br>
-                    <label for="subtitle">Title of your Book</label>
-                    <br>
+                    <label for="subtitle">Subtitle of your Book</label>
                     <input id="subtitle" v-model="subtitle" type="text" name="subtitle">
                     <br>
+                    <label>Theme: </label>
                     <select v-model="theme">
                         <option selected>0</option>
                         <option>1</option>
                     </select>
                     <br>
                     <button type="submit" class="btn btn-primary">Confirm</button>
+                    <div v-if="save_success">
+                        <div class="alert alert-success" role="alert">
+                            Saved successfully!
+                        </div>
+                    </div>
+                    <div v-if="save_error">
+                        <div class="alert alert-danger" role="alert">
+                            Failed successfully!
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="right">
@@ -30,7 +39,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload cover</button>
                 <picture-input
                         ref="pictureInputSticker1"
                         @change="onChangedSticker1"
@@ -41,7 +50,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload first sticker</button>
                 <picture-input
                         ref="pictureInputSticker2"
                         @change="onChangedSticker2"
@@ -52,7 +61,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload second sticker</button>
             </div>
         </div>
         <div style="clear: both"></div>
@@ -72,6 +81,8 @@
         },
         data() {
             return {
+                save_success: false,
+                save_error: false,
                 username: '',
                 title: "",
                 subtitle: "",
@@ -92,7 +103,13 @@
             },
             editBook() {
                 this.$store.dispatch("editBook", {title: this.title, subtitle: this.subtitle, theme: this.theme})
-                    .then((response) => { })
+                    .then((response) => {
+                        let ref = this;
+                        ref.save_success = true;
+                        setTimeout(function() {
+                            ref.save_success = false;
+                        }, 5000);
+                    })
             },
             onChanged() {
                 if (this.$refs.pictureInput.file) {
@@ -153,6 +170,7 @@
     }
     label {
         margin-top: 16px;
+        margin-right: 16px;
     }
     .left {
         width: 50%;
@@ -165,7 +183,12 @@
         float: right;
         padding: 8px;
     }
+    .alert {
+        width: 50%;
+        margin: 16px auto auto;
+    }
     button {
         margin-top: 16px;
+        width: 50%;
     }
 </style>

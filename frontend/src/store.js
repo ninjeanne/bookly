@@ -14,9 +14,6 @@ export default new Vuex.Store({
                     api.getUser()
                         .then(response => {
                             resolve(response)
-                        })
-                        .catch(err => {
-                            console.error(err);
                         });
             })
         },
@@ -25,9 +22,6 @@ export default new Vuex.Store({
                 api.updateUser(username, email, firstName, lastName)
                     .then(response => {
                         resolve(response)
-                    })
-                    .catch(err => {
-                        console.error(err);
                     });
             })
         },

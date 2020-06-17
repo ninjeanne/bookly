@@ -12,7 +12,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadImage">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadImage">Upload image</button>
             </div>
             <div class="left-top">
                 <div style="padding: 16px; text-align: left">
@@ -121,7 +121,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker1">Upload first sticker</button>
             </div>
             <div class="left-mid">
                 <picture-input
@@ -134,7 +134,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker2">Upload second sticker</button>
             </div>
             <div class="right-mid">
                 <div style="padding: 16px; text-align: left">
@@ -186,7 +186,7 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker3">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker3">Upload third sticker</button>
             </div>
             <div class="mid-bot">
                 <div style="padding: 16px; text-align: left">
@@ -245,10 +245,20 @@
                         accept="image/jpeg, image/png"
                         :customStrings="{drag: 'Drag and drop your image here'}">
                 </picture-input>
-                <button class="btn btn-primary" @click="attemptUploadSticker4">Upload</button>
+                <button class="btn btn-primary" @click="attemptUploadSticker4">Upload fourth sticker</button>
             </div>
         </div>
-        <button v-on:click="save" style="width: 90%; margin-top: 16px" class="btn btn-primary">Save</button>
+        <button v-on:click="save" class="btn btn-primary">Save</button>
+        <div v-if="save_success">
+            <div class="alert alert-success" role="alert">
+                Saved successfully!
+            </div>
+        </div>
+        <div v-if="save_error">
+            <div class="alert alert-danger" role="alert">
+                Failed successfully!
+            </div>
+        </div>
     </div>
     <div v-else class="main">
         <h2>Whoops, something went wrong :/</h2>
@@ -270,6 +280,8 @@
         },
         data() {
             return {
+                save_success: false,
+                save_error: false,
                 uuid: "",
                 uuid_exists: false,
                 image: "",
@@ -342,7 +354,11 @@
                     ' }';
                 this.$store.dispatch("updatePage", {json: text})
                     .then((response) => {
-                        alert("saved");
+                        let ref = this;
+                        ref.save_success = true;
+                        setTimeout(function() {
+                            ref.save_success = false;
+                        }, 5000);
                     })
             },
             parsePage(response) {
@@ -464,6 +480,11 @@
     }
     button {
         margin-top: 16px;
+        width: 90%;
+    }
+    .alert {
+        width: 90%;
+        margin: 16px auto auto;
     }
     .container {
         display: grid;
