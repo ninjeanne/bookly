@@ -52,10 +52,10 @@ public class UserController extends Controller {
         try {
             userService.update(user);
             log.debug("Updated the user {}", user.getUsername());
+            return ResponseEntity.ok().build();
         } catch (BooklyException e) {
-            ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
-        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
