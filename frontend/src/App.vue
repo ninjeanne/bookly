@@ -3,9 +3,9 @@
     <div class="header">
       <b-card-header header-tag="nav">
         <b-nav card-header tabs align="center">
-          <b-nav-item class="nav-item" to="/" exact exact-active-class="active">Home</b-nav-item>
-          <b-nav-item class="nav-item" to="/book" exact exact-active-class="active">Book</b-nav-item>
-          <b-nav-item class="nav-item" to="/user" exact exact-active-class="active">Profile</b-nav-item>
+          <b-nav-item class="nav-item" @click.native="scrollToTop()" to="/" exact exact-active-class="active">Home</b-nav-item>
+          <b-nav-item class="nav-item" @click.native="scrollToTop()" to="/book" exact exact-active-class="active">Book</b-nav-item>
+          <b-nav-item class="nav-item" @click.native="scrollToTop()" to="/user" exact exact-active-class="active">Profile</b-nav-item>
         </b-nav>
       </b-card-header>
     </div>
@@ -16,17 +16,17 @@
         <div class="row text-center d-flex justify-content-center pt-5 mb-3">
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="/help">Help</router-link>
+              <router-link @click.native="scrollToTop()" to="/help">Help</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="/about">About us</router-link>
+              <router-link @click.native="scrollToTop()" to="/about">About us</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
             <h6 class="text-uppercase font-weight-bold">
-              <router-link to="/termsofservice">Terms of Service</router-link>
+              <router-link @click.native="scrollToTop()" to="/termsofservice">Terms of Service</router-link>
             </h6>
           </div>
           <div class="col-md-2 mb-3">
@@ -72,6 +72,9 @@
     methods: {
       notHomePage() {
         return document.location.pathname !== "/";
+      },
+      scrollToTop() {
+        window.scrollTo(0,0);
       }
     }
   };

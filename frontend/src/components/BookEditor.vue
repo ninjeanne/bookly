@@ -1,6 +1,8 @@
 <template>
     <div id="main">
         <div class="wrapper">
+            <h1>Book Editor</h1>
+            <p>Edit your book cover here.</p>
             <div class="left">
                 <form id="app" @submit.prevent="editBook">
                     <label for="title">Title of your Book</label>

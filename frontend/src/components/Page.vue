@@ -211,17 +211,17 @@
                 <div class="separator"></div>
                 <div>
                     <div style="text-align: left" class="card-body left">
-                        <a v-on:click="back" class="btn btn-primary">Back</a>
+                        <a @click.native="scrollToTop()" v-on:click="back" class="btn btn-primary">Back</a>
                     </div>
                     <div style="text-align: right" class="card-body right">
-                        <a v-on:click="forward" class="btn btn-primary">Next</a>
+                        <a @click.native="scrollToTop()" v-on:click="forward" class="btn btn-primary">Next</a>
                     </div>
                 </div>
             </div>
         </div>
         <div v-else>
             <h2>Sorry, that's it :/</h2>
-            <a v-on:click="backToBook" class="btn btn-primary">Back to book</a>
+            <a @click.native="scrollToTop()" v-on:click="backToBook" class="btn btn-primary">Back to book</a>
         </div>
     </div>
 </template>
@@ -269,6 +269,9 @@
             }
         },
         methods: {
+            scrollToTop() {
+                window.scrollTo(0,0);
+            },
             getPage() {
                 this.$store.dispatch("getPages")
                     .then((response) => {
@@ -344,14 +347,17 @@
                 var nextPage = +(this.$route.query.num) - 1;
                 this.$router.push('/page?num=' + nextPage);
                 this.getPage();
+                this.scrollToTop();
             },
             forward : function () {
                 var nextPage = +(this.$route.query.num) + 1;
                 this.$router.push('/page?num=' + nextPage);
                 this.getPage();
+                this.scrollToTop();
             },
             backToBook : function () {
                 this.$router.push('/book');
+                this.scrollToTop();
             }
         }
     }

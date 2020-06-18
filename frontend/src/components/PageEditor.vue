@@ -1,5 +1,7 @@
 <template>
     <div v-if="uuid_exists" class="main">
+        <h1>Page Editor</h1>
+        <p>Edit a page for one of your friends here.</p>
         <div class="container">
             <div class="far-left-top">
                 <picture-input
