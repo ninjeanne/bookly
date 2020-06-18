@@ -34,8 +34,8 @@
                 </div>
             </div>
             <div style="padding: 64px 64px 32px 64px">
-                <router-link style="float: left" to="/bookeditor" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Edit</router-link>
-                <router-link style="float: right" to="/page?num=0" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading</router-link>
+                <router-link @click.native="scrollToTop()" style="float: left" to="/bookeditor" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Edit</router-link>
+                <router-link @click.native="scrollToTop()" style="float: right" to="/page?num=0" class="btn btn-flat deep-purple-text p-1 mx-0 mb-0">Start Reading</router-link>
             </div>
         </div>
     </div>
@@ -65,6 +65,9 @@
                     .then((response) => {
                         this.cover = 'data:image/jpeg;base64,'.concat(this.cover.concat(response.data));
                     })
+            },
+            scrollToTop() {
+                window.scrollTo(0,0);
             },
             getSticker1() {
                 this.$store.dispatch("getBookSticker", {number: "0"})

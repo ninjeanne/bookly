@@ -24,7 +24,7 @@
           </div>
           </div>
           <div class="card">
-            <router-link class="btn btn-dark" to="/book">Go to <b>YOUR</b> book</router-link>
+            <router-link @click.native="scrollToTop()" class="btn btn-dark" to="/book">Go to <b>YOUR</b> book</router-link>
           </div>
         </div>
         <div class="right">
@@ -32,7 +32,7 @@
           <div class="card">
             <p style="font-size: large">Want to style a page for a friend? Enter your page edit <b>CODE</b> here.</p>
             <input type="text" v-model="invite_code">
-            <button v-on:click="editPage" class="btn btn-dark" style="font-weight: bold">Let's go!</button>
+            <button @click.native="scrollToTop()" v-on:click="editPage" class="btn btn-dark" style="font-weight: bold">Let's go!</button>
           </div>
         </div>
       </div>
@@ -58,6 +58,10 @@
     methods: {
       editPage() {
         this.$router.push("/pageeditor?id=" + this.invite_code);
+        window.scrollTo(0,0);
+      },
+      scrollToTop() {
+        window.scrollTo(0,0);
       }
     }
   };
