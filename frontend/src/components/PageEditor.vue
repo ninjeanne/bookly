@@ -52,14 +52,14 @@
                 <div style="padding: 16px; text-align: left">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Haircolor</span>
+                            <span class="input-group-text">Hair color</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Default"
                                aria-describedby="inputGroup-sizing-default" v-model="haircolor">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Eyecolor</span>
+                            <span class="input-group-text">Eye color</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Default"
                                aria-describedby="inputGroup-sizing-default" v-model="eyecolor">
