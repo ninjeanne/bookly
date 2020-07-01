@@ -6,7 +6,7 @@
 - Nico Schinacher - schinacher.nico@student.dhbw-karlsruhe.de
 
 ### Time spent per person
-![Time Spent](../design/timespent.png "Time Spent")
+![Time Spent](/finalExam/time_spent.png "Time Spent")
 
 
 ### Overall use case diagram
@@ -14,7 +14,7 @@
 
 ### RUP Roles
 ![legend](../design/RUP_Workflow_legend.png "RUP Workflow legend")
-![rup_workflow](../design/RUP_Workflow.png "RUP Workflow")
+![rup_workflow](/finalExam/rup.png "RUP Workflow")
 ![rup_roles](../design/RUP_Roles.png "RUP Roles")
 
 
