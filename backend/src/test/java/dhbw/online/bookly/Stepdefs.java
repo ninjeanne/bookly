@@ -28,7 +28,7 @@ public class Stepdefs {
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     private RestTemplate login(String username, String password) {
-        String url = "https://keycloak.bookly.online/auth/realms/bookly/protocol/openid-connect/token";
+        String url = "https://keycloak.jeanne.tech/auth/realms/bookly/protocol/openid-connect/token";
 
         ResourceOwnerPasswordResourceDetails resourceDetails = new ResourceOwnerPasswordResourceDetails();
         resourceDetails.setGrantType(OAuth2Constants.PASSWORD);

@@ -15,7 +15,7 @@ Vue.use(BootstrapVue);
 
 const keycloakConfig = {
     realm: 'bookly',
-    url: 'https://keycloak.bookly.online/auth',
+    url: 'https://keycloak.jeanne.tech/auth',
     clientId: 'bookly-app',
     onLoad: "check-sso",
     "enable-cors": true
